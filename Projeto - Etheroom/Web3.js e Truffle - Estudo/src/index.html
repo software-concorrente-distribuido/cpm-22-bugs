@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/web3/dist/web3.min.js"></script>
+</head>
+<body>
+
+    <script>
+        const web3 = new Web3("HTTP://127.0.0.1:7545")
+        
+        async function isMining() {
+
+            let minerando = await web3.eth.isMining();
+            console.log("Minerando? ", minerando)
+
+            let bloco = await web3.eth.getBlockNumber();
+            console.log("Bloco atual -> ", bloco)
+        }
+
+        isMining();
+    </script>
+
+    <!--Criando uma instância do Web3.js passando a porta do nó para interagir com o Ganache-->
+    <!--Criando uma função que mostra no console do live server se a porta atrelada está minerando-->
+    <!--Criando uma função que mostra no console do live server o bloco atual-->
+
+</body>
+</html>
