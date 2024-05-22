@@ -8,6 +8,9 @@ O sistema projetado busca descentralizar o processo de reservas de hotéis atrav
 - Promove uma maior segurança de dados devido à criptografia
 - Preços transparentes em tempo real, isto é, sem taxas ou acréscimos ocultos
 
+## Cronogama
+![Cronograma](/ProjetoEtheroom/assets/Cronograma.png)
+
 ## Relação com Concorrência e Distribuição
 ### Controle de concorrência
 Em um cenário em que múltiplos nós competem para validar transações, conflitos de concorrência podem surgir  quando dois usuários tentarem reservar o mesmo quarto simultaneamente, por exemplo.
