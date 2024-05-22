@@ -1,15 +1,13 @@
-package com.etheroom.Etheroom.domain.models;
+package com.etheroom.Etheroom.domain.models.user;
 
 import com.etheroom.Etheroom.infrastructure.base.BaseEntity;
-import com.etheroom.Etheroom.infrastructure.base.BaseEntityDto;
 import com.etheroom.Etheroom.infrastructure.vo.enums.UserRole;
-import com.etheroom.Etheroom.presentation.dtos.UserDto;
+import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

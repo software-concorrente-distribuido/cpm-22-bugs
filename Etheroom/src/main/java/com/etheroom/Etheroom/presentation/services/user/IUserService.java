@@ -1,6 +1,6 @@
-package com.etheroom.Etheroom.presentation.services;
+package com.etheroom.Etheroom.presentation.services.user;
 
-import com.etheroom.Etheroom.presentation.dtos.UserDto;
+import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
 
 public interface IUserService {
 

@@ -1,11 +1,11 @@
-package com.etheroom.Etheroom.domain.services;
+package com.etheroom.Etheroom.domain.services.user;
 
-import com.etheroom.Etheroom.domain.models.User;
-import com.etheroom.Etheroom.domain.repositories.UserRepository;
+import com.etheroom.Etheroom.domain.models.user.User;
+import com.etheroom.Etheroom.domain.repositories.user.UserRepository;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
 import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.NotFoundException;
-import com.etheroom.Etheroom.presentation.dtos.UserDto;
-import com.etheroom.Etheroom.presentation.services.IUserService;
+import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
+import com.etheroom.Etheroom.presentation.services.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

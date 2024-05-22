@@ -1,7 +1,7 @@
-package com.etheroom.Etheroom.presentation.controllers;
+package com.etheroom.Etheroom.presentation.controllers.user;
 
-import com.etheroom.Etheroom.presentation.dtos.UserDto;
-import com.etheroom.Etheroom.presentation.services.IUserService;
+import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
+import com.etheroom.Etheroom.presentation.services.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

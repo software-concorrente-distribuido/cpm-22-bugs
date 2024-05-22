@@ -1,6 +1,6 @@
-package com.etheroom.Etheroom.presentation.dtos;
+package com.etheroom.Etheroom.presentation.dtos.user;
 
-import com.etheroom.Etheroom.domain.models.User;
+import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.infrastructure.base.BaseEntityDto;
 import com.etheroom.Etheroom.infrastructure.vo.enums.UserRole;
 import lombok.Getter;
