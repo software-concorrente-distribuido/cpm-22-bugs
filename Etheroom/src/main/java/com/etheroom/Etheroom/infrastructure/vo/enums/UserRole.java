@@ -1,5 +1,10 @@
 package com.etheroom.Etheroom.infrastructure.vo.enums;
 
+import com.etheroom.Etheroom.presentation.dtos.app.EnumDto;
+
+import java.util.Arrays;
+import java.util.List;
+
 public enum UserRole {
 
     USER("User"),
@@ -13,6 +18,12 @@ public enum UserRole {
 
     public String getDescription() {
         return description;
+    }
+
+    public static List<EnumDto> buildEnumDto() {
+        return Arrays.stream(UserRole.values())
+                .map(userRole -> new EnumDto(userRole.name(), userRole.getDescription()))
+                .toList();
     }
 
 }

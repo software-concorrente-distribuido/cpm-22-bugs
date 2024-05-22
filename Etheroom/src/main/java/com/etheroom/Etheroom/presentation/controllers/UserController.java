@@ -1,4 +1,4 @@
-package com.etheroom.Etheroom.presentation.controllers.user;
+package com.etheroom.Etheroom.presentation.controllers;
 
 import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
 import com.etheroom.Etheroom.presentation.services.user.IUserService;
