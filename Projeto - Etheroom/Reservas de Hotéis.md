@@ -9,8 +9,7 @@ O sistema projetado busca descentralizar o processo de reservas de hotéis atrav
 - Preços transparentes em tempo real, isto é, sem taxas ou acréscimos ocultos
 
 ## Cronogama
-![Cronograma](/ProjetoEtheroom/assets/Cronograma.png)
-
+![Cronograma](https://github.com/software-concorrente-distribuido/cpm-22-bugs/blob/15b8be6b03518d45a9e9ada0b5f46e27ce505a96/Projeto%20-%20Etheroom/assets/Cronograma.png)
 ## Relação com Concorrência e Distribuição
 ### Controle de concorrência
 Em um cenário em que múltiplos nós competem para validar transações, conflitos de concorrência podem surgir  quando dois usuários tentarem reservar o mesmo quarto simultaneamente, por exemplo.
