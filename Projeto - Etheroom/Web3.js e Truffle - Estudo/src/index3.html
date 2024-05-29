@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/web3/dist/web3.min.js"></script>
+</head>
+<body>
+    <button id = "criar">Criar um novo contrato</button>
+    <button id = "pegarNome">Pegar nome</button>
+    <button id = "mudarNome">Mudar nome</button>
+    <button id = "encode">Encode</button>
+    <script>
+
+
+        async function pegarNome() {
+
+            const web3 = new Web3('HTTP://127.0.0.1:7545')
+
+            let endereco = '0x334663eA3fEB7d36216601414F36DeFbbd471de0';
+            let abi = [ { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" } ], "name": "mudaNome", "outputs": [], "stateMutability": "nonpayable", "type": "function" } ]
+        
+            let contrato = new web3.eth.Contract(abi, endereco);
+
+            let nome = await contrato.methods.nome().call();
+            console.log(nome);
+        }
+
+        async function mudarNome() {
+
+            const web3 = new Web3('HTTP://127.0.0.1:7545')
+
+            let endereco = '0x334663eA3fEB7d36216601414F36DeFbbd471de0';
+            let abi = [ { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" } ], "name": "mudaNome", "outputs": [], "stateMutability": "nonpayable", "type": "function" } ]
+        
+            let contrato = new web3.eth.Contract(abi, endereco);
+
+            let receipt = await contrato.methods.mudaNome('thom').send({from: '0x6120107e5E2df0A8b428Ccb03227cA242F764102'});
+            console.log(receipt);
+        }
+        
+        async function criar() {
+
+            const web3 = new Web3('HTTP://127.0.0.1:7545')
+
+            let transaction = {
+                from: '0xfcF21039c371E3ca13d0Ee09FcDf163979A88798',
+                data: '0x608060405234801561001057600080fd5b506104a3806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c806306fdde031461003b578063e5e1bf8f14610059575b600080fd5b610043610075565b6040516100509190610259565b60405180910390f35b610073600480360381019061006e91906103c4565b610103565b005b600080546100829061043c565b80601f01602080910402602001604051908101604052809291908181526020018280546100ae9061043c565b80156100fb5780601f106100d0576101008083540402835291602001916100fb565b820191906000526020600020905b8154815290600101906020018083116100de57829003601f168201915b505050505081565b806000908051906020019061011992919061011d565b5050565b8280546101299061043c565b90600052602060002090601f01602090048101928261014b5760008555610192565b82601f1061016457805160ff1916838001178555610192565b82800160010185558215610192579182015b82811115610191578251825591602001919060010190610176565b5b50905061019f91906101a3565b5090565b5b808211156101bc5760008160009055506001016101a4565b5090565b600081519050919050565b600082825260208201905092915050565b60005b838110156101fa5780820151818401526020810190506101df565b83811115610209576000848401525b50505050565b6000601f19601f8301169050919050565b600061022b826101c0565b61023581856101cb565b93506102458185602086016101dc565b61024e8161020f565b840191505092915050565b600060208201905081810360008301526102738184610220565b905092915050565b6000604051905090565b600080fd5b600080fd5b600080fd5b600080fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b6102d18261020f565b810181811067ffffffffffffffff821117156102f0576102ef610299565b5b80604052505050565b600061030361027b565b905061030f82826102c8565b919050565b600067ffffffffffffffff82111561032f5761032e610299565b5b6103388261020f565b9050602081019050919050565b82818337600083830152505050565b600061036761036284610314565b6102f9565b90508281526020810184848401111561038357610382610294565b5b61038e848285610345565b509392505050565b600082601f8301126103ab576103aa61028f565b5b81356103bb848260208601610354565b91505092915050565b6000602082840312156103da576103d9610285565b5b600082013567ffffffffffffffff8111156103f8576103f761028a565b5b61040484828501610396565b91505092915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b6000600282049050600182168061045457607f821691505b6020821081036104675761046661040d565b5b5091905056fea2646970667358221220e80be3c62a3bef74e10340c8aacf7d269c9e5ef1dc35032275bf1d0b2e65dccd64736f6c634300080d0033',
+                gas: '0x4B62D'
+            }
+
+            let gas = await web3.eth.estimateGas(transaction);
+            console.log(gas);
+
+            let receipt = await web3.eth.sendTransaction(transaction);
+            console.log(receipt);
+        }
+
+        async function encode() {
+
+            const web3 = new Web3('HTTP://127.0.0.1:7545')
+
+            let endereco = '0x334663eA3fEB7d36216601414F36DeFbbd471de0';
+            let abi = [ { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" } ], "name": "mudaNome", "outputs": [], "stateMutability": "nonpayable", "type": "function" } ]
+        
+            let contrato = new web3.eth.Contract(abi, endereco);
+            let encode = contrato.methods.mudaNome('jonny').encodeABI();
+            console.log(encode);
+        }
+
+
+        document.getElementById("criar").addEventListener('click', criar);
+        document.getElementById("pegarNome").addEventListener('click', pegarNome);
+        document.getElementById("mudarNome").addEventListener('click', mudarNome);
+        document.getElementById("encode").addEventListener('click', encode);
+
+    </script>
+
+</body>
+</html>
+
+<!--APRENDENDO A USAR A BIBLIOTECA WEB3.JS E INTERAGIR COM O CONTRATO EM MÉTODOS DE ALTO NÍVEL-->
