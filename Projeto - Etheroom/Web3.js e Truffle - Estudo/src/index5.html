@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/web3/dist/web3.min.js"></script>
+</head>
+<body>
+
+    <button id="conectar">Conectar</button>
+
+    <script>
+
+        async function conectar() {
+            let resultado = await ethereum.request({method: 'eth_requestAccounts'})
+            console.log(resultado);
+        }
+
+        async function run() {
+
+            const web3 = await new Web3(window.ethereum);
+            let contas = await web3.eth.getAccounts();
+            console.log(contas);
+
+        }
+
+        document.getElementById("conectar").addEventListener('click', conectar);
+
+    </script>
+
+</body>
+</html>
+
+<!-- Utilizando o web3.eth.Contracts para realizar movimentações nas contas locais do Ganache -->
