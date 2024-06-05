@@ -12,6 +12,7 @@
     <button id="conectar">Conectar</button>
     <button id="recupera">Recuperar Nome</button>
     <button id="altera">Alterar Nome</button>
+    <button id="pegaRede">Qual a rede local?</button>
 
     <script>
 
@@ -21,10 +22,19 @@
         }
 
         async function run() {
-            const web3 = await new Web3(window.ethereum);
-            let contas = await web3.eth.getAccounts();
-            console.log(web3);
-            console.log("contas ->", contas);
+
+            if(window.ethereum) {
+                // const web3 = await new Web3(window.ethereum);
+                // let contas = await web3.eth.getAccounts();
+                // console.log(web3);
+
+                let contas = await ethereum.request({ method: 'eth_accounts'});
+                console.log("contas ->", contas);
+            }
+            else {
+                alert('Metamask não está instalado')
+            }
+            
         }
 
         var abi = [ { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" } ], "name": "mudaNome", "outputs": [], "stateMutability": "nonpayable", "type": "function" } ]
@@ -49,9 +59,20 @@
             console.log(receipt);
         }
 
+        async function pegaRede() {
+
+            let rede = await ethereum.request({method: 'eth_chainId'});
+            console.log(rede);
+        }
+
         document.getElementById("conectar").addEventListener('click', conectar);
         document.getElementById("recupera").addEventListener('click', recupera);
         document.getElementById("altera").addEventListener('click', altera);
+        document.getElementById("pegaRede").addEventListener('click', pegaRede);
+        ethereum.on('chainChanged', () => (window.location.reload()));
+        ethereum.on('accountsChanged', () => {alert('A conta foi alterada!')});
+
+        run();
 
     </script>
 
