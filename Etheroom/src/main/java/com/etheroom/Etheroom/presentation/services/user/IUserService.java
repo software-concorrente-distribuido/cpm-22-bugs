@@ -1,5 +1,6 @@
 package com.etheroom.Etheroom.presentation.services.user;
 
+import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
 
 public interface IUserService {
@@ -11,5 +12,7 @@ public interface IUserService {
     void update(UserDto userDto);
 
     void delete(String id);
+
+    User loadUserByUsername(String username);
 
 }
