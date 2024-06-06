@@ -1,7 +1,7 @@
-package com.jk.infrastructure.configs.security;
+package com.etheroom.Etheroom.infrastructure.configs.security;
 
-import com.jk.infrastructure.utils.Functions;
-import com.jk.presentation.services.oauth.aggregates.IJwtService;
+import com.etheroom.Etheroom.infrastructure.utils.Functions;
+import com.etheroom.Etheroom.presentation.services.auth.aggregates.IJwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,6 +1,6 @@
-package com.jk.infrastructure.configs;
+package com.etheroom.Etheroom.infrastructure.configs;
 
-import com.jk.infrastructure.configs.security.JwtSecurityFilter;
+import com.etheroom.Etheroom.infrastructure.configs.security.JwtSecurityFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
