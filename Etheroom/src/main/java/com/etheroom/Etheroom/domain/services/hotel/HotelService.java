@@ -1,14 +1,17 @@
 package com.etheroom.Etheroom.domain.services.hotel;
 
 import com.etheroom.Etheroom.domain.models.hotel.Hotel;
+import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.domain.repositories.hotel.HotelRepository;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
 import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.NotFoundException;
 import com.etheroom.Etheroom.presentation.dtos.hotel.HotelDto;
 import com.etheroom.Etheroom.presentation.services.hotel.IHotelService;
+import com.etheroom.Etheroom.presentation.services.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,14 +22,19 @@ public class HotelService implements IHotelService {
 
     private final HotelRepository hotelRepository;
 
+    private final IUserService userService;
+
 
     @Override
-    public HotelDto create(HotelDto personDto) {
+    public HotelDto create(HotelDto hotelDto) {
         Functions.acceptTrueThrows(
-                this.hotelRepository.existsById(personDto.getId()),
+                Optional.ofNullable(hotelDto.getId()).isPresent() && this.hotelRepository.existsById(hotelDto.getId()),
                 () -> new NotFoundException(HOTEL_NOT_FOUND)
         );
-        Hotel hotel = personDto.mapDtoToEntity();
+        Hotel hotel = hotelDto.mapDtoToEntity();
+        User user = hotel.getUser();
+        this.userService.handleUser(user);
+
         return this.hotelRepository.save(hotel).mapEntityToDto();
     }
 
@@ -38,8 +46,8 @@ public class HotelService implements IHotelService {
     }
 
     @Override
-    public void update(HotelDto personDto) {
-        Hotel hotel = personDto.mapDtoToEntity();
+    public void update(HotelDto hotelDto) {
+        Hotel hotel = hotelDto.mapDtoToEntity();
         this.hotelRepository.save(hotel);
     }
 

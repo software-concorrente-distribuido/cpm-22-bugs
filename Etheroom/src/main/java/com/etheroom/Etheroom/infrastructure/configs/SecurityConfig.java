@@ -70,6 +70,10 @@ public class SecurityConfig implements WebMvcConfigurer {
                     .denyAll()
                     .requestMatchers(HttpMethod.OPTIONS)
                     .permitAll()
+                    .requestMatchers(HttpMethod.POST, "/hotel")
+                    .permitAll()
+                    .requestMatchers(HttpMethod.POST, "/person")
+                    .permitAll()
                     .anyRequest()
                     .authenticated()
         );
