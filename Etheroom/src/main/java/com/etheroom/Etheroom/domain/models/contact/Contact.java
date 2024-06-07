@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "jk_contact")
+@Table(name = "etheroom_contact")
 @Entity
 public class Contact extends BaseEntity {
 
