@@ -22,7 +22,7 @@ public class OpenAPIConfig {
     public GroupedOpenApi authenticatedControllers() {
         return GroupedOpenApi.builder()
                 .group("Authenticated Endpoints")
-                .packagesToScan("com.jk.presentation.controllers")
+                .packagesToScan("com.etheroom.Etheroom.presentation.controllers")
                 .build();
     }
 
@@ -30,7 +30,7 @@ public class OpenAPIConfig {
     public GroupedOpenApi publicControllers() {
         return GroupedOpenApi.builder()
                 .group("Public Endpoints")
-                .packagesToScan("com.jk.presentation.controllers.publics")
+                .packagesToScan("com.etheroom.Etheroom.presentation.controllers.publics")
                 .build();
     }
 
