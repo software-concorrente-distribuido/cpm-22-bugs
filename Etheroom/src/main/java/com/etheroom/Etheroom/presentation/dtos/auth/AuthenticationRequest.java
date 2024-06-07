@@ -7,7 +7,6 @@ import lombok.Setter;
 @Setter
 public class AuthenticationRequest {
 
-    private String login;
-    private String password;
+    private String ethereumAddress;
 
 }

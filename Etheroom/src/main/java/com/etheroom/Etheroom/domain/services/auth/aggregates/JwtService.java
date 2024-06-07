@@ -47,7 +47,7 @@ public class JwtService implements IJwtService {
     @Override
     public String generateToken(User user) {
         return Jwts.builder()
-                .subject(user.getAddress())
+                .subject(user.getEthereumAddress())
                 .claims(this.getExtraUserClaims(user))
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + DAY_IN_MILLIS))

@@ -25,11 +25,12 @@ public class AuthenticationService implements IAuthenticationService {
 
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
-        User user = this.userService.loadUserByUsername(authenticationRequest.getLogin());
+        String ethereumAddress = authenticationRequest.getEthereumAddress();
+        User user = this.userService.loadUserByUsername(ethereumAddress);
         this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getLogin(),
-                        authenticationRequest.getPassword()
+                        ethereumAddress,
+                        null
                 )
         );
         return new AuthenticationResponse(

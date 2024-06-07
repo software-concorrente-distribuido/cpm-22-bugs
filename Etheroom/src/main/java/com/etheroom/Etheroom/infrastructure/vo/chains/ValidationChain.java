@@ -1,6 +1,6 @@
 package com.etheroom.Etheroom.infrastructure.vo.chains;
 
-import com.jk.infrastructure.utils.Functions;
+import com.etheroom.Etheroom.infrastructure.utils.Functions;
 
 import java.util.Arrays;
 import java.util.Optional;
