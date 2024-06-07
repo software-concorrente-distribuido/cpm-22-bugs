@@ -4,6 +4,7 @@ import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.domain.services.auth.aggregates.JwtService;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
 import com.etheroom.Etheroom.infrastructure.utils.Utils;
+import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.BadRequestException;
 import com.etheroom.Etheroom.presentation.dtos.auth.AuthenticationRequest;
 import com.etheroom.Etheroom.presentation.dtos.auth.AuthenticationResponse;
 import com.etheroom.Etheroom.presentation.dtos.auth.PasswordResetDto;
@@ -19,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class AuthenticationService implements IAuthenticationService {
 
+    private static final String INVALID_ETHEREUM_ADDRESS = "Endereço Ethereum inválido";
+
     private final AuthenticationManager authenticationManager;
 
     private final JwtService jwtService;
@@ -30,7 +33,7 @@ public class AuthenticationService implements IAuthenticationService {
         String ethereumAddress = authenticationRequest.getEthereumAddress();
         Functions.acceptFalseThrows(
                 Utils.isEthereumAddressValid(ethereumAddress),
-                () -> new RuntimeException("Invalid ethereum address")
+                () -> new BadRequestException(INVALID_ETHEREUM_ADDRESS)
         );
         User user = this.userService.loadUserByUsername(ethereumAddress);
         this.authenticationManager.authenticate(

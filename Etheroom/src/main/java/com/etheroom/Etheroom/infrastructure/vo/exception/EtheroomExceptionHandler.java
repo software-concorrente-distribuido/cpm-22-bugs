@@ -1,9 +1,6 @@
 package com.etheroom.Etheroom.infrastructure.vo.exception;
 
-import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.DuplicatedKeyException;
-import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.NotFoundException;
-import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.ServiceException;
-import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.UnauthorizedException;
+import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -100,6 +97,21 @@ public class EtheroomExceptionHandler {
                         .timestamp(LocalDateTime.now())
                         .build(),
                 HttpStatus.CONFLICT
+        );
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ExceptionDetails> handleBadRequestException(BadRequestException exception){
+        return new ResponseEntity<>(
+                ExceptionDetails.builder()
+                        .title("Requisição Inválida")
+                        .status(HttpStatus.BAD_REQUEST.value())
+                        .details(exception.getMessage())
+                        .developerMessage(BadRequestException.EXCEPTION_DEVELOPER_MESSAGE)
+                        .className(Arrays.stream(exception.getStackTrace()).findFirst().map(StackTraceElement::getClassName).orElse(null))
+                        .timestamp(LocalDateTime.now())
+                        .build(),
+                HttpStatus.BAD_REQUEST
         );
     }
 
