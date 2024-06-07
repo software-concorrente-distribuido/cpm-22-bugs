@@ -6,10 +6,11 @@ CREATE TABLE IF NOT EXISTS ETHEROOM_USER (
 
     ID                  UUID,
 
-    ETHEREUM_ADDRESS    VARCHAR(50)         NOT NULL,
-    ETHEREUM_PUBLIC_KEY VARCHAR(50)         NOT NULL,
+    ETHEREUM_ADDRESS    VARCHAR             NOT NULL,
+    ETHEREUM_PUBLIC_KEY VARCHAR             NOT NULL,
     EMAIL               VARCHAR(50)         NOT NULL,
     ROLE                VARCHAR(50)         NOT NULL,
+
     CREATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UPDATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -92,10 +93,10 @@ BEGIN
 END $$;
 
 /*===========================================================*/
-/* TABLE: ETHEREUM_ADDRESS                                   */
+/* TABLE: ETHEROOM_ADDRESS                                   */
 /*===========================================================*/
 
-CREATE TABLE IF NOT EXISTS ETHEREUM_ADDRESS (
+CREATE TABLE IF NOT EXISTS ETHEROOM_ADDRESS (
 
     ID              UUID,
 
@@ -146,7 +147,7 @@ CREATE TABLE IF NOT EXISTS ETHEROOM_PERSON (
 
     PRIMARY KEY (ID),
     FOREIGN KEY (USER_ID) REFERENCES ETHEROOM_USER(ID),
-    FOREIGN KEY (ADDRESS_ID) REFERENCES ETHEREUM_ADDRESS(ID),
+    FOREIGN KEY (ADDRESS_ID) REFERENCES ETHEROOM_ADDRESS(ID),
     FOREIGN KEY (CONTACT_ID) REFERENCES ETHEROOM_CONTACT(ID)
 
 );

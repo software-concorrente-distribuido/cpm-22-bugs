@@ -29,10 +29,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "ethereum_public_key", unique = true, updatable = false)
     private String ethereumPublicKey;
 
-    @Column(name = "locked")
-    private Boolean locked;
-
-    @Column(name = "role")
+    @Column(name = "role", updatable = false)
     private UserRole role;
 
     @Override
