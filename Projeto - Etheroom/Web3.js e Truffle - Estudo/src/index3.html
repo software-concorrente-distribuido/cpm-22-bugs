@@ -11,33 +11,33 @@
     <button id = "criar">Criar um novo contrato</button>
     <button id = "pegarNome">Pegar nome</button>
     <button id = "mudarNome">Mudar nome</button>
+    <button id = "encode">Encode</button>
     <script>
+
 
         async function pegarNome() {
 
             const web3 = new Web3('HTTP://127.0.0.1:7545')
 
-            let transaction = {
-                to: '0xddd2b9ac458ef8d4945ea7264142b082682a2fac',
-                data: '0x06fdde03'
-            }
+            let endereco = '0x334663eA3fEB7d36216601414F36DeFbbd471de0';
+            let abi = [ { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" } ], "name": "mudaNome", "outputs": [], "stateMutability": "nonpayable", "type": "function" } ]
+        
+            let contrato = new web3.eth.Contract(abi, endereco);
 
-            let receipt = await web3.eth.call(transaction);
-            console.log(receipt);
+            let nome = await contrato.methods.nome().call();
+            console.log(nome);
         }
 
         async function mudarNome() {
 
             const web3 = new Web3('HTTP://127.0.0.1:7545')
 
-            let transaction = {
-                from: '0xfcF21039c371E3ca13d0Ee09FcDf163979A88798',
-                to: '0xddd2b9ac458ef8d4945ea7264142b082682a2fac',
-                data: '0xe5e1bf8f000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000076761627269656c00000000000000000000000000000000000000000000000000',
-                gas: '0x4B705'
-            }
+            let endereco = '0x334663eA3fEB7d36216601414F36DeFbbd471de0';
+            let abi = [ { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" } ], "name": "mudaNome", "outputs": [], "stateMutability": "nonpayable", "type": "function" } ]
+        
+            let contrato = new web3.eth.Contract(abi, endereco);
 
-            let receipt = await web3.eth.sendTransaction(transaction);
+            let receipt = await contrato.methods.mudaNome('thom').send({from: '0x6120107e5E2df0A8b428Ccb03227cA242F764102'});
             console.log(receipt);
         }
         
@@ -58,20 +58,27 @@
             console.log(receipt);
         }
 
+        async function encode() {
+
+            const web3 = new Web3('HTTP://127.0.0.1:7545')
+
+            let endereco = '0x334663eA3fEB7d36216601414F36DeFbbd471de0';
+            let abi = [ { "inputs": [], "name": "name", "outputs": [ { "internalType": "string", "name": "", "type": "string" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_name", "type": "string" } ], "name": "mudaNome", "outputs": [], "stateMutability": "nonpayable", "type": "function" } ]
+        
+            let contrato = new web3.eth.Contract(abi, endereco);
+            let encode = contrato.methods.mudaNome('jonny').encodeABI();
+            console.log(encode);
+        }
+
+
         document.getElementById("criar").addEventListener('click', criar);
         document.getElementById("pegarNome").addEventListener('click', pegarNome);
         document.getElementById("mudarNome").addEventListener('click', mudarNome);
+        document.getElementById("encode").addEventListener('click', encode);
 
     </script>
 
 </body>
 </html>
 
-<!--Interagindo com a EVM para alterar uma variável de estado em um contrato ou enviar uma transação para uma conta = transação-->
-<!--A transação é um objeto javascript, para criá-lo, é preciso saber o endereço da conta que está enviando e o bytecode do contrato enviado-->
-<!--Nesse objeto também podemos passar a conta destino, valor, gas, nounce (esses fatores a carteira já lida)-->
-<!--O estimatedGas retorna o gas para criar o contrato, este valor decimal deve ser passado para hex e colocado no objeto com 0x na frente-->
-
-<!--Para verificar a instância criada: "let instance = await Simples.at('address')"-->
-<!--Para obter o nome: "await instance.name()"-->
-<!--Para mudar o nome: descomentar o código-->
+<!--APRENDENDO A USAR A BIBLIOTECA WEB3.JS E INTERAGIR COM O CONTRATO EM MÉTODOS DE ALTO NÍVEL-->

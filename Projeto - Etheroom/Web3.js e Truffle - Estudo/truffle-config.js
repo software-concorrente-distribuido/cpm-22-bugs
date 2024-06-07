@@ -138,4 +138,6 @@ module.exports = {
   //     }
   //   }
   // }
+  contracts_directory: "./src/contracts/",
+  contracts_build_directory: "./build/contracts/"
 };
