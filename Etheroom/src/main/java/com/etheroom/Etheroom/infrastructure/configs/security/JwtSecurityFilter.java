@@ -1,5 +1,6 @@
 package com.etheroom.Etheroom.infrastructure.configs.security;
 
+import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
 import com.etheroom.Etheroom.presentation.services.auth.aggregates.IJwtService;
 import jakarta.servlet.FilterChain;
@@ -47,12 +48,12 @@ public class JwtSecurityFilter extends OncePerRequestFilter {
 
     private void performFilterFlow(HttpServletRequest request,String authorizationHeader) {
         String token = authorizationHeader.replace(BEARER_PREFIX, "");
-        UserDetails user = this.userService.loadUserByUsername(this.jwtService.extractLogin(token));
+        User user = (User) this.userService.loadUserByUsername(this.jwtService.extractLogin(token));
         Functions.acceptTrue(
                 this.jwtService.isValid(token, user) && Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication()).isEmpty(),
                 () -> {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                            user, null, user.getAuthorities()
+                            user.getEthereumAddress(), user.getEthereumPublicKey(), user.getAuthorities()
                     );
 
                     authToken.setDetails(

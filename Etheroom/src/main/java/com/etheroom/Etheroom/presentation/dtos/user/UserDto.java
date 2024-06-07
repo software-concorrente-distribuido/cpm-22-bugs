@@ -11,6 +11,7 @@ import lombok.Setter;
 public class UserDto extends BaseEntityDto<User> {
 
     private String ethereumAddress;
+    private String ethereumPublicKey;
     private String email;
     private UserRole role;
 
@@ -19,6 +20,7 @@ public class UserDto extends BaseEntityDto<User> {
         User user = new User();
         user.setId(this.getId());
         user.setEthereumAddress(this.getEthereumAddress());
+        user.setEthereumPublicKey(this.getEthereumPublicKey());
         user.setEmail(this.getEmail());
         user.setRole(this.getRole());
         user.setUpdatedAt(this.getUpdatedAt());

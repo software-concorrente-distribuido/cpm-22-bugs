@@ -23,8 +23,11 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "ethereum_address", unique = true)
+    @Column(name = "ethereum_address", unique = true, updatable = false)
     private String ethereumAddress;
+
+    @Column(name = "ethereum_public_key", unique = true, updatable = false)
+    private String ethereumPublicKey;
 
     @Column(name = "locked")
     private Boolean locked;
@@ -74,6 +77,7 @@ public class User extends BaseEntity implements UserDetails {
         UserDto userDto = new UserDto();
         userDto.setId(this.getId());
         userDto.setEthereumAddress(this.getEthereumAddress());
+        userDto.setEthereumPublicKey(this.getEthereumPublicKey());
         userDto.setEmail(this.getEmail());
         userDto.setRole(this.getRole());
         userDto.setUpdatedAt(this.getUpdatedAt());

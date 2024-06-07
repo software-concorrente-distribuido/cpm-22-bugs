@@ -8,5 +8,6 @@ import lombok.Setter;
 public class AuthenticationRequest {
 
     private String ethereumAddress;
+    private String ethereumPublicKey;
 
 }

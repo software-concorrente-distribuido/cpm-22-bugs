@@ -39,7 +39,7 @@ public class AuthenticationService implements IAuthenticationService {
         this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         ethereumAddress,
-                        null
+                        authenticationRequest.getEthereumPublicKey()
                 )
         );
         return new AuthenticationResponse(
