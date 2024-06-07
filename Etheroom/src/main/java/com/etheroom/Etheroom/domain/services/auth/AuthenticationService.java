@@ -2,6 +2,8 @@ package com.etheroom.Etheroom.domain.services.auth;
 
 import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.domain.services.auth.aggregates.JwtService;
+import com.etheroom.Etheroom.infrastructure.utils.Functions;
+import com.etheroom.Etheroom.infrastructure.utils.Utils;
 import com.etheroom.Etheroom.presentation.dtos.auth.AuthenticationRequest;
 import com.etheroom.Etheroom.presentation.dtos.auth.AuthenticationResponse;
 import com.etheroom.Etheroom.presentation.dtos.auth.PasswordResetDto;
@@ -26,6 +28,10 @@ public class AuthenticationService implements IAuthenticationService {
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
         String ethereumAddress = authenticationRequest.getEthereumAddress();
+        Functions.acceptFalseThrows(
+                Utils.isEthereumAddressValid(ethereumAddress),
+                () -> new RuntimeException("Invalid ethereum address")
+        );
         User user = this.userService.loadUserByUsername(ethereumAddress);
         this.authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

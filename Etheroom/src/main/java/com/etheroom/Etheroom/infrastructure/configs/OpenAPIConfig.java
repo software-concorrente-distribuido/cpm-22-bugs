@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "JK API",
-                description = "JK API",
-                version = "0.0.0"
+                title = "ETHEROOM API",
+                description = "ETHEROOM API",
+                version = "0.1.0"
         )
 )
 public class OpenAPIConfig {

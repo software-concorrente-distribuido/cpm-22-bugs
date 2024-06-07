@@ -20,9 +20,6 @@ import java.util.List;
 @Entity
 public class User extends BaseEntity implements UserDetails {
 
-    @Column(name = "name")
-    private String name;
-
     @Column(name = "email")
     private String email;
 
@@ -76,7 +73,6 @@ public class User extends BaseEntity implements UserDetails {
     public UserDto mapEntityToDto() {
         UserDto userDto = new UserDto();
         userDto.setId(this.getId());
-        userDto.setName(this.getName());
         userDto.setEthereumAddress(this.getEthereumAddress());
         userDto.setEmail(this.getEmail());
         userDto.setRole(this.getRole());

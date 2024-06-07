@@ -18,7 +18,7 @@ public class ApplicationController {
     @GetMapping("/health")
     @ResponseStatus(HttpStatus.OK)
     public String health() {
-        return "JK API Running!";
+        return "ETHEROOM API Running!";
     }
 
     @GetMapping("/enum/{name}")

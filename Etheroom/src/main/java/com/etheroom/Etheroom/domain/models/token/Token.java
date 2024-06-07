@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "jk_token")
+@Table(name = "etheroom_token")
 @Entity
 public class Token extends BaseEntity {
 

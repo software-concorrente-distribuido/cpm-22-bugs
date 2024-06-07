@@ -16,6 +16,6 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return this.userRepository.findByAddress(username);
+        return this.userRepository.findByEthereumAddress(username);
     }
 }
