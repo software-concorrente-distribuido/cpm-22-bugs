@@ -76,6 +76,42 @@ BEGIN
 END $$;
 
 /*===========================================================*/
+/* TABLE: ETHEREUM_ADDRESS                                   */
+/*===========================================================*/
+
+CREATE TABLE IF NOT EXISTS ETHEREUM_ADDRESS (
+
+    ID              UUID,
+
+    DESCRIPTION     VARCHAR(255),
+    ZIP_CODE        VARCHAR(20),
+    COUNTRY         VARCHAR(50),
+
+    CREATED_AT      TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT      TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (ID)
+);
+
+/*===========================================================*/
+/* TABLE: ETHEROOM_CONTACT                                   */
+/*===========================================================*/
+
+CREATE TABLE IF NOT EXISTS ETHEROOM_CONTACT (
+
+    ID                      UUID,
+
+    PHONE                   VARCHAR(20),
+    CELLPHONE               VARCHAR(20),
+    EMAIL                   VARCHAR(50),
+
+    CREATED_AT              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT              TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (ID)
+);
+
+/*===========================================================*/
 /* TABLE: ETHEROOM_PERSON                                    */
 /*===========================================================*/
 
