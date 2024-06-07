@@ -5,8 +5,9 @@
 CREATE TABLE IF NOT EXISTS ETHEROOM_USER (
 
     ID                  UUID,
-    NAME                VARCHAR(50)         NOT NULL,
+
     ETHEREUM_ADDRESS    VARCHAR(50)         NOT NULL,
+    ETHEREUM_PUBLIC_KEY VARCHAR(50)         NOT NULL,
     EMAIL               VARCHAR(50)         NOT NULL,
     ROLE                VARCHAR(50)         NOT NULL,
     CREATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -30,6 +31,20 @@ BEGIN
 
 END $$;
 
+DO $$
+BEGIN
+
+  BEGIN
+    ALTER TABLE ETHEROOM_USER
+        ADD CONSTRAINT ETHEROOM_USER_AK_ETHEREUM_PUBLIC_KEY UNIQUE (WALLET_PUBLIC_KEY);
+  EXCEPTION
+    WHEN duplicate_table THEN
+    WHEN duplicate_object THEN
+      RAISE NOTICE 'Table constraint ETHEROOM_USER_AK_ETHEREUM_PUBLIC_KEY already exists';
+  END;
+
+END $$;
+
 /*===========================================================*/
 /* TABLE: ETHEROOM_TOKEN                                     */
 /*===========================================================*/
@@ -37,6 +52,7 @@ END $$;
 CREATE TABLE IF NOT EXISTS ETHEROOM_TOKEN (
 
     ID              UUID,
+
     TOKEN           VARCHAR(4)          NOT NULL,
     HASH            VARCHAR(30)         NOT NULL,
     TYPE            VARCHAR(30)         NOT NULL,
@@ -111,17 +127,28 @@ CREATE TABLE IF NOT EXISTS ETHEROOM_CONTACT (
     PRIMARY KEY (ID)
 );
 
-/*===========================================================*/
+/===========================================================/
 /* TABLE: ETHEROOM_PERSON                                    */
-/*===========================================================*/
+/===========================================================/
 
 CREATE TABLE IF NOT EXISTS ETHEROOM_PERSON (
 
     ID                  UUID,
+
+    NAME                VARCHAR(100),
+
+    USER_ID             UUID,
+    ADDRESS_ID          UUID,
+    CONTACT_ID          UUID,
+
     CREATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UPDATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    PRIMARY KEY (ID)
+    PRIMARY KEY (ID),
+
+    FOREIGN KEY (USER_ID) REFERENCES ETHEROOM_USER(ID),
+    FOREIGN KEY (ADDRESS_ID) REFERENCES ETHEREUM_ADDRESS(ID),
+    FOREIGN KEY (CONTACT_ID) REFERENCES ETHEROOM_CONTACT(ID)
 
 );
 
@@ -143,6 +170,10 @@ CREATE TABLE IF NOT EXISTS ETHEROOM_HOTEL (
     CREATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
     UPDATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    PRIMARY KEY (ID)
+    PRIMARY KEY (ID),
+
+    FOREIGN KEY (USER_ID) REFERENCES ETHEROOM_USER(ID),
+    FOREIGN KEY (ADDRESS_ID) REFERENCES ETHEREUM_ADDRESS(ID),
+    FOREIGN KEY (CONTACT_ID) REFERENCES ETHEROOM_CONTACT(ID)
 
 );
