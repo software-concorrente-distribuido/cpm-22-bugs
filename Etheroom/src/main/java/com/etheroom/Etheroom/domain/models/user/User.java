@@ -26,8 +26,8 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "address", unique = true)
-    private String address;
+    @Column(name = "ethereum_address", unique = true)
+    private String ethereumAddress;
 
     @Column(name = "locked")
     private Boolean locked;
@@ -49,7 +49,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.address;
+        return this.ethereumAddress;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return !this.locked;
+        return true;
     }
 
     @Override
@@ -77,9 +77,8 @@ public class User extends BaseEntity implements UserDetails {
         UserDto userDto = new UserDto();
         userDto.setId(this.getId());
         userDto.setName(this.getName());
-        userDto.setAddress(this.getAddress());
+        userDto.setEthereumAddress(this.getEthereumAddress());
         userDto.setEmail(this.getEmail());
-        userDto.setLocked(this.getLocked());
         userDto.setRole(this.getRole());
         userDto.setUpdatedAt(this.getUpdatedAt());
         userDto.setCreatedAt(this.getCreatedAt());
