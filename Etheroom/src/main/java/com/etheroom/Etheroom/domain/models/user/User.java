@@ -6,6 +6,7 @@ import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,6 +39,12 @@ public class User extends BaseEntity implements UserDetails {
                 new SimpleGrantedAuthority(this.role.name())
         );
     }
+
+    @Transient
+    private String addressToMatch;
+
+    @Transient
+    private String keyToMatch;
 
     @Override
     public String getPassword() {

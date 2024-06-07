@@ -3,9 +3,13 @@ package com.etheroom.Etheroom.infrastructure.vo.chains;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 public abstract class ValidationChain<T> {
+
+    private Set<Validation> validations = new HashSet<>();
 
     private T entityToValidate;
 

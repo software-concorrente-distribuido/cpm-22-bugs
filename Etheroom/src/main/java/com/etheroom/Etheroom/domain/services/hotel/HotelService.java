@@ -4,6 +4,7 @@ import com.etheroom.Etheroom.domain.models.hotel.Hotel;
 import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.domain.repositories.hotel.HotelRepository;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
+import com.etheroom.Etheroom.infrastructure.vo.enums.UserRole;
 import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.NotFoundException;
 import com.etheroom.Etheroom.presentation.dtos.hotel.HotelDto;
 import com.etheroom.Etheroom.presentation.services.hotel.IHotelService;
@@ -33,8 +34,8 @@ public class HotelService implements IHotelService {
         );
         Hotel hotel = hotelDto.mapDtoToEntity();
         User user = hotel.getUser();
-        this.userService.handleUser(user);
-
+        this.userService.handleUserByRole(user, UserRole.HOTEL);
+        hotel.setUser(user);
         return this.hotelRepository.save(hotel).mapEntityToDto();
     }
 

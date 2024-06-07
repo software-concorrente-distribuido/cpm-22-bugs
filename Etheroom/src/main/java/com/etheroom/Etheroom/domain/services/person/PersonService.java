@@ -1,11 +1,14 @@
 package com.etheroom.Etheroom.domain.services.person;
 
 import com.etheroom.Etheroom.domain.models.person.Person;
+import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.domain.repositories.person.PersonRepository;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
+import com.etheroom.Etheroom.infrastructure.vo.enums.UserRole;
 import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.NotFoundException;
 import com.etheroom.Etheroom.presentation.dtos.person.PersonDto;
 import com.etheroom.Etheroom.presentation.services.person.IPersonService;
+import com.etheroom.Etheroom.presentation.services.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ public class PersonService implements IPersonService {
 
     private final PersonRepository personRepository;
 
+    private final IUserService userService;
+
     @Override
     public PersonDto create(PersonDto personDto) {
         Functions.acceptTrueThrows(
@@ -26,6 +31,9 @@ public class PersonService implements IPersonService {
                 () -> new NotFoundException(PERSON_NOT_FOUND)
         );
         Person person = personDto.mapDtoToEntity();
+        User user = person.getUser();
+        this.userService.handleUserByRole(user, UserRole.USER);
+        person.setUser(user);
         return this.personRepository.save(person).mapEntityToDto();
     }
 
