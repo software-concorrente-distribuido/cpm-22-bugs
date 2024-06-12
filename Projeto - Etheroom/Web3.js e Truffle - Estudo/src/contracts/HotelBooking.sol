@@ -1,0 +1,44 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract HotelBooking {
+    address public guest;
+    string public hotel;
+    uint256 public amount;
+    uint256 public checkInDate;
+    uint256 public checkOutDate;
+    bool public isCancelled;
+
+    event BookingCancelled(address indexed guest, uint256 refundAmount);
+
+    modifier onlyGuest() {
+        require(msg.sender == guest, "Not the guest");
+        _;
+    }
+
+    constructor(address _guest, string memory _hotel, uint256 _amount, uint256 _checkInDate, uint256 _checkOutDate) {
+        guest = _guest;
+        hotel = _hotel;
+        amount = _amount;
+        checkInDate = _checkInDate;
+        checkOutDate = _checkOutDate;
+        isCancelled = false;
+    }
+
+    function cancelBooking(address _caller) public onlyGuest {
+        require(!isCancelled, "Booking already cancelled");
+        require(_caller == guest, "Only guest can cancel booking");
+
+        isCancelled = true;
+        uint256 refundAmount = calculateRefund();
+        payable(guest).transfer(refundAmount);
+
+        emit BookingCancelled(guest, refundAmount);
+    }
+
+    function calculateRefund() internal view returns (uint256) {
+        // Logic to calculate refund amount based on cancellation policy
+        // For simplicity, assuming full refund here
+        return amount;
+    }
+}
