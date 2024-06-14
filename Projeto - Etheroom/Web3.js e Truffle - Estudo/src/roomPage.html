@@ -7,10 +7,13 @@
     <title>Document</title>
     <script src="../node_modules/web3/dist/web3.min.js"></script>
     <style>
-        div{
+        div {
             display: flex;
             justify-content: center;
             margin:10px;
+        }
+        p {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -98,16 +101,22 @@
     }
 
     function exibirDetalhesReserva(booking) {
+
+        let web3 = new Web3(provider);
+        let valorEther = web3.utils.fromWei(booking.amount, 'ether');
+
         document.getElementById("detalhesReserva").innerHTML = `
-            <p>Contrato de Reserva: ${booking.bookingContract}</p>
-            <p>Hóspede: ${booking.guest}</p>
-            <p>Hotel: ${booking.hotel}</p>
-            <p>Valor: ${booking.amount}</p>
-            <p>Ativo: ${booking.isActive}</p>
+            Contrato de Reserva: ${booking.bookingContract}<br />
+            Endereço da conta do hóspede: ${booking.guest}<br />
+            Hotel: ${booking.hotel}<br />
+            Valor em wei: ${booking.amount} wei<br />
+            Valor em ether: ${valorEther} ETH<br />
+            Ativo: ${booking.isActive}
         `;
     }
 
     run();
+
 </script>
 </body>
 </html>
