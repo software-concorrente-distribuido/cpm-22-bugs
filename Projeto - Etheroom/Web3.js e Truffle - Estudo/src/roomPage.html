@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/web3/dist/web3.min.js"></script>
+    <style>
+        div{
+            display: flex;
+            justify-content: center;
+            margin:10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="conectar">
+        <button id="btnConectar" style="display: none">Conectar ao Metamask</button>
+    </div>
+    <div>
+        <button id="alterar" style="display: none">Alterar Nome</button>
+        <button id="reservar">Reservar quarto</button>
+    </div>
+    <div>
+        <input id="bookingId" type="text" placeholder="Booking ID" />
+        <button id="obterReserva">Obter Reserva</button>
+    </div>
+    <div id="detalhesReserva">&nbsp;</div>
+    <div id="idReserva">&nbsp;</div>
+
+<script>
+    var provider = window.ethereum;
+    var abi = [ { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "uint256", "name": "bookingId", "type": "uint256" }, { "indexed": true, "internalType": "address", "name": "guest", "type": "address" } ], "name": "BookingCancelled", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "uint256", "name": "bookingId", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "bookingContract", "type": "address" }, { "indexed": true, "internalType": "address", "name": "guest", "type": "address" }, { "indexed": false, "internalType": "string", "name": "hotel", "type": "string" }, { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "BookingCreated", "type": "event" }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "bookingContracts", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "bookingCount", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "bookings", "outputs": [ { "internalType": "address", "name": "bookingContract", "type": "address" }, { "internalType": "address", "name": "guest", "type": "address" }, { "internalType": "string", "name": "hotel", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "bool", "name": "isActive", "type": "bool" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "owner", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_hotel", "type": "string" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_checkInDate", "type": "uint256" }, { "internalType": "uint256", "name": "_checkOutDate", "type": "uint256" } ], "name": "createBooking", "outputs": [], "stateMutability": "payable", "type": "function", "payable": true }, { "inputs": [ { "internalType": "uint256", "name": "_bookingId", "type": "uint256" } ], "name": "cancelBooking", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "_bookingId", "type": "uint256" } ], "name": "getBooking", "outputs": [ { "components": [ { "internalType": "address", "name": "bookingContract", "type": "address" }, { "internalType": "address", "name": "guest", "type": "address" }, { "internalType": "string", "name": "hotel", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "bool", "name": "isActive", "type": "bool" } ], "internalType": "struct HotelBookingManager.BookingInfo", "name": "", "type": "tuple" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "getBookingContracts", "outputs": [ { "internalType": "address[]", "name": "", "type": "address[]" } ], "stateMutability": "view", "type": "function", "constant": true } ];
+    var endereco = '0x8E7E8A7427a0bD9cD8596C46A4aC72fd73B16149'; // endereço do HotelBookingManager
+    var conta = "";
+
+    async function run() {
+        if (!provider) {
+            document.getElementById("conectar").innerHTML = "Por favor, instale o Metamask";
+        } else {
+            let contas = await provider.request({ method: 'eth_accounts' });
+
+            if (contas.length == 0) {
+                document.getElementById("btnConectar").style.display = 'block';
+                document.getElementById("btnConectar").addEventListener('click', conectarMM);
+            } else {
+                document.getElementById("conectar").innerHTML = contas[0];
+                conta = contas[0];
+                document.getElementById("reservar").style.display = 'block';
+                document.getElementById("reservar").addEventListener('click', () => reservarQuarto('Copacabana Palace', 0.21, 4, 12));
+                document.getElementById("obterReserva").addEventListener('click', obterReserva);
+            }
+        }
+    }
+
+    async function conectarMM() {
+        let contas = await provider.request({ method: 'eth_requestAccounts' });
+        document.getElementById("conectar").innerHTML = contas[0];
+        conta = contas[0];
+    }
+
+    async function reservarQuarto(nomeHotel, valor, checkIn, checkOut) {
+        let web3 = new Web3(provider);
+        let contract = new web3.eth.Contract(abi, endereco);
+
+        const valorWei = web3.utils.toWei(valor.toString(), 'ether');
+
+        try {
+            let receipt = await contract.methods.createBooking(nomeHotel, valorWei, checkIn, checkOut).send({
+                from: conta,
+                value: valorWei
+            });
+
+            // Extrair o ID da reserva do evento "BookingCreated"
+            let bookingId = receipt.events.BookingCreated.returnValues.bookingId;
+            console.log(`ID da Reserva: ${bookingId}`);
+            document.getElementById("idReserva").innerHTML = `ID da Reserva: ${bookingId}`;
+
+        } catch (e) {
+            console.log("Algo deu errado", e);
+        }
+    }
+
+    async function obterReserva() {
+        let web3 = new Web3(provider);
+        let contract = new web3.eth.Contract(abi, endereco);
+
+        let bookingId = document.getElementById("bookingId").value;
+
+        try {
+            let booking = await contract.methods.getBooking(bookingId).call();
+            console.log(booking);
+            exibirDetalhesReserva(booking);
+        } catch (e) {
+            console.log("Algo deu errado", e);
+        }
+    }
+
+    function exibirDetalhesReserva(booking) {
+        document.getElementById("detalhesReserva").innerHTML = `
+            <p>Contrato de Reserva: ${booking.bookingContract}</p>
+            <p>Hóspede: ${booking.guest}</p>
+            <p>Hotel: ${booking.hotel}</p>
+            <p>Valor: ${booking.amount}</p>
+            <p>Ativo: ${booking.isActive}</p>
+        `;
+    }
+
+    run();
+</script>
+</body>
+</html>

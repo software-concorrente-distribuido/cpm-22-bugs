@@ -50,7 +50,7 @@ contract HotelBookingManager {
         // Verifica se o valor enviado na transação é igual ao valor esperado da reserva, caso não seja, a transação falha e exibe a mensagem
         require(msg.value == _amount, "Incorrect payment amount");
 
-    // Cria uma instância de um novo contrato de reserva individual (HotelBooking)
+        // Cria uma instância de um novo contrato de reserva individual (HotelBooking)
         HotelBooking newBooking = new HotelBooking(
         msg.sender, //endereço do hóspede
         _hotel, //nome do hotel
