@@ -12,7 +12,7 @@ contract HotelBooking {
     event BookingCancelled(address indexed guest, uint256 refundAmount);
 
     modifier onlyGuest() {
-        require(msg.sender == guest, "Not the guest");
+        require(msg.sender == guest, "Erro, so pode ser feito pelo hospede");
         _;
     }
 
@@ -26,8 +26,8 @@ contract HotelBooking {
     }
 
     function cancelBooking(address _caller) public onlyGuest {
-        require(!isCancelled, "Booking already cancelled");
-        require(_caller == guest, "Only guest can cancel booking");
+        require(!isCancelled, "Reserva ja cancelada");
+        require(_caller == guest, "Apenas o hospede pode cancelar a reserva");
 
         isCancelled = true;
         uint256 refundAmount = calculateRefund();

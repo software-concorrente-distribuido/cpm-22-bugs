@@ -38,7 +38,7 @@ contract HotelBookingManager {
     );
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Not the owner");
+        require(msg.sender == owner, "Erro, apenas o criador do contrato");
         _;
     }
 
@@ -48,7 +48,7 @@ contract HotelBookingManager {
 
     function createBooking(string memory _hotel, uint256 _amount, uint256 _checkInDate, uint256 _checkOutDate) public payable {
         // Verifica se o valor enviado na transação é igual ao valor esperado da reserva, caso não seja, a transação falha e exibe a mensagem
-        require(msg.value == _amount, "Incorrect payment amount");
+        require(msg.value == _amount, "Valor de pagamento incorreto");
 
         // Cria uma instância de um novo contrato de reserva individual (HotelBooking)
         HotelBooking newBooking = new HotelBooking(
@@ -86,10 +86,10 @@ contract HotelBookingManager {
 
     function cancelBooking(uint256 _bookingId) public {
         BookingInfo storage booking = bookings[_bookingId];
-        require(booking.isActive, "Booking already cancelled");
+        require(booking.isActive, "Reserva ja cancelada");
         require(
             msg.sender == booking.guest || msg.sender == owner,
-            "Not authorized"
+            "Nao autorizado"
         );
 
         HotelBooking(booking.bookingContract).cancelBooking(msg.sender);
