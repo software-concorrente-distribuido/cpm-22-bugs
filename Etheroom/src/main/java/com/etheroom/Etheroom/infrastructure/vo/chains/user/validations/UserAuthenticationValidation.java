@@ -18,7 +18,7 @@ public class UserAuthenticationValidation extends Validation<User> {
     public void validate(User entityToValidate) {
         Functions.acceptFalseThrows(
                 Optional.ofNullable(entityToValidate.getKeyToMatch())
-                        .map(key -> new BCryptPasswordEncoder().matches(key, entityToValidate.getEthereumPublicKey()))
+                        .map(key -> new BCryptPasswordEncoder().matches(key, entityToValidate.getPassword()))
                         .orElseThrow(() -> new BadRequestException(EMPTY_PUBLIC_KEY)),
                 () -> new BadRequestException(KEYS_DIDNT_MATCH)
         );

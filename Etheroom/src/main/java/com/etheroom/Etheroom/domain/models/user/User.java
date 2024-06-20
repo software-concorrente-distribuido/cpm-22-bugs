@@ -3,10 +3,7 @@ package com.etheroom.Etheroom.domain.models.user;
 import com.etheroom.Etheroom.infrastructure.base.BaseEntity;
 import com.etheroom.Etheroom.infrastructure.vo.enums.UserRole;
 import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +27,7 @@ public class User extends BaseEntity implements UserDetails {
     @Column(name = "ethereum_public_key", unique = true, updatable = false)
     private String ethereumPublicKey;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", updatable = false)
     private UserRole role;
 
@@ -48,7 +46,7 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.ethereumPublicKey;
     }
 
     @Override
