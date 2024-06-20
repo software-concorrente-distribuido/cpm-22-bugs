@@ -15,9 +15,9 @@ import java.util.Optional;
 public class PersonDto extends BaseEntityDto<Person> {
 
     private String name;
-    private UserDto userDto;
-    private AddressDto addressDto;
-    private ContactDto contactDto;
+    private UserDto user;
+    private AddressDto address;
+    private ContactDto contact;
 
     @Override
     public Person mapDtoToEntity() {
@@ -25,17 +25,17 @@ public class PersonDto extends BaseEntityDto<Person> {
         person.setId(this.getId());
         person.setName(this.getName());
         person.setUser(
-                Optional.ofNullable(this.getUserDto())
+                Optional.ofNullable(this.getUser())
                         .map(UserDto::mapDtoToEntity)
                         .orElse(null)
         );
         person.setAddress(
-                Optional.ofNullable(this.getAddressDto())
+                Optional.ofNullable(this.getAddress())
                         .map(AddressDto::mapDtoToEntity)
                         .orElse(null)
         );
         person.setContact(
-                Optional.ofNullable(this.getContactDto())
+                Optional.ofNullable(this.getContact())
                         .map(ContactDto::mapDtoToEntity)
                         .orElse(null)
         );

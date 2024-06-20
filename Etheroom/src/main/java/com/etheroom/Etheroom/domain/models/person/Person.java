@@ -37,17 +37,17 @@ public class Person extends BaseEntity {
         PersonDto personDto = new PersonDto();
         personDto.setId(this.getId());
         personDto.setName(this.getName());
-        personDto.setUserDto(
+        personDto.setUser(
                 Optional.ofNullable(this.getUser())
                         .map(User::mapEntityToDto)
                         .orElse(null)
         );
-        personDto.setAddressDto(
+        personDto.setAddress(
                 Optional.ofNullable(this.getAddress())
                         .map(Address::mapEntityToDto)
                         .orElse(null)
         );
-        personDto.setContactDto(
+        personDto.setContact(
                 Optional.ofNullable(this.getContact())
                         .map(Contact::mapEntityToDto)
                         .orElse(null)

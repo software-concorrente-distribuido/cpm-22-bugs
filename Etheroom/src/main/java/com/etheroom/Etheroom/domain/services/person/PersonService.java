@@ -12,6 +12,7 @@ import com.etheroom.Etheroom.presentation.services.user.IUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -26,10 +27,6 @@ public class PersonService implements IPersonService {
 
     @Override
     public PersonDto create(PersonDto personDto) {
-        Functions.acceptTrueThrows(
-                this.personRepository.existsById(personDto.getId()),
-                () -> new NotFoundException(PERSON_NOT_FOUND)
-        );
         Person person = personDto.mapDtoToEntity();
         User user = person.getUser();
         this.userService.handleUserByRole(user, UserRole.USER);
@@ -46,6 +43,10 @@ public class PersonService implements IPersonService {
 
     @Override
     public void update(PersonDto personDto) {
+        Functions.acceptTrueThrows(
+                Optional.ofNullable(personDto.getId()).isPresent() && this.personRepository.existsById(personDto.getId()),
+                () -> new NotFoundException(PERSON_NOT_FOUND)
+        );
         Person person = personDto.mapDtoToEntity();
         this.personRepository.save(person);
     }

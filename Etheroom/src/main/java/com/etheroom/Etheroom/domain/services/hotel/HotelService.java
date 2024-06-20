@@ -28,10 +28,6 @@ public class HotelService implements IHotelService {
 
     @Override
     public HotelDto create(HotelDto hotelDto) {
-        Functions.acceptTrueThrows(
-                Optional.ofNullable(hotelDto.getId()).isPresent() && this.hotelRepository.existsById(hotelDto.getId()),
-                () -> new NotFoundException(HOTEL_NOT_FOUND)
-        );
         Hotel hotel = hotelDto.mapDtoToEntity();
         User user = hotel.getUser();
         this.userService.handleUserByRole(user, UserRole.HOTEL);
@@ -48,6 +44,10 @@ public class HotelService implements IHotelService {
 
     @Override
     public void update(HotelDto hotelDto) {
+        Functions.acceptTrueThrows(
+                Optional.ofNullable(hotelDto.getId()).isPresent() && this.hotelRepository.existsById(hotelDto.getId()),
+                () -> new NotFoundException(HOTEL_NOT_FOUND)
+        );
         Hotel hotel = hotelDto.mapDtoToEntity();
         this.hotelRepository.save(hotel);
     }
