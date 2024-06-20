@@ -45,13 +45,4 @@ public class AuthenticationService implements IAuthenticationService {
         );
     }
 
-    @Override
-    public void passwordResetFlow(String email) {
-    }
-
-    @Override
-    @Transactional
-    public void passwordReset(PasswordResetDto passwordResetDto) {
-    }
-
 }

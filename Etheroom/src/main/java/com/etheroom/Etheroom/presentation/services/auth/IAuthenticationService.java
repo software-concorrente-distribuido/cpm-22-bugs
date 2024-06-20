@@ -8,8 +8,4 @@ public interface IAuthenticationService {
 
     AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest);
 
-    void passwordResetFlow(String email);
-
-    void passwordReset(PasswordResetDto passwordResetDto);
-
 }
