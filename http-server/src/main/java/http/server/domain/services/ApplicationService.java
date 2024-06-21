@@ -25,7 +25,7 @@ public class ApplicationService implements IApplicationService {
     @Override
     public ItemResponse create(Object object) {
         Functions.acceptFalseThrows(
-                Optional.ofNullable(object).isEmpty(),
+                Optional.ofNullable(object).isPresent(),
                 () -> new NotFoundException(EMPTY_CONTENT)
         );
         return ItemResponse.fromItem(
@@ -51,7 +51,7 @@ public class ApplicationService implements IApplicationService {
     @Override
     public void update(String id, Object object) {
         Functions.acceptFalseThrows(
-                Optional.ofNullable(id).isEmpty(),
+                Optional.ofNullable(id).isPresent(),
                 () -> new NotFoundException(ID_NOT_SENT)
         );
         Functions.acceptFalseThrows(
@@ -59,7 +59,7 @@ public class ApplicationService implements IApplicationService {
                 () -> new NotFoundException(ITEM_NOT_FOUND)
         );
         Functions.acceptFalseThrows(
-                Optional.ofNullable(object).isEmpty(),
+                Optional.ofNullable(object).isPresent(),
                 () -> new NotFoundException(EMPTY_CONTENT)
         );
         this.itemRepository.update(id, object);
@@ -68,7 +68,7 @@ public class ApplicationService implements IApplicationService {
     @Override
     public void deleteById(String id) {
         Functions.acceptFalseThrows(
-                Optional.ofNullable(id).isEmpty(),
+                Optional.ofNullable(id).isPresent(),
                 () -> new NotFoundException(ID_NOT_SENT)
         );
         Functions.acceptFalseThrows(
