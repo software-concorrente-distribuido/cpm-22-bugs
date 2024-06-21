@@ -9,7 +9,7 @@ public class AppServer {
 
     private static final Integer SERVER_PORT = 9090;
 
-    private static final String APP_PATH = "/app/*";
+    private static final String APP_PATH = "/*";
 
     public static void initServer() {
         try {
