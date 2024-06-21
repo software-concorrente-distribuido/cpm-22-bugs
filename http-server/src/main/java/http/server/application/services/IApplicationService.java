@@ -1,17 +1,16 @@
 package http.server.application.services;
 
-import http.server.application.dtos.ApplicationResponse;
-import http.server.domain.models.Item;
+import http.server.application.dtos.ItemResponse;
 
 import java.util.List;
 
 public interface IApplicationService {
 
-    ApplicationResponse create(Object object);
+    ItemResponse create(Object object);
 
-    ApplicationResponse findById(Integer id);
+    ItemResponse findById(String id);
 
-    List<ApplicationResponse> findAll();
+    List<ItemResponse> findAll();
 
     void update(String id, Object object);
 

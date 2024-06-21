@@ -1,6 +1,6 @@
 package http.server.domain.services;
 
-import http.server.application.dtos.ApplicationResponse;
+import http.server.application.dtos.ItemResponse;
 import http.server.application.services.IApplicationService;
 import http.server.domain.repositories.IItemRepository;
 import http.server.infrastructure.utils.Functions;
@@ -23,28 +23,28 @@ public class ApplicationService implements IApplicationService {
     private static IApplicationService applicationService;
 
     @Override
-    public ApplicationResponse create(Object object) {
+    public ItemResponse create(Object object) {
         Functions.acceptFalseThrows(
                 Optional.ofNullable(object).isEmpty(),
                 () -> new NotFoundException(EMPTY_CONTENT)
         );
-        return ApplicationResponse.fromItem(
+        return ItemResponse.fromItem(
                 this.itemRepository.create(object)
         );
     }
 
     @Override
-    public ApplicationResponse findById(Integer id) {
+    public ItemResponse findById(String id) {
         return this.itemRepository.findById(id)
-                .map(ApplicationResponse::fromItem)
+                .map(ItemResponse::fromItem)
                 .orElseThrow(() -> new NotFoundException(ITEM_NOT_FOUND));
     }
 
     @Override
-    public List<ApplicationResponse> findAll() {
+    public List<ItemResponse> findAll() {
         return this.itemRepository.findAll()
                 .stream()
-                .map(ApplicationResponse::fromItem)
+                .map(ItemResponse::fromItem)
                 .toList();
     }
 
@@ -53,6 +53,10 @@ public class ApplicationService implements IApplicationService {
         Functions.acceptFalseThrows(
                 Optional.ofNullable(id).isEmpty(),
                 () -> new NotFoundException(ID_NOT_SENT)
+        );
+        Functions.acceptFalseThrows(
+                this.itemRepository.existsById(id),
+                () -> new NotFoundException(ITEM_NOT_FOUND)
         );
         Functions.acceptFalseThrows(
                 Optional.ofNullable(object).isEmpty(),
@@ -66,6 +70,10 @@ public class ApplicationService implements IApplicationService {
         Functions.acceptFalseThrows(
                 Optional.ofNullable(id).isEmpty(),
                 () -> new NotFoundException(ID_NOT_SENT)
+        );
+        Functions.acceptFalseThrows(
+                this.itemRepository.existsById(id),
+                () -> new NotFoundException(ITEM_NOT_FOUND)
         );
         this.itemRepository.deleteById(id);
     }

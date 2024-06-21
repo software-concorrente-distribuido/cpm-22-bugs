@@ -1,6 +1,5 @@
 package http.server.application.dtos;
 
-import http.server.domain.models.Item;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,24 +7,38 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class ApplicationResponse {
+public class ApplicationResponse<T> {
 
-    private String id;
+    private Integer status;
 
-    private Object content;
+    private String message;
 
-    private Date updatedAt;
+    private Boolean error;
 
-    private Date createdAt;
+    private T data;
 
     private Date queriedAt;
 
-    public static ApplicationResponse fromItem(Item item) {
-        ApplicationResponse response = new ApplicationResponse();
-        response.id = item.getId();
-        response.content = item.getContent();
-        response.updatedAt = item.getUpdatedAt();
-        response.createdAt = item.getCreatedAt();
+    public static <T> ApplicationResponse<T> fromSuccess(
+        Integer status, String message, T data
+    ) {
+        ApplicationResponse<T> response = new ApplicationResponse<T>();
+        response.status = status;
+        response.message = message;
+        response.error = Boolean.FALSE;
+        response.data = data;
+        response.queriedAt = new Date();
+        return response;
+    }
+
+    public static <T> ApplicationResponse<T> fromError(
+        Integer status, String message, T data
+    ) {
+        ApplicationResponse<T> response = new ApplicationResponse<T>();
+        response.status = status;
+        response.message = message;
+        response.error = Boolean.TRUE;
+        response.data = data;
         response.queriedAt = new Date();
         return response;
     }
