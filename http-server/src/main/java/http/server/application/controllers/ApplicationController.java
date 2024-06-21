@@ -3,6 +3,8 @@ package http.server.application.controllers;
 import http.server.application.dtos.ItemResponse;
 import http.server.application.services.IApplicationService;
 import http.server.domain.services.ApplicationService;
+import http.server.infrastructure.exceptions.NotFoundException;
+import http.server.infrastructure.exceptions.handler.ExceptionHandler;
 import http.server.infrastructure.utils.HttpUtils;
 import http.server.infrastructure.utils.JsonUtils;
 
@@ -21,7 +23,7 @@ public class ApplicationController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        this.configureCors(resp);
+        HttpUtils.handleNewRequest(req, resp);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream(), StandardCharsets.UTF_8))) {
             ItemResponse itemResponse = this.applicationService.create(JsonUtils.fromJson(reader));
             HttpUtils.setCreatedResponse(
@@ -29,16 +31,21 @@ public class ApplicationController extends HttpServlet {
                     itemResponse
             );
         } catch (IOException e) {
-            e.printStackTrace();
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleIOException(e)
+            );
+        } catch (NotFoundException e) {
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleNotFoundException(e)
+            );
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        this.configureCors(resp);
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
+        HttpUtils.handleNewRequest(req, resp);
         Optional.ofNullable(req.getParameter("id"))
                 .ifPresentOrElse(
                         id -> this.findById(id, resp),
@@ -48,7 +55,7 @@ public class ApplicationController extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        this.configureCors(resp);
+        HttpUtils.handleNewRequest(req, resp);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(req.getInputStream(), StandardCharsets.UTF_8))) {
             this.applicationService.update(
                     req.getParameter("id"),
@@ -56,45 +63,53 @@ public class ApplicationController extends HttpServlet {
             );
             HttpUtils.setNoContentResponse(resp, "Item atualizado com sucesso");
         } catch (IOException e) {
-            e.printStackTrace();
-            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleIOException(e)
+            );
+        } catch (NotFoundException e) {
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleNotFoundException(e)
+            );
         }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) {
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        this.configureCors(resp);
-        Optional.ofNullable(req.getParameter("id"))
-                .ifPresent(
-                        id -> this.deleteById(id, resp)
-                );
+        HttpUtils.handleNewRequest(req, resp);
+        this.deleteById(req.getParameter("id"), resp);
     }
 
     @Override
-    protected void doOptions(HttpServletRequest request, HttpServletResponse response) {
-        this.configureCors(response);
-        response.setStatus(HttpServletResponse.SC_OK);
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) {
+        HttpUtils.handleNewRequest(req, resp);
+        resp.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override
-    protected void doHead(HttpServletRequest request, HttpServletResponse response) {
-        this.configureCors(response);
+    protected void doHead(HttpServletRequest req, HttpServletResponse resp) {
+        HttpUtils.handleNewRequest(req, resp);
         try {
-            HttpUtils.setMethodNotAllowedResponse(response);
+            HttpUtils.setMethodNotAllowedResponse(resp);
         } catch (IOException e) {
-            e.printStackTrace();
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleIOException(e)
+            );
         }
     }
 
     @Override
-    protected void doTrace(HttpServletRequest request, HttpServletResponse response) {
-        this.configureCors(response);
+    protected void doTrace(HttpServletRequest req, HttpServletResponse resp) {
+        HttpUtils.handleNewRequest(req, resp);
         try {
-            HttpUtils.setMethodNotAllowedResponse(response);
+            HttpUtils.setMethodNotAllowedResponse(resp);
         } catch (IOException e) {
-            e.printStackTrace();
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleIOException(e)
+            );
         }
     }
 
@@ -102,7 +117,15 @@ public class ApplicationController extends HttpServlet {
         try {
             HttpUtils.setOkResponse(resp, this.applicationService.findById(id));
         } catch (IOException e) {
-            e.printStackTrace();
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleIOException(e)
+            );
+        } catch (NotFoundException e) {
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleNotFoundException(e)
+            );
         }
     }
 
@@ -110,7 +133,10 @@ public class ApplicationController extends HttpServlet {
         try {
             HttpUtils.setOkResponse(resp, this.applicationService.findAll());
         } catch (IOException e) {
-            e.printStackTrace();
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleIOException(e)
+            );
         }
     }
 
@@ -119,16 +145,16 @@ public class ApplicationController extends HttpServlet {
             this.applicationService.deleteById(id);
             HttpUtils.setNoContentResponse(resp, "Item deletado com sucesso");
         } catch (IOException e) {
-            e.printStackTrace();
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleIOException(e)
+            );
+        } catch (NotFoundException e) {
+            HttpUtils.setErrorFromExceptionDetails(
+                    resp,
+                    ExceptionHandler.handleNotFoundException(e)
+            );
         }
-    }
-
-    private void configureCors(HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD, TRACE");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 
 }

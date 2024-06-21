@@ -14,16 +14,16 @@ public class ApplicationService implements IApplicationService {
 
     private static final String ITEM_NOT_FOUND = "Item não encontrado";
 
-    private static final String EMPTY_CONTENT = "Conteúdo vazio";
+    private static final String EMPTY_CONTENT = "Conteúdo não enviado como Request Body";
 
-    private static final String ID_NOT_SENT = "ID não enviado";
+    private static final String ID_NOT_SENT = "ID não enviado como Query Param";
 
     private final IItemRepository itemRepository = ItemRepository.getInstance();
 
     private static IApplicationService applicationService;
 
     @Override
-    public ItemResponse create(Object object) {
+    public ItemResponse create(Object object) throws NotFoundException {
         Functions.acceptFalseThrows(
                 Optional.ofNullable(object).isPresent(),
                 () -> new NotFoundException(EMPTY_CONTENT)
@@ -34,7 +34,7 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public ItemResponse findById(String id) {
+    public ItemResponse findById(String id) throws NotFoundException {
         return this.itemRepository.findById(id)
                 .map(ItemResponse::fromItem)
                 .orElseThrow(() -> new NotFoundException(ITEM_NOT_FOUND));
@@ -49,7 +49,7 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public void update(String id, Object object) {
+    public void update(String id, Object object) throws NotFoundException {
         Functions.acceptFalseThrows(
                 Optional.ofNullable(id).isPresent(),
                 () -> new NotFoundException(ID_NOT_SENT)
@@ -66,7 +66,7 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public void deleteById(String id) {
+    public void deleteById(String id) throws NotFoundException {
         Functions.acceptFalseThrows(
                 Optional.ofNullable(id).isPresent(),
                 () -> new NotFoundException(ID_NOT_SENT)
