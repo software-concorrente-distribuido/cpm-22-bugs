@@ -1,15 +1,24 @@
+:root {
+    --white: #fff;
+    --gray: #9b9b9b;
+    --primary: #11998e;
+    --secondary: #38ef7d;
+}
+
 body {
     font-family: 'Quasimoda', sans-serif;
     color: #000;
     margin: 0;
     padding: 0;
-    border: 0;
 }
 
 a {
     text-decoration: none;
     color: #000;
+}
 
+ul, li {
+    margin: 0;
 }
 
 .container {
@@ -18,30 +27,20 @@ a {
     justify-content: center;
     padding: 2px 0;
 }
+
 .header-section {
     background-color: #000;
     height: 140px;
-    display: flex;
     width: 100%;
-    flex-direction: column;
+    display: flex;
+    justify-content: end;
 }
-@media (max-width: 991px) {
-    .header-section {
-    max-width: 100%;
-    }
-}
+
 .header-top {
     z-index: 10;
-    display: flex;
-    align-self: flex-end;
     width: 90%;
 }
-@media (max-width: 991px) {
-    .header-top {
-    max-width: 100%;
-    flex-wrap: wrap;
-    }
-}
+
 .logo-box {
     background-color: #000;
     width: 150px;
@@ -51,17 +50,9 @@ a {
     background-color: #fff;
     height: 130px;
     display: flex;
-    /* margin-top: 33px; */
-    flex-direction: column;
-    flex-grow: 1;
-    flex-basis: 0;
-    width: fit-content;
+    width: 100%;
 }
-@media (max-width: 991px) {
-    .header-content {
-    max-width: 100%;
-    }
-}
+
 .header-inner {
     align-self: center;
     display: flex;
@@ -71,30 +62,22 @@ a {
     justify-content: space-between;
     padding: 0 20px;
 }
-@media (max-width: 991px) {
-    .header-inner {
-    max-width: 100%;
-    flex-wrap: wrap;
-    }
+
+.etheroom-logo {
+    width: 250px;
 }
-.branding {
-    align-self: stretch;
-    display: flex;
-}
+
 .branding img {
     aspect-ratio: 1.02;
     width: 94px;
 }
+
 .branding-text {
     font-family: 'FONTSPRING DEMO - All Round Gothic Book', -apple-system, Roboto, Helvetica, sans-serif;
     flex-grow: 1;
     margin: auto 0;
 }
-@media (max-width: 991px) {
-    .branding-text {
-    font-size: 40px;
-    }
-}
+
 .nav-bar {
     align-self: stretch;
     display: flex;
@@ -104,12 +87,7 @@ a {
     letter-spacing: 0.18px;
     margin: auto 0;
 }
-@media (max-width: 991px) {
-    .nav-bar {
-    max-width: 100%;
-    flex-wrap: wrap;
-    }
-}
+
 .nav-item {
     font-family: 'Quasimoda', sans-serif;
 }
@@ -134,12 +112,7 @@ a {
     justify-content: space-between;
     margin: auto 0;
 }
-@media (max-width: 991px) {
-    .header-right-actions {
-    max-width: 100%;
-    flex-wrap: wrap;
-    }
-}
+
 .signin-btn {
     font-family: 'Quasimoda', sans-serif;
     border-radius: 20px;
@@ -149,11 +122,7 @@ a {
     justify-content: center;
     padding: 27px 60px;
 }
-@media (max-width: 991px) {
-    .signin-btn {
-    padding: 0 20px;
-    }
-}
+
 .signup-btn {
     font-family: 'Quasimoda', sans-serif;
     border-radius: 20px;
@@ -163,58 +132,32 @@ a {
     justify-content: center;
     padding: 27px 60px;
 }
-@media (max-width: 991px) {
-    .signup-btn {
-    padding: 0 29px 0 27px;
-    }
-}
+
 .main-section {
     align-self: center;
     width: 100%;
-    max-width: 1653px;
-    margin: 75px 0 7px;
-}
-@media (max-width: 991px) {
-    .main-section {
-    max-width: 100%;
-    margin-top: 40px;
-    }
+    margin: 75px 0 75px;
 }
 .main-inner {
     display: flex;
     gap: 20px;
 }
-@media (max-width: 991px) {
-    .main-inner {
-    flex-direction: column;
-    align-items: stretch;
-    }
-}
+
 .details-section {
     display: flex;
     flex-direction: column;
     line-height: normal;
-    width: 100%;
+    width: 60%;
     margin-left: 0;
 }
-@media (max-width: 991px) {
-    .details-section {
-    width: 100%;
-    }
-}
+
 .details-content {
     display: flex;
-    flex-grow: 1;
     flex-direction: column;
     align-items: center;
     padding: 0 20px;
 }
-@media (max-width: 991px) {
-    .details-content {
-    max-width: 100%;
-    margin-top: 40px;
-    }
-}
+
 .details-header {
     font-size: 35px;
     font-weight: 600;
@@ -225,27 +168,18 @@ a {
     font-weight: 400;
 }
 .details-images {
-    align-self: stretch;
     display: flex;
     margin-top: 20px;
     gap: 20px;
 }
-@media (max-width: 991px) {
-    .details-images {
-    flex-wrap: wrap;
-    }
-}
+
 .image-column-vertical {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
 }
-@media (max-width: 991px) {
-    .image-column-vertical {
-    white-space: initial;
-    }
-}
+
 .vertical-img {
     aspect-ratio: 1;
     width: 80px;
@@ -276,95 +210,45 @@ a {
     align-items: center;
     justify-content: center;
 }
-.image-column-horizontal {
-    display: flex;
-    flex-direction: column;
-    font-size: 16px;
-    font-weight: 500;
-    flex-grow: 1;
-    width: fit-content;
-}
-@media (max-width: 991px) {
-    .image-column-horizontal {
-    max-width: 100%;
-    }
-}
+
 .horizontal-img {
     aspect-ratio: 1.16;
-    width: 100%;
+    width: 80%;
 }
-@media (max-width: 991px) {
-    .horizontal-img {
-    max-width: 100%;
-    }
-}
+
 .details-icons {
     display: flex;
     align-items: center;
-    margin-top: 24px;
     gap: 10px;
 }
 .details-icon {
-    aspect-ratio: 0.79;
     width: 31px;
 }
+
 .feature-segment {
-    width: 485px;
+    display: flex;
+    flex-direction: column;
+
     max-width: 100%;
     margin-top: 22px;
 }
 .multi-column {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
 }
-@media (max-width: 991px) {
-    .multi-column {
-    flex-direction: column;
-    align-items: stretch;
-    }
-}
-.column-left {
-    display: flex;
-    flex-direction: column;
-    width: 54%;
-    margin-left: 0;
-}
-@media (max-width: 991px) {
-    .column-left {
-    width: 100%;
-    }
-}
+
 .feature-list {
     color: #000;
     font-size: 20px;
     font-weight: 500;
 }
-@media (max-width: 991px) {
-    .feature-list {
-    margin-top: 40px;
-    }
-}
-.column-right {
-    display: flex;
-    flex-direction: column;
-    width: 46%;
-    margin-left: 20px;
-}
-@media (max-width: 991px) {
-    .column-right {
-    width: 100%;
-    }
-}
+
 .booking-section {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-@media (max-width: 991px) {
-    .booking-section {
-    max-width: 100%;
-    }
-}
+
 .tabs-container {
     display: flex;
     align-items: start;
@@ -373,12 +257,7 @@ a {
     color: #b5b5b5;
     font-weight: 600;
 }
-@media (max-width: 991px) {
-    .tabs-container {
-    max-width: 100%;
-    flex-wrap: wrap;
-    }
-}
+
 .tab-title {
     display: flex;
     flex-direction: column;
@@ -400,19 +279,10 @@ a {
     font-weight: 500;
     margin: 51px 0 0 24px;
 }
-@media (max-width: 991px) {
-    .main-promo {
-    margin-top: 40px;
-    }
-}
+
 .price {
     font-size: 30px;
     letter-spacing: 0.3px;
-}
-@media (max-width: 991px) {
-    .price {
-    margin-left: 10px;
-    }
 }
 
 .currency-price {
@@ -435,11 +305,7 @@ a {
     gap: 19px;
     font-weight: 600;
 }
-@media (max-width: 991px) {
-    .booking-info {
-    max-width: 100%;
-    }
-}
+
 .booking-details {
     border-radius: 14px;
     background-color: #d9d9d9;
@@ -449,11 +315,7 @@ a {
     flex: 1;
     padding: 16px 24px;
 }
-@media (max-width: 991px) {
-    .booking-details {
-    padding-left: 20px;
-    }
-}
+
 .date-range {
     display: flex;
     flex-direction: column;
@@ -493,11 +355,7 @@ a {
     font-weight: 600;
     padding: 20px 80px 20px 30px;
 }
-@media (max-width: 991px) {
-    .guests-info {
-    padding: 0 20px;
-    }
-}
+
 .guest-title {
     font-size: 10px;
 }
@@ -515,7 +373,7 @@ a {
     gap: 10px;
     align-items: center;
 }
-.wallet-btn{
+.wallet-btn, .room-reservation, .get-reservation{
     border-radius: 20px;
     border: 3px solid;
     background-color: #fff;
@@ -526,15 +384,11 @@ a {
     font-weight: 600;
     padding: 11px 46px;
 }
-@media (max-width: 991px) {
-    .wallet-btn {
-    padding: 0 20px;
-    }
-}
+
 .wallet-label {
     font-size: 16px;
     font-weight: 600;
-    margin: 0;
+    margin: auto 0;
 }
 
 .wallet-icon {
@@ -548,7 +402,4 @@ a {
 }
 .help-icon {
     width: 24px;
-}
-.branding-text {
-    font-size: 32px;
 }

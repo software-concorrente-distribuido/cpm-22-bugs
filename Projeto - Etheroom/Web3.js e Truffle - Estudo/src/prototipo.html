@@ -13,10 +13,7 @@
       <div class="header-top">
         <div class="header-content">
           <div class="header-inner">
-            <div class="branding">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/65d53b6f67a2cc8788dda0465361e738e1bfe743e421ea88a287df93307fd0b1?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" alt="Etheroom brand logo" />
-              <div class="branding-text">Etheroom</div>
-            </div>
+            <img class="etheroom-logo" src="./assets/Group 4.png" alt="Etheroom brand logo" />
 
             <nav class="nav-bar">
               <a href="#" class="nav-item">Home</a>
@@ -55,11 +52,11 @@
             </div>
             <div class="feature-segment">
               <div class="details-icons">
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b4d0263c87749065617cba54b52250d74ac0d570676b88a2b8c189e7e3b3766b?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="details-icon" alt="Room Info Icon" />
-              <div class="details-title">
-                Room Information:
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b4d0263c87749065617cba54b52250d74ac0d570676b88a2b8c189e7e3b3766b?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="details-icon" alt="Room Info Icon" />
+                <div class="details-title">
+                  Room Information:
+                </div>
               </div>
-            </div>
               <div class="multi-column">
                 <div class="column-left">
                   <div class="feature-list">
@@ -140,14 +137,17 @@
             <div class="help-text">Need Help?</div>
           </div>
           <div>
-            <button id="reservar" style="display: none">Reservar quarto</button>
+            <button id="reservar" style="display: none" class="room-reservation">Reservar quarto</button>
         </div>
         <div>
-            <input id="bookingId" type="text" placeholder="Booking ID" style="display: none"/>
-            <button id="obterReserva" style="display: none">Obter Reserva</button>
+          <div class="id-group">
+            <input id="bookingId" type="text" placeholder="ID da reserva" style="display: none; margin-bottom: 16px;" class="id-field"/>
+            <label for="name" class="id-label">ID da reserva</label>
+          </div>
+            <button id="obterReserva" style="display: none" class="get-reservation">Obter Reserva</button>
         </div>
-        <div id="detalhesReserva">&nbsp;</div>
         <div id="idReserva">&nbsp;</div>
+        <div id="detalhesReserva">&nbsp;</div>
         </div>
       </div>
     </section>
@@ -156,7 +156,7 @@
   <script>
     var provider = window.ethereum;
     var abi = [ { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "uint256", "name": "bookingId", "type": "uint256" }, { "indexed": true, "internalType": "address", "name": "guest", "type": "address" } ], "name": "BookingCancelled", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "uint256", "name": "bookingId", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "bookingContract", "type": "address" }, { "indexed": true, "internalType": "address", "name": "guest", "type": "address" }, { "indexed": false, "internalType": "string", "name": "hotel", "type": "string" }, { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "BookingCreated", "type": "event" }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "bookingContracts", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "bookingCount", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "bookings", "outputs": [ { "internalType": "address", "name": "bookingContract", "type": "address" }, { "internalType": "address", "name": "guest", "type": "address" }, { "internalType": "string", "name": "hotel", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "bool", "name": "isActive", "type": "bool" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "owner", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_hotel", "type": "string" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_checkInDate", "type": "uint256" }, { "internalType": "uint256", "name": "_checkOutDate", "type": "uint256" } ], "name": "createBooking", "outputs": [], "stateMutability": "payable", "type": "function", "payable": true }, { "inputs": [ { "internalType": "uint256", "name": "_bookingId", "type": "uint256" } ], "name": "cancelBooking", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "_bookingId", "type": "uint256" } ], "name": "getBooking", "outputs": [ { "components": [ { "internalType": "address", "name": "bookingContract", "type": "address" }, { "internalType": "address", "name": "guest", "type": "address" }, { "internalType": "string", "name": "hotel", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "bool", "name": "isActive", "type": "bool" } ], "internalType": "struct HotelBookingManager.BookingInfo", "name": "", "type": "tuple" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "getBookingContracts", "outputs": [ { "internalType": "address[]", "name": "", "type": "address[]" } ], "stateMutability": "view", "type": "function", "constant": true } ];
-    var endereco = '0x8E7E8A7427a0bD9cD8596C46A4aC72fd73B16149'; // endereço do HotelBookingManager
+    var endereco = '0xC5Dde23F21164BbD61E4B59c756cd4c64A487d87'; // endereço do HotelBookingManager
     var conta = "";
 
     async function run() {
@@ -166,7 +166,7 @@
             let contas = await provider.request({ method: 'eth_accounts' });
 
             if (contas.length == 0) {
-                document.getElementById("btnConectar").style.display = 'block';
+                document.getElementById("btnConectar").style.display = 'flex';
                 document.getElementById("btnConectar").addEventListener('click', conectarMM);
             } else {
                 document.getElementById("conectar").innerHTML = contas[0];

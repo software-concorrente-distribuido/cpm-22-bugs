@@ -12,7 +12,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -28,9 +29,9 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"meuNumero\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_novoNumero\",\"type\":\"uint256\"}],\"name\":\"setInt\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/src/contracts/HelloWorld.sol\":\"HelloWorld\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/src/contracts/HelloWorld.sol\":{\"keccak256\":\"0xc9715e3bbdeeb595dd8891fdd6b5f5ef2a0e4016082a387e29fe0f2f245d4691\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://bdfa74112d000893fff4ec37437457603205cd6b044a155358a2bff94a205b72\",\"dweb:/ipfs/QmZGRZUc6zD4jx14W9NNe1whYNjEeotqPJwk3YMr1axsBo\"]}},\"version\":1}",
-  "bytecode": "0x60806040526000805534801561001457600080fd5b50610133806100246000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806344420311146037578063e7dda5ad14604f575b600080fd5b604d60048036038101906049919060af565b6069565b005b60556073565b6040516060919060e4565b60405180910390f35b8060008190555050565b60005481565b600080fd5b6000819050919050565b608f81607e565b8114609957600080fd5b50565b60008135905060a9816088565b92915050565b60006020828403121560c25760c16079565b5b600060ce84828501609c565b91505092915050565b60de81607e565b82525050565b600060208201905060f7600083018460d7565b9291505056fea26469706673582212209960eb4c53999464e034a25325dfdcbb723d00d8a0518eda7d45eb816ecf54ae64736f6c634300080d0033",
-  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806344420311146037578063e7dda5ad14604f575b600080fd5b604d60048036038101906049919060af565b6069565b005b60556073565b6040516060919060e4565b60405180910390f35b8060008190555050565b60005481565b600080fd5b6000819050919050565b608f81607e565b8114609957600080fd5b50565b60008135905060a9816088565b92915050565b60006020828403121560c25760c16079565b5b600060ce84828501609c565b91505092915050565b60de81607e565b82525050565b600060208201905060f7600083018460d7565b9291505056fea26469706673582212209960eb4c53999464e034a25325dfdcbb723d00d8a0518eda7d45eb816ecf54ae64736f6c634300080d0033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.13+commit.abaa5c0e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"meuNumero\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_novoNumero\",\"type\":\"uint256\"}],\"name\":\"setInt\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/src/contracts/HelloWorld.sol\":\"HelloWorld\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/src/contracts/HelloWorld.sol\":{\"keccak256\":\"0xe72f9d78f7f6502b7a8e2b9758373cb5361cb86ed5d02b4b0217f242d99f8b95\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://d05b915b2f96777a2f2c16e2fed60211864f8ab35f8e8114006246f367eb114b\",\"dweb:/ipfs/QmXmw96ACbwofHFiZ7HqNGJGUTU5S2UsBRedsvwP8qiMtc\"]}},\"version\":1}",
+  "bytecode": "0x60806040526000805534801561001457600080fd5b50610133806100246000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c806344420311146037578063e7dda5ad14604f575b600080fd5b604d60048036038101906049919060af565b6069565b005b60556073565b6040516060919060e4565b60405180910390f35b8060008190555050565b60005481565b600080fd5b6000819050919050565b608f81607e565b8114609957600080fd5b50565b60008135905060a9816088565b92915050565b60006020828403121560c25760c16079565b5b600060ce84828501609c565b91505092915050565b60de81607e565b82525050565b600060208201905060f7600083018460d7565b9291505056fea26469706673582212200616d792db7dc04cc919d75534a63ca854d55a324b0b958e4dcf8dbb3f8d371b64736f6c634300080d0033",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c806344420311146037578063e7dda5ad14604f575b600080fd5b604d60048036038101906049919060af565b6069565b005b60556073565b6040516060919060e4565b60405180910390f35b8060008190555050565b60005481565b600080fd5b6000819050919050565b608f81607e565b8114609957600080fd5b50565b60008135905060a9816088565b92915050565b60006020828403121560c25760c16079565b5b600060ce84828501609c565b91505092915050565b60de81607e565b82525050565b600060208201905060f7600083018460d7565b9291505056fea26469706673582212200616d792db7dc04cc919d75534a63ca854d55a324b0b958e4dcf8dbb3f8d371b64736f6c634300080d0033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [
@@ -739,10 +740,10 @@
       "name": "#utility.yul"
     }
   ],
-  "sourceMap": "56:142:2:-:0;;;107:1;83:25;;56:142;;;;;;;;;;;;;;;;",
-  "deployedSourceMap": "56:142:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;115:81;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;83:25;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;115:81;178:11;166:9;:23;;;;115:81;:::o;83:25::-;;;;:::o;88:117:8:-;197:1;194;187:12;334:77;371:7;400:5;389:16;;334:77;;;:::o;417:122::-;490:24;508:5;490:24;:::i;:::-;483:5;480:35;470:63;;529:1;526;519:12;470:63;417:122;:::o;545:139::-;591:5;629:6;616:20;607:29;;645:33;672:5;645:33;:::i;:::-;545:139;;;;:::o;690:329::-;749:6;798:2;786:9;777:7;773:23;769:32;766:119;;;804:79;;:::i;:::-;766:119;924:1;949:53;994:7;985:6;974:9;970:22;949:53;:::i;:::-;939:63;;895:117;690:329;;;;:::o;1025:118::-;1112:24;1130:5;1112:24;:::i;:::-;1107:3;1100:37;1025:118;;:::o;1149:222::-;1242:4;1280:2;1269:9;1265:18;1257:26;;1293:71;1361:1;1350:9;1346:17;1337:6;1293:71;:::i;:::-;1149:222;;;;:::o",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity^0.8.7;\n\ncontract HelloWorld {\n\n    uint public meuNumero = 0;\n\n    function setInt(uint _novoNumero) public {\n        meuNumero = _novoNumero;\n    }\n}\n\n// ao executar \"truffle compile\" no console, será criada uma pasta \"build\" com um JSON para cada contrato\n// neste JSON, podemos encontrar a ABI do contrato, através dessa ABI, o dApp conseguirá interagir com os métodos do contrato na Blockchain\n// no JSON também encontramos o bytecode, um código hexadecimal que será implementado na blockchain\n\n// ao executar \"truffle migrate\", será feito o deploy de cada contrato para, nesse caso, a rede local definida no truffle-config.js, o Ganache\n// para interagir com o contrato, podemos escrever um programa em JS ou usar o \"truffle console\"\n// neste caso, podemos usar diretivas do próprio truffle ou da web3.js\n\n// para gerar uma instância do contrato no truffle console, usamos \"let instance = await NomeDoContrato.deployed()\" e depois \"instance\"\n// a partir desse ponto, podemos interagir com os métodos do contrato\n\n// transação: interagir com alguma conta, seja conta de contato ou conta externa (carteira), alterando alguma variável de estado\n// obter informações não conta como transação, pois não alteramos nada na Blockchain",
-  "sourcePath": "C:\\Users\\Usuario\\Documents\\GitHub\\cpm-22-bugs\\Projeto - Etheroom\\Web3.js e Truffle - Estudo\\src\\contracts\\HelloWorld.sol",
+  "sourceMap": "59:149:2:-:0;;;112:1;88:25;;59:149;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "59:149:2:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;122:83;;;;;;;;;;;;;:::i;:::-;;:::i;:::-;;88:25;;;:::i;:::-;;;;;;;:::i;:::-;;;;;;;;122:83;186:11;174:9;:23;;;;122:83;:::o;88:25::-;;;;:::o;:117:8:-;197:1;194;187:12;334:77;371:7;400:5;389:16;;334:77;;;:::o;417:122::-;490:24;508:5;490:24;:::i;:::-;483:5;480:35;470:63;;529:1;526;519:12;470:63;417:122;:::o;545:139::-;591:5;629:6;616:20;607:29;;645:33;672:5;645:33;:::i;:::-;545:139;;;;:::o;690:329::-;749:6;798:2;786:9;777:7;773:23;769:32;766:119;;;804:79;;:::i;:::-;766:119;924:1;949:53;994:7;985:6;974:9;970:22;949:53;:::i;:::-;939:63;;895:117;690:329;;;;:::o;1025:118::-;1112:24;1130:5;1112:24;:::i;:::-;1107:3;1100:37;1025:118;;:::o;1149:222::-;1242:4;1280:2;1269:9;1265:18;1257:26;;1293:71;1361:1;1350:9;1346:17;1337:6;1293:71;:::i;:::-;1149:222;;;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\r\npragma solidity^0.8.7;\r\n\r\ncontract HelloWorld {\r\n\r\n    uint public meuNumero = 0;\r\n\r\n    function setInt(uint _novoNumero) public {\r\n        meuNumero = _novoNumero;\r\n    }\r\n}\r\n\r\n// ao executar \"truffle compile\" no console, será criada uma pasta \"build\" com um JSON para cada contrato\r\n// neste JSON, podemos encontrar a ABI do contrato, através dessa ABI, o dApp conseguirá interagir com os métodos do contrato na Blockchain\r\n// no JSON também encontramos o bytecode, um código hexadecimal que será implementado na blockchain\r\n\r\n// ao executar \"truffle migrate\", será feito o deploy de cada contrato para, nesse caso, a rede local definida no truffle-config.js, o Ganache\r\n// para interagir com o contrato, podemos escrever um programa em JS ou usar o \"truffle console\"\r\n// neste caso, podemos usar diretivas do próprio truffle ou da web3.js\r\n\r\n// para gerar uma instância do contrato no truffle console, usamos \"let instance = await NomeDoContrato.deployed()\" e depois \"instance\"\r\n// a partir desse ponto, podemos interagir com os métodos do contrato\r\n\r\n// transação: interagir com alguma conta, seja conta de contato ou conta externa (carteira), alterando alguma variável de estado\r\n// obter informações não conta como transação, pois não alteramos nada na Blockchain",
+  "sourcePath": "C:\\Users\\TorWe\\OneDrive\\Documentos\\GitHub\\cpm-22-bugs\\Projeto - Etheroom\\Web3.js e Truffle - Estudo\\src\\contracts\\HelloWorld.sol",
   "ast": {
     "absolutePath": "project:/src/contracts/HelloWorld.sol",
     "exportedSymbols": {
@@ -763,7 +764,7 @@
           ".7"
         ],
         "nodeType": "PragmaDirective",
-        "src": "32:22:2"
+        "src": "33:22:2"
       },
       {
         "abstract": false,
@@ -777,7 +778,7 @@
           72
         ],
         "name": "HelloWorld",
-        "nameLocation": "65:10:2",
+        "nameLocation": "68:10:2",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
@@ -786,10 +787,10 @@
             "id": 61,
             "mutability": "mutable",
             "name": "meuNumero",
-            "nameLocation": "95:9:2",
+            "nameLocation": "100:9:2",
             "nodeType": "VariableDeclaration",
             "scope": 72,
-            "src": "83:25:2",
+            "src": "88:25:2",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -800,7 +801,7 @@
               "id": 59,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
-              "src": "83:4:2",
+              "src": "88:4:2",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -815,7 +816,7 @@
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "107:1:2",
+              "src": "112:1:2",
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_0_by_1",
                 "typeString": "int_const 0"
@@ -828,7 +829,7 @@
             "body": {
               "id": 70,
               "nodeType": "Block",
-              "src": "156:40:2",
+              "src": "163:42:2",
               "statements": [
                 {
                   "expression": {
@@ -843,7 +844,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 61,
-                      "src": "166:9:2",
+                      "src": "174:9:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -857,13 +858,13 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 63,
-                      "src": "178:11:2",
+                      "src": "186:11:2",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "src": "166:23:2",
+                    "src": "174:23:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -871,7 +872,7 @@
                   },
                   "id": 69,
                   "nodeType": "ExpressionStatement",
-                  "src": "166:23:2"
+                  "src": "174:23:2"
                 }
               ]
             },
@@ -881,7 +882,7 @@
             "kind": "function",
             "modifiers": [],
             "name": "setInt",
-            "nameLocation": "124:6:2",
+            "nameLocation": "131:6:2",
             "nodeType": "FunctionDefinition",
             "parameters": {
               "id": 64,
@@ -892,10 +893,10 @@
                   "id": 63,
                   "mutability": "mutable",
                   "name": "_novoNumero",
-                  "nameLocation": "136:11:2",
+                  "nameLocation": "143:11:2",
                   "nodeType": "VariableDeclaration",
                   "scope": 71,
-                  "src": "131:16:2",
+                  "src": "138:16:2",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -906,7 +907,7 @@
                     "id": 62,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "131:4:2",
+                    "src": "138:4:2",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -915,27 +916,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "130:18:2"
+              "src": "137:18:2"
             },
             "returnParameters": {
               "id": 65,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "156:0:2"
+              "src": "163:0:2"
             },
             "scope": 72,
-            "src": "115:81:2",
+            "src": "122:83:2",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
         "scope": 73,
-        "src": "56:142:2",
+        "src": "59:149:2",
         "usedErrors": []
       }
     ],
-    "src": "32:1267:2"
+    "src": "33:1290:2"
   },
   "compiler": {
     "name": "solc",
@@ -951,12 +952,13 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xEDf5488Fe2050781766F7872D799F6d77BD45De3",
-      "transactionHash": "0x3d56837bff55e8b9233c1b98f51cf558eae949d3caca7a0bbdfa5375e0628d7b"
+      "address": "0x2821c384c280C334Ea97d0730ea372E15Fc42C0E",
+      "transactionHash": "0x0c812f7b956144f6beb8bde0fbd061e9e3c0e68355ef6c21ec80d531bf4ec20c"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-06-13T17:54:21.136Z",
+  "updatedAt": "2024-06-14T21:01:18.940Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},

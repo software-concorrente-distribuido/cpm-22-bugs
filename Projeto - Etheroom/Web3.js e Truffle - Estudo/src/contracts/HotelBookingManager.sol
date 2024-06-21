@@ -38,7 +38,7 @@ contract HotelBookingManager {
     );
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Erro, apenas o criador do contrato");
+        require(msg.sender == owner, "Erro, disponivel apenas o criador do contrato");
         _;
     }
 
