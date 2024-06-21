@@ -10,6 +10,8 @@ import java.net.InetAddress;
 
 public class AppServer {
 
+    private static final String SERVER_ADDRESS = "0.0.0.0";
+
     private static final Integer SERVER_PORT = 9090;
 
     private static final String APP_PATH = "/*";
@@ -22,7 +24,7 @@ public class AppServer {
 
             ServerConnector connector = new ServerConnector(server);
             connector.setPort(SERVER_PORT);
-            connector.setHost(ip.getHostAddress());
+            connector.setHost(SERVER_ADDRESS);
 
             server.addConnector(connector);
 
