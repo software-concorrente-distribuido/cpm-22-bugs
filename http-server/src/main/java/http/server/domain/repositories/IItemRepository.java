@@ -9,7 +9,9 @@ public interface IItemRepository {
 
     Item create(Object object);
 
-    Optional<Item> findById(Integer id);
+    Boolean existsById(String id);
+
+    Optional<Item> findById(String id);
 
     List<Item> findAll();
 

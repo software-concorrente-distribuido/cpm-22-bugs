@@ -15,27 +15,48 @@ public class ItemRepository implements IItemRepository {
 
     @Override
     public Item create(Object object) {
-        return null;
+        Item item = new Item(object);
+        synchronized (items) {
+            items.put(item.getId(), item);
+        }
+        return item;
     }
 
     @Override
-    public Optional<Item> findById(Integer id) {
-        return null;
+    public Boolean existsById(String id) {
+        synchronized (items) {
+            return items.containsKey(id);
+        }
+    }
+
+    @Override
+    public Optional<Item> findById(String id) {
+        synchronized (items) {
+            return Optional.ofNullable(items.get(id));
+        }
     }
 
     @Override
     public List<Item> findAll() {
-        return null;
+        synchronized (items) {
+            return List.copyOf(items.values());
+        }
     }
 
     @Override
     public void update(String id, Object object) {
-
+        synchronized (items) {
+            Item item = items.get(id);
+            item.setContent(object);
+            items.put(id, item);
+        }
     }
 
     @Override
     public void deleteById(String id) {
-
+        synchronized (items) {
+            items.remove(id);
+        }
     }
 
     public static IItemRepository getInstance() {
