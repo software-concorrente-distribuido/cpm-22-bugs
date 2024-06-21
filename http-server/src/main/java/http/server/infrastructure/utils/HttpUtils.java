@@ -8,12 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.logging.Logger;
 
 public class HttpUtils {
 
+    public static Logger LOGGER = Logger.getLogger(HttpUtils.class.getName());
+
     public static void handleNewRequest(HttpServletRequest request, HttpServletResponse response) {
+        String method = request.getMethod();
+        String requestURI = request.getRequestURI();
+
+        LOGGER.info("Received request of type: " + method + " for URI: " + requestURI);
+
         configureResponse(response);
         configureCors(response);
+
+        LOGGER.info("Response configured for method: " + method + " with status: " + response.getStatus());
     }
 
     public static <T> void setCreatedResponse(HttpServletResponse response, T responseBody) throws IOException {

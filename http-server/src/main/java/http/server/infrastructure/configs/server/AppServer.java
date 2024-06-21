@@ -6,6 +6,8 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
+import java.net.InetAddress;
+
 public class AppServer {
 
     private static final Integer SERVER_PORT = 9090;
@@ -14,11 +16,13 @@ public class AppServer {
 
     public static void initServer() {
         try {
+            InetAddress ip = InetAddress.getLocalHost();
+            System.out.println("Server running at: " + ip.getHostAddress() + ":" + SERVER_PORT);
             Server server = new Server();
 
             ServerConnector connector = new ServerConnector(server);
             connector.setPort(SERVER_PORT);
-            connector.setHost("0.0.0.0");
+            connector.setHost(ip.getHostAddress());
 
             server.addConnector(connector);
 
