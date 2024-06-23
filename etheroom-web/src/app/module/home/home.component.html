@@ -1,0 +1,36 @@
+<section class="main-section">
+    <app-header></app-header>
+    
+    <section class="hotels">
+        <div class="hotels__header">
+            <div class="hotels__header--title">
+                <div class="hotels__header--title_main-title">HOTELS</div>
+                <div class="hotels__header--title_sub-title">HOTELS</div>
+            </div>
+
+            <mat-tab-group>
+                <section *ngFor="let type of hotelsTypes">
+                    <mat-tab label="{{ type }}">
+                        Content 1
+                    </mat-tab>
+                </section>
+            </mat-tab-group>
+            <!-- <div class="hotels__header--types">
+                <div 
+                    class="type"
+                    *ngFor="let type of hotelsTypes">
+                    {{ type }}
+                </div>
+            </div> -->
+        </div>
+    
+        <div class="hotels__examples">
+            <app-hotel-info [srcImage]="'./../../../assets/images/example-hotel.svg'"></app-hotel-info>
+            <app-hotel-info [srcImage]="'./../../../assets/images/example-hotel.svg'"></app-hotel-info>
+            <app-hotel-info [srcImage]="'./../../../assets/images/example-hotel.svg'"></app-hotel-info>
+            <app-hotel-info [srcImage]="'./../../../assets/images/example-hotel.svg'"></app-hotel-info>
+        </div>
+    </section>
+    
+    <section class="about-us"></section>
+</section>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-ether-button',
@@ -18,5 +18,12 @@ export class EtherButtonComponent {
 
   @Input()
   public isInvertColors?: boolean;
+
+  @Output()
+  public onClick: EventEmitter<void> = new EventEmitter<void>();
+
+  public handleClick(): void {
+    this.onClick.emit();
+  }
 
 }

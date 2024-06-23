@@ -1,0 +1,14 @@
+div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    img {
+        width: 30px;
+    }
+
+    .price {
+        font-size: 18px;
+        font-weight: 300;
+    }
+}

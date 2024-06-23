@@ -1,0 +1,44 @@
+.main-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    app-header {
+        width: 100%;
+    }
+
+    .hotels {
+        &__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            &--title {
+                position: relative;
+
+                &_main-title {
+                    position: absolute;
+                    font-size: 60px;
+                }
+    
+                &_sub-title {
+                    font-size: 100px;
+                    color: white;
+                    text-shadow: 1px 1px 0 #7F7F7F;
+                }
+            }
+
+
+            &--types{
+                display: flex;
+                gap: 10px;
+            }
+        }
+
+        &__examples {
+            display: flex;
+            gap: 10px;            
+        }
+    }
+}
