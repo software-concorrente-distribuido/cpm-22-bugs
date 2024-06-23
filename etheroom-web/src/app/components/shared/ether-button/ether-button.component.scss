@@ -1,0 +1,15 @@
+button {
+    width: 200px;
+    height: 66px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+button.default {
+    background-color: #ffffff;
+}
+
+button.inverted {
+    background-color: #000000;
+    color: #ffffff;
+}
