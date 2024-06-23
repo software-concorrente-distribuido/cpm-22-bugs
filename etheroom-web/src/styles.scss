@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'cabin-semi-bold', sans-serif;
+}
+
+@font-face {
+    font-family: 'cabin-bold';
+    src: url(assets/fonts/cabin/Cabin-Bold.ttf) format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cabin-regular';
+    src: url(assets/fonts/cabin/Cabin-Regular.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cabin-medium';
+    src: url(assets/fonts/cabin/Cabin-Medium.ttf) format('truetype');
+    font-weight: medium;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'cabin-semi-bold';
+    src: url(assets/fonts/cabin/Cabin-SemiBold.ttf) format('truetype');
+    font-weight: semi-bold;
+    font-style: normal;
+}

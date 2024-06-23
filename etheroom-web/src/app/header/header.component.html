@@ -1,0 +1,23 @@
+<section>
+    <div class="header-content">
+        <div class="ether-logo">
+            <img src="./../../assets/images/etheroom-logo.svg" alt="Ether Logo">
+        </div>
+
+        <nav>
+            <a routerLink="/home">HOME</a>
+            <a routerLink="/all-hotels">ALL HOTELS</a>
+            <a routerLink="/explore-cities">EXPLORE CITIES</a>
+            <a routerLink="/about-us">ABOUT US</a>
+            <a routerLink="/faq">FAQ</a>
+        </nav>
+
+        <div class="access-buttons">
+            <app-ether-button [buttonText]="'SIGN IN'" [buttonType]="'primary'"></app-ether-button>
+            <app-ether-button 
+                [buttonText]="'SIGN UP'" 
+                [buttonType]="'secondary'" 
+                [isInvertColors]="isInvertColors"></app-ether-button>
+        </div>
+    </div>
+</section>

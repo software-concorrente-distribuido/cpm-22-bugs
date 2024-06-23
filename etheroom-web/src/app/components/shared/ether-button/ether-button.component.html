@@ -1,0 +1,6 @@
+<button [ngClass]="{
+    'primary': buttonType === 'primary',
+    'secondary': buttonType === 'secondary',
+    'default': !isInvertColors,
+    'inverted': isInvertColors
+}">{{ buttonText }}</button>
