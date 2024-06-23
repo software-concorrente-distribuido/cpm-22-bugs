@@ -1,0 +1,18 @@
+section {
+    position: relative;
+
+    img {
+        width: 280px;
+    }
+
+    app-hotel-details {
+        position: absolute;
+        bottom: 15px;
+        left: 0;
+        right: 0;
+        font-size: 20px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+    }
+}

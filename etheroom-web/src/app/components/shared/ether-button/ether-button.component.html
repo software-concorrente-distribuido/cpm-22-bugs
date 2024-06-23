@@ -1,4 +1,6 @@
-<button [ngClass]="{
+<button 
+    (click)="handleClick()"
+    [ngClass]="{
     'primary': buttonType === 'primary',
     'secondary': buttonType === 'secondary',
     'default': !isInvertColors,
