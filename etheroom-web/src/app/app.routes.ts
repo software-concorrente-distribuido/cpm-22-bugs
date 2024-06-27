@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './module/home/home.component';
-import { AllHotelsComponent } from './module/all-hotels/all-hotels.component';
-import { ExploreCitiesComponent } from './module/explore-cities/explore-cities.component';
-import { AboutComponent } from './module/about/about.component';
-import { FaqComponent } from './module/faq/faq.component';
+import { HomeComponent } from './views/home/home.component';
+import { AllHotelsComponent } from './views/all-hotels/all-hotels.component';
+import { ExploreCitiesComponent } from './views/explore-cities/explore-cities.component';
+import { AboutComponent } from './views/about/about.component';
+import { FaqComponent } from './views/faq/faq.component';
 
 export const routes: Routes = [
     {
