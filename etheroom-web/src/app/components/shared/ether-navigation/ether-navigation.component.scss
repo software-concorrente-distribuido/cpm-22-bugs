@@ -1,8 +1,9 @@
 nav {
     display: flex;
-    gap: 30px;
+    justify-content: space-evenly;
 
     a {
+        font-family: 'quasimoda-semi-bold';
         cursor: pointer;
         text-decoration: none;
         color: black;

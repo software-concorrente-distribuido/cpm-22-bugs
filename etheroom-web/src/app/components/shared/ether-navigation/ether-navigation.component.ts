@@ -8,16 +8,16 @@ interface NavRoute {
 }
 
 @Component({
-  selector: 'app-navigation',
+  selector: 'ether-navigation',
   standalone: true,
   imports: [
     CommonModule,
     RouterModule
   ],
-  templateUrl: './navigation.component.html',
-  styleUrl: './navigation.component.scss'
+  templateUrl: './ether-navigation.component.html',
+  styleUrl: './ether-navigation.component.scss'
 })
-export class NavigationComponent {
+export class EtherNavigationComponent {
 
   @Input()
   public routes: NavRoute[] = [];

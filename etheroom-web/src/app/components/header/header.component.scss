@@ -10,13 +10,31 @@ section {
         width: 90%;
         height: 80%;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
         padding: 10px 25px;
-    }
 
-    .access-buttons {
-        display: flex;
-        gap: 20px;
+        .ether-logo {
+            width: 25%;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        ether-navigation {
+            width: 45%;
+        }
+
+        .access-buttons {
+            display: flex;
+            justify-content: space-evenly;
+            width: 30%;
+
+            ether-button {
+                display: flex;
+                width: 40%;
+            }
+        }
     }
 }

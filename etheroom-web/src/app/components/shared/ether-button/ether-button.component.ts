@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-ether-button',
+  selector: 'ether-button',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './ether-button.component.html',
