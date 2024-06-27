@@ -43,33 +43,47 @@ html, body {
 
 body {
     margin: 0;
-    font-family: 'cabin-semi-bold', sans-serif;
+    font-family: 'quasimoda-regular', sans-serif;
 }
 
 @font-face {
-    font-family: 'cabin-bold';
-    src: url(assets/fonts/cabin/Cabin-Bold.ttf) format('truetype');
-    font-weight: 700;
+    font-family: 'quasimoda-light';
+    src: url('assets/fonts/Quasimoda/Quasimoda-Light.otf') format('opentype');
+    font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'cabin-regular';
-    src: url(assets/fonts/cabin/Cabin-Regular.ttf) format('truetype');
+    font-family: 'quasimoda-regular';
+    src: url('assets/fonts/Quasimoda/Quasimoda-Regular.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'cabin-medium';
-    src: url(assets/fonts/cabin/Cabin-Medium.ttf) format('truetype');
+    font-family: 'quasimoda-medium';
+    src: url('assets/fonts/Quasimoda/Quasimoda-Medium.otf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'cabin-semi-bold';
-    src: url(assets/fonts/cabin/Cabin-SemiBold.ttf) format('truetype');
+    font-family: 'quasimoda-semi-bold';
+    src: url('assets/fonts/Quasimoda/Quasimoda-SemiBold.otf') format('truetype');
     font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'quasimoda-bold';
+    src: url('assets/fonts/Quasimoda/Quasimoda-Bold.otf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'quasimoda-extra-bold';
+    src: url('assets/fonts/Quasimoda/Quasimoda-ExtraBold.otf') format('truetype');
+    font-weight: 800;
     font-style: normal;
 }
