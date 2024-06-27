@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HotelInfoComponent } from '../../components/shared/hotel-info/hotel-info.component';
+import { HotelInfoComponent } from '../../shared/components/hotel-info/hotel-info.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { EtherInputFieldComponent } from '../../components/shared/ether-input-field/ether-input-field.component';
-import { EtherPageComponent } from '../../components/shared/containers/ether-page/ether-page.component';
+import { EtherInputFieldComponent } from '../../shared/components/ether-input-field/ether-input-field.component';
+import { EtherPageComponent } from '../../shared/components/containers/ether-page/ether-page.component';
 
 export enum HotelsTypes {
   FULL_SERVICE = 'FULL-SERVICE',

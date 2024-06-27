@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { EtherButtonComponent } from '../shared/ether-button/ether-button.component';
-import { EtherNavigationComponent } from '../shared/ether-navigation/ether-navigation.component';
+import { EtherButtonComponent } from '../ether-button/ether-button.component';
+import { EtherNavigationComponent } from '../ether-navigation/ether-navigation.component';
 
 @Component({
   selector: 'app-header',

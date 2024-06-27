@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, RouterOutlet } from '@angular/router';
-import { HomeComponent } from './module/home/home.component';
-import { EtherNavigationComponent } from './components/shared/ether-navigation/ether-navigation.component';
-import { routes } from './app.routes';
-import { HeaderComponent } from './components/header/header.component';
-import { EtherPageComponent } from './components/shared/containers/ether-page/ether-page.component';
+import { RouterOutlet } from '@angular/router';
+import { HomeComponent } from './views/home/home.component';
+import { EtherNavigationComponent } from './shared/components/ether-navigation/ether-navigation.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { EtherPageComponent } from './shared/components/containers/ether-page/ether-page.component';
 
 @Component({
   selector: 'app-root',
