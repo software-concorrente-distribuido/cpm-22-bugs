@@ -1,6 +1,5 @@
-<section class="main-section">
-    <app-header></app-header>
-
+<ether-page>
+    <section class="main-section">
     <section class="etheroom-presentation">
         <div class="etheroom-presentation__search">
             <!-- <img src="./../../../assets/images/bg-hotel-room-3.jpg" alt=""> -->
@@ -11,10 +10,16 @@
                 <div class="hosting__options">
                     <mat-tab-group>
                         <mat-tab label="HOTELS">
-                            Content 1
+                            <ether-input-field label="LOCATION" placeholder="AVENIDA T-4, GOIÂNIA"></ether-input-field>
+                            <ether-input-field label="CHECK IN" placeholder="04 MAY, 2024"></ether-input-field>
+                            <ether-input-field label="CHECK OUT" placeholder="22 MAY, 2024"></ether-input-field>
                         </mat-tab>
-                        <mat-tab label="FLIGHTS"></mat-tab>
-                        <mat-tab label="FOOD POINTS"></mat-tab>
+                        <mat-tab label="FLIGHTS">
+                            <div>Content 2</div>
+                        </mat-tab>
+                        <mat-tab label="FOOD POINTS">
+                            <div>Content 3</div>
+                        </mat-tab>
                     </mat-tab-group>
                 </div>
             </div>
@@ -53,4 +58,5 @@
     </section>
     
     <section class="about-us"></section>
-</section>
+    </section>
+</ether-page>

@@ -1,13 +1,13 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-go-button',
+  selector: 'ether-go-button',
   standalone: true,
   imports: [],
-  templateUrl: './go-button.component.html',
-  styleUrl: './go-button.component.scss'
+  templateUrl: './ether-go-button.component.html',
+  styleUrl: './ether-go-button.component.scss'
 })
-export class GoButtonComponent {
+export class EtherGoButtonComponent {
   
   @Output()
   onClick: EventEmitter<void> = new EventEmitter<void>();

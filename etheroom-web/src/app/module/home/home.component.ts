@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { HotelInfoComponent } from '../../components/shared/hotel-info/hotel-info.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { EtherInputFieldComponent } from '../../components/shared/ether-input-field/ether-input-field.component';
+import { EtherPageComponent } from '../../components/shared/containers/ether-page/ether-page.component';
 
 export enum HotelsTypes {
   FULL_SERVICE = 'FULL-SERVICE',
@@ -14,13 +15,14 @@ export enum HotelsTypes {
 }
 
 @Component({
-  selector: 'app-home',
+  selector: 'ether-home',
   standalone: true,
   imports: [
-    HeaderComponent,
     CommonModule,
+    MatTabsModule,
     HotelInfoComponent,
-    MatTabsModule
+    EtherPageComponent,
+    EtherInputFieldComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

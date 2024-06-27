@@ -4,18 +4,18 @@
             <img src="./../../assets/images/etheroom-logo.svg" alt="Ether Logo">
         </div>
 
-        <app-navigation [routes]="navRoutes"></app-navigation>
+        <ether-navigation [routes]="navRoutes"></ether-navigation>
 
         <div class="access-buttons">
-            <app-ether-button
+            <ether-button
                 (onClick)="handleButtonClick()"
                 [buttonText]="'SIGN IN'"
-                [buttonType]="'primary'"></app-ether-button>
-            <app-ether-button
+                [buttonType]="'primary'"></ether-button>
+            <ether-button
                 (onClick)="handleButtonClick()"
                 [buttonText]="'SIGN UP'" 
                 [buttonType]="'secondary'" 
-                [isInvertColors]="isInvertColors"></app-ether-button>
+                [isInvertColors]="isInvertColors"></ether-button>
         </div>
     </div>
 </section>
