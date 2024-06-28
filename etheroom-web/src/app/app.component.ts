@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './views/home/home.component';
-import { EtherNavigationComponent } from './shared/components/ether-navigation/ether-navigation.component';
-import { HeaderComponent } from './shared/components/header/header.component';
 import { EtherPageComponent } from './shared/components/containers/ether-page/ether-page.component';
+import { SharedModule } from './shared/shared.module';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +12,8 @@ import { EtherPageComponent } from './shared/components/containers/ether-page/et
     CommonModule,
     RouterOutlet,
     HomeComponent,
-    HeaderComponent,
     EtherPageComponent,
-    EtherNavigationComponent
+    SharedModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

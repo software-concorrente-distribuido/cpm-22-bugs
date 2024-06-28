@@ -1,14 +1,7 @@
 import { Component } from '@angular/core';
-import { EtherButtonComponent } from '../ether-button/ether-button.component';
-import { EtherNavigationComponent } from '../ether-navigation/ether-navigation.component';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [
-    EtherButtonComponent,
-    EtherNavigationComponent
-  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

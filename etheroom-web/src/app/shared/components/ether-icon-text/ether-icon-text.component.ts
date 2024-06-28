@@ -4,12 +4,24 @@ import { Component, Input } from '@angular/core';
   selector: 'ether-icon-text',
   standalone: true,
   imports: [],
-  templateUrl: './ether-icon-text.component.html',
+  template: `
+    <div>
+      <img [src]="setIconName(iconName)">
+      <div class="price">{{ text }}</div>
+    </div>
+  `,
   styleUrl: './ether-icon-text.component.scss'
 })
 export class EtherIconTextComponent {
 
   @Input()
   public text?: string;
+
+  @Input()
+  public iconName!: string;
+
+  public setIconName(iconName: string): string {
+    return `./../../../../assets/icons/${iconName}.svg`;
+  }
 
 }

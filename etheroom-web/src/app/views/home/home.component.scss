@@ -48,6 +48,11 @@
                     padding: 20px;
                     border-radius: 10px;
                     background-color: white;
+
+                    .hotel-form-field {
+                        display: flex;
+                        gap: 8px;
+                    }
                 }
             }
         }
@@ -58,22 +63,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            &--title {
-                position: relative;
-
-                &_main-title {
-                    position: absolute;
-                    font-size: 60px;
-                }
-    
-                &_sub-title {
-                    font-size: 100px;
-                    color: white;
-                    text-shadow: 1px 1px 0 #7F7F7F;
-                }
-            }
-
 
             &--types{
                 display: flex;
