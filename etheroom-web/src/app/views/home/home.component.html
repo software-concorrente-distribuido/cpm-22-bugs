@@ -10,9 +10,22 @@
                 <div class="hosting__options">
                     <mat-tab-group>
                         <mat-tab label="HOTELS">
-                            <ether-input-field label="LOCATION" placeholder="AVENIDA T-4, GOIÂNIA"></ether-input-field>
-                            <ether-input-field label="CHECK IN" placeholder="04 MAY, 2024"></ether-input-field>
-                            <ether-input-field label="CHECK OUT" placeholder="22 MAY, 2024"></ether-input-field>
+                            <section class="hotel-form-field">
+                                <ether-form-field>
+                                    <ether-form-field-label>LOCATION</ether-form-field-label>
+                                    <input type="text" placeholder="AVENIDA T-4, GOIÂNIA">
+                                </ether-form-field>
+    
+                                <ether-form-field>
+                                    <ether-form-field-label>CHECK IN</ether-form-field-label>
+                                    <input type="text" placeholder="04 MAY, 2024">
+                                </ether-form-field>
+    
+                                <ether-form-field>
+                                    <ether-form-field-label>CHECK OUT</ether-form-field-label>
+                                    <input type="text" placeholder="22 MAY, 2024">
+                                </ether-form-field>
+                            </section>
                         </mat-tab>
                         <mat-tab label="FLIGHTS">
                             <div>Content 2</div>
@@ -28,10 +41,7 @@
     
     <section class="hotels">
         <div class="hotels__header">
-            <div class="hotels__header--title">
-                <div class="hotels__header--title_main-title">HOTELS</div>
-                <div class="hotels__header--title_sub-title">HOTELS</div>
-            </div>
+            <ether-home-section-title title="HOTELS"></ether-home-section-title>
 
             <mat-tab-group>
                 <section *ngFor="let type of hotelsTypes">

@@ -9,11 +9,6 @@ interface NavRoute {
 
 @Component({
   selector: 'ether-navigation',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
   templateUrl: './ether-navigation.component.html',
   styleUrl: './ether-navigation.component.scss'
 })
