@@ -2,29 +2,32 @@
     <section class="main-section">
     <section class="etheroom-presentation">
         <div class="etheroom-presentation__search">
-            <!-- <img src="./../../../assets/images/bg-hotel-room-3.jpg" alt=""> -->
-
             <div class="hosting">
                 <div class="hosting__title">DISCOVER YOUR FUTURE HOSTING</div>
 
                 <div class="hosting__options">
                     <mat-tab-group>
                         <mat-tab label="HOTELS">
-                            <section class="hotel-form-field">
-                                <ether-form-field>
-                                    <ether-form-field-label>LOCATION</ether-form-field-label>
-                                    <input type="text" placeholder="AVENIDA T-4, GOIÂNIA">
-                                </ether-form-field>
-    
-                                <ether-form-field>
-                                    <ether-form-field-label>CHECK IN</ether-form-field-label>
-                                    <input type="text" placeholder="04 MAY, 2024">
-                                </ether-form-field>
-    
-                                <ether-form-field>
-                                    <ether-form-field-label>CHECK OUT</ether-form-field-label>
-                                    <input type="text" placeholder="22 MAY, 2024">
-                                </ether-form-field>
+                            <section class="hotel-section">
+                                <section class="hotel-form-field">
+                                    <ether-form-field>
+                                        <ether-form-field-label>LOCATION</ether-form-field-label>
+                                        <input type="text" placeholder="AVENIDA T-4, GOIÂNIA">
+                                    </ether-form-field>
+        
+                                    <ether-form-field>
+                                        <ether-form-field-label>CHECK IN</ether-form-field-label>
+                                        <input type="text" placeholder="04 MAY, 2024">
+                                    </ether-form-field>
+        
+                                    <ether-form-field>
+                                        <ether-form-field-label>CHECK OUT</ether-form-field-label>
+                                        <input type="text" placeholder="22 MAY, 2024">
+                                    </ether-form-field>
+                                </section>
+                                <section class="search">
+                                    <ether-button [isInvertColors]="true">SEARCH</ether-button>
+                                </section>
                             </section>
                         </mat-tab>
                         <mat-tab label="FLIGHTS">
