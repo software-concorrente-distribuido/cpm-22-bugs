@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   template: `
     <div>
       <img [src]="setIconName(iconName)">
-      <div class="price">{{ text }}</div>
+      <ng-content></ng-content>
     </div>
   `,
   styleUrl: './ether-icon-text.component.scss'

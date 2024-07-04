@@ -5,4 +5,6 @@
     'secondary': buttonType === 'secondary',
     'default': !isInvertColors,
     'inverted': isInvertColors
-}">{{ buttonText }}</button>
+}">
+    <ng-content></ng-content>
+</button>
