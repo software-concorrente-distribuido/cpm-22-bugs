@@ -4,6 +4,9 @@ import { AllHotelsComponent } from './views/all-hotels/all-hotels.component';
 import { ExploreCitiesComponent } from './views/explore-cities/explore-cities.component';
 import { AboutComponent } from './views/about/about.component';
 import { FaqComponent } from './views/faq/faq.component';
+import { ManageRoomsComponent } from './views/manage-rooms/manage-rooms.component';
+import { RoomDetailsComponent } from './views/manage-rooms/room-details/room-details.component';
+import { AddRoomComponent } from './views/manage-rooms/add-room/add-room.component';
 
 export const routes: Routes = [
     {
@@ -35,5 +38,14 @@ export const routes: Routes = [
     {
         path: 'faq',
         component: FaqComponent
+    },
+
+    {
+        path: 'manage-rooms',
+        children: [
+            { path: '', component: ManageRoomsComponent },
+            { path: 'room-details', component: RoomDetailsComponent },
+            { path: 'add-room', component: AddRoomComponent }
+        ]
     }
 ];
