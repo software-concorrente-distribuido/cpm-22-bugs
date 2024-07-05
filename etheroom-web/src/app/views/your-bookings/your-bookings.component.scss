@@ -167,7 +167,7 @@
   justify-content: flex-start;
   padding: var(--padding-smi) var(--padding-mini);
   box-sizing: border-box;
-  background-image: href("./assets/public/rectangle-41@2x.png");
+  background-image: url("./../../../assets/public/rectangle-41@2x.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -314,7 +314,7 @@
   justify-content: flex-start;
   padding: var(--padding-smi) var(--padding-mini);
   box-sizing: border-box;
-  background-image: href("./assets/public/rectangle-411@2x.png");
+  background-image: url("./../../../assets/public/rectangle-41@2x.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -336,7 +336,7 @@
 }
 .frame-parent4 {
   position: absolute;
-  top: 414px;
+  top: 225px;
   left: 81px;
   width: 852px;
   display: flex;
@@ -945,7 +945,7 @@
 }
 .search-bar1 {
   position: absolute;
-  top: 153px;
+  top:10px;
   left: 0px;
   background-color: var(--color-gainsboro-300);
   width: 100%;

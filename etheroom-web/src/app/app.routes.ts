@@ -9,6 +9,7 @@ import { RoomDetailsComponent } from './views/manage-rooms/room-details/room-det
 import { AddRoomComponent } from './views/manage-rooms/add-room/add-room.component';
 import { LoginComponent } from './views/login/login.component';
 import { YourBookingsComponent } from './views/your-bookings/your-bookings.component';
+import { BookedRoomComponent } from './views/booked-room/booked-room.component';
 
 export const routes: Routes = [
     {
@@ -54,6 +55,10 @@ export const routes: Routes = [
     {
         path: 'your-bookings',
         component: YourBookingsComponent
+    },
+    {
+        path: 'booked-room',
+        component: BookedRoomComponent
     },
 
     {
