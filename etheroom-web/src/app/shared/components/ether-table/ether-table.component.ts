@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { EtherButtonIconComponent } from '../ether-button-icon/ether-button-icon.component';
 import { EtherButtonTextIconComponent } from '../ether-button-text-icon/ether-button-text-icon.component';
 import { Router } from '@angular/router';
 
