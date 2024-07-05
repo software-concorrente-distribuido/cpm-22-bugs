@@ -8,10 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class EtherButtonComponent {
 
   @Input()
-  public buttonText?: string;
-
-  @Input()
-  public buttonType?: string;
+  public buttonType: string = 'primary';
 
   @Input()
   public isInvertColors?: boolean;

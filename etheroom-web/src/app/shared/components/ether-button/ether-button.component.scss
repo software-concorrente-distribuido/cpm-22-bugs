@@ -1,9 +1,13 @@
 button {
     width: 100%;
-    height: 60px;
-    border-radius: 20px;
+    height: 50px;
+    border-radius: 15px;
     cursor: pointer;
 }
+
+// button.secondary {
+//     width: 90% !important;
+// }
 
 button.default {
     background-color: #ffffff;
