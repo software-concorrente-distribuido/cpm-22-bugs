@@ -1,3 +1,6 @@
+@import 'colors';
+@import 'typography';
+
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -88,12 +91,17 @@ body {
     font-style: normal;
 }
 
+h2 {
+    margin: 0;
+}
+
 .ether-form-field {
     input {
         outline: none;
         border: none;
         display:block;
         padding: 0;
+        width: 100%;
         background-color: transparent;
 
         &::placeholder {
