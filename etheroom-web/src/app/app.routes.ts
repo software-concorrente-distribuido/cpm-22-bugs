@@ -7,12 +7,23 @@ import { FaqComponent } from './views/faq/faq.component';
 import { ManageRoomsComponent } from './views/manage-rooms/manage-rooms.component';
 import { RoomDetailsComponent } from './views/manage-rooms/room-details/room-details.component';
 import { AddRoomComponent } from './views/manage-rooms/add-room/add-room.component';
+import { LoginComponent } from './views/login/login.component';
 
 export const routes: Routes = [
     {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
+    },
+
+    {
+        path: 'sign-in',
+        component: LoginComponent
+    },
+
+    {
+        path: 'sign-up',
+        component: LoginComponent
     },
 
     {

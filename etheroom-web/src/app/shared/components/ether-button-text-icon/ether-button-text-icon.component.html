@@ -1,4 +1,9 @@
-<button (click)="handleClick()">
-    <ng-content></ng-content>
-    <img [src]="setIconName(iconName)">
+<button 
+    (click)="handleClick()" 
+    [ngClass]="{ 
+        'primary': buttonType === 'primary',
+        'secondary': buttonType === 'secondary',
+    }">
+        <ng-content></ng-content>
+        <img [src]="setIconName(iconName)">
 </button>
