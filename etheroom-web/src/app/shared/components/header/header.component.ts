@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent implements OnInit {
     label: string;
   }[];
 
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
     this.accessRoutes();
@@ -51,7 +53,11 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  public handleButtonClick(): void {
+  public handleButtonSignIn(): void {
+    this.router.navigate(['/sign-in']);
+  }
+
+  public handleButtonSignUp(): void {
     console.log('Button clicked!');
   }
 
