@@ -1,0 +1,37 @@
+section {
+    display: flex;
+
+    .button {
+        width: 25%;
+    }
+
+    .booking {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .room-price,
+        .room-availability,
+        .room-type {
+            display: flex;
+            gap: 20px;
+        }
+
+        .room-price,
+        .room-availability {
+            align-items: center;
+        }
+
+        .room-type {
+            align-items: end;
+        }
+
+        .room-price {
+            &__currency-info {
+                .question-mark {
+                    width: 10%;
+                }
+            }
+        }
+    }
+}

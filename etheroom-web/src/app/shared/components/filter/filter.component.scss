@@ -1,0 +1,12 @@
+section {
+    background-color: #F4F4F4;
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+
+    .fields {
+        display: grid;
+        row-gap: 18px;
+    }
+}

@@ -1,20 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'ether-icon-button',
+  selector: 'ether-button-icon',
   standalone: true,
-  imports: [],
-  template: `
-    <button (click)="handleClick()">
-      <img [src]="setIconName(iconName)">
-    </button>
-  `,
-  styleUrl: './ether-icon-button.component.scss'
+  imports: [CommonModule],
+  templateUrl: './ether-button-icon.component.html',
+  styleUrl: './ether-button-icon.component.scss'
 })
-export class EtherIconButtonComponent {
+export class EtherButtonIconComponent {
 
   @Input()
   public iconName!: string;
+
+  @Input()
+  public isSecondary?: boolean = false;
   
   @Output()
   onClick: EventEmitter<void> = new EventEmitter<void>();
