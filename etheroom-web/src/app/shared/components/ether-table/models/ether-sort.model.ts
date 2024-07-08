@@ -1,13 +1,13 @@
 export class EtherSort {
-    column: string;
+    active: string;
     direction: string;
     
     constructor(column: string, direction: string) {
-        this.column = column;
+        this.active = column;
         this.direction = direction;
     }
 
     public buildSort(): string {
-        return `${this.column}, ${this.direction}`;
+        return `${this.active}, ${this.direction}`;
     }
 }

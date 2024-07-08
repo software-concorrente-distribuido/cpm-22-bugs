@@ -1,24 +1,25 @@
-import { Directive, Renderer2, ViewContainerRef } from '@angular/core';
+import { Directive, EmbeddedViewRef, TemplateRef, ViewContainerRef } from '@angular/core';
+import { EtherRowDefContext } from '../models/ether-row-def-context.model';
 
 @Directive({
   selector: '[appEtherRowDef]',
   standalone: true
 })
-export class EtherRowDefDirective {
+export class EtherRowDefDirective<T> {
 
   constructor(
-    public templateRef: Renderer2,
+    public templateRef: TemplateRef<any>,
     public viewContainerRef: ViewContainerRef
   ) { }
 
-  // public createEmbeddedView() {
-  //   const context = this.;
-  //   const index = this.viewContainerRef.length;
-  //   this.viewContainerRef.createEmbeddedView(
-  //     this.templateRef,
-  //     context,
-  //     index
-  //   );
-  // }
+  public createEmbeddedView(data: T, index: number): EmbeddedViewRef<EtherRowDefContext<T>> {
+    const context = new EtherRowDefContext(data, index);
+    const embeddedViewRef = this.viewContainerRef.createEmbeddedView(
+      this.templateRef,
+      context,
+      index
+    );
+    return embeddedViewRef;
+  }
 
 }
