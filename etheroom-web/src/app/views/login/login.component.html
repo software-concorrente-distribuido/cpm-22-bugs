@@ -7,7 +7,12 @@
         <h1>Log In</h1>
 
         <div class="login-button">
-            <ether-button-text-icon iconName="metamask-fox" buttonType="secondary">LOG IN WITH METAMASK</ether-button-text-icon>
+            <ether-button-text-icon 
+                iconName="metamask-fox" 
+                buttonType="secondary"
+                (onClick)="handleButtonClick()">
+                    LOG IN WITH METAMASK
+            </ether-button-text-icon>
         </div>
 
         <div class="login-info">
