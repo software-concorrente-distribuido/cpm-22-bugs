@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'ether-row-cell',
@@ -15,5 +15,17 @@ import { Component } from '@angular/core';
   }
 })
 export class EtherRowCellComponent {
+
+  constructor(
+    public host: Renderer2,
+    public elementRef: ElementRef
+  ) { }
+
+  @Input()
+  public setColumnName(columnName: string) {
+    this.host.addClass(
+      this.elementRef.nativeElement, 'ether-row-cell--' + columnName
+    );
+  }
 
 }

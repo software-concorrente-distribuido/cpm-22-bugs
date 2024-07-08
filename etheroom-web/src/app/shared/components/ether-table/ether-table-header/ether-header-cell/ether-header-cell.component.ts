@@ -13,11 +13,16 @@ import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 })
 export class EtherHeaderCellComponent {
 
-  constructor(public elementRef: ElementRef) { }
+  constructor(
+    public host: Renderer2,
+    public elementRef: ElementRef
+  ) { }
 
   @Input()
   public setColumnName(columnName: string) {
-    this.elementRef.nativeElement.setAttribute('data-column-name--', columnName);
+    this.host.addClass(
+      this.elementRef.nativeElement, 'ether-header-cell--' + columnName
+    );
   }
 
 }
