@@ -1,35 +1,64 @@
 section {
     display: flex;
+    justify-content: center;
+    gap: 25px;
 
-    .button {
-        width: 25%;
+    .container {
+        display: flex;
+        width: 60%;
+        justify-content: center;
+        align-items: center;
+        .room-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .room-information {
+                display: flex;
+                align-items: center;
+                .infos {
+                    ul {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        column-gap: 40px;
+                    }
+                }
+            }
+        }
     }
 
-    .booking {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
 
-        .room-price,
-        .room-availability,
-        .room-type {
+    .group-tab {
+
+        .button {
+            width: 25%;
+        }
+    
+        .booking {
             display: flex;
-            gap: 20px;
-        }
-
-        .room-price,
-        .room-availability {
-            align-items: center;
-        }
-
-        .room-type {
-            align-items: end;
-        }
-
-        .room-price {
-            &__currency-info {
-                .question-mark {
-                    width: 10%;
+            flex-direction: column;
+            gap: 30px;
+    
+            .room-price,
+            .room-availability,
+            .room-type {
+                display: flex;
+                gap: 20px;
+            }
+    
+            .room-price,
+            .room-availability {
+                align-items: center;
+            }
+    
+            .room-type {
+                align-items: end;
+            }
+    
+            .room-price {
+                &__currency-info {
+                    .question-mark {
+                        width: 10%;
+                    }
                 }
             }
         }

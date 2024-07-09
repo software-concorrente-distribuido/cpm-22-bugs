@@ -1,4 +1,4 @@
-import { Component, ContentChildren } from '@angular/core';
+import { Component, ContentChildren, Query, QueryList } from '@angular/core';
 import { EtherHeaderCellComponent } from './ether-header-cell/ether-header-cell.component';
 
 @Component({
@@ -16,5 +16,6 @@ import { EtherHeaderCellComponent } from './ether-header-cell/ether-header-cell.
   }
 })
 export class EtherTableHeaderComponent {
-  @ContentChildren(EtherHeaderCellComponent) cells?: EtherHeaderCellComponent[];
+  @ContentChildren(EtherHeaderCellComponent) 
+  etherHeaderCell = new QueryList<EtherHeaderCellComponent>();
 }
