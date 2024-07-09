@@ -368,4 +368,54 @@ CREATE TABLE IF NOT EXISTS ETHEROOM_HOTEL_CONVENIENCES (
     FOREIGN KEY (CONVENIENCE_ID) REFERENCES ETHEROOM_CONVENIENCE(ID)
 
 );
+
+/*===========================================================*/
+/* TABLE: ETHEROOM_BOOKING                                   */
+/*===========================================================*/
+
+CREATE TABLE IF NOT EXISTS ETHEROOM_BOOKING (
+
+    ID                              UUID,
+
+    CHECK_IN                        TIMESTAMP,
+    CHECK_OUT                       TIMESTAMP,
+    NUMBER_OF_GUESTS                INTEGER,
+    TOTAL_PRICE                     DECIMAL(12,2),
+    STATUS                          VARCHAR(50),
+    ETHEREUM_TRANSACTION_ADDRESS    VARCHAR(50),
+
+    HOTEL_ROOM_ID                   UUID,
+    PERSON_ID                       UUID,
+
+    CREATED_AT                      TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT                      TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (ID),
+
+    FOREIGN KEY (HOTEL_ROOM_ID) REFERENCES ETHEROOM_HOTEL_ROOM(ID),
+    FOREIGN KEY (PERSON_ID) REFERENCES ETHEROOM_PERSON(ID)
+
+);
+
+/*===========================================================*/
+/* TABLE: ETHEROOM_GUEST                                     */
+/*===========================================================*/
+
+CREATE TABLE IF NOT EXISTS ETHEROOM_GUEST (
+
+    ID                  UUID,
+
+    NAME                VARCHAR(100),
+    EMAIL               VARCHAR(50),
+    PHONE               VARCHAR(20),
+
+    BOOKING_ID          UUID,
+
+    CREATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (ID),
+
+    FOREIGN KEY (BOOKING_ID) REFERENCES ETHEROOM_BOOKING(ID)
+
 );
