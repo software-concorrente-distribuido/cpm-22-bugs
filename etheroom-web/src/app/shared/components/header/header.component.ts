@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   public isInvertColors: boolean = true;
-  public access: string = 'hotel';
+  public access: string = 'guest';
 
   public navRoutes!: {
     path: string;
@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit {
         this.navRoutes = [
           { path: '/home', label: 'HOME' },
           { path: '/all-hotels', label: 'ALL HOTELS' },
-          { path: '/my-bookings', label: 'MY BOOKINGS' },
+          { path: '/your-bookings', label: 'MY BOOKINGS' },
           { path: '/profile', label: 'PROFILE' },
           { path: '/faq', label: 'FAQ' }
         ];
