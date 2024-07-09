@@ -1,4 +1,23 @@
 /*===========================================================*/
+/* TABLE: ETHEROOM_MEDIA                                     */
+/*===========================================================*/
+
+CREATE TABLE IF NOT EXISTS ETHEROOM_MEDIA (
+
+    ID              UUID,
+
+    FILENAME        VARCHAR(255)        NOT NULL,
+    SIZE            BIGINT              NOT NULL,
+    TYPE            VARCHAR(5)          NOT NULL,
+    DATA            BYTEA               NOT NULL,
+
+    CREATED_AT      TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT      TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (ID)
+);
+
+/*===========================================================*/
 /* TABLE: ETHEROOM_USER                                      */
 /*===========================================================*/
 
