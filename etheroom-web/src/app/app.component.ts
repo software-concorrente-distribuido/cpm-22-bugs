@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
-import { HomeComponent } from './views/home/home.component';
+import { HomeComponent } from './views/shared/home/home.component';
 import { EtherPageComponent } from './shared/components/containers/ether-page/ether-page.component';
 import { SharedModule } from './shared/shared.module';
 import { filter } from 'rxjs/operators';

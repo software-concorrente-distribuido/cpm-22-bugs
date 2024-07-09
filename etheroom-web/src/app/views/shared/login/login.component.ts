@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { EtherButtonTextIconComponent } from '../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
 import { Router } from '@angular/router';
+import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
 
 @Component({
   selector: 'ether-login',
