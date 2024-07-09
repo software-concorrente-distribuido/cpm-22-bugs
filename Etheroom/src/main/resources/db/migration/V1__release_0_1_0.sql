@@ -201,4 +201,63 @@ CREATE TABLE IF NOT EXISTS ETHEROOM_HOTEL (
 
 );
 
+/*===========================================================*/
+/* TABLE: ETHEROOM_HOTEL_IMAGES                              */
+/*===========================================================*/
+
+CREATE TABLE IF NOT EXISTS ETHEROOM_HOTEL_IMAGES (
+
+    ID                  UUID,
+
+    HOTEL_ID            UUID,
+    MEDIA_ID            UUID,
+
+    CREATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (ID),
+
+    FOREIGN KEY (HOTEL_ID) REFERENCES ETHEROOM_HOTEL(ID),
+    FOREIGN KEY (MEDIA_ID) REFERENCES ETHEROOM_MEDIA(ID)
+
+);
+
+/*===========================================================*/
+/* TABLE: ETHEROOM_TOURIST_SPOT                              */
+/*===========================================================*/
+
+CREATE TABLE IF NOT EXISTS ETHEROOM_TOURIST_SPOT (
+
+    ID                  UUID,
+
+    TOURIST_SPOT        VARCHAR(255),
+
+    CREATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (ID)
+
+
+);
+
+/*===========================================================*/
+/* TABLE: ETHEROOM_HOTEL_TOURIST_SPOTS                       */
+/*===========================================================*/
+
+CREATE TABLE IF NOT EXISTS ETHEROOM_HOTEL_TOURIST_SPOTS (
+
+    ID                  UUID,
+
+    HOTEL_ID            UUID,
+    TOURIST_SPOT_ID     UUID,
+
+    CREATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT          TIMESTAMP           NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY (ID),
+
+    FOREIGN KEY (HOTEL_ID) REFERENCES ETHEROOM_HOTEL(ID),
+    FOREIGN KEY (TOURIST_SPOT_ID) REFERENCES ETHEROOM_TOURIST_SPOT(ID)
+
+);
 );
