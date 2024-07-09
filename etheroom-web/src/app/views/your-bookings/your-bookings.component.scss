@@ -789,7 +789,7 @@
   display: inline-block;
   z-index: 2;
 }
-.may-2024 {
+.checkin-placeholder {
   width: 143.1px;
   border: none;
   outline: none;
@@ -838,7 +838,7 @@
   display: inline-block;
   z-index: 2;
 }
-.may-20241 {
+.checkout-placeholder {
   width: 140.2px;
   border: none;
   outline: none;
@@ -1048,13 +1048,13 @@
     min-width: 100%;
   }
 
-  .may-2024 {
+  .checkin-placeholder {
     align-self: stretch;
     width: auto;
     min-width: 100%;
   }
 
-  .may-20241 {
+  .checkout-placeholder {
     align-self: stretch;
     width: auto;
     min-width: 100%;

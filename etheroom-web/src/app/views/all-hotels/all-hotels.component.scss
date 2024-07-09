@@ -411,7 +411,7 @@
   border-radius: var(--br-3xs);
 }
 .location1,
-.monaco {
+.location-placeholder {
   font-weight: 600;
   font-family: var(--font-quasimoda);
   position: relative;
@@ -425,7 +425,7 @@
   color: var(--color-black);
   min-width: 56px;
 }
-.monaco {
+.location-placeholder {
   width: 173px;
   border: 0;
   outline: 0;
