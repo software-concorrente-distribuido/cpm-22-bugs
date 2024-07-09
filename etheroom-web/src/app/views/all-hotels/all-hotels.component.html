@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="../../../styles/global.scss" />
+    <link rel="stylesheet" href="./all-hotels.component.scss" />
+
+    <style>
+      @font-face {
+        font-family: "Quasimoda";
+        src: url("./assets/fonts/Quasimoda Light.otf");
+        font-weight: 300;
+      }
+      @font-face {
+        font-family: "Quasimoda";
+        src: url("./assets/fonts/Quasimoda Regular.otf");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Quasimoda";
+        src: url("./assets/fonts/Quasimoda Bold.otf");
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: "Quasimoda";
+        src: url("./assets/fonts/Quasimoda SemiBold.otf");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "FONTSPRING DEMO - All Round Gothic Book";
+        src: url("./assets/fonts/Quasimoda Light.otf");
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="root">
+      <main class="any-search-hotels-page">
+        <div class="home-page"></div>
+       
+        <section class="results-panel">
+          <div class="hotel-list">
+            <div class="hotel-card">
+              <form class="search-bar">
+                <div class="search-bar-child"></div>
+                <div class="input">
+                  <div class="input-child"></div>
+                  <div class="location">LOCATION</div>
+                  <div class="address">AVENIDA T-4, GOIÂNIA</div>
+                </div>
+                <div class="search-inputs">
+                  <h3 class="search">Search</h3>
+                  <div class="input-labels">
+                    <div class="input-labels-child"></div>
+                    <div class="input1">
+                      <img
+                        class="input-item"
+                        alt=""
+                        src="./assets/public/rectangle-35.svg"
+                      />
+                      <div class="location1">LOCATION</div>
+                      <input class="monaco" placeholder="MONACO" type="text" />
+                    </div>
+                  </div>
+                  <div class="input2">
+                    <div class="input-inner"></div>
+                    <div class="check-in">CHECK-IN</div>
+                    <input
+                      class="guest-placeholder"
+                      placeholder="20/07/2024"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input3">
+                    <div class="rectangle-div"></div>
+                    <div class="check-out">CHECK-OUT</div>
+                    <input
+                      class="input4"
+                      placeholder="23/07/2024"
+                      type="text"
+                    />
+                  </div>
+                  <div class="input5">
+                    <div class="input-child1"></div>
+                    <div class="number-of-travellers">NUMBER OF TRAVELLERS</div>
+                    <input class="adults" placeholder="2 ADULTS" type="text" />
+                  </div>
+                </div>
+                <div class="search-button-icon">
+                  <button class="rectangle-parent" id="frameButton">
+                    <div class="frame-child"></div>
+                    <div class="search1">SEARCH</div>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="hotel-card-container">
+              <div class="hotel-card1">
+                <div class="hotel-card2"></div>
+                <div class="card-images-parent">
+                  <img
+                    class="card-images-icon"
+                    loading="lazy"
+                    alt=""
+                    src="./assets/public/rectangle-54@2x.png"
+                  />
+
+                  <div class="card-details">
+                    <div class="card-info">
+                      <div class="booking-details">
+                        <h1 class="booking-info">Fairmont Monte Carlo</h1>
+                        <div class="address2">
+                          12 Av. des Spéluges, 980000 Monaco, Mônaco
+                        </div>
+                      </div>
+                      <div class="hotel-description">
+                        <div class="hotel-rating">
+                          <img
+                            class="hotel-stars-icon"
+                            loading="lazy"
+                            alt=""
+                            src="./assets/public/vector-7.svg "
+                          />
+
+                          <div class="hotel-review">
+                            <div class="hotel-desc2">
+                              Fairmont Monte Carlo is a 4-star hotel set between
+                              the Mediterranean Sea and the Casino of Monte
+                              Carlo. It has two outdoor pools, 4 restaurants and
+                              bars, a shopping mall, hairdressers, fitness
+                              centre and spa. Each guest room and suite is
+                              air-conditioned and equipped with a desk, kettle
+                              and interactive TV.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="telephone1">
+                      Telephone: +377 93 50 65 00
+                    </div>
+                  </div>
+                </div>
+                <div class="amenities-list-parent">
+                  <div class="amenities-list">
+                    <div class="amenity-item">
+                      <div class="amenity-icon">
+                        <div class="amenity-details">
+                          <img
+                            class="building-icon-1"
+                            loading="lazy"
+                            alt=""
+                            src="./assets/public/buildingicon-1@2x.png"
+                          />
+
+                          <div class="amenity-name">
+                            <div class="hotel-amenities">Hotel Amenities:</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="swimming-pools-private-container">
+                        <ul class="swimming-pools-private-parking">
+                          <li class="swimming-pools">2 swimming pools</li>
+                          <li class="private-parking">Private parking</li>
+                          <li class="free-wi-fi">Free Wi-Fi</li>
+                          <li class="bar">Bar</li>
+                          <li class="room-service">Room Service</li>
+                          <li class="restaurants">4 Restaurants</li>
+                          <li class="gym">Gym</li>
+                          <li class="breakfast">Breakfast</li>
+                          <li>Spa</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="price-details-parent">
+                    <div class="price-details">
+                      <div class="adult-number">1 Night, 1 Adult</div>
+                      <div class="eth">0,16 ETH</div>
+                      <img
+                        class="brand-ethereum-icon-158920-2"
+                        loading="lazy"
+                        alt=""
+                        src="./assets/public/brand-ethereum-icon-158920-2@2x.png"
+                      />
+                    </div>
+                    <button class="button" id="button">
+                      <div class="button-child"></div>
+                      <div class="see-availability">See availability</div>
+                      <div class="availability-icon">
+                        <img
+                          class="availability-icon-child"
+                          alt=""
+                          src="./assets/public/arrow-2.svg"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="hotel-card3">
+                <div class="hotel-card4"></div>
+                <div class="rectangle-group">
+                  <img
+                    class="frame-item"
+                    alt=""
+                    src="./assets/public/rectangle-54-1@2x.png"
+                  />
+
+                  <div class="frame-parent">
+                    <div class="frame-group">
+                      <div class="booking-info-parent">
+                        <h1 class="booking-info1">Le Méridien Beach Plaza</h1>
+                        <div class="address3">
+                          22 Av. Princesse Grâce, 98000 Monaco, Mônaco
+                        </div>
+                      </div>
+                      <div class="frame-wrapper">
+                        <div class="vector-parent">
+                          <img
+                            class="frame-inner"
+                            alt=""
+                            src="./assets/public/vector-7.svg"
+                          />
+
+                          <div class="hotel-desc">
+                            Expect the unexpected in Monaco at Le Méridien Beach
+                            Plaza. Here, find yourself among like-minds on our
+                            family friendly hotel's exclusive, private beach on
+                            the Mediterranean Sea and just moments from
+                            iconic Monte Carlo shopping, dining and nightlife.
+                            Take time in the Riviera for jet-skiing or
+                            parasailing.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="telephone2">
+                      Telephone: +377 93 30 98 80
+                    </div>
+                  </div>
+                </div>
+                <div class="frame-container">
+                  <div class="frame-div">
+                    <div class="frame-parent1">
+                      <div class="frame-wrapper1">
+                        <div class="building-icon-1-parent">
+                          <img
+                            class="building-icon-11"
+                            alt=""
+                            src="./assets/public/buildingicon-1@2x.png"
+                          />
+
+                          <div class="hotel-amenities-wrapper">
+                            <div class="hotel-amenities1">Hotel Amenities:</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="swimming-pools-private-container1">
+                        <ul class="swimming-pools-private-parking1">
+                          <li class="swimming-pools1">2 swimming pools</li>
+                          <li class="private-parking-lot">
+                            Private parking lot
+                          </li>
+                          <li class="free-wi-fi1">Free Wi-Fi</li>
+                          <li class="bar1">Bar</li>
+                          <li class="room-service1">Room Service</li>
+                          <li class="private-beach">Private beach</li>
+                          <li class="tea-and-coffee">Tea and coffee maker</li>
+                          <li class="breakfast1">Breakfast</li>
+                          <li>Seashore</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="frame-parent2">
+                    <div class="frame-parent3">
+                      <div class="night-1-adult-wrapper">
+                        <div class="adult-number2">1 Night, 1 Adult</div>
+                      </div>
+                      <div class="eth-parent">
+                        <div class="eth1">0,17 ETH</div>
+                        <img
+                          class="brand-ethereum-icon-158920-21"
+                          alt=""
+                          src="./assets/public/brand-ethereum-icon-158920-2@2x.png"
+                        />
+                      </div>
+                    </div>
+                    <button class="rectangle-container">
+                      <div class="frame-child1"></div>
+                      <div class="see-availability1">See availability</div>
+                      <div class="vector-wrapper">
+                        <img
+                          class="arrow-icon"
+                          alt=""
+                          src="./assets/public/arrow-2.svg"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      var frameButton = document.getElementById("frameButton");
+      if (frameButton) {
+        frameButton.addEventListener("click", function (e) {
+          //TODO: Filter the hotel cards by location, check-in date, check-out date and/or number of travellers that the hotel can currently handle in any available r oom.
+        });
+      }
+      
+      var button = document.getElementById("button");
+      if (button) {
+        button.addEventListener("click", function (e) {
+          //TODO: Go to the Frame 2 window of the hotel selected
+        });
+      }
+      </script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+<ng-container *ngIf="showHeader">
+    <app-header></app-header>
+</ng-container>
+<main [ngClass]="{ 'full-height': !showHeader }">
+    <ether-page>
+        <router-outlet></router-outlet>
+    </ether-page>
+</main>

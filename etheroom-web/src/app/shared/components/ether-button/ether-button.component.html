@@ -1,0 +1,10 @@
+<button 
+    (click)="handleClick()"
+    [ngClass]="{
+    'primary': buttonType === 'primary',
+    'secondary': buttonType === 'secondary',
+    'default': !isInvertColors,
+    'inverted': isInvertColors
+}">
+    <ng-content></ng-content>
+</button>

@@ -1,0 +1,14 @@
+section {
+    position: relative;
+
+    .main-title {
+        position: absolute;
+        font-size: 60px;
+    }
+
+    .sub-title {
+        font-size: 100px;
+        color: white;
+        text-shadow: 1px 1px 0 #7F7F7F;
+    }
+}

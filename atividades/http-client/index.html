@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>HTTP Client</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="HTTP Client">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <header>
+            <h1>HTTP Client</h1>
+        </header>
+        <main>
+            <section>
+                <input id="id" type="text" placeholder="ID da Requisição">
+                <textarea id="content" placeholder="Conteúdo da Requisição HTTP"></textarea>
+            </section>
+            <section class="methods-container">
+                <button id="post" type="button">POST</button>
+                <button id="get-by-id" type="button">GET</button>
+                <button id="put" type="button">PUT</button>
+                <button id="delete" type="button">DELETE</button>
+                <button id="get" type="button">GET ALL</button>
+                <button id="options" type="button">OPTIONS</button>
+                <button id="head" type="button">HEAD</button>
+                <button id="trace" type="button">TRACE</button>
+            </section>
+            <section>
+                <div id="response"></div>
+            </section>
+        </main>
+        <script src="index.js"></script>
+    </body>
+</html>

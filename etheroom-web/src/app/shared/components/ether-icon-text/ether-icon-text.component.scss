@@ -1,0 +1,25 @@
+div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    img {
+        width: 30px;
+    }
+
+    .n1 {
+        width: 16px;
+    }
+
+    .n2 {
+        width: 24px;
+    }
+
+    .n3 {
+        width: 32px;
+    }
+
+    .default {
+        width: 32px;
+    }
+}

@@ -1,0 +1,19 @@
+<section>
+    <div class="header-content">
+        <div class="ether-logo">
+            <img src="./../../assets/images/etheroom-logo.svg" alt="Ether Logo">
+        </div>
+
+        <ether-navigation [routes]="navRoutes"></ether-navigation>
+
+        <div class="access-buttons">
+            <ether-button
+                (onClick)="handleButtonSignIn()"
+                [buttonType]="'primary'">SIGN IN</ether-button>
+            <ether-button
+                (onClick)="handleButtonSignUp()"
+                [buttonType]="'primary'" 
+                [isInvertColors]="isInvertColors">SIGN UP</ether-button>
+        </div>
+    </div>
+</section>
