@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './booked-room.component.html',
-  styleUrls: ['./booked-room.component.scss','../../../styles/global.scss']
+  styleUrls: ['./booked-room.component.scss','./../../../styles/global.scss']
 })
 export class BookedRoomComponent {
 

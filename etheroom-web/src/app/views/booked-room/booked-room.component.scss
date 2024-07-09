@@ -341,7 +341,7 @@
   font-family: inherit;
   z-index: 1;
 }
-.th-avenue-south {
+.booked-hotel-name {
   position: relative;
   font-size: var(--font-size-xl);
   display: inline-block;
@@ -640,13 +640,13 @@
 .check-in3 {
   margin: 0;
 }
-.apr-2023-300pm,
+.checkin-date,
 .check-in2 {
   position: relative;
   font-weight: 600;
   z-index: 1;
 }
-.apr-2023-300pm {
+.checkin-date {
   align-self: stretch;
   font-weight: 300;
 }
@@ -718,13 +718,13 @@
 .check-out3 {
   margin: 0;
 }
-.apr-2023-500pm,
+.checkout-date,
 .check-out2 {
   position: relative;
   font-weight: 600;
   z-index: 1;
 }
-.apr-2023-500pm {
+.checkout-date {
   align-self: stretch;
   font-weight: 300;
 }
@@ -954,7 +954,7 @@
   .booking-info2 {
     font-size: var(--font-size-2xl);
   }
-  .th-avenue-south {
+  .booked-hotel-name {
     font-size: var(--font-size-base);
   }
   .category-name {
@@ -965,7 +965,7 @@
   .room-details {
     font-size: var(--font-size-base);
   }
-  .apr-2023-300pm,
+  .checkin-date,
   .booked-at,
   .check-in2,
   .jan-23-2023,
@@ -980,7 +980,7 @@
     gap: var(--gap-11xl);
   }
   .active,
-  .apr-2023-500pm,
+  .checkout-date,
   .booking-status,
   .check-out2,
   .double-room,
