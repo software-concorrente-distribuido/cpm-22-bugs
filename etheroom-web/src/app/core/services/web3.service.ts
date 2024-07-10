@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import Web3 from 'web3';
 declare var window: any;
@@ -10,17 +11,15 @@ export class Web3Service {
   
   private provider: any;
   private web3: any;
-  private contractABI: any = [
-    // Copie aqui o ABI do contrato HotelBookingManager
-  ];
+  private contractABI: any = [ { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "uint256", "name": "bookingId", "type": "uint256" }, { "indexed": true, "internalType": "address", "name": "guest", "type": "address" } ], "name": "BookingCancelled", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "internalType": "uint256", "name": "bookingId", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "bookingContract", "type": "address" }, { "indexed": true, "internalType": "address", "name": "guest", "type": "address" }, { "indexed": false, "internalType": "string", "name": "hotel", "type": "string" }, { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" } ], "name": "BookingCreated", "type": "event" }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "bookingContracts", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "bookingCount", "outputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "uint256", "name": "", "type": "uint256" } ], "name": "bookings", "outputs": [ { "internalType": "address", "name": "bookingContract", "type": "address" }, { "internalType": "address", "name": "guest", "type": "address" }, { "internalType": "string", "name": "hotel", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "bool", "name": "isActive", "type": "bool" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "owner", "outputs": [ { "internalType": "address", "name": "", "type": "address" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [ { "internalType": "string", "name": "_hotel", "type": "string" }, { "internalType": "uint256", "name": "_amount", "type": "uint256" }, { "internalType": "uint256", "name": "_checkInDate", "type": "uint256" }, { "internalType": "uint256", "name": "_checkOutDate", "type": "uint256" } ], "name": "createBooking", "outputs": [], "stateMutability": "payable", "type": "function", "payable": true }, { "inputs": [ { "internalType": "uint256", "name": "_bookingId", "type": "uint256" } ], "name": "cancelBooking", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [ { "internalType": "uint256", "name": "_bookingId", "type": "uint256" } ], "name": "getBooking", "outputs": [ { "components": [ { "internalType": "address", "name": "bookingContract", "type": "address" }, { "internalType": "address", "name": "guest", "type": "address" }, { "internalType": "string", "name": "hotel", "type": "string" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }, { "internalType": "bool", "name": "isActive", "type": "bool" } ], "internalType": "struct HotelBookingManager.BookingInfo", "name": "", "type": "tuple" } ], "stateMutability": "view", "type": "function", "constant": true }, { "inputs": [], "name": "getBookingContracts", "outputs": [ { "internalType": "address[]", "name": "", "type": "address[]" } ], "stateMutability": "view", "type": "function", "constant": true } ];
   private contractAddress: string = '0xfb070fe085D6fc81CDEceE503efEF3af49ebdF38'; // Endereço do contrato HotelBookingManager
   private account: string = '';
 
-  constructor() {
-    this.initializeWeb3();
+  constructor(public router: Router) {
+    
   }
 
-  private async initializeWeb3() {
+  async initializeWeb3() {
     // Verifica se há um provider Ethereum (MetaMask, etc.) disponível
     if (window.ethereum) {
       this.provider = window.ethereum;
@@ -29,7 +28,7 @@ export class Web3Service {
         // Solicita acesso à conta Ethereum
         await this.provider.request({ method: 'eth_requestAccounts' });
         this.web3 = new Web3(this.provider);
-
+        this.router.navigate(['/home']);
         // Assina eventos de mudança de rede e de contas
         this.provider.on('chainChanged', () => window.location.reload());
         this.provider.on('accountsChanged', () => window.location.reload());
