@@ -8,6 +8,8 @@ public interface IPersonService {
 
     PersonDto findById(String id);
 
+    PersonDto findByUserId(String userId);
+
     void update(PersonDto personDto);
 
     void delete(String id);

@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TokenService implements ITokenService {
 
-    private static final String TOKEN_NOT_FOUND = "Código inválido";
+    private static final String TOKEN_NOT_FOUND = "Invalid code";
 
     private final TokenRepository tokenRepository;
 

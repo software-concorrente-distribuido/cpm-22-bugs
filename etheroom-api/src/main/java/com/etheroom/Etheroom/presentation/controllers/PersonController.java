@@ -27,6 +27,12 @@ public class PersonController {
         return personService.findById(id);
     }
 
+    @GetMapping(value = "/user/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public PersonDto findByUserId(@PathVariable String userId) {
+        return personService.findByUserId(userId);
+    }
+
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public void update(@RequestBody PersonDto personDto) {

@@ -39,7 +39,6 @@ public class PersonDto extends BaseEntityDto<Person> {
                         .map(ContactDto::mapDtoToEntity)
                         .orElse(null)
         );
-
         return person;
     }
 
