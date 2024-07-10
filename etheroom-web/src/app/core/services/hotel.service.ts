@@ -17,7 +17,7 @@ export class HotelService {
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     this.hotelApiUrl = `${environment.apiUrl}/${this.HOTEL_PATH}`;
   }
 
@@ -26,7 +26,7 @@ export class HotelService {
   }
 
   public findAll(
-    page: number, 
+    page: number,
     size: number,
     location: string = null,
     checkIn: Date = null,

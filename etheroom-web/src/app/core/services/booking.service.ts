@@ -17,7 +17,7 @@ export class BookingService {
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     this.bookingApiUrl = `${environment.apiUrl}/${this.BOOKING_PATH}`;
   }
 
