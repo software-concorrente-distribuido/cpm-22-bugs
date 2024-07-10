@@ -1,0 +1,19 @@
+section {
+    padding: 70px;
+}
+
+.bookings-section {
+    display: flex;
+    gap: 30px;
+
+    &__filter {
+        width: 25%;
+    }
+
+    &__bookings {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 75%;
+    }
+}
