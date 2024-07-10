@@ -57,6 +57,7 @@ export class Web3Service {
     return this.account;
   }
 
+
   async createBooking(nomeHotel: string, valor: number, checkIn: number, checkOut: number): Promise<number> {
     try {
       const contract = new this.web3.eth.Contract(this.contractABI, this.contractAddress);

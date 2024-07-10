@@ -8,9 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class ClienteService {
   
-  /* private baseApiUrl = environment.baseApiUrl; */
   /* Base da API*/
-  private baseApiUrl = 'http://localhost:9090/api';
+  private baseApiUrl = 'http://localhost:9090';
 
   /* Especificando a URL */
   private apiUrl = `${this.baseApiUrl}/cliente`;
@@ -19,8 +18,9 @@ export class ClienteService {
 
   createCliente(cliente: any): Observable<any>{
 
+    const url = `${this.apiUrl}/cadastrarCliente`;
     const data = {
-      wallet: cliente.wallet,
+      wallet: cliente.wallet, 
       email: cliente.email,
       senha: cliente.senha,
       endereco: cliente.endereco,
@@ -28,7 +28,27 @@ export class ClienteService {
     }
     
     console.log(data);
-    const result = this.http.post(this.apiUrl, data);
+    const result = this.http.post(url, data);
+    return result;
+  }
+
+   /* Consultar um Cliente no sistema através do ID */
+  getCliente(id: number): Observable<Cliente> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get<Cliente>(url);
+  }
+
+  updateCliente(cliente: any): Observable<any>{
+
+    const url = `${this.apiUrl}/${cliente.id}`;
+
+    const data = {
+      email: cliente.email,
+      senha: cliente.senha,
+      endereco: cliente.endereco,
+      telefone: cliente.telefone,
+    };
+    const result = this.http.put(url, data);
     return result;
   }
 

@@ -37,8 +37,8 @@ contract HotelBooking {
     }
 
     function calculateRefund() internal view returns (uint256) {
-        // Logic to calculate refund amount based on cancellation policy
-        // For simplicity, assuming full refund here
+        // Lógica para calcular reembolso baseada na política de cancelamento
+        // Assumindo 100% de reembolso
         return amount;
     }
 }
