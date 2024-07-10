@@ -79,4 +79,10 @@ public interface BookingRepository extends JpaRepository<Booking, UUID> {
             "WHERE b.hotelRoom.hotel.id = :hotelId AND b.status = :status")
     Boolean existsByHotelIdAndStatus(UUID hotelId, BookingStatus status);
 
+    @Query("SELECT CASE WHEN COUNT(b) > 0 THEN true ELSE false END FROM Booking b " +
+            "WHERE b.hotelRoom.id = :hotelRoomId AND b.status = 'ACTIVE' " +
+            "AND ((b.checkIn >= :checkIn AND b.checkIn <= :checkOut) " +
+            "OR (b.checkOut >= :checkIn AND b.checkOut <= :checkOut))")
+    Boolean isHotelRoomBooked(UUID hotelRoomId, LocalDateTime checkIn, LocalDateTime checkOut);
+
 }
