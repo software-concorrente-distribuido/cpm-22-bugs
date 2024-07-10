@@ -10,6 +10,7 @@ import { AddRoomComponent } from './views/manage-rooms/add-room/add-room.compone
 import { LoginComponent } from './views/login/login.component';
 import { YourBookingsComponent } from './views/your-bookings/your-bookings.component';
 import { BookedRoomComponent } from './views/booked-room/booked-room.component';
+import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
     {
@@ -25,7 +26,7 @@ export const routes: Routes = [
 
     {
         path: 'sign-up',
-        component: LoginComponent
+        component: RegisterComponent
     },
 
     {
@@ -69,4 +70,5 @@ export const routes: Routes = [
             { path: 'add-room', component: AddRoomComponent }
         ]
     }
+    
 ];
