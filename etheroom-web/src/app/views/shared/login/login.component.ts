@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-<<<<<<< HEAD:etheroom-web/src/app/views/shared/login/login.component.ts
 import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
-=======
-import { Web3Service } from '../../core/services/web3.service';
->>>>>>> main:etheroom-web/src/app/views/login/login.component.ts
+import { Web3Service } from '../../../core/services/web3.service';
 
 @Component({
   selector: 'ether-login',
