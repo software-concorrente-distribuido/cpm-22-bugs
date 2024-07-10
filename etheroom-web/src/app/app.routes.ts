@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { YourBookingsComponent } from './views/your-bookings/your-bookings.component';
+import { BookedRoomComponent } from './views/booked-room/booked-room.component';
+import { LoginComponent } from './views/shared/login/login.component';
 import { HomeComponent } from './views/shared/home/home.component';
 import { AllHotelsComponent } from './views/shared/all-hotels/all-hotels.component';
 import { ExploreCitiesComponent } from './views/shared/explore-cities/explore-cities.component';
@@ -8,7 +11,6 @@ import { ManageRoomsComponent } from './views/hotel/manage-rooms/manage-rooms.co
 import { RoomDetailsComponent } from './views/hotel/manage-rooms/room-details/room-details.component';
 import { AddRoomComponent } from './views/hotel/manage-rooms/add-room/add-room.component';
 import { MyBookingsComponent } from './views/hotel/my-bookings/my-bookings.component';
-import { LoginComponent } from './views/shared/login/login.component';
 
 export const routes: Routes = [
     {
@@ -50,6 +52,14 @@ export const routes: Routes = [
     {
         path: 'faq',
         component: FaqComponent
+    },
+    {
+        path: 'your-bookings',
+        component: YourBookingsComponent
+    },
+    {
+        path: 'booked-room',
+        component: BookedRoomComponent
     },
 
     {

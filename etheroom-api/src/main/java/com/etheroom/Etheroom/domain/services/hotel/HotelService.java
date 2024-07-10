@@ -4,12 +4,18 @@ import com.etheroom.Etheroom.domain.models.hotel.Hotel;
 import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.domain.repositories.hotel.HotelRepository;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
+import com.etheroom.Etheroom.infrastructure.vo.enums.BookingStatus;
 import com.etheroom.Etheroom.infrastructure.vo.enums.UserRole;
+import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.BadRequestException;
 import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.NotFoundException;
+import com.etheroom.Etheroom.infrastructure.vo.filter.HotelFilter;
 import com.etheroom.Etheroom.presentation.dtos.hotel.HotelDto;
+import com.etheroom.Etheroom.presentation.services.booking.aggregates.IBookingHelper;
 import com.etheroom.Etheroom.presentation.services.hotel.IHotelService;
 import com.etheroom.Etheroom.presentation.services.user.IUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,9 +25,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class HotelService implements IHotelService {
 
-    private static final String HOTEL_NOT_FOUND = "Hotel não encontrado";
+    private static final String HOTEL_NOT_FOUND = "Hotel not found";
+
+    private static final String ONGOING_BOOKING = "This hotel have ongoing booking";
 
     private final HotelRepository hotelRepository;
+
+    private final IBookingHelper bookingHelper;
 
     private final IUserService userService;
 
@@ -36,8 +46,26 @@ public class HotelService implements IHotelService {
     }
 
     @Override
+    public Page<HotelDto> findAll(Pageable pageable, HotelFilter filter) {
+        return this.hotelRepository.findAll(
+                pageable,
+                filter.getLocation(),
+                filter.getCheckIn(),
+                filter.getCheckOut(),
+                filter.getNumberOfGuests()
+        ).map(Hotel::mapEntityToDto);
+    }
+
+    @Override
     public HotelDto findById(String id) {
         return this.hotelRepository.findById(UUID.fromString(id))
+                .map(Hotel::mapEntityToDto)
+                .orElseThrow(() -> new NotFoundException(HOTEL_NOT_FOUND));
+    }
+
+    @Override
+    public HotelDto findByUserId(String userId) {
+        return this.hotelRepository.findByUserId(UUID.fromString(userId))
                 .map(Hotel::mapEntityToDto)
                 .orElseThrow(() -> new NotFoundException(HOTEL_NOT_FOUND));
     }
@@ -58,6 +86,10 @@ public class HotelService implements IHotelService {
         Functions.acceptFalseThrows(
                 this.hotelRepository.existsById(hotelId),
                 () -> new NotFoundException(HOTEL_NOT_FOUND)
+        );
+        Functions.acceptTrueThrows(
+                this.bookingHelper.existsByHotelIdAndStatus(id, BookingStatus.ACTIVE),
+                () -> new BadRequestException(ONGOING_BOOKING)
         );
         this.hotelRepository.deleteById(hotelId);
     }

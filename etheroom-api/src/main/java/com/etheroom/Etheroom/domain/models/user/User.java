@@ -1,5 +1,6 @@
 package com.etheroom.Etheroom.domain.models.user;
 
+import com.etheroom.Etheroom.domain.models.media.Media;
 import com.etheroom.Etheroom.infrastructure.base.BaseEntity;
 import com.etheroom.Etheroom.infrastructure.vo.enums.UserRole;
 import com.etheroom.Etheroom.presentation.dtos.user.UserDto;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -30,6 +32,10 @@ public class User extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", updatable = false)
     private UserRole role;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "profile_picture_id", referencedColumnName = "id")
+    private Media profilePicture;
 
     @Override
     public Collection<SimpleGrantedAuthority> getAuthorities() {
@@ -82,6 +88,11 @@ public class User extends BaseEntity implements UserDetails {
         userDto.setEthereumPublicKey(this.getEthereumPublicKey());
         userDto.setEmail(this.getEmail());
         userDto.setRole(this.getRole());
+        userDto.setProfilePicture(
+                Optional.ofNullable(this.getProfilePicture())
+                        .map(Media::mapEntityToDto)
+                        .orElse(null)
+        );
         userDto.setUpdatedAt(this.getUpdatedAt());
         userDto.setCreatedAt(this.getCreatedAt());
         return userDto;

@@ -3,10 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'ether-all-hotels',
   standalone: true,
-  imports: [],
   templateUrl: './all-hotels.component.html',
-  styleUrl: './all-hotels.component.scss'
+  styleUrls: ['./all-hotels.component.scss', '../../../styles/global.scss']
 })
-export class AllHotelsComponent {
-
-}
+export class AllHotelsComponent {}

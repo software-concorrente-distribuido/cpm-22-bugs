@@ -31,7 +31,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles/global.scss"
             ],
             "scripts": []
           },
@@ -54,7 +55,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environments.ts",
+                  "with": "src/environments/environments.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -91,7 +98,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles/styles.scss"
+              "src/styles/styles.scss",
+              "src/styles/global.scss"
             ],
             "scripts": []
           }
