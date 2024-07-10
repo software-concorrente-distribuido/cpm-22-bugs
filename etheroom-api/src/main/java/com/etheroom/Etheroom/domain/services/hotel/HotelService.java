@@ -57,6 +57,12 @@ public class HotelService implements IHotelService {
     }
 
     @Override
+    public Page<HotelDto> findMostBooked(Pageable pageable) {
+        return this.hotelRepository.findMostBooked(pageable)
+                .map(Hotel::mapEntityToDto);
+    }
+
+    @Override
     public HotelDto findById(String id) {
         return this.hotelRepository.findById(UUID.fromString(id))
                 .map(Hotel::mapEntityToDto)

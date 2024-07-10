@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { EtherButtonTextIconComponent } from '../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
 import { Router } from '@angular/router';
-import { Web3Service } from '../../core/services/web3.service';
+import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
+import { Web3Service } from '../../../core/services/web3.service';
 
 @Component({
   selector: 'ether-login',

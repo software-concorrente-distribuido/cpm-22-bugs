@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+
 @RestController
 @RequestMapping("/hotel-room")
 @RequiredArgsConstructor
@@ -38,6 +40,12 @@ public class HotelRoomController {
     @ResponseStatus(HttpStatus.OK)
     public HotelRoomDto findById(@PathVariable String id) {
         return hotelRoomService.findById(id);
+    }
+
+    @GetMapping("/{id}/booked")
+    @ResponseStatus(HttpStatus.OK)
+    public Boolean isHotelRoomBooked(@PathVariable String id, LocalDateTime checkIn, LocalDateTime checkOut) {
+        return hotelRoomService.isHotelRoomBooked(id, checkIn, checkOut);
     }
 
     @PutMapping

@@ -6,6 +6,7 @@ import com.etheroom.Etheroom.presentation.services.booking.aggregates.IBookingHe
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -25,8 +26,13 @@ public class BookingHelper implements IBookingHelper {
     }
 
     @Override
-    public Boolean existsByHotelIdAndStatus(String roomId, BookingStatus status) {
-        return this.bookingRepository.existsByHotelIdAndStatus(UUID.fromString(roomId), status);
+    public Boolean existsByHotelIdAndStatus(String hotelId, BookingStatus status) {
+        return this.bookingRepository.existsByHotelIdAndStatus(UUID.fromString(hotelId), status);
+    }
+
+    @Override
+    public Boolean isHotelRoomBooked(String roomId, LocalDateTime checkIn, LocalDateTime checkOut) {
+        return this.bookingRepository.isHotelRoomBooked(UUID.fromString(roomId), checkIn, checkOut);
     }
 
 }

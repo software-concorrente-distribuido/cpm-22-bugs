@@ -31,6 +31,16 @@ public interface HotelRepository extends JpaRepository<Hotel, UUID> {
     );
 
     @Query(
+            "SELECT h FROM Hotel h " +
+                    "LEFT JOIN Booking b ON h.id = b.hotelRoom.hotel.id " +
+                    "GROUP BY h.id " +
+                    "ORDER BY COUNT(b.id) DESC"
+    )
+    Page<Hotel> findMostBooked(
+            Pageable pageable
+    );
+
+    @Query(
             "FROM Hotel h " +
                     "WHERE h.user.id = :userId"
     )

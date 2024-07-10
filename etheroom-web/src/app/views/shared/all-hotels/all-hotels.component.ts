@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'ether-all-hotels',
   standalone: true,
   templateUrl: './all-hotels.component.html',
-  styleUrls: ['./all-hotels.component.scss', '../../../styles/global.scss']
+  styleUrls: ['./all-hotels.component.scss', '../../../../styles/global.scss']
 })
 export class AllHotelsComponent {}

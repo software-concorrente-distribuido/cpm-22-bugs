@@ -73,6 +73,18 @@ export class HotelRoomService {
     return this.http.get<HotelRoom>(`${this.hotelRoomApiUrl}/${id}`);
   }
 
+  public isHotelRoomBooked(id: number, checkIn: Date, checkOut: Date): Observable<boolean> {
+    return this.http.get<boolean>(
+      `${this.hotelRoomApiUrl}/${id}/booked`, 
+      {
+        params: {
+          checkIn: Optional.ofNullable(checkIn).map(c => c.toISOString()).orElse(''),
+          checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse('')
+        }
+      }
+    );
+  }
+
   public update(hotelRoom: HotelRoom): Observable<void> {
     return this.http.put<void>(this.hotelRoomApiUrl, hotelRoom);
   }

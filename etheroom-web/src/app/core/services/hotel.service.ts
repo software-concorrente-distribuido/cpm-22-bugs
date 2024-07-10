@@ -48,6 +48,21 @@ export class HotelService {
     );
   }
 
+  public findMostBooked(
+    page: number,
+    size: number
+  ): Observable<Page<Hotel>> {
+    return this.http.get<Page<Hotel>>(
+      `${this.hotelApiUrl}/most-booked`,
+      {
+        params: {
+          page: page.toString(),
+          size: size.toString()
+        }
+      }
+    );
+  }
+
   public findById(id: number): Observable<Hotel> {
     return this.http.get<Hotel>(`${this.hotelApiUrl}/${id}`);
   }
