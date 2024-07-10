@@ -6,7 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   standalone: true,
   imports: [MatTabsModule],
   templateUrl: './booked-room.component.html',
-  styleUrls: ['./booked-room.component.scss','./../../../styles/global.scss']
+  styleUrls: ['./booked-room.component.scss','../../../../styles/global.scss']
 })
 export class BookedRoomComponent {
 

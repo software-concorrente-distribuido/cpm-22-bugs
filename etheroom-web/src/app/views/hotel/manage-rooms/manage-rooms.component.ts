@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { EtherPageComponent } from '../../shared/components/containers/ether-page/ether-page.component';
-import { FilterComponent } from '../../shared/components/filter/filter.component';
-import { EtherButtonIconComponent } from '../../shared/components/ether-button-icon/ether-button-icon.component';
-import { EtherTableComponent } from '../../shared/components/ether-table/ether-table.component';
+import { EtherPageComponent } from '../../../shared/components/containers/ether-page/ether-page.component';
+import { EtherFilterComponent } from '../../../shared/components/filter/ether-filter.component';
+import { EtherButtonIconComponent } from '../../../shared/components/ether-button-icon/ether-button-icon.component';
+import { EtherTableComponent } from '../../../shared/components/ether-table/ether-table.component';
 import { ManageRoomModule } from './manage-room.module';
 import { Router, RouterOutlet } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { Router, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [
     RouterOutlet,
-    FilterComponent,
+    EtherFilterComponent,
     ManageRoomModule,
     EtherPageComponent,
     EtherTableComponent,

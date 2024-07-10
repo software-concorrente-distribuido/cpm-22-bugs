@@ -8,9 +8,9 @@ import { SharedModule } from '../../shared.module';
   imports: [
     SharedModule
   ],
-  templateUrl: './filter.component.html',
-  styleUrl: './filter.component.scss'
+  templateUrl: './ether-filter.component.html',
+  styleUrl: './ether-filter.component.scss'
 })
-export class FilterComponent {
+export class EtherFilterComponent {
 
 }
