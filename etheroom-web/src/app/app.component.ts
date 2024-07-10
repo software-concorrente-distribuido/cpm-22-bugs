@@ -27,9 +27,16 @@ export class AppComponent implements OnInit {
   
   ngOnInit(): void {
     this.router.events.pipe(
-      filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)
+      filter(event => event instanceof NavigationEnd)
     ).subscribe(event => {
-      this.showHeader = (event instanceof NavigationStart) ? false : true;
+      if (event instanceof NavigationEnd) {
+        this.showHeader = this.shouldShowHeader(event.urlAfterRedirects);
+      }
     });
+  }
+
+  private shouldShowHeader(url: string): boolean {
+    const noHeaderRoutes = ['/sign-in', '/sign-up'];
+    return !noHeaderRoutes.includes(url);
   }
 }

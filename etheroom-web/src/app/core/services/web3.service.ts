@@ -16,7 +16,6 @@ export class Web3Service {
   private account: string = '';
 
   constructor(public router: Router) {
-    
   }
 
   async initializeWeb3() {
@@ -34,9 +33,10 @@ export class Web3Service {
         this.provider.on('accountsChanged', () => window.location.reload());
       } catch (error) {
         console.error('Erro ao conectar ao MetaMask:', error);
+        alert('Erro ao conectar ao MetaMask.');
       }
     } else {
-      console.warn('Por favor, instale o MetaMask para utilizar esta aplicação.');
+      alert('Por favor, instale o MetaMask para utilizar esta aplicação.');
     }
   }
 
@@ -99,4 +99,5 @@ export class Web3Service {
     }
   }
 
+  
 }
