@@ -1,0 +1,167 @@
+
+.image-signup {
+    width: 100%;
+    height: 98%;
+    object-fit: contain;
+    position: absolute;
+    left: -12px;
+    top: 4px;
+    transform: scale(1.041);
+  }
+  .wrapper-image {
+    position: absolute;
+    top: 0;
+    left: 935px;
+    width: 984px;
+    height: 1080px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo-title,
+  .title {
+    position: absolute;
+    display: inline-block;
+  }
+  .logo-title {
+    right:20px;
+    top:17px;
+  }
+  .title {
+    margin: 0;
+    top: 290px;
+    left: 374px;
+    font-size: inherit;
+    font-weight: 600;
+    font-family: inherit;
+    width: 177px;
+    height: 49px;
+  }
+  .etheroom4 {
+    top: 10.6px;
+    left: 88.9px;
+    width: 256.1px;
+    height: 52px;
+  }
+  .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 89.2px;
+    height: 81px;
+    object-fit: cover;
+  }
+  .etheroom-group {
+    position: absolute;
+    top: 149px;
+    left: 282px;
+    width: 345px;
+    height: 81px;
+    font-family: var(--font-fontspring-demo---all-round-gothic-book);
+  }
+  .create-button {
+    cursor: pointer;
+    border: 3px solid var(--color-black);
+    padding: 0;
+    background-color: var(--color-white);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-xl);
+    box-sizing: border-box;
+    width: 196px;
+    height: 66px;
+  }
+  .create-hotel {
+    position: absolute;
+    top: 22px;
+    left: 75px;
+    font-weight: 600;
+    display: inline-block;
+    width: 96px;
+    height: 15px;
+  }
+  .user-button {
+    cursor: pointer;
+    border: 3px solid var(--color-black);
+    padding: 0;
+    background-color: var(--color-white);
+    position: absolute;
+    top: 0;
+    left: 223px;
+    border-radius: var(--br-xl);
+    box-sizing: border-box;
+    width: 196px;
+    height: 66px;
+  }
+  .button {
+    position: absolute;
+    top: 761px;
+    left: 360px;
+    width: 419px;
+    height: 66px;
+    font-size: var(--font-size-base);
+  }
+  .campo-email,
+  .campo-password,
+  .campo-address,
+  .campo-phone {
+    border: 0;
+    outline: 0;
+    font-family: var(--font-quasimoda);
+    font-size: var(--font-size-xl);
+    background-color: transparent;
+    position: absolute;
+    top: 649px;
+    left: 190px;
+    width: 546px;
+    height: 42px;
+    padding: 0 var(--padding-12xs) var(--padding-sm);
+    box-sizing: border-box;
+    color: var(--color-black);
+    border-bottom: 1px solid rgba(0,0,0,0.25)
+  }
+  .campo-address,
+  .campo-password,
+  .campo-email {
+    top: 489px;
+    left: 188px;
+  }
+  .campo-email,
+  .campo-address {
+    top: 569px;
+    left: 189px;
+  }
+  .campo-email {
+    top: 409px;
+    left: 188px;
+  }
+  .login-router {
+    color: var(--color-blue);
+  }
+  .already-a-member-container1 {
+    text-decoration: none;
+    position: absolute;
+    top: 895px;
+    left: 347px;
+    font-size: var(--font-size-xl);
+    color: inherit;
+  }
+  .sign-up-page {
+    width: 100%;
+    margin-bottom: 160px;
+    margin-right: 1900px;
+    max-width: 1600px;
+    position: relative;
+    height: 900px;
+    text-align: left;
+    font-size: var(--font-size-31xl);
+    color: var(--color-black);
+    font-family: var(--font-quasimoda);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
