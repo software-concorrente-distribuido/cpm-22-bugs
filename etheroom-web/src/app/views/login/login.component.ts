@@ -26,6 +26,7 @@ export class LoginComponent {
     } catch (error) {
       console.error('Erro ao conectar a MetaMask:', error);
     }
+    //Podem comentar o código acima e substituir para "this.router.navigate(['/home']);" se não quiserem ter que ficar conectando com a Metamask
   }
 
   public pathToImage(imageName: string, extension: string): string {
