@@ -29,13 +29,20 @@ export class AppComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.routerSubscription = this.router.events.pipe(
-      filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)
+      filter(event => event instanceof NavigationEnd)
     ).subscribe(event => {
-      this.showHeader = (event instanceof NavigationStart) ? false : true;
+      if (event instanceof NavigationEnd) {
+        this.showHeader = this.shouldShowHeader(event.urlAfterRedirects);
+      }
     });
   }
 
   ngOnDestroy(): void {
     if (this.routerSubscription) this.routerSubscription.unsubscribe();
+  }
+  
+  private shouldShowHeader(url: string): boolean {
+    const noHeaderRoutes = ['/sign-in', '/sign-up'];
+    return !noHeaderRoutes.includes(url);
   }
 }

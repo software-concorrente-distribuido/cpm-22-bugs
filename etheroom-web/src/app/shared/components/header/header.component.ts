@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public handleButtonSignUp(): void {
-    console.log('Button clicked!');
+    this.router.navigate(['/sign-up']);
   }
 
 }

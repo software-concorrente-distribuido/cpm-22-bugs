@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { YourBookingsComponent } from './views/your-bookings/your-bookings.component';
 import { BookedRoomComponent } from './views/booked-room/booked-room.component';
+import { RegisterComponent } from './views/register/register.component';
 import { LoginComponent } from './views/shared/login/login.component';
 import { HomeComponent } from './views/shared/home/home.component';
 import { AllHotelsComponent } from './views/shared/all-hotels/all-hotels.component';
@@ -26,7 +27,7 @@ export const routes: Routes = [
 
     {
         path: 'sign-up',
-        component: LoginComponent
+        component: RegisterComponent
     },
 
     {
@@ -75,4 +76,5 @@ export const routes: Routes = [
         path: 'my-bookings',
         component: MyBookingsComponent
     }
+    
 ];
