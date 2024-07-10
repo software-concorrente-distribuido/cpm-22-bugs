@@ -411,7 +411,7 @@
   border-radius: var(--br-3xs);
 }
 .location1,
-.monaco {
+.location-placeholder {
   font-weight: 600;
   font-family: var(--font-quasimoda);
   position: relative;
@@ -425,7 +425,7 @@
   color: var(--color-black);
   min-width: 56px;
 }
-.monaco {
+.location-placeholder {
   width: 173px;
   border: 0;
   outline: 0;
@@ -651,9 +651,10 @@
 .rectangle-parent:hover {
   background-color: var(--color-slategray);
 }
-.hotel-card,
+.search-card,
 .search-bar,
 .search-button-icon {
+  margin-top: 27px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -663,7 +664,7 @@
   flex-direction: row;
   position: relative;
 }
-.hotel-card,
+.search-card,
 .search-bar {
   flex-direction: column;
 }
@@ -676,7 +677,7 @@
   gap: 34px;
   z-index: 1;
 }
-.hotel-card {
+.search-card {
   width: 299px;
   padding: var(--padding-4xl) 0 0;
   box-sizing: border-box;
@@ -979,6 +980,7 @@
   max-width: 100%;
 }
 .hotel-card1 {
+  margin-top: 50px;
   align-self: stretch;
   display: flex;
   flex-direction: row;

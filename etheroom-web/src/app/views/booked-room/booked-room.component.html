@@ -38,7 +38,6 @@
   <body>
     <div class="root2">
       <main class="user-booking-room-details-pa">
-        <div class="home-page2"></div>
         <section class="booking-summary">
           <div class="summary-content">
             <div class="booking-location-wrapper">
@@ -135,72 +134,64 @@
                   </div>
                 </div>
               </div>
-              <div class="guest-info-wrapper-parent">
-                <div class="guest-info-wrapper">
-                  <div class="guest-details">
-                    <div class="details-list">
-                      <div class="room-details">ROOM DETAILS</div>
-                      <div class="guest-label">
-                        <div class="guests">GUESTS</div>
-                      </div>
-                      <div class="booking-info-label">
-                        <div class="booking-info3">BOOKING INFO</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="vector-group">
-                    <img
-                      class="vector-icon"
-                      alt=""
-                      src="./../../../assets/public/vector-1-1.svg"
-                    />
-
-                    <img
-                      class="divider-end-icon"
-                      alt=""
-                      src="./../../../assets/public/vector-2-1.svg"
-                    />
-                  </div>
-                </div>
-                <div class="frame-wrapper4">
-                  <div class="frame-parent7">
-                    <div class="frame-wrapper5">
-                      <div class="check-in-info-parent">
-                        <div class="check-in-info">
-                          <div class="check-in2">
-                            <p class="check-in3">Check-In</p>
+              <mat-tab-group class="tab-group">
+                <mat-tab label="ROOM DETAILS">
+                  <div class="tab-content">
+                    <div class="frame-wrapper4">
+                      <div class="frame-parent7">
+                        <div class="frame-wrapper5">
+                          <div class="check-in-info-parent">
+                            <div class="check-in-info">
+                              <div class="check-in2">
+                                <p class="check-in3">Check-In</p>
+                              </div>
+                              <div class="checkin-date">03 Apr 2023, 3:00pm</div>
+                            </div>
+                            <div class="room-info1">
+                              <div class="room-number">Room Number</div>
+                              <div class="room-number-value">302</div>
+                            </div>
+                            <div class="booking-date">
+                              <div class="booked-at">Booked At</div>
+                              <div class="jan-23-2023">Jan 23 2023, 9:42am</div>
+                            </div>
                           </div>
-                          <div class="checkin-date">03 Apr 2023, 3:00pm</div>
                         </div>
-                        <div class="room-info1">
-                          <div class="room-number">Room Number</div>
-                          <div class="room-number-value">302</div>
+                        <div class="summary-items-parent">
+                          <div class="summary-items">
+                            <div class="check-out2">
+                              <p class="check-out3">Check-Out</p>
+                            </div>
+                            <div class="checkout-date">08 Apr 2023, 5:00pm</div>
+                          </div>
+                          <div class="summary-items1">
+                            <div class="room-type">Room Type</div>
+                            <div class="double-room">Double Room</div>
+                          </div>
+                          <div class="summary-items2">
+                            <div class="booking-status">Booking Status</div>
+                            <div class="active">Active</div>
+                          </div>
                         </div>
-                        <div class="booking-date">
-                          <div class="booked-at">Booked At</div>
-                          <div class="jan-23-2023">Jan 23 2023, 9:42am</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="summary-items-parent">
-                      <div class="summary-items">
-                        <div class="check-out2">
-                          <p class="check-out3">Check-Out</p>
-                        </div>
-                        <div class="checkout-date">08 Apr 2023, 5:00pm</div>
-                      </div>
-                      <div class="summary-items1">
-                        <div class="room-type">Room Type</div>
-                        <div class="double-room">Double Room</div>
-                      </div>
-                      <div class="summary-items2">
-                        <div class="booking-status">Booking Status</div>
-                        <div class="active">Active</div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                </mat-tab>
+                <mat-tab label="GUESTS">
+                  <div class="tab-content">
+                    <div class="guest-details">
+                      <!-- Conteúdo dos convidados -->
+                    </div>
+                  </div>
+                </mat-tab>
+                <mat-tab label="BOOKING INFO">
+                  <div class="tab-content">
+                    <div class="booking-info3">
+                      <!-- Conteúdo das informações da reserva -->
+                    </div>
+                  </div>
+                </mat-tab>
+              </mat-tab-group>
             </div>
           </div>
         </section>

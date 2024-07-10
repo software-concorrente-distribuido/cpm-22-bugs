@@ -15,7 +15,7 @@ export class ApplicationService {
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     this.appApiUrl = `${environment.apiUrl}/${this.APP_PATH}`;
   }
 

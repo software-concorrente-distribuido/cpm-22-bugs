@@ -15,7 +15,7 @@ export class PersonService {
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     this.personApiUrl = `${environment.apiUrl}/${this.PERSON_PATH}`;
   }
 

@@ -38,6 +38,7 @@
                     background-color: white;
 
                     .hotel-section {
+                        margin-top: 20px;
                         display: flex;
                         justify-content: space-between;
                     }
@@ -69,7 +70,7 @@
 
         &__examples {
             display: flex;
-            gap: 10px;            
+            gap: 10px;
         }
     }
 }
