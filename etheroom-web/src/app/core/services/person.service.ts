@@ -23,11 +23,11 @@ export class PersonService {
     return this.http.post<Person>(this.personApiUrl, person);
   }
 
-  public findById(id: number): Observable<Person> {
+  public findById(id: string): Observable<Person> {
     return this.http.get<Person>(`${this.personApiUrl}/${id}`);
   }
 
-  public findByUserId(userId: number): Observable<Person> {
+  public findByUserId(userId: string): Observable<Person> {
     return this.http.get<Person>(`${this.personApiUrl}/user/${userId}`);
   }
 
@@ -35,7 +35,7 @@ export class PersonService {
     return this.http.put<void>(this.personApiUrl, person);
   }
 
-  public delete(id: number): Observable<void> {
+  public delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.personApiUrl}/${id}`);
   }
 
