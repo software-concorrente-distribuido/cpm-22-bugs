@@ -163,5 +163,33 @@
     align-items: center;
     justify-content: center;
   }
+
+  #addAmenityButton {
+    padding: 0px 9px;
+    position: absolute;
+    margin-right: 50px;
+    border: 2px solid #000; /* Borda preta */
+    background-color: transparent; /* Fundo transparente */
+    color: black; /* Cor do texto */
+    border-radius: 90px; /* Borda levemente arredondada */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 125px;
+    font-size: 30px;
+  }
+
+  #addAttractionsButton {
+    padding: 0px 9px;
+    position: absolute;
+    margin-right: 50px;
+    border: 2px solid #000; /* Borda preta */
+    background-color: transparent; /* Fundo transparente */
+    color: black; /* Cor do texto */
+    border-radius: 90px; /* Borda levemente arredondada */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 285px;
+    font-size: 30px;
+  }
   
   
