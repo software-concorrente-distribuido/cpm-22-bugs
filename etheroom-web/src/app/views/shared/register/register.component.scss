@@ -1,11 +1,4 @@
-.signup-page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: var(--color-gray-500);
-  width: 1920px;
-  height: 1080px;
-}
+
 .image-signup {
   width: 100%;
   height: 98%;
@@ -135,6 +128,7 @@
   padding: 0 var(--padding-12xs) var(--padding-sm);
   box-sizing: border-box;
   color: var(--color-black);
+  border-bottom: 1px solid rgba(0,0,0,0.25)
 }
 .campo-address,
 .campo-password,
@@ -164,10 +158,11 @@
 }
 .sign-up-page {
   width: 100%;
+  margin-bottom: 160px;
   margin-right: 1900px;
-  max-width: 1920px;
+  max-width: 1600px;
   position: relative;
-  height: 1080px;
+  height: 900px;
   text-align: left;
   font-size: var(--font-size-31xl);
   color: var(--color-black);

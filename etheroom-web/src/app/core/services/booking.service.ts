@@ -34,9 +34,9 @@ export class BookingService {
     checkOut: Date = null,
     roomNumber: number = null,
     status: string = null,
-    personId: number = null,
-    hotelRoomId: number = null,
-    hotelId: number = null
+    personId: string = null,
+    hotelRoomId: string = null,
+    hotelId: string = null
   ): Observable<Page<Booking>> {
     return this.http.get<Page<Booking>>(
       this.bookingApiUrl,
@@ -50,15 +50,15 @@ export class BookingService {
           checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse(''),
           roomNumber: Optional.ofNullable(roomNumber).map(r => r.toString()).orElse(''),
           status: Optional.ofNullable(status).orElse(''),
-          personId: Optional.ofNullable(personId).map(p => p.toString()).orElse(''),
-          hotelRoomId: Optional.ofNullable(hotelRoomId).map(h => h.toString()).orElse(''),
-          hotelId: Optional.ofNullable(hotelId).map(h => h.toString()).orElse('')
+          personId: Optional.ofNullable(personId).orElse(''),
+          hotelRoomId: Optional.ofNullable(hotelRoomId).orElse(''),
+          hotelId: Optional.ofNullable(hotelId).orElse('')
         }
       }
     );
   }
 
-  public findById(id: number): Observable<Booking> {
+  public findById(id: string): Observable<Booking> {
     return this.http.get<Booking>(`${this.bookingApiUrl}/${id}`);
   }
 
@@ -66,11 +66,11 @@ export class BookingService {
     return this.http.put<void>(this.bookingApiUrl, booking);
   }
 
-  public cancel(id: number): Observable<void> {
+  public cancel(id: string): Observable<void> {
     return this.http.put<void>(`${this.bookingApiUrl}/cancel/${id}`, null);
   }
 
-  public delete(id: number): Observable<void> {
+  public delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.bookingApiUrl}/${id}`);
   }
 

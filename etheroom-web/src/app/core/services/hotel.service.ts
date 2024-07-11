@@ -48,11 +48,26 @@ export class HotelService {
     );
   }
 
-  public findById(id: number): Observable<Hotel> {
+  public findMostBooked(
+    page: number,
+    size: number
+  ): Observable<Page<Hotel>> {
+    return this.http.get<Page<Hotel>>(
+      `${this.hotelApiUrl}/most-booked`,
+      {
+        params: {
+          page: page.toString(),
+          size: size.toString()
+        }
+      }
+    );
+  }
+
+  public findById(id: string): Observable<Hotel> {
     return this.http.get<Hotel>(`${this.hotelApiUrl}/${id}`);
   }
 
-  public findByUserId(userId: number): Observable<Hotel> {
+  public findByUserId(userId: string): Observable<Hotel> {
     return this.http.get<Hotel>(`${this.hotelApiUrl}/user/${userId}`);
   }
 
@@ -60,7 +75,7 @@ export class HotelService {
     return this.http.put<void>(this.hotelApiUrl, hotel);
   }
 
-  public delete(id: number): Observable<void> {
+  public delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.hotelApiUrl}/${id}`);
   }
 

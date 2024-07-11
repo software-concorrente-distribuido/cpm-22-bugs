@@ -11,6 +11,8 @@ public interface IHotelService {
 
     Page<HotelDto> findAll(Pageable pageable, HotelFilter filter);
 
+    Page<HotelDto> findMostBooked(Pageable pageable);
+
     HotelDto findById(String id);
 
     HotelDto findByUserId(String userId);

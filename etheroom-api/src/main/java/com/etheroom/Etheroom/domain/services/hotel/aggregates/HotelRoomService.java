@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -75,6 +76,11 @@ public class HotelRoomService implements IHotelRoomService {
         return this.hotelRoomRepository.findById(UUID.fromString(id))
                 .map(HotelRoom::mapEntityToDto)
                 .orElseThrow(() -> new NotFoundException(HOTEL_ROOM_NOT_FOUND));
+    }
+
+    @Override
+    public Boolean isHotelRoomBooked(String roomId, LocalDateTime checkIn, LocalDateTime checkOut) {
+        return this.bookingHelper.isHotelRoomBooked(roomId, checkIn, checkOut);
     }
 
     @Override

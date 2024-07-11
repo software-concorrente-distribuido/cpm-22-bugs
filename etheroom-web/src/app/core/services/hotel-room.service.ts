@@ -31,7 +31,7 @@ export class HotelRoomService {
     number: number,
     type: string,
     available: boolean,
-    hotelId: number
+    hotelId: string
   ): Observable<Page<HotelRoom>> {
     return this.http.get<Page<HotelRoom>>(
       this.hotelRoomApiUrl, 
@@ -42,7 +42,7 @@ export class HotelRoomService {
           number: Optional.ofNullable(number).map(n => n.toString()).orElse(''),
           type: Optional.ofNullable(type).orElse(''),
           available: Optional.ofNullable(available).map(a => a.toString()).orElse(''),
-          hotelId: Optional.ofNullable(hotelId).map(h => h.toString()).orElse('')
+          hotelId: Optional.ofNullable(hotelId).orElse('')
         }
       }
     );
@@ -53,7 +53,7 @@ export class HotelRoomService {
     size: number,
     number: number = null,
     type: string = null,
-    hotelId: number = null
+    hotelId: string = null
   ): Observable<Page<HotelRoom>> {
     return this.http.get<Page<HotelRoom>>(
       `${this.hotelRoomApiUrl}/available`, 
@@ -63,21 +63,33 @@ export class HotelRoomService {
           size: size.toString(),
           number: Optional.ofNullable(number).map(n => n.toString()).orElse(''),
           type: Optional.ofNullable(type).orElse(''),
-          hotelId: Optional.ofNullable(hotelId).map(h => h.toString()).orElse('')
+          hotelId: Optional.ofNullable(hotelId).orElse('')
         }
       }
     );
   }
 
-  public findById(id: number): Observable<HotelRoom> {
+  public findById(id: string): Observable<HotelRoom> {
     return this.http.get<HotelRoom>(`${this.hotelRoomApiUrl}/${id}`);
+  }
+
+  public isHotelRoomBooked(id: string, checkIn: Date, checkOut: Date): Observable<boolean> {
+    return this.http.get<boolean>(
+      `${this.hotelRoomApiUrl}/${id}/booked`, 
+      {
+        params: {
+          checkIn: Optional.ofNullable(checkIn).map(c => c.toISOString()).orElse(''),
+          checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse('')
+        }
+      }
+    );
   }
 
   public update(hotelRoom: HotelRoom): Observable<void> {
     return this.http.put<void>(this.hotelRoomApiUrl, hotelRoom);
   }
 
-  public delete(id: number): Observable<void> {
+  public delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.hotelRoomApiUrl}/${id}`);
   }
 
