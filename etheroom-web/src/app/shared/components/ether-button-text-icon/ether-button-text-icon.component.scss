@@ -6,13 +6,20 @@ button {
     cursor: pointer;
 }
 
-button.primary {
-    background-color: #4B5062;
+button.primary, button.danger {
     border-radius: 16px 0 16px 0;
     color: white;
     border-style: none;
-    padding: 20px 30px;
+    padding: 15px 25px;
     font-size: 15px;
+}
+
+button.primary {
+    background-color: #4B5062;
+}
+
+button.danger {
+    background-color: #9A3D3D;
 }
 
 button.secondary {

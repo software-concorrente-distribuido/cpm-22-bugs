@@ -1,4 +1,43 @@
-.header {
+section {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 30px;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+
+        .logo-image {
+            width: 25%;
+        }
+    }
+
+    .infos {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .room-information, .sender-information {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .fx-cl {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    
+        .title {
+            font-size: 22px;
+            font-family: 'quasimoda-semi-bold';
+        }
+    
+        .value {
+            font-size: 24px;
+            font-family: 'quasimoda-light';
+        }
+    }
+
 }

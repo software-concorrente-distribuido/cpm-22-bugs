@@ -14,7 +14,7 @@ export class EtherButtonIconComponent {
   public iconName!: string;
 
   @Input()
-  public isSecondary?: boolean = false;
+  public buttonType?: string = 'primary';
   
   @Output()
   onClick: EventEmitter<void> = new EventEmitter<void>();

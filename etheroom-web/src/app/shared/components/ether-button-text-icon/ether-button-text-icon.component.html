@@ -3,6 +3,7 @@
     [ngClass]="{
         'primary': buttonType === 'primary',
         'secondary': buttonType === 'secondary',
+        'danger': buttonType === 'danger',
     }">
         <ng-content></ng-content>
         <img [src]="setIconName(iconName)">
