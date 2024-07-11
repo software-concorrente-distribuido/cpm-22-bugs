@@ -63,11 +63,11 @@ export class HotelService {
     );
   }
 
-  public findById(id: number): Observable<Hotel> {
+  public findById(id: string): Observable<Hotel> {
     return this.http.get<Hotel>(`${this.hotelApiUrl}/${id}`);
   }
 
-  public findByUserId(userId: number): Observable<Hotel> {
+  public findByUserId(userId: string): Observable<Hotel> {
     return this.http.get<Hotel>(`${this.hotelApiUrl}/user/${userId}`);
   }
 
@@ -75,7 +75,7 @@ export class HotelService {
     return this.http.put<void>(this.hotelApiUrl, hotel);
   }
 
-  public delete(id: number): Observable<void> {
+  public delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.hotelApiUrl}/${id}`);
   }
 
