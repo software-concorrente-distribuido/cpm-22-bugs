@@ -6,10 +6,6 @@ section {
     display: flex;
     gap: 30px;
 
-    &__filter {
-        width: 25%;
-    }
-
     &__bookings {
         display: flex;
         flex-direction: column;

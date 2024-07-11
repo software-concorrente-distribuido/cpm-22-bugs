@@ -1,7 +1,69 @@
 <section>
     <div class="header">
-        <div class="header__ether-logo">
-            <img [src]="setImagePath('etheroom-logo')" alt="">
+        <img [src]="setImagePath('etheroom-logo')" alt="Etheroom Logo" class="logo-image">
+
+        <ether-button-icon iconName="close" buttonType="close" (onClick)="closeDialog()"></ether-button-icon>
+    </div>
+
+    <div class="infos">
+        <div class="room-information">
+            <div class="fx-cl room-information__number">
+                <div class="fx-cl title">Room:</div>
+                <div class="fx-cl value">110</div>
+            </div>
+    
+            <div class="fx-cl room-information__check-in">
+                <div class="fx-cl title">Check-In:</div>
+                <div class="fx-cl value">Jul, 07, 03:00pm</div>
+            </div>
+    
+            <div class="fx-cl room-information__check-out">
+                <div class="fx-cl title">Check-Out:</div>
+                <div class="fx-cl value">Jul, 10, 11:30am</div>
+            </div>
+    
+            <div class="fx-cl room-information__contract-owner">
+                <div class="fx-cl title">Contract Owner Name:</div>
+                <div class="fx-cl value">John Martin Marr</div>
+            </div>
+    
+            <div class="fx-cl room-information__room-type">
+                <div class="fx-cl title">Room Type:</div>
+                <div class="fx-cl value">Double Room</div>
+            </div>
+    
+            <div class="fx-cl room-information__status">
+                <div class="fx-cl title">Status:</div>
+                <div class="fx-cl value">Active</div>
+            </div>
         </div>
+    
+        <div class="sender-information">
+            <div class="fx-cl sender-information__email">
+                <div class="fx-cl title">E-mail:</div>
+                <div class="fx-cl value">johnnymarraoutlook.com</div>
+            </div>
+            <div class="fx-cl sender-information__phone">
+                <div class="fx-cl title">Phone number:</div>
+                <div class="fx-cl value">+1 (453) 505-5392</div>
+            </div>
+            <div class="fx-cl sender-information__eth-address">
+                <div class="fx-cl title">ETH address:</div>
+                <div class="fx-cl value">0xc0ffee254729296a45a3885639AC7E10F9d54979</div>
+            </div>
+        </div>
+    
+        <div class="guests-information">
+            <div class="fx-cl guests-information__guests">
+                <div class="fx-cl title">Guest:</div>
+                <div class="fx-cl value">Noel Thomas David Gallagher</div>
+                <div class="fx-cl value">noelgallagheragmail.com</div>
+                <div class="fx-cl value">+1 (818) 583-9824</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <ether-button-text-icon iconName="right-arrow-white" buttonType="danger">CANCEL BOOKING</ether-button-text-icon>
     </div>
 </section>

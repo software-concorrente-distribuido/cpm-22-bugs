@@ -1,5 +1,7 @@
 <button (click)="handleClick()" [ngClass]="{
-    'secondary': isSecondary
+    'primary': buttonType === 'primary',
+    'secondary': buttonType === 'secondary',
+    'close': buttonType === 'close',
 }">
     <img [src]="setIconName(iconName)">
 </button>
