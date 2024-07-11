@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   
   private shouldShowHeader(url: string): boolean {
-    const noHeaderRoutes = ['/sign-in', '/sign-up'];
+    const noHeaderRoutes = ['/sign-in', '/sign-up', '/sign-up-hotel'];
     return !noHeaderRoutes.includes(url);
   }
 }

@@ -12,6 +12,7 @@ import { ManageRoomsComponent } from './views/hotel/manage-rooms/manage-rooms.co
 import { RoomDetailsComponent } from './views/hotel/manage-rooms/room-details/room-details.component';
 import { AddRoomComponent } from './views/hotel/manage-rooms/add-room/add-room.component';
 import { MyBookingsComponent } from './views/hotel/my-bookings/my-bookings.component';
+import { RegisterHotelComponent } from './views/shared/register/register-hotel/register-hotel.component';
 
 export const routes: Routes = [
     {
@@ -28,6 +29,11 @@ export const routes: Routes = [
     {
         path: 'sign-up',
         component: RegisterComponent
+    },
+
+    {
+        path: 'sign-up-hotel',
+        component: RegisterHotelComponent
     },
 
     {
