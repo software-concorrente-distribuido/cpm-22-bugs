@@ -65,16 +65,18 @@
       name="password-field"
       placeholder="Amenities"
       type="text"
+      [(ngModel)]="amenity"
     />
-    <button id="addAmenityButton">+</button>
+    <button (click)="addAmenity()" id="addAmenityButton">+</button>
 
     <input
       class="campo-address"
       name="address-field"
       placeholder="Near Attractions"
+      [(ngModel)]="attraction"
       type="text"
     />
-    <button id="addAttractionsButton">+</button>
+    <button (click)="addAttraction()"id="addAttractionsButton">+</button>
 
     <input
       class="campo-email"
