@@ -1,15 +1,14 @@
 <section>
     <div class="manage-sections">
-        <div class="manage-sections__filter">
-            <ether-filter></ether-filter>
-        </div>
+        <ether-filter></ether-filter>
+
         <div class="manage-sections__rooms">
             <div class="list-room">
                 <ether-table></ether-table>
             </div>
             <div class="create-room">
                 <p>CREATE NEW ROOM</p>
-                <ether-button-icon iconName="add-icon" [isSecondary]="true" (onClick)="handleButtonClick()"></ether-button-icon>
+                <ether-button-icon iconName="add-icon" buttonType="secondary" (onClick)="handleButtonClick()"></ether-button-icon>
             </div>
         </div>
     </div>

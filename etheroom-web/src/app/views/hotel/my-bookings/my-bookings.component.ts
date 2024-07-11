@@ -26,7 +26,7 @@ export class MyBookingsComponent {
 
   public openDialog() {
     const dialogRef = this.dialog.open(EtherDialogComponent, {
-      width: '250px',
+      width: '1250px',
       data: {
         room: 'room',
         guest: 'guest',
