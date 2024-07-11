@@ -7,4 +7,6 @@ public interface IAuthenticationService {
 
     AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest);
 
+    void validate(AuthenticationRequest authenticationRequest);
+
 }

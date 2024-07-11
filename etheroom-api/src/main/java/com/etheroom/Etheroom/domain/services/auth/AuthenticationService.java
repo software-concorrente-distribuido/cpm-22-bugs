@@ -2,6 +2,7 @@ package com.etheroom.Etheroom.domain.services.auth;
 
 import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.domain.services.auth.aggregates.JwtService;
+import com.etheroom.Etheroom.infrastructure.vo.chains.auth.AuthCredentialsValidationChain;
 import com.etheroom.Etheroom.infrastructure.vo.chains.user.UserAuthenticationValidationChain;
 import com.etheroom.Etheroom.presentation.dtos.auth.AuthenticationRequest;
 import com.etheroom.Etheroom.presentation.dtos.auth.AuthenticationResponse;
@@ -24,6 +25,8 @@ public class AuthenticationService implements IAuthenticationService {
 
     private final UserAuthenticationValidationChain userAuthenticationValidationChain;
 
+    private final AuthCredentialsValidationChain authCredentialsValidationChain;
+
     @Override
     public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
         String ethereumAddress = authenticationRequest.getEthereumAddress();
@@ -41,6 +44,11 @@ public class AuthenticationService implements IAuthenticationService {
         return new AuthenticationResponse(
                 this.jwtService.generateToken(user)
         );
+    }
+
+    @Override
+    public void validate(AuthenticationRequest authenticationRequest) {
+        this.authCredentialsValidationChain.performValidations(authenticationRequest);
     }
 
 }
