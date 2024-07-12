@@ -17,70 +17,40 @@ import { RegisterHotelComponent } from './views/shared/register/register-hotel/r
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'public/home',
         pathMatch: 'full'
     },
 
     {
-        path: 'sign-in',
-        component: LoginComponent
-    },
-
-    {
-        path: 'sign-up',
-        component: RegisterComponent
-    },
-
-    {
-        path: 'sign-up-hotel',
-        component: RegisterHotelComponent
-    },
-
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-
-    {
-        path: 'all-hotels',
-        component: AllHotelsComponent
-    },
-
-    {
-        path: 'explore-cities',
-        component: ExploreCitiesComponent
-    },
-
-    {
-        path: 'about-us',
-        component: AboutComponent
-    },
-
-    {
-        path: 'faq',
-        component: FaqComponent
-    },
-    {
-        path: 'your-bookings',
-        component: YourBookingsComponent
-    },
-    {
-        path: 'booked-room',
-        component: BookedRoomComponent
-    },
-
-    {
-        path: 'manage-rooms',
+        path: 'public',
         children: [
-            { path: '', component: ManageRoomsComponent },
-            { path: 'room-details', component: RoomDetailsComponent },
-            { path: 'add-room', component: AddRoomComponent }
+            { path: 'home', component: HomeComponent },
+            { path: 'sign-in', component: LoginComponent },
+            { path: 'sign-up', component: RegisterComponent },
+            { path: 'all-hotels', component: AllHotelsComponent },
+            { path: 'explore-cities', component: ExploreCitiesComponent },
+            { path: 'faq', component: FaqComponent },
+            { path: 'about-us', component: AboutComponent }
+            // { path: 'profile', component: ProfileComponent }
         ]
     },
 
     {
-        path: 'my-bookings',
-        component: MyBookingsComponent
+        path: 'guest',
+        children: [
+            { path: 'your-bookings', component: YourBookingsComponent },
+            { path: 'booked-room', component: BookedRoomComponent }
+        ]
+    },
+
+    {
+        path: 'hotel',
+        children: [
+            { path: 'sign-up-hotel', component: RegisterHotelComponent },
+            { path: 'manage-rooms', component: ManageRoomsComponent },
+            { path: 'manage-rooms/room-details', component: RoomDetailsComponent },
+            { path: 'manage-rooms/add-room', component: AddRoomComponent },
+            { path: 'my-bookings', component: MyBookingsComponent }
+        ]
     }
-    
 ];

@@ -27,6 +27,6 @@ export class ManageRoomsComponent {
   ) { }
 
   public handleButtonClick(): void {
-    this.router.navigate(['/manage-rooms/add-room']);
+    this.router.navigate(['hotel/manage-rooms/add-room']);
   }
 }
