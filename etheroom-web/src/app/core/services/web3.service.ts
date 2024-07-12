@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import Web3 from 'web3';
+import { environment } from '../../../environments/environments';
+import { ethers } from 'ethers';
 declare var window: any;
 
 @Injectable({
@@ -15,8 +17,10 @@ export class Web3Service {
   private contractAddress: string = '0xfb070fe085D6fc81CDEceE503efEF3af49ebdF38'; // Endereço do contrato HotelBookingManager
   private account: string = '';
   private secret: string = '';
+  private message: string;
 
   constructor(public router: Router) {
+    this.message = environment.ETHEROOM_APP_MESSAGE;
   }
 
   async initializeWeb3() {
@@ -53,10 +57,13 @@ export class Web3Service {
   async getAccount(): Promise<any> {
     if (!this.account) {
       const accounts = await this.provider.request({ method: 'eth_accounts' });
-      const signer = await this.provider.getSigner();
-      const secret = await signer.signMessage(['process.env.ETHEROOM_APP_MESSAGE']);
+      const browserProvider = new ethers.BrowserProvider(this.provider);
+      const signer = await browserProvider.getSigner();
+      const secret = await signer.signMessage(this.message);
       this.account = accounts[0];
       this.secret = secret;
+      console.log('Conta conectada:', this.account);
+      console.log('Chave secreta:', this.secret);
     }
     return { user: this.account, secret: this.secret };
   }
