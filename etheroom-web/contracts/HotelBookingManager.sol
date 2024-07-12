@@ -15,6 +15,7 @@ contract HotelBookingManager {
         string hotel;
         uint256 amount;
         bool isActive;
+        uint256 roomNumber;
     }
 
     mapping(uint256 => BookingInfo) public bookings;
@@ -24,7 +25,8 @@ contract HotelBookingManager {
         address bookingContract,
         address indexed guest,
         string hotel,
-        uint256 amount
+        uint256 amount,
+        uint256 roomNumber
     );
     /*Notifica qualquer sistema externo que uma nova reserva foi feita, incluindo detalhes como o ID da reserva, o endereço do contrato
     da reserva, o endereço do hóspede, o nome do hotel e o valor pago. Sistemas que monitoram a blockchain podem capturar esse evento e
@@ -46,7 +48,7 @@ contract HotelBookingManager {
         owner = msg.sender;
     }
 
-    function createBooking(string memory _hotel, uint256 _amount, uint256 _checkInDate, uint256 _checkOutDate) public payable {
+    function createBooking(string memory _hotel, uint256 _amount,string memory  _checkInDate, string memory _checkOutDate, uint256 _roomNumber) public payable {
         // Verifica se o valor enviado na transação é igual ao valor esperado da reserva, caso não seja, a transação falha e exibe a mensagem
         require(msg.value == _amount, "Valor de pagamento incorreto");
 
@@ -56,7 +58,8 @@ contract HotelBookingManager {
         _hotel, //nome do hotel
         _amount, //valor pago
         _checkInDate,
-        _checkOutDate
+        _checkOutDate,
+        _roomNumber
     );
 
     // Incrementa o contador de reservas para gerar um novo ID de reserva
@@ -68,7 +71,8 @@ contract HotelBookingManager {
         guest: msg.sender,
         hotel: _hotel,
         amount: _amount,
-        isActive: true
+        isActive: true,
+        roomNumber: _roomNumber
     });
 
     // Adiciona o endereço do novo contrato de reserva à lista de contratos de reserva
@@ -80,7 +84,8 @@ contract HotelBookingManager {
         address(newBooking),
         msg.sender,
         _hotel,
-        _amount
+        _amount,
+        _roomNumber
         );
     }
 
