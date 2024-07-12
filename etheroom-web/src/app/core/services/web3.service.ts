@@ -54,12 +54,12 @@ export class Web3Service {
     return accounts.length > 0;
   }
 
-  async getAccount(): Promise<any> {
+  async getAccount(): Promise<string> {
     if (!this.account) {
       const accounts = await this.provider.request({ method: 'eth_accounts' });
       this.account = accounts[0];
     }
-    return { user: this.account};
+    return this.account;
   }
 
   async getSecret(): Promise<string> {

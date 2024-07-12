@@ -12,6 +12,8 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   loginWithEthereum(ethereumAddress: string, ethereumPublicKey: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { ethereumAddress, ethereumPublicKey });
+    const requestBody = { ethereumAddress, ethereumPublicKey };
+    console.log('Request Body:', JSON.stringify(requestBody));
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, requestBody);
   }
 }
