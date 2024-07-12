@@ -18,5 +18,6 @@ export class RoomPageComponent {
     const id = await this.web3.createBooking("Hilton London Tower, Tooley Street", 0.053, "13/07/2024", "14/07/2024", 302);
     const booking = await this.web3.getBooking(id);
     console.log(booking);
+    alert("Booking created! ID: " + id);
   }
 }

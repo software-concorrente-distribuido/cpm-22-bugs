@@ -32,7 +32,6 @@ export class Web3Service {
         // Solicita acesso à conta Ethereum
         await this.provider.request({ method: 'eth_requestAccounts' });
         this.web3 = new Web3(this.provider);
-        this.router.navigate(['/home']);
         // Assina eventos de mudança de rede e de contas
         this.provider.on('chainChanged', () => window.location.reload());
         this.provider.on('accountsChanged', () => window.location.reload());

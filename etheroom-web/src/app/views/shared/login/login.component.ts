@@ -24,10 +24,16 @@ export class LoginComponent {
       await this.web3.initializeWeb3(); // Conecta com Metamask
       const account = await this.web3.getAccount(); // Obtém o endereço Ethereum do usuário
       console.log('Conta conectada:', account); // Envia o endereço Ethereum ao backend para autenticação
-      
+  
       const secret = await this.web3.getSecret();
       console.log('Secret: ', secret);
+  
+      this.router.navigate(['/home']); // PROVISÓRIO
 
+      if (!secret) {
+        throw new Error('User rejected signing the message');
+      }
+  
       const authResponse: AuthResponse = await this.authService.loginWithEthereum(account, secret).toPromise();
       if (authResponse && authResponse.accessToken) {
         localStorage.setItem('accessToken', authResponse.accessToken); // Armazena o token de acesso
@@ -36,9 +42,11 @@ export class LoginComponent {
         this.router.navigate(['/register']); // Navega para a página de registro
       }
     } catch (error) {
-      console.error('Erro ao conectar a MetaMask:', error);
+      console.error('Erro ao conectar a MetaMask ou autenticar:', error);
+      // Adicione um tratamento de erros adequado aqui, como exibir uma mensagem de erro ao usuário.
     }
   }
+  
 
   public pathToImage(imageName: string, extension: string): string {
     return `./../../../assets/images/${imageName}.${extension}`;
