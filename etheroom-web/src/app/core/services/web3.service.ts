@@ -57,17 +57,18 @@ export class Web3Service {
   async getAccount(): Promise<any> {
     if (!this.account) {
       const accounts = await this.provider.request({ method: 'eth_accounts' });
-      const browserProvider = new ethers.BrowserProvider(this.provider);
-      const signer = await browserProvider.getSigner();
-      const secret = await signer.signMessage(this.message);
       this.account = accounts[0];
-      this.secret = secret;
-      console.log('Conta conectada:', this.account);
-      console.log('Chave secreta:', this.secret);
     }
-    return { user: this.account, secret: this.secret };
+    return { user: this.account};
   }
 
+  async getSecret(): Promise<string> {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const secret = signer.signMessage('Login Etheroom');
+    //Função assíncrona que gera uma assinatura digital
+    return secret;
+  }
 
   async createBooking(nomeHotel: string, valor: number, checkIn: number, checkOut: number): Promise<number> {
     try {
