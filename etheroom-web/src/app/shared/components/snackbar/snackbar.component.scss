@@ -1,0 +1,27 @@
+div.snackbar {
+  width: clamp(120px, 90%, 320px);
+  max-height: 20%;
+  padding: 1rem 1.5rem;
+  position: fixed;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: var(--br-3xs);
+  text-align: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: var(--linear-transition-settings);
+  z-index: 100;
+}
+
+div.snackbar:hover {
+  background-color: var(--color-whitesmoke-100);
+  transition: var(--linear-transition-settings);
+}
+
+div.snackbar > p {
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-light);
+  color: white;
+}
