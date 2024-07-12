@@ -17,12 +17,12 @@ import { RegisterHotelComponent } from './views/shared/register/register-hotel/r
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'public/home',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
 
     {
-        path: 'public',
+        path: '',
         children: [
             { path: 'home', component: HomeComponent },
             { path: 'sign-in', component: LoginComponent },

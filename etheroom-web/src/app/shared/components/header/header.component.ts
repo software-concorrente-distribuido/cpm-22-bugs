@@ -25,27 +25,27 @@ export class HeaderComponent implements OnInit {
     switch (this.access) {
       case 'public':
         this.navRoutes = [
-          { path: '/public/home', label: 'HOME' },
-          { path: '/public/all-hotels', label: 'ALL HOTELS' },
-          { path: '/public/explore-cities', label: 'EXPLORE CITIES' },
-          { path: '/public/about-us', label: 'ABOUT US' },
-          { path: '/public/faq', label: 'FAQ' }
+          { path: '/home', label: 'HOME' },
+          { path: '/all-hotels', label: 'ALL HOTELS' },
+          { path: '/explore-cities', label: 'EXPLORE CITIES' },
+          { path: '/about-us', label: 'ABOUT US' },
+          { path: '/faq', label: 'FAQ' }
         ];
         break;
 
       case 'guest':
         this.navRoutes = [
-          { path: '/public/home', label: 'HOME' },
+          { path: '/home', label: 'HOME' },
           { path: '/guest/all-hotels', label: 'ALL HOTELS' },
           { path: '/guest/your-bookings', label: 'MY BOOKINGS' },
           { path: '/guest/profile', label: 'PROFILE' },
-          { path: '/public/faq', label: 'FAQ' }
+          { path: '/faq', label: 'FAQ' }
         ];
         break;
 
       case 'hotel':
         this.navRoutes = [
-          { path: '/public/home', label: 'HOME' },
+          { path: '/home', label: 'HOME' },
           { path: '/hotel/manage-rooms', label: 'MANAGE ROOMS' },
           { path: '/hotel/my-bookings', label: 'MY BOOKINGS' },
           { path: '/hotel/profile', label: 'PROFILE' }
