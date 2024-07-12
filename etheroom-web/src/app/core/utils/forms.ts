@@ -52,7 +52,7 @@ export const createHotelForm = (hotel: Hotel = null): FormGroup => {
     return inject(FormBuilder).group({
         id: [hotel?.id],
         name: [hotel?.name, [Validators.required, Validators.maxLength(100)]],
-        description: [hotel?.description, [Validators.maxLength(255)]],
+        description: [hotel?.description, [Validators.required, Validators.maxLength(255)]],
         user: createUserForm(hotel?.user),
         address: createAddressForm(hotel?.address),
         thumbnail: [hotel?.thumbnail],
@@ -79,10 +79,10 @@ export const createPersonForm = (person: Person = null): FormGroup => {
 export const createUserForm = (user: User = null): FormGroup => {
     return inject(FormBuilder).group({
         id: [user?.id],
-        ethereumAddress: [user?.ethereumAddress, [Validators.maxLength(255)]],
-        ethereumPublicKey: [user?.ethereumPublicKey, [Validators.maxLength(255)]],
-        email: [user?.email, [Validators.maxLength(50)]],
-        role: [user?.role, [Validators.maxLength(50)]],
+        ethereumAddress: [user?.ethereumAddress, [Validators.required, Validators.maxLength(255)]],
+        ethereumPublicKey: [user?.ethereumPublicKey, [Validators.required, Validators.maxLength(255)]],
+        email: [user?.email, [Validators.required, Validators.maxLength(50)]],
+        role: [user?.role],
         profilePicture: [user?.profilePicture],
         updatedAt: [user?.updatedAt],
         createdAt: [user?.createdAt]
@@ -92,7 +92,7 @@ export const createUserForm = (user: User = null): FormGroup => {
 export const createContactForm = (contact: Contact = null): FormGroup => {
     return inject(FormBuilder).group({
         id: [contact?.id],
-        phone: [contact?.phone, [Validators.maxLength(20)]],
+        phone: [contact?.phone, [Validators.required, Validators.maxLength(20)]],
         cellphone: [contact?.cellphone, [Validators.maxLength(20)]],
         updatedAt: [contact?.updatedAt],
         createdAt: [contact?.createdAt]
@@ -102,9 +102,9 @@ export const createContactForm = (contact: Contact = null): FormGroup => {
 export const createAddressForm = (address: Address = null): FormGroup => {
     return inject(FormBuilder).group({
         id: [address?.id],
-        description: [address?.description, [Validators.maxLength(255)]],
-        country: [address?.country, [Validators.maxLength(20)]],
-        zipCode: [address?.zipCode],
+        description: [address?.description, [Validators.required, Validators.maxLength(255)]],
+        country: [address?.country, [Validators.required, Validators.maxLength(50)]],
+        zipCode: [address?.zipCode, [Validators.maxLength(20)]],
         updatedAt: [address?.updatedAt],
         createdAt: [address?.createdAt]
     });
