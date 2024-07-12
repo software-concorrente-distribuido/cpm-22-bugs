@@ -34,6 +34,8 @@ public class BookingService implements IBookingService {
 
     private static final String ONLY_ONGOING_BOOKINGS = "Only ongoing bookings can be cancelled";
 
+    private static final String HOTEL_ROOM_DONT_SUPPORT_GUESTS = "Hotel Room don't support this amount of guests";
+
     private final BookingRepository bookingRepository;
 
     private final IPersonService personService;
@@ -52,6 +54,7 @@ public class BookingService implements IBookingService {
         booking.setPerson(this.personService.findById(personId).mapDtoToEntity());
         booking.setHotelRoom(this.hotelRoomService.findById(hotelRoomId).mapDtoToEntity());
         booking.setStatus(BookingStatus.STARTED);
+        this.checkGuestsAmount(booking);
         return this.bookingRepository.save(booking).mapEntityToDto();
     }
 
@@ -103,7 +106,8 @@ public class BookingService implements IBookingService {
                 () -> new BadRequestException(ONLY_STARTED_BOOKINGS)
         );
         Booking booking = bookingDto.mapDtoToEntity();
-        booking.setStatus(BookingStatus.FINISHED);
+        booking.setStatus(BookingStatus.ACTIVE);
+        this.checkGuestsAmount(booking);
         this.bookingRepository.save(booking);
     }
 
@@ -130,6 +134,13 @@ public class BookingService implements IBookingService {
                 () -> new BadRequestException(ONLY_STARTED_BOOKINGS)
         );
         this.bookingRepository.deleteById(uuid);
+    }
+
+    private void checkGuestsAmount(Booking booking) {
+        Functions.acceptTrueThrows(
+                booking.getGuests().size() > booking.getNumberOfGuests(),
+                () -> new BadRequestException(HOTEL_ROOM_DONT_SUPPORT_GUESTS)
+        );
     }
 
 }
