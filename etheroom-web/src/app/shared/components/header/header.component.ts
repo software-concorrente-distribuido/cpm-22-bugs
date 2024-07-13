@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   public isInvertColors: boolean = true;
-  public access: string = 'hotel';
+  public access: string = 'guest';
 
   public navRoutes!: {
     path: string;

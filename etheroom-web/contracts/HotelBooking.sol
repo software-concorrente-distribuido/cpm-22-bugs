@@ -4,9 +4,10 @@ pragma solidity ^0.8.0;
 contract HotelBooking {
     address public guest;
     string public hotel;
+    uint256 public roomNumber;
     uint256 public amount;
-    uint256 public checkInDate;
-    uint256 public checkOutDate;
+    string public checkInDate;
+    string public checkOutDate;
     bool public isCancelled;
 
     event BookingCancelled(address indexed guest, uint256 refundAmount);
@@ -16,10 +17,11 @@ contract HotelBooking {
         _;
     }
 
-    constructor(address _guest, string memory _hotel, uint256 _amount, uint256 _checkInDate, uint256 _checkOutDate) {
+    constructor(address _guest, string memory _hotel, uint256 _amount, string memory _checkInDate, string memory _checkOutDate, uint256 _roomNumber) {
         guest = _guest;
         hotel = _hotel;
         amount = _amount;
+        roomNumber = _roomNumber;
         checkInDate = _checkInDate;
         checkOutDate = _checkOutDate;
         isCancelled = false;
