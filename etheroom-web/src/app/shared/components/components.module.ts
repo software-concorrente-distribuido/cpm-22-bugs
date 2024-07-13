@@ -5,6 +5,10 @@ import { HeaderComponent } from './header/header.component';
 import { EtherButtonComponent } from './ether-button/ether-button.component';
 import { EtherNavigationComponent } from './ether-navigation/ether-navigation.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from './forms/forms.module';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { SplashScreenComponent } from './splash-screen/splash-screen.component';
+import { DialogsModule } from './dialogs/dialogs.module';
 
 
 
@@ -13,17 +17,25 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     EtherButtonComponent,
     EtherNavigationComponent,
+    SplashScreenComponent,
+    SnackbarComponent
   ],
   imports: [
     CommonModule,
     InputsModule,
-    RouterModule
+    RouterModule,
+    FormsModule,
+    DialogsModule
   ],
   exports: [
     InputsModule,
     HeaderComponent,
     EtherButtonComponent,
-    EtherNavigationComponent
+    EtherNavigationComponent,
+    FormsModule,
+    DialogsModule,
+    SplashScreenComponent,
+    SnackbarComponent,
   ]
 })
 export class ComponentsModule { }

@@ -40,7 +40,7 @@ export class EtherTableComponent<T> implements AfterContentInit, OnDestroy {
   }
 
   public handleClickButton() {
-    this.router.navigate(['/manage-rooms/room-details']);
+    this.router.navigate(['hotel/manage-rooms/room-details']);
   }
 
   @Input()

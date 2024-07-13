@@ -9,6 +9,9 @@ body {
   --font-fontspring-demo---all-round-gothic-book: "FONTSPRING DEMO - All Round Gothic Book";
 
   /* font sizes */
+  --font-size-xxxxs: 10px;
+  --font-size-xxxs: 12px;
+  --font-size-xxs: 14px;
   --font-size-mini: 15px;
   --font-size-11xl: 30px;
   --font-size-5xl: 24px;
@@ -24,6 +27,12 @@ body {
   --font-size-3xl: 22px;
   --font-size-31xl: 50px;
   --font-size-6xl: 25px;
+
+  /* font weights */
+  --font-weight-light: 400;
+  --font-weight-regular: 500;
+  --font-weight-medium: 600;
+  --font-weight-bold: 700;
 
   /* Colors */
   --color-gray-100: rgba(0, 0, 0, 0.79);
@@ -105,4 +114,6 @@ body {
   --br-xl: 20px;
   --br-13xl: 32px;
   --br-10xl: 29px;
+
+  --linear-transition-settings: 0.2s all linear;
 }

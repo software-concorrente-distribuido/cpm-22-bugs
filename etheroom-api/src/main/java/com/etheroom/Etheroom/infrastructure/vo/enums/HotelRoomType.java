@@ -9,6 +9,8 @@ public enum HotelRoomType {
 
     SINGLE("Single Room"),
     DOUBLE("Double Room"),
+    TRIPLE("Triple Room"),
+    QUAD("Quad Room"),
     KING("King Room");
 
     private final String description;

@@ -36,9 +36,9 @@ export class HeaderComponent implements OnInit {
       case 'guest':
         this.navRoutes = [
           { path: '/home', label: 'HOME' },
-          { path: '/all-hotels', label: 'ALL HOTELS' },
-          { path: '/your-bookings', label: 'MY BOOKINGS' },
-          { path: '/profile', label: 'PROFILE' },
+          { path: '/guest/all-hotels', label: 'ALL HOTELS' },
+          { path: '/guest/your-bookings', label: 'MY BOOKINGS' },
+          { path: '/guest/profile', label: 'PROFILE' },
           { path: '/faq', label: 'FAQ' }
         ];
         break;
@@ -46,9 +46,9 @@ export class HeaderComponent implements OnInit {
       case 'hotel':
         this.navRoutes = [
           { path: '/home', label: 'HOME' },
-          { path: '/manage-rooms', label: 'MANAGE ROOMS' },
-          { path: '/my-bookings', label: 'MY BOOKINGS' },
-          { path: '/profile', label: 'PROFILE' }
+          { path: '/hotel/manage-rooms', label: 'MANAGE ROOMS' },
+          { path: '/hotel/my-bookings', label: 'MY BOOKINGS' },
+          { path: '/hotel/profile', label: 'PROFILE' }
         ];
     }
   }

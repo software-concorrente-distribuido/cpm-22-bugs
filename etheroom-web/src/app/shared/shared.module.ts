@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
+import { DirectivesModule } from './directives/directives.module';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    ComponentsModule
+    ComponentsModule,
+    DirectivesModule,
+    PipesModule
   ],
   exports: [
     CommonModule,
-    ComponentsModule
+    ComponentsModule,
+    DirectivesModule,
+    PipesModule
   ]
 })
 export class SharedModule { }
