@@ -50,3 +50,8 @@ export type Page<T> = {
     last: boolean;
     empty: boolean;
 }
+
+export type EthereumAccount = {
+    account: string;
+    secret: string;
+}

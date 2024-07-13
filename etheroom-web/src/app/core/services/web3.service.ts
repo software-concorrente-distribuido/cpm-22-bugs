@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import Web3 from 'web3';
 import { environment } from '../../../environments/environments';
 import { ethers } from 'ethers';
+import { EthereumAccount } from '../types/types';
 declare var window: any;
 
 @Injectable({
@@ -64,9 +65,34 @@ export class Web3Service {
   async getSecret(): Promise<string> {
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
-    const secret = signer.signMessage('Login Etheroom');
+    
     //Função assíncrona que gera uma assinatura digital
+    const secret = signer.signMessage(this.message);
+
     return secret;
+  }
+
+  public async buildEthereumAccount(): Promise<EthereumAccount> {
+    await this.getAccount().then(
+      account => {
+        this.account = account;
+        console.log('Conta conectada:', account);
+      }
+    );
+
+    await this.getSecret().then(
+      secret => {
+        this.secret = secret;
+        console.log('Secret: ', secret);
+      }
+    );
+
+    const ethereumAccount: EthereumAccount = {
+      account: this.account,
+      secret: this.secret
+    };
+
+    return ethereumAccount;
   }
 
   async createBooking(nomeHotel: string, valor: number, checkIn: string, checkOut: string, roomNumber: number): Promise<number> {
