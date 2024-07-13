@@ -13,6 +13,7 @@ import { RoomDetailsComponent } from './views/hotel/manage-rooms/room-details/ro
 import { AddRoomComponent } from './views/hotel/manage-rooms/add-room/add-room.component';
 import { MyBookingsComponent } from './views/hotel/my-bookings/my-bookings.component';
 import { RegisterHotelComponent } from './views/shared/register/register-hotel/register-hotel.component';
+import { RoomPageComponent } from './views/shared/room-page/room-page.component';
 
 export const routes: Routes = [
     {
@@ -39,6 +40,10 @@ export const routes: Routes = [
     {
         path: 'home',
         component: HomeComponent
+    },
+    {
+        path: 'room-page',
+        component: RoomPageComponent
     },
 
     {

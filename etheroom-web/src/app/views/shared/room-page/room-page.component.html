@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etheroom</title>
+  <script src="../node_modules/web3/dist/web3.min.js"></script>
+  <link rel="stylesheet" href="./room-page.component.scss">
+</head>
+<body>
+  <main class="container">
+    <section class="main-section">
+      <div class="main-inner">
+        <div class="details-section">
+          <div class="details-content">
+            <div class="details-header">Bedroom in London City</div>
+            <div class="details-subheader">Tooley Street, Sector 70, United Kingdom</div>
+            <div class="details-images">
+              <div class="image-column-vertical">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/387c546cf5b06ccc6ab39959e3921aefd10a4dee29a1c4e3c67ac8bfde5f2347?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="vertical-img" alt="Bedroom Image 1" />
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/4b9e0e8d5671b0121d0090a6248abd7f06ba95f4419ffeddc149c73f920d3589?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="vertical-img" alt="Bedroom Image 2" />
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6602c1a67cffb4b9d5915f6ea81e12e047e59bb04908a862ebfbd36bda760b82?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="vertical-img" alt="Bedroom Image 3" />
+                <div class="overlay-img-container">
+                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d0edfb1a6f3901b24f51a25a84cb57f2fcb2aec272a91e0e66f4125884a65ccb?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="vertical-img" alt="Additional Bedroom Image" />
+                  <div class="overlay-text">+2</div>
+                </div>
+              </div>
+              <div class="image-column-horizontal">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1cebdd4f8e778b3d373e5cda3dd5b04477fbfee3b31acbf063508e82a7febf12?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="horizontal-img" alt="Main Bedroom Image" />
+              </div>
+            </div>
+            <div class="feature-segment">
+              <div class="details-icons">
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b4d0263c87749065617cba54b52250d74ac0d570676b88a2b8c189e7e3b3766b?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="details-icon" alt="Room Info Icon" />
+                <div class="details-title">
+                  Room Information:
+                </div>
+              </div>
+              <div class="multi-column">
+                <div class="column-left">
+                  <div class="feature-list">
+                    <ul>
+                      <li>Flat-screen TV</li>
+                      <li>Work Desk</li>
+                      <li>Iron and ironing board</li>
+                      <li>Free toilets</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="column-right">
+                  <div class="feature-list">
+                    <ul>
+                      <li>Hairdryer</li>
+                      <li>Free unlimited Wi-Fi</li>
+                      <li>Coffee & Tea Maker</li>
+                      <li>Telephone</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="booking-section">
+          <div class="tabs-container">
+            <div tabindex="0" role="button" class="tab-title"></div>
+          </div>
+          <div class="currency-price">
+            <img src="./../../../../assets/images/brand-ethereum-icon-158920-2@2x.png" class="segment-image" alt="Booking Image" />
+            <div class="price">0,053 ETH/night</div>
+          </div>
+          <div class="currency-converter">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/37fda18346278d8b756c8db18a54ada2bc588903e01c0bb3b9457dc95c40ec43?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="currency-icon" alt="Currency Icon" />
+            <div class="currency-text">Currency converter</div>
+          </div>
+          <div class="booking-info">
+            <div class="booking-details">
+              <div class="date-range">
+                <label for="checkin_date" class="input-date">Check In</label>
+                <div class="input-placeholder">Arrive Date</div>
+              </div>
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a79e335954cd14b9841d15ee0eb2f8b0147ebfe20db420462bb796f689a2302d?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="date-picker-icon" alt="Date Picker Icon" />
+            </div>
+            <div class="booking-details">
+              <div class="date-range">
+                <label for="checkout_date" class="input-date">Check Out</label>
+                <div class="input-placeholder">Leave Date</div>
+              </div>
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a79e335954cd14b9841d15ee0eb2f8b0147ebfe20db420462bb796f689a2302d?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="date-picker-icon" alt="Date Picker Icon" />
+            </div>
+          </div>
+          <div class="room-info">
+            <div class="room-details">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b4d0263c87749065617cba54b52250d74ac0d570676b88a2b8c189e7e3b3766b?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="details-icon" alt="Room Type Icon" />
+              <div class="details-title">Room Types</div>
+            </div>
+            <div class="guests-info">
+              <div class="guest-title">Number of Guests</div>
+              <div class="guest-range">1-4</div>
+            </div>
+          </div>
+          <div class="payment-section">
+            <div class="payment-details">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a88431bc1400ae5054577036f317a326ee820b196f7f10c61d8a24c3ed80295e?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="currency-icon" alt="Payment Icon" />
+              <div class="payment-text">Payment</div>
+            </div>
+            <div id="conectar">
+                <div tabindex="0" role="button" class="wallet-btn" id="btnConectar" (click)="CreateBooking()" style="display: flex">
+                <div class="wallet-label">BOOK ROOM</div>
+                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1d8dd0382c16396155cf11001f63ba813906cc645d629d201d185980b41cda00?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="wallet-icon" alt="Wallet Icon" />
+                </div>
+            </div>
+          </div>
+          <div class="help-btn">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/37fda18346278d8b756c8db18a54ada2bc588903e01c0bb3b9457dc95c40ec43?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="help-icon" alt="Help Icon" />
+            <div class="help-text">Need Help?</div>
+          </div>
+          <div>
+            <button id="reservar" style="display: none" class="room-reservation">Reservar quarto</button>
+        </div>
+        <div>
+          <div class="id-group">
+            <input id="bookingId" type="text" placeholder="ID da reserva" style="display: none; margin-bottom: 16px;" class="id-field"/>
+            <label for="name" class="id-label">ID da reserva</label>
+          </div>
+            <button id="obterReserva" style="display: none" class="get-reservation">Obter Reserva</button>
+        </div>
+        <div id="idReserva">&nbsp;</div>
+        <div id="detalhesReserva">&nbsp;</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+   document.getElementById("btnConectar").addEventListener('click', conectarMM);
+   </script>
+</body>
+</html>
