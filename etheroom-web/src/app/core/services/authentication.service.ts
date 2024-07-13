@@ -6,11 +6,16 @@ import { Router } from '@angular/router';
 import { HotelService } from './hotel.service';
 import { PersonService } from './person.service';
 import { environment } from '../../../environments/environments';
-import { AuthenticationRequest, AuthenticationResponse, JwtTokenClaims } from '../types/types';
 import { Optional } from '../utils/optional';
 import { Hotel } from '../models/hotel/hotel.model';
 import { Person } from '../models/person/person.model';
 import { jwtDecode } from 'jwt-decode';
+import { 
+  AuthenticationRequest,
+  AuthenticationResponse,
+  EthereumAccount,
+  JwtTokenClaims 
+} from '../types/types';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +101,15 @@ export class AuthenticationService {
   public isCurrentUserHotel = (): boolean => this.role === 'HOTEL';
 
   public isCurrentUserPerson = (): boolean => this.role === 'PERSON';
+
+  public buildAuthRequest(ethereumAccount: EthereumAccount): AuthenticationRequest {
+    const authRequest: AuthenticationRequest = {
+      ethereumAddress: ethereumAccount.account,
+      ethereumPublicKey: ethereumAccount.secret
+    };
+    
+    return authRequest;
+  }
 
   private onAuthenticationSuccess = (response: AuthenticationResponse): void => {
     Optional.ofNullable(response.accessToken)

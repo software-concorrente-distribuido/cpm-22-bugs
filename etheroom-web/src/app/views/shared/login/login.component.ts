@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
 import { Web3Service } from '../../../core/services/web3.service';
-import { AuthService } from '../../../core/services/auth.service';
 import { AuthenticationResponse, EthereumAccount } from '../../../core/types/types';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 
 @Component({
   selector: 'ether-login',
@@ -21,7 +21,7 @@ export class LoginComponent {
   constructor(
     public router: Router,
     public web3Service: Web3Service,
-    public authService: AuthService
+    public authService: AuthenticationService
   ) { }
 
   public async login(): Promise<void> {
@@ -65,7 +65,7 @@ export class LoginComponent {
   private handleLogin(ethereumAccount: EthereumAccount): void {
     const authRequest = this.authService.buildAuthRequest(ethereumAccount);
 
-    this.authService.loginWithEthereum(authRequest).subscribe({
+    this.authService.login(authRequest).subscribe({
       next: (response: AuthenticationResponse) => this.handleAuthResponse(response),
       error: (error) => console.error('Erro ao autenticar:', error)
     });
@@ -73,7 +73,6 @@ export class LoginComponent {
 
   private handleAuthResponse(response: AuthenticationResponse): void {
     if (response && response.accessToken) {
-      localStorage.setItem('accessToken', response.accessToken); // Armazena o token de acesso
       this.router.navigate(['/home']); // Navega para a página inicial
     } else {
       this.router.navigate(['/register']); // Navega para a página de registro
