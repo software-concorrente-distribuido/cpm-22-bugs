@@ -115,4 +115,44 @@ contract HotelBookingManager {
         return bookingContracts;
         //retorna os contratos de reserva da lista
     }
+
+    function getActiveBookings() public view returns (BookingInfo[] memory) {
+        uint256 activeCount = 0;
+        for (uint256 i = 1; i <= bookingCount; i++) {
+            if (bookings[i].isActive) {
+                activeCount++;
+            }
+        }
+
+        BookingInfo[] memory activeBookings = new BookingInfo[](activeCount);
+        uint256 index = 0;
+        for (uint256 i = 1; i <= bookingCount; i++) {
+            if (bookings[i].isActive) {
+                activeBookings[index] = bookings[i];
+                index++;
+            }
+        }
+
+        return activeBookings;
+    }
+
+    function getBookingsByUser(address _user) public view returns (BookingInfo[] memory) {
+        uint256 userBookingCount = 0;
+        for (uint256 i = 1; i <= bookingCount; i++) {
+            if (bookings[i].guest == _user) {
+                userBookingCount++;
+            }
+        }
+
+        BookingInfo[] memory userBookings = new BookingInfo[](userBookingCount);
+        uint256 index = 0;
+        for (uint256 i = 1; i <= bookingCount; i++) {
+            if (bookings[i].guest == _user) {
+                userBookings[index] = bookings[i];
+                index++;
+            }
+        }
+
+        return userBookings;
+    }
 }
