@@ -9,4 +9,6 @@ public interface IUserService {
 
     void handleUserByRole(User user, UserRole userRole);
 
+    String findRoleByUserId(String userId);
+
 }
