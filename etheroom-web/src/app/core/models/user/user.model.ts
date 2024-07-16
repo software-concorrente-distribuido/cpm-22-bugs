@@ -1,3 +1,4 @@
+import { EthereumAccount } from "../../types/types";
 import { Media } from "../media/media.model";
 
 export class User {
@@ -29,6 +30,13 @@ export class User {
         this.profilePicture = profilePicture;
         this.updatedAt = updatedAt;
         this.createdAt = createdAt;
+    }
+
+    public static fromEthereumAccount(ethereumAccount: EthereumAccount): User {
+        const user: User = new User();
+        user.ethereumAddress = ethereumAccount.account;
+        user.ethereumPublicKey = ethereumAccount.secret;
+        return user;
     }
 
 }

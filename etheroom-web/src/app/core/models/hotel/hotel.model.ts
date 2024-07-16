@@ -44,4 +44,10 @@ export class Hotel {
         this.createdAt = createdAt;
     }
 
+    public static fromUser(user: User): Hotel {
+        const hotel: Hotel = new Hotel();
+        hotel.user = user;
+        return hotel;
+    }
+
 }

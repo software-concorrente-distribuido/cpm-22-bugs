@@ -30,4 +30,10 @@ export class Person {
         this.createdAt = createdAt;
     }
 
+    public static fromUser(user: User): Person {
+        const person: Person = new Person();
+        person.user = user;
+        return person;
+    }
+
 }
