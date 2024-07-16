@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "jk_media")
+@Table(name = "etheroom_media")
 @Entity
 public class Media extends BaseEntity {
 

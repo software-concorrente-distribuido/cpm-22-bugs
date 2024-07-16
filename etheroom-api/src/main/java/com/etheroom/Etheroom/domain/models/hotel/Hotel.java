@@ -46,7 +46,7 @@ public class Hotel extends BaseEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "etheroom_hotel_convenience",
+            name = "etheroom_hotel_conveniences",
             joinColumns = @JoinColumn(name = "hotel_id"),
             inverseJoinColumns = @JoinColumn(name = "convenience_id")
     )
