@@ -5,3 +5,8 @@ export enum EnumsNames {
     HOTEL_CONVENIENCE = 'hotelConvenience',
     HOTEL_ROOM_CONVENIENCE = 'hotelRoomConvenience'
 }
+
+export enum UserRole {
+    USER='USER',
+    HOTEL='HOTEL'
+}

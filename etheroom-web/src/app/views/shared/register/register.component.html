@@ -1,0 +1,32 @@
+<section>
+    <h1>Sign Up</h1>
+    <ng-container *ngIf="userForm$ | async as userForm; else roleNotSelected">
+        <etheroom-person-form *ngIf="isPerson; else hotelForm" [personForm]="userForm"></etheroom-person-form>
+        <ng-template #hotelForm>
+            <etheroom-hotel-form [hotelForm]="userForm"></etheroom-hotel-form>
+        </ng-template>
+        <ether-button (onClick)="reset()">Back</ether-button>
+        <ether-button (onClick)="onSubmit()">Submit</ether-button>
+    </ng-container>
+    <ng-template #roleNotSelected>
+        <div>
+            <img alt="Picture that shows a hotel with a pool at night" />
+            <div>
+                <p>
+                    Our services use the Metamask Browser Plugin.
+                    Make sure you have installed the <a href="https://metamask.io/download/">Metamask plugin</a> in your browser.
+                </p>
+                <div *ngIf="ethereumAccount$ | async; else loadingAccount">
+                    <ether-button>Create Guest</ether-button>
+                    <ether-button>Create Hotel</ether-button>
+                </div>
+                <ng-template #loadingAccount>
+                    <p>We weren't able to load your Metamask Account data</p>
+                    <p>Check if you have the Plugin installed and try again</p>
+                    <ether-button>Reload Metamask Data</ether-button>
+                </ng-template>
+                <p>Already have an account? <a routerLink="/login">Log in</a></p>
+            </div>
+        </div>
+    </ng-template>
+</section>
