@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
 import { Web3Service } from '../../../core/services/web3.service';
 import { AuthenticationResponse, EthereumAccount } from '../../../core/types/types';
@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../../core/services/authentication.ser
 @Component({
   selector: 'ether-login',
   standalone: true,
-  imports: [EtherButtonTextIconComponent],
+  imports: [EtherButtonTextIconComponent, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   host: {

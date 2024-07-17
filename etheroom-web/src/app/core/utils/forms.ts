@@ -10,9 +10,10 @@ import { Guest } from "../models/booking/aggregates/guest.model";
 import { Booking } from "../models/booking/booking.model";
 import { Hotel } from "../models/hotel/hotel.model";
 import { HotelRoom } from "../models/hotel/aggregates/hotel-room.model";
+import { getProvider } from "../providers/global.providers";
 
 export const createBookingForm = (booking: Booking = null): FormGroup => {
-    const formBuilder: FormBuilder = inject(FormBuilder);
+    const formBuilder: FormBuilder = getFormBuilder();
     return formBuilder.group({
         id: [booking?.id],
         hotelRoomId: [booking?.hotelRoomId, [Validators.required]],
@@ -30,7 +31,7 @@ export const createBookingForm = (booking: Booking = null): FormGroup => {
 }
 
 export const createHotelRoomForm = (hotelRoom: HotelRoom = null): FormGroup => {
-    const formBuilder: FormBuilder = inject(FormBuilder);
+    const formBuilder: FormBuilder = getFormBuilder();
     return formBuilder.group({
         id: [hotelRoom?.id],
         description: [hotelRoom?.description, [Validators.required, Validators.maxLength(255)]],
@@ -48,13 +49,14 @@ export const createHotelRoomForm = (hotelRoom: HotelRoom = null): FormGroup => {
 }
 
 export const createHotelForm = (hotel: Hotel = null): FormGroup => {
-    const formBuilder: FormBuilder = inject(FormBuilder);
-    return inject(FormBuilder).group({
+    const formBuilder: FormBuilder = getFormBuilder();
+    return getFormBuilder().group({
         id: [hotel?.id],
         name: [hotel?.name, [Validators.required, Validators.maxLength(100)]],
         description: [hotel?.description, [Validators.required, Validators.maxLength(255)]],
         user: createUserForm(hotel?.user),
         address: createAddressForm(hotel?.address),
+        contact: createContactForm(hotel?.contact),
         thumbnail: [hotel?.thumbnail],
         conveniences: formBuilder.array(hotel?.conveniences?.map(convenience => createConvenienceForm(convenience))),
         images: [hotel?.images],
@@ -65,7 +67,7 @@ export const createHotelForm = (hotel: Hotel = null): FormGroup => {
 }
 
 export const createPersonForm = (person: Person = null): FormGroup => {
-    return inject(FormBuilder).group({
+    return getFormBuilder().group({
         id: [person?.id],
         name: [person?.name, [Validators.required, Validators.maxLength(100)]],
         user: createUserForm(person?.user),
@@ -77,10 +79,10 @@ export const createPersonForm = (person: Person = null): FormGroup => {
 }
 
 export const createUserForm = (user: User = null): FormGroup => {
-    return inject(FormBuilder).group({
+    return getFormBuilder().group({
         id: [user?.id],
-        ethereumAddress: [user?.ethereumAddress, [Validators.required, Validators.maxLength(255)]],
-        ethereumPublicKey: [user?.ethereumPublicKey, [Validators.required, Validators.maxLength(255)]],
+        ethereumAddress: [{value: user?.ethereumAddress, disabled: true}, [Validators.required, Validators.maxLength(255)]],
+        ethereumPublicKey: [{value: user?.ethereumPublicKey, disabled: true}, [Validators.required, Validators.maxLength(255)]],
         email: [user?.email, [Validators.required, Validators.maxLength(50)]],
         role: [user?.role],
         profilePicture: [user?.profilePicture],
@@ -90,7 +92,7 @@ export const createUserForm = (user: User = null): FormGroup => {
 }
 
 export const createContactForm = (contact: Contact = null): FormGroup => {
-    return inject(FormBuilder).group({
+    return getFormBuilder().group({
         id: [contact?.id],
         phone: [contact?.phone, [Validators.required, Validators.maxLength(20)]],
         cellphone: [contact?.cellphone, [Validators.maxLength(20)]],
@@ -100,7 +102,7 @@ export const createContactForm = (contact: Contact = null): FormGroup => {
 }
 
 export const createAddressForm = (address: Address = null): FormGroup => {
-    return inject(FormBuilder).group({
+    return getFormBuilder().group({
         id: [address?.id],
         description: [address?.description, [Validators.required, Validators.maxLength(255)]],
         country: [address?.country, [Validators.required, Validators.maxLength(50)]],
@@ -111,7 +113,7 @@ export const createAddressForm = (address: Address = null): FormGroup => {
 }
 
 export const createGuestForm = (guest: Guest = null): FormGroup => {
-    return inject(FormBuilder).group({
+    return getFormBuilder().group({
         id: [guest?.id],
         name: [guest?.name, [Validators.required, Validators.maxLength(100)]],
         email: [guest?.email, [Validators.maxLength(50)]],
@@ -122,7 +124,7 @@ export const createGuestForm = (guest: Guest = null): FormGroup => {
 }
 
 export const createTouristSpotForm = (touristSpot: TouristSpot = null): FormGroup => {
-    return inject(FormBuilder).group({
+    return getFormBuilder().group({
         id: [touristSpot?.id],
         touristSpot: [touristSpot?.touristSpot, [Validators.required, Validators.maxLength(255)]],
         updatedAt: [touristSpot?.updatedAt],
@@ -131,10 +133,12 @@ export const createTouristSpotForm = (touristSpot: TouristSpot = null): FormGrou
 }
 
 export const createConvenienceForm = (convenience: Convenience = null): FormGroup => {
-    return inject(FormBuilder).group({
+    return getFormBuilder().group({
         id: [convenience?.id],
         type: [convenience?.type, [Validators.required, Validators.maxLength(100)]],
         updatedAt: [convenience?.updatedAt],
         createdAt: [convenience?.createdAt]
     });
 }
+
+const getFormBuilder = (): FormBuilder => getProvider(FormBuilder);

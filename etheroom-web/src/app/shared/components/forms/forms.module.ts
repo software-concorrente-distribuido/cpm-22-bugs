@@ -5,19 +5,25 @@ import { HotelFormComponent } from './hotel-form/hotel-form.component';
 import { PersonFormComponent } from './person-form/person-form.component';
 import { FormsModule as AngularFormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputsModule } from '../inputs/inputs.module';
+import { MediaModule } from "../media/media.module";
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { AddressFormComponent } from './address-form/address-form.component';
 
 @NgModule({
   declarations: [
     UserFormComponent,
     HotelFormComponent,
-    PersonFormComponent
+    PersonFormComponent,
+    ContactFormComponent,
+    AddressFormComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     AngularFormsModule,
-    InputsModule
-  ],
+    InputsModule,
+    MediaModule
+],
   exports: [
     UserFormComponent,
     HotelFormComponent,

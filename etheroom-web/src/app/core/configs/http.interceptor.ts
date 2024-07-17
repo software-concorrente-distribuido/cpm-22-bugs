@@ -12,6 +12,7 @@ const UNHANDLED_ERROR: number = 0;
 export const etheroomInterceptor: HttpInterceptorFn = (req, next) => {
     const authReq = Optional.ofNullable(localStorage.getItem(TOKEN_KEY))
         .filter(() => isMainAPI(req.url))
+        .filter(() => !isOAuthRequest(req.url))
         .map(token => req.clone({ 
                 headers: req.headers.set('Authorization', `Bearer ${token}`) 
         }))
@@ -31,4 +32,8 @@ const errorHandler = (error: HttpErrorResponse): Observable<never> => {
 
 const isMainAPI = (url: string): boolean => {
     return url.includes('localhost') || url.includes('etheroom');
+}
+
+const isOAuthRequest = (url: string): boolean => {
+    return url.includes('oauth');
 }
