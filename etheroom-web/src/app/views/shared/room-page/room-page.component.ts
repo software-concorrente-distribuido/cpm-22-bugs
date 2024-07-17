@@ -34,6 +34,15 @@ export class RoomPageComponent implements OnInit {
         const booking = await this.web3.getBooking(id);
         await this.web3.startBooking(id, this.todayDate);
         console.log(booking);
+
+        // Obtenha o endereço do contrato de reserva do booking criado
+        const bookingContractAddress = booking.bookingContract;
+
+        const checkin = await this.web3.getCheckInDate(bookingContractAddress);
+        const checkout = await this.web3.getCheckOutDate(bookingContractAddress);
+        console.log('Check-In:' + checkin);
+        console.log('Check-Out:' + checkout);
+
         alert("Booking created! ID: " + id);
       } catch (error) {
         console.error("Error creating booking:", error);

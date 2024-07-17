@@ -149,4 +149,79 @@ export class Web3Service {
     }
   }
 
+  // Chama a função getGuest do contrato
+  async getGuest(bookingContractAddress: string): Promise<string> {
+    const contract = new this.web3.eth.Contract(this.contractABIBooking, bookingContractAddress);
+    return await contract.methods.getGuest().call();
+  } catch (error) {
+    console.error('Erro ao obter o hóspede:', error);
+    throw error;
+  }
+
+  // Chama a função getHotel do contrato
+  async getHotel(bookingContractAddress: string): Promise<string> {
+    try {
+      const contract = new this.web3.eth.Contract(this.contractABIBooking, bookingContractAddress);
+      return await contract.methods.getHotel().call();
+    } catch (error) {
+      console.error('Erro ao obter o hotel:', error);
+      throw error;
+    }
+  }
+
+  // Chama a função getRoomNumber do contrato
+  async getRoomNumber(bookingContractAddress: string): Promise<number> {
+    try {
+      const contract = new this.web3.eth.Contract(this.contractABIBooking, bookingContractAddress);
+      return await contract.methods.getRoomNumber().call();
+    } catch (error) {
+      console.error('Erro ao obter o numero do quarto:', error);
+      throw error;
+    }
+  }
+
+  // Chama a função getAmount do contrato
+  async getAmount(bookingContractAddress: string): Promise<number> {
+    try {
+      const contract = new this.web3.eth.Contract(this.contractABIBooking, bookingContractAddress);
+      return await contract.methods.getAmount().call();
+    } catch (error) {
+      console.error('Erro ao obter o valor:', error);
+      throw error;
+    }
+  }
+
+    // Chama a função getCheckInDate do contrato
+    async getCheckInDate(bookingContractAddress: string): Promise<string> {
+      try {
+        const contract = new this.web3.eth.Contract(this.contractABIBooking, bookingContractAddress);
+        return await contract.methods.getCheckInDate().call();
+      } catch (error) {
+        console.error('Erro ao obter a data de check-in:', error);
+        throw error;
+      }
+    }
+
+  // Chama a função getCheckOutDate do contrato
+  async getCheckOutDate(bookingContractAddress: string): Promise<string> {
+    try {
+      const contract = new this.web3.eth.Contract(this.contractABIBooking, bookingContractAddress);
+      return await contract.methods.getCheckOutDate().call();
+    } catch (error) {
+      console.error('Erro ao obter a data de check-out:', error);
+      throw error;
+    }
+  }
+
+  // Chama a função getIsCancelled do contrato
+  async getIsCancelled(bookingContractAddress: string): Promise<boolean> {
+    try {
+      const contract = new this.web3.eth.Contract(this.contractABIBooking, bookingContractAddress);
+      return await contract.methods.getIsCancelled().call();
+    } catch (error) {
+      console.error('Erro ao obter o status da reserva:', error);
+      throw error;
+    }
+  }
+
 }
