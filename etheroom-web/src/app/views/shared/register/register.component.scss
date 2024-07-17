@@ -1,0 +1,49 @@
+:host {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+}
+
+div.sign-up-welcome-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > * {
+        flex: 1;
+    }
+    > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+div.actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    ether-button {
+        width: clamp(180px, 50%, 240px);
+    }
+}
+
+div.sign-up-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    > img {
+        height: 4rem;
+    }
+}

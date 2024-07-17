@@ -30,6 +30,8 @@ export class RegisterComponent extends UtilComponent implements OnInit {
 
   public isPerson: boolean = false;
 
+  public connectionAttempted: boolean = false;
+
   protected override pageTitle: string = "New Account";
   protected override pageDescription: string = "Create a new account to access our services";
   
@@ -40,10 +42,12 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     injector: Injector
   ) {
     super(injector);
+    this.onInit();
   }
 
-  public ngOnInit(): void {
-      
+  public async ngOnInit(): Promise<void> {
+      await this.web3Service.initializeWeb3();
+      this.loadEthereumAccount();
   }
 
   public onClickPerson(): void {
@@ -67,6 +71,16 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     else {
       this.snackbar.info("Please fill all the required fields");
     }
+  }
+
+  public retryConnection(): void {
+    this.loadEthereumAccount();
+  }
+
+  private loadEthereumAccount(): void {
+    this.web3Service.buildEthereumAccount().then(
+      account => this.ethereumAccount$.next(account)
+    ).catch(() => this.connectionAttempted = true);
   }
 
   private createPerson(person: Person): void {
