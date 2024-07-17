@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
       case 'guest':
         this.navRoutes = [
           { path: '/home', label: 'HOME' },
-          { path: '/guest/all-hotels', label: 'ALL HOTELS' },
+          { path: '/all-hotels', label: 'ALL HOTELS' },
           { path: '/guest/your-bookings', label: 'MY BOOKINGS' },
           { path: '/guest/profile', label: 'PROFILE' },
           { path: '/faq', label: 'FAQ' }

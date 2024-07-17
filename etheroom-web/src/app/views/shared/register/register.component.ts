@@ -63,7 +63,7 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     if(form.valid) {
       this.loading.start();
       this.isPerson ? this.createPerson(form.value) : this.createHotel(form.value);
-    } 
+    }
     else {
       this.snackbar.info("Please fill all the required fields");
     }
