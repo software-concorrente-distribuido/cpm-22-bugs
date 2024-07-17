@@ -114,19 +114,23 @@
             <div class="help-text">Need Help?</div>
           </div>
           <div>
-            <button id="reservar" style="display: none" class="room-reservation">Reservar quarto</button>
-        </div>
-        <div>
-            <button id="obterReserva" style="display: none" class="get-reservation">Obter Reserva</button>
-        </div>
-        <div id="idReserva">&nbsp;</div>
-        <div id="detalhesReserva">&nbsp;</div>
+            <button id="openPopup" class="room-reservation">Abrir Popup</button>
+          </div>
+
+          <!-- Popup Container -->
+<div id="popupContainer" class="popup-container" style="display: none;">
+  <div class="popup-content">
+    <span id="closePopup" class="close">&times;</span>
+    <h2>Insira o ID da Reserva</h2>
+    <input type="text" id="reservationIdInput" placeholder="ID da Reserva">
+    <button id="getReservationInfo">Obter Informações</button>
+    <div id="reservationInfoContainer"></div>
+  </div>
+</div>
+
         </div>
       </div>
     </section>
   </main>
-  <script>
-   document.getElementById("btnConectar").addEventListener('click', conectarMM);
-   </script>
 </body>
 </html>

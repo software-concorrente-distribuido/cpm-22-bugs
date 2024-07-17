@@ -46,8 +46,7 @@ export class LoginComponent {
       await this.web3Service.buildEthereumAccount().then(
         account => this.ethereumAccount = account
       ); // Cria um objeto EthereumAccount com o endereço Ethereum e a chave pública
-  
-      this.router.navigate(['/home']); // PROVISÓRIO
+
 
       if (!this.ethereumAccount.secret) {
         throw new Error('User rejected signing the message');
