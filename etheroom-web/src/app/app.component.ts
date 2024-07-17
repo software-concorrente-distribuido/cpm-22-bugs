@@ -6,6 +6,7 @@ import { EtherPageComponent } from './shared/components/containers/ether-page/et
 import { SharedModule } from './shared/shared.module';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { ApplicationService } from './core/services/application.service';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,10 @@ export class AppComponent implements OnInit, OnDestroy {
   public showHeader: boolean = true;
   private routerSubscription!: Subscription;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    appService: ApplicationService
+  ) { }
   
   ngOnInit(): void {
     this.routerSubscription = this.router.events.pipe(
