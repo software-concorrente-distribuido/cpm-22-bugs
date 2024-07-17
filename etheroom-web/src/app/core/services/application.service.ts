@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { setProvider } from './../providers/global.providers';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Enum } from '../types/types';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environments';
+import { EnumsNames } from '../data/enums';
+import { FormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +20,19 @@ export class ApplicationService {
     private http: HttpClient
   ) {
     this.appApiUrl = `${environment.apiUrl}/${this.APP_PATH}`;
+    console.log("dfjfdskljsdflk")
+    this.createGlobalProviders();
   }
 
-  public findEnumByName(name: string): Observable<Enum[]> {
+  public findEnumByName(name: EnumsNames): Observable<Enum[]> {
     return this.http.get<Enum[]>(
       `${this.appApiUrl}/enum/${name}`
     );
+  }
+
+  private createGlobalProviders(): void {
+    console.log('Creating global providers...');
+    setProvider(FormBuilder, inject(FormBuilder));
   }
   
 }
