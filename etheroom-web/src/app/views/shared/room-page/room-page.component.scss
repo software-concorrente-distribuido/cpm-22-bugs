@@ -405,3 +405,15 @@ ul, li {
 .help-icon {
     width: 24px;
 }
+
+.input-placeholder {
+    border: none;
+    background: none;
+    color: inherit; /* herda a cor do texto */
+    font: inherit; /* herda a fonte */
+    outline: none; /* remove o contorno ao focar */
+    color:#979797;
+    cursor: text;
+
+}
+

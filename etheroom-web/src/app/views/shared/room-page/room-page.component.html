@@ -13,8 +13,8 @@
       <div class="main-inner">
         <div class="details-section">
           <div class="details-content">
-            <div class="details-header">Bedroom in London City</div>
-            <div class="details-subheader">Tooley Street, Sector 70, United Kingdom</div>
+            <div class="details-header">Bedroom in Fairmont Monte Carlo</div>
+            <div class="details-subheader">12 Av. des Spéluges, 980000 Monaco, Mônaco</div>
             <div class="details-images">
               <div class="image-column-vertical">
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/387c546cf5b06ccc6ab39959e3921aefd10a4dee29a1c4e3c67ac8bfde5f2347?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="vertical-img" alt="Bedroom Image 1" />
@@ -67,7 +67,7 @@
           </div>
           <div class="currency-price">
             <img src="./../../../../assets/images/brand-ethereum-icon-158920-2@2x.png" class="segment-image" alt="Booking Image" />
-            <div class="price">0,053 ETH/night</div>
+            <div class="price">0,16 ETH/night</div>
           </div>
           <div class="currency-converter">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/37fda18346278d8b756c8db18a54ada2bc588903e01c0bb3b9457dc95c40ec43?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="currency-icon" alt="Currency Icon" />
@@ -77,16 +77,14 @@
             <div class="booking-details">
               <div class="date-range">
                 <label for="checkin_date" class="input-date">Check In</label>
-                <div class="input-placeholder">Arrive Date</div>
+                <input type="date" id="checkin_date" class="input-placeholder" min="{{ todayDate }}">
               </div>
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a79e335954cd14b9841d15ee0eb2f8b0147ebfe20db420462bb796f689a2302d?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="date-picker-icon" alt="Date Picker Icon" />
             </div>
             <div class="booking-details">
               <div class="date-range">
                 <label for="checkout_date" class="input-date">Check Out</label>
-                <div class="input-placeholder">Leave Date</div>
+                <input type="date" id="checkout_date" class="input-placeholder" min="{{ todayDate }}">
               </div>
-              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/a79e335954cd14b9841d15ee0eb2f8b0147ebfe20db420462bb796f689a2302d?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="date-picker-icon" alt="Date Picker Icon" />
             </div>
           </div>
           <div class="room-info">
@@ -119,10 +117,6 @@
             <button id="reservar" style="display: none" class="room-reservation">Reservar quarto</button>
         </div>
         <div>
-          <div class="id-group">
-            <input id="bookingId" type="text" placeholder="ID da reserva" style="display: none; margin-bottom: 16px;" class="id-field"/>
-            <label for="name" class="id-label">ID da reserva</label>
-          </div>
             <button id="obterReserva" style="display: none" class="get-reservation">Obter Reserva</button>
         </div>
         <div id="idReserva">&nbsp;</div>
