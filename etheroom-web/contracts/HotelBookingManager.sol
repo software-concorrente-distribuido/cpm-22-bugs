@@ -7,7 +7,7 @@ contract HotelBookingManager {
     address public owner;
     uint256 public bookingCount = 0;
     address[] public bookingContracts;
-    //lista de endereços de contratos de reserva
+    // lista de endereços de contratos de reserva
 
     struct BookingInfo {
         address bookingContract;
@@ -48,44 +48,45 @@ contract HotelBookingManager {
         owner = msg.sender;
     }
 
-    function createBooking(string memory _hotel, uint256 _amount,string memory  _checkInDate, string memory _checkOutDate, uint256 _roomNumber) public payable {
+    function createBooking(string memory _hotel, uint256 _amount, string memory _checkInDate, string memory _checkOutDate, uint256 _roomNumber, address payable _hotelAddress) public payable {
         // Verifica se o valor enviado na transação é igual ao valor esperado da reserva, caso não seja, a transação falha e exibe a mensagem
         require(msg.value == _amount, "Valor de pagamento incorreto");
 
         // Cria uma instância de um novo contrato de reserva individual (HotelBooking)
-        HotelBooking newBooking = new HotelBooking(
-        msg.sender, //endereço do hóspede
-        _hotel, //nome do hotel
-        _amount, //valor pago
-        _checkInDate,
-        _checkOutDate,
-        _roomNumber
-    );
+        HotelBooking newBooking = new HotelBooking{value: msg.value}(
+            msg.sender, // endereço do hóspede
+            _hotel, // nome do hotel
+            _amount, // valor pago
+            _checkInDate,
+            _checkOutDate,
+            _roomNumber,
+            _hotelAddress
+        );
 
-    // Incrementa o contador de reservas para gerar um novo ID de reserva
-    bookingCount++;
+        // Incrementa o contador de reservas para gerar um novo ID de reserva
+        bookingCount++;
 
-    // Registra as informações da nova reserva no mapeamento 'bookings' usando o novo ID de reserva como chave
-    bookings[bookingCount] = BookingInfo({
-        bookingContract: address(newBooking),
-        guest: msg.sender,
-        hotel: _hotel,
-        amount: _amount,
-        isActive: true,
-        roomNumber: _roomNumber
-    });
+        // Registra as informações da nova reserva no mapeamento 'bookings' usando o novo ID de reserva como chave
+        bookings[bookingCount] = BookingInfo({
+            bookingContract: address(newBooking),
+            guest: msg.sender,
+            hotel: _hotel,
+            amount: _amount,
+            isActive: true,
+            roomNumber: _roomNumber
+        });
 
-    // Adiciona o endereço do novo contrato de reserva à lista de contratos de reserva
-    bookingContracts.push(address(newBooking));
+        // Adiciona o endereço do novo contrato de reserva à lista de contratos de reserva
+        bookingContracts.push(address(newBooking));
 
-    // Emite o evento 'BookingCreated' para notificar sobre a nova reserva
-    emit BookingCreated(
-        bookingCount,
-        address(newBooking),
-        msg.sender,
-        _hotel,
-        _amount,
-        _roomNumber
+        // Emite o evento 'BookingCreated' para notificar sobre a nova reserva
+        emit BookingCreated(
+            bookingCount,
+            address(newBooking),
+            msg.sender,
+            _hotel,
+            _amount,
+            _roomNumber
         );
     }
 
@@ -113,7 +114,7 @@ contract HotelBookingManager {
 
     function getBookingContracts() public view returns (address[] memory) {
         return bookingContracts;
-        //retorna os contratos de reserva da lista
+        // retorna os contratos de reserva da lista
     }
 
     function getActiveBookings() public view returns (BookingInfo[] memory) {

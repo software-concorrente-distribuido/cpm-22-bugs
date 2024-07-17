@@ -22,21 +22,17 @@ export class RoomPageComponent implements OnInit {
     console.log(this.todayDate);
   }
 
-  public async CreateBooking() {
-    
-    // Verificando se o Web3 está conectado
+  public async createBooking() {
     this.web3.isConnected();
 
-     // Obtendo os valores dos campos de data
-     const checkinDate = (document.getElementById('checkin_date') as HTMLInputElement).value;
-     const checkoutDate = (document.getElementById('checkout_date') as HTMLInputElement).value;
+    const checkinDate = (document.getElementById('checkin_date') as HTMLInputElement).value;
+    const checkoutDate = (document.getElementById('checkout_date') as HTMLInputElement).value;
 
-    // Verificando se as datas não estão vazias
-     if (checkinDate && checkoutDate) {
+    if (checkinDate && checkoutDate) {
       try {
-        // Criando a reserva na blockchain
-        const id = await this.web3.createBooking("Hilton London Tower, Tooley Street", 0.053, checkinDate, checkoutDate, 302);
+        const id = await this.web3.createBooking("Hilton London Tower, Tooley Street", 0.053, checkinDate, checkoutDate, 302, '0x80524E6e4644eFc240BCd03adE126bBe6E7CbB79');
         const booking = await this.web3.getBooking(id);
+        await this.web3.startBooking(id, this.todayDate);
         console.log(booking);
         alert("Booking created! ID: " + id);
       } catch (error) {
@@ -45,6 +41,16 @@ export class RoomPageComponent implements OnInit {
       }
     } else {
       alert("Please select both check-in and check-out dates.");
+    }
+  }
+
+  public async startBooking(bookingId: number) {
+    try {
+      await this.web3.startBooking(bookingId, this.todayDate);
+      alert("Booking started!");
+    } catch (error) {
+      console.error("Error starting booking:", error);
+      alert("Failed to start booking.");
     }
   }
 }

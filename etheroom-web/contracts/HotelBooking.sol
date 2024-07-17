@@ -9,15 +9,25 @@ contract HotelBooking {
     string public checkInDate;
     string public checkOutDate;
     bool public isCancelled;
+    address payable public hotelAddress;
 
     event BookingCancelled(address indexed guest, uint256 refundAmount);
+    event BookingStarted(address indexed guest, address indexed hotel, uint256 amount);
 
     modifier onlyGuest() {
         require(msg.sender == guest, "Erro, so pode ser feito pelo hospede");
         _;
     }
 
-    constructor(address _guest, string memory _hotel, uint256 _amount, string memory _checkInDate, string memory _checkOutDate, uint256 _roomNumber) {
+    constructor(
+        address _guest,
+        string memory _hotel,
+        uint256 _amount,
+        string memory _checkInDate,
+        string memory _checkOutDate,
+        uint256 _roomNumber,
+        address payable _hotelAddress
+    ) payable {
         guest = _guest;
         hotel = _hotel;
         amount = _amount;
@@ -25,6 +35,7 @@ contract HotelBooking {
         checkInDate = _checkInDate;
         checkOutDate = _checkOutDate;
         isCancelled = false;
+        hotelAddress = _hotelAddress;
     }
 
     function cancelBooking(address _caller) public onlyGuest {
@@ -39,11 +50,19 @@ contract HotelBooking {
     }
 
     function calculateRefund() internal view returns (uint256) {
-        // Lógica para calcular reembolso baseada na política de cancelamento
-        // Uma ideia: podemos assumir que o reembolso é proporcional aos dias restantes antes do check-in.
-        // Por exemplo, 100% se cancelado com mais de 30 dias de antecedência, 50% se entre 30 e 7 dias, 0% se menos de 7 dias.
-        // Assumindo 100% de reembolso
         return amount;
+    }
+
+    function startBooking(string memory currentDate) public {
+        require(!isCancelled, "Reserva ja cancelada");
+        require(isCheckInDate(currentDate), "Ainda nao e o dia do check-in");
+
+        hotelAddress.transfer(amount);
+        emit BookingStarted(guest, hotelAddress, amount);
+    }
+
+    function isCheckInDate(string memory currentDate) internal view returns (bool) {
+        return keccak256(abi.encodePacked(checkInDate)) == keccak256(abi.encodePacked(currentDate));
     }
 
     function getBookingDetails() public view returns (
@@ -93,5 +112,4 @@ contract HotelBooking {
     function getIsCancelled() public view returns (bool) {
         return isCancelled;
     }
-    
 }
