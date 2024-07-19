@@ -41,17 +41,34 @@ export class RoomPageComponent implements OnInit {
     getReservationInfoBtn.addEventListener('click', () => this.getReservationInfo());
   }
 
+  // Função para calcular o número de dias entre duas datas
+  private calculateDays(checkinDate: string, checkoutDate: string): number {
+    const checkin = new Date(checkinDate);
+    const checkout = new Date(checkoutDate);
+    const timeDifference = checkout.getTime() - checkin.getTime();
+    const dayDifference = timeDifference / (1000 * 3600 * 24); // Converte a diferença de tempo de milissegundos para dias
+    return dayDifference;
+  }
+
+  // Função para calcular o preço final da reserva
+  private calculatePrice(checkinDate: string, checkoutDate: string, dailyRate: number): number {
+    const numberOfDays = this.calculateDays(checkinDate, checkoutDate);
+    return numberOfDays * dailyRate;
+  }
+
   public async createBooking() {
     this.web3.isConnected();
 
     const checkinDate = (document.getElementById('checkin_date') as HTMLInputElement).value;
     const checkoutDate = (document.getElementById('checkout_date') as HTMLInputElement).value;
+    const dailyRate = 0.16; // Definindo o preço diário
 
     if (checkinDate && checkoutDate) {
       try {
-        const id = await this.web3.createBooking("Hilton London Tower, Tooley Street", 0.053, checkinDate, checkoutDate, 302, '0x80524E6e4644eFc240BCd03adE126bBe6E7CbB79');
+        const finalPrice = this.calculatePrice(checkinDate, checkoutDate, dailyRate);
+        const id = await this.web3.createBooking("Hilton London Tower, Tooley Street", finalPrice, checkinDate, checkoutDate, 302, '0xa5F936CCDc04422ae960D48De5fB7E4378Bb2E47');
         const booking = await this.web3.getBooking(id);
-        //await this.web3.startBooking(id, this.todayDate);
+        await this.web3.startBooking(id, this.todayDate);
         console.log(booking);
 
         alert("Booking created! ID: " + id);
