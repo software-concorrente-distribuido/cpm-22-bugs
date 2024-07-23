@@ -1,78 +1,77 @@
 <section>
-    <div class="container">
-        <div class="room-details">
-            <h2>Bedroom in London City</h2>
-            <h3>Tooley Street, Sector 70, United Kingdom</h3>
-    
-            <div class="room-information">
-                <div class="infos">
-                    <ether-icon-text [iconName]="'house'">Room information</ether-icon-text>
-                    <ul>
-                        <li>Flat-screen TV</li>
-                        <li>Work Desk</li>
-                        <li>Iron and ironing board</li>
-                        <li>Free toilets</li>
-                        <li>Hairdryer</li>
-                        <li>Free unlimited Wi-Fi</li>
-                        <li>Coffee & Tea Maker</li>
-                        <li>Telephone</li>
-                    </ul>
+    <form *ngIf="hotelRoomForm$ | async as hotelRoomForm" [formGroup]="hotelRoomForm">
+        <div class="container">
+            <div class="room-details">
+                <h2>
+                    {{ (newHotelRoom$ | async) ? 'Create Room' : hotel?.name }}
+                </h2>
+                <h3>
+                    {{ (newHotelRoom$ | async) ? 'Create Room' : hotel?.address?.description }}
+                </h3>
+        
+                <div class="room-information">
+                    <div class="infos">
+                        <!-- <ether-icon-text [iconName]="'house'">Room information</ether-icon-text> -->
+                        <ul>
+                            <li *ngFor="let convenience of roomConveniences">{{ convenience.type }}</li>
+                        </ul>
+                    </div>
+        
+                    <!-- <ether-button>Change Info</ether-button> -->
                 </div>
-    
-                <ether-button>Change Info</ether-button>
             </div>
         </div>
-    </div>
-
-    <div class="group-tab">
-        <mat-tab-group>
-            <mat-tab label="BOOKING">
-                <div class="booking">
-                    <div class="room-price">
-                        <div class="room-price__currency-info">
-                            <ether-icon-text [iconName]="'ether-icon-black'">0,053 ETH/night</ether-icon-text>
-                            <ether-icon-text [iconName]="'question-mark'" class="question-mark">Currency converter</ether-icon-text>
-                        </div>
-                        <div class="button">
-                            <ether-button>Change Price</ether-button>
-                        </div>
-                    </div>
-                    
-                    <div class="room-availability">
-                        <ether-form-field>
-                            <ether-form-field-label>CHECK IN</ether-form-field-label>
-                            <input type="text" placeholder="ARRIVE DATE">
-                        </ether-form-field>
     
-                        <ether-form-field>
-                            <ether-form-field-label>CHECK OUT</ether-form-field-label>
-                            <input type="text" placeholder="LEAVE DATE">
-                        </ether-form-field>
-    
-                        <div class="button">
-                            <ether-button>Check Availability</ether-button>
+        <div class="group-tab">
+            <!-- <mat-tab-group>
+                <mat-tab label="BOOKING">
+                    <div class="booking">
+                        <div class="room-price">
+                            <div class="room-price__currency-info">
+                                <ether-icon-text [iconName]="'ether-icon-black'">0,053 ETH/night</ether-icon-text>
+                                <ether-icon-text [iconName]="'question-mark'" class="question-mark">Currency converter</ether-icon-text>
+                            </div>
+                            <div class="button">
+                                <ether-button>Change Price</ether-button>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="room-type">
-                        <div class="room-type__form-field">
-                            <ether-icon-text [iconName]="'house'">Room type</ether-icon-text>
+                        
+                        <div class="room-availability">
                             <ether-form-field>
-                                <ether-form-field-label>ROOM TYPE</ether-form-field-label>
-                                <input type="text" placeholder="SINGLE ROOM">
+                                <ether-form-field-label>CHECK IN</ether-form-field-label>
+                                <input type="text" placeholder="ARRIVE DATE">
                             </ether-form-field>
+        
+                            <ether-form-field>
+                                <ether-form-field-label>CHECK OUT</ether-form-field-label>
+                                <input type="text" placeholder="LEAVE DATE">
+                            </ether-form-field>
+        
+                            <div class="button">
+                                <ether-button>Check Availability</ether-button>
+                            </div>
                         </div>
-    
-                        <div class="button">
-                            <ether-button>Change Room Type</ether-button>
+                        
+                        <div class="room-type">
+                            <div class="room-type__form-field">
+                                <ether-icon-text [iconName]="'house'">Room type</ether-icon-text>
+                                <ether-form-field>
+                                    <ether-form-field-label>ROOM TYPE</ether-form-field-label>
+                                    <input type="text" placeholder="SINGLE ROOM">
+                                </ether-form-field>
+                            </div>
+        
+                            <div class="button">
+                                <ether-button>Change Room Type</ether-button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </mat-tab>
-            <mat-tab label="AMENITIES"></mat-tab>
-            <mat-tab label="SERVICES & ACTIVITIES"></mat-tab>
-            <mat-tab label="REVIEWS"></mat-tab>
-            <mat-tab label="CONTACT"></mat-tab>
-        </mat-tab-group>
-    </div>
+                </mat-tab>
+                <mat-tab label="AMENITIES"></mat-tab>
+                <mat-tab label="SERVICES & ACTIVITIES"></mat-tab>
+                <mat-tab label="REVIEWS"></mat-tab>
+                <mat-tab label="CONTACT"></mat-tab>
+            </mat-tab-group> -->
+        </div>
+    </form>
 </section>

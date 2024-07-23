@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { ApplicationService } from './core/services/application.service';
+import { ManageRoomModule } from './views/hotel/manage-rooms/manage-room.module';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import { ApplicationService } from './core/services/application.service';
     RouterOutlet,
     HomeComponent,
     EtherPageComponent,
-    SharedModule
+    SharedModule,
+    ManageRoomModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
