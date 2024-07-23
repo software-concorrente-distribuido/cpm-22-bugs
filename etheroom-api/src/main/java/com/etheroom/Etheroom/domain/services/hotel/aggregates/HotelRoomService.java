@@ -86,7 +86,7 @@ public class HotelRoomService implements IHotelRoomService {
     @Override
     public void update(HotelRoomDto hotelRoomDto) {
         UUID uuid = hotelRoomDto.getId();
-        Functions.acceptTrueThrows(
+        Functions.acceptFalseThrows(
                 hotelRoomRepository.existsById(uuid),
                 () -> new NotFoundException(HOTEL_ROOM_NOT_FOUND)
         );

@@ -20,7 +20,7 @@ public class HotelRoomController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public HotelRoomDto create(HotelRoomDto hotelRoomDto) {
+    public HotelRoomDto create(@RequestBody HotelRoomDto hotelRoomDto) {
         return hotelRoomService.create(hotelRoomDto);
     }
 
@@ -50,7 +50,7 @@ public class HotelRoomController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void update(HotelRoomDto hotelRoomDto) {
+    public void update(@RequestBody HotelRoomDto hotelRoomDto) {
         hotelRoomService.update(hotelRoomDto);
     }
 
