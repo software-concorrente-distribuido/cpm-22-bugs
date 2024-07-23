@@ -7,6 +7,7 @@ export class HotelRoom {
     public description: string;
     public type: string;
     public price: number;
+    public number: number;
     public capacity: number;
     public available: boolean;
     public conveniences: Convenience[];
@@ -21,6 +22,7 @@ export class HotelRoom {
         description: string = null,
         type: string = null,
         price: number = null,
+        number: number = null,
         capacity: number = null,
         available: boolean = null,
         conveniences: Convenience[] = [],
@@ -34,6 +36,7 @@ export class HotelRoom {
         this.description = description;
         this.type = type;
         this.price = price;
+        this.number = number;
         this.capacity = capacity;
         this.available = available;
         this.conveniences = conveniences;
