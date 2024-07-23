@@ -1,0 +1,15 @@
+:host(.ether-table-row) {
+    width: 100%;
+    display: block;
+}
+
+tr.ether-table-row {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    gap: 4px;
+    background-color: white;
+    border-radius: 8px;
+}
