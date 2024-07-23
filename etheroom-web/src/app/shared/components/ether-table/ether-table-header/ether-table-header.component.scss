@@ -1,0 +1,14 @@
+:host(.ether-table-header) {
+    width: 100%;
+    display: block;
+}
+
+thead.ether-table-header {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    gap: 4px;
+    background-color: inherit;
+}

@@ -1,0 +1,21 @@
+:host(.ether-table) {
+    width: 100%;
+    overflow: hidden;
+    display: block;
+}
+
+table.ether-table {
+    width: 100%;
+    height: clamp(320px, 75%, 540px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 100%;
+    overflow-y: scroll;
+    gap: 8px;
+    background-color: inherit;
+    > tbody {
+        width: 100%;
+    }
+}

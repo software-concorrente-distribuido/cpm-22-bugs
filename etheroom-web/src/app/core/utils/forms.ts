@@ -37,6 +37,7 @@ export const createHotelRoomForm = (hotelRoom: HotelRoom = null): FormGroup => {
         description: [hotelRoom?.description, [Validators.required, Validators.maxLength(255)]],
         type: [hotelRoom?.type, [Validators.required, Validators.maxLength(100)]],
         price: [hotelRoom?.price, [Validators.required]],
+        number: [hotelRoom?.number, [Validators.required]],
         capacity: [hotelRoom?.capacity, [Validators.required]],
         available: [hotelRoom?.available],
         conveniences: formBuilder.array(hotelRoom?.conveniences?.map(convenience => createConvenienceForm(convenience))),
