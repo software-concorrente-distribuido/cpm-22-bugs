@@ -9,10 +9,7 @@ public enum MediaType {
 
     JPG,
     JPEG,
-    PNG,
-    TXT,
-    DOCX,
-    PDF;
+    PNG;
 
     public static MediaType fromFileOriginalName(String originalName) throws BadRequestException {
         try {

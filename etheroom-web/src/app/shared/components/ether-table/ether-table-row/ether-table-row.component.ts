@@ -1,14 +1,11 @@
-import { Component, ContentChildren } from '@angular/core';
-import { EtherRowCellComponent } from './ether-row-cell/ether-row-cell.component';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ether-table-row',
-  standalone: true,
-  imports: [],
   template: `
-    <div class='ether-table-row'>
-      <ng-content select='ether-row-cell'></ng-content>
-    </div>
+    <tr class="ether-table-row">
+      <ng-content select="ether-row-cell"></ng-content>
+    </tr>
   `,
   styleUrl: './ether-table-row.component.scss',
   host: {
@@ -16,5 +13,5 @@ import { EtherRowCellComponent } from './ether-row-cell/ether-row-cell.component
   }
 })
 export class EtherTableRowComponent {
-  @ContentChildren(EtherRowCellComponent) cells?: EtherRowCellComponent[];
+
 }

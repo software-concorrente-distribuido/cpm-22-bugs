@@ -1,4 +1,5 @@
 import { Address } from "../address/address.model";
+import { Contact } from "../contact/contact.model";
 import { Media } from "../media/media.model";
 import { User } from "../user/user.model";
 import { Convenience } from "./aggregates/convenience.model";
@@ -11,6 +12,7 @@ export class Hotel {
     public description: string;
     public user: User;
     public address: Address;
+    public contact: Contact;
     public thumbnail: Media;
     public conveniences: Convenience[];
     public images: Media[];
@@ -24,6 +26,7 @@ export class Hotel {
         description: string = null,
         user: User = null,
         address: Address = null,
+        contact: Contact = null,
         thumbnail: Media = null,
         conveniences: Convenience[] = [],
         images: Media[] = [],
@@ -36,6 +39,7 @@ export class Hotel {
         this.description = description;
         this.user = user;
         this.address = address;
+        this.contact = contact;
         this.thumbnail = thumbnail;
         this.conveniences = conveniences;
         this.images = images;

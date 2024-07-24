@@ -1,1 +1,14 @@
-<p>person-form works!</p>
+<span class="divider"></span>
+<h2>Personal Data</h2>
+<form *ngIf="personForm$ | async as personForm" [formGroup]="personForm">
+    <ether-form-field>
+        <ether-form-field-label>Name</ether-form-field-label>
+        <input formControlName="name" type="text" />
+        <ether-form-field-error *ngIf="personForm.get('name').touched && personForm.get('name').hasError('required')">
+            Field is required
+        </ether-form-field-error>
+    </ether-form-field>
+    <etheroom-user-form [userForm]="userForm"></etheroom-user-form>
+    <etheroom-contact-form [contactForm]="contactForm"></etheroom-contact-form>
+    <etheroom-address-form [addressForm]="addressForm"></etheroom-address-form>
+</form>

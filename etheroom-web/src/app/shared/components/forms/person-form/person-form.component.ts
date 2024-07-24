@@ -16,4 +16,16 @@ export class PersonFormComponent {
     this.personForm$.next(value);
   }
 
+  public get userForm(): FormGroup {
+    return this.personForm$.value.get('user') as FormGroup;
+  }
+
+  public get contactForm(): FormGroup {
+    return this.personForm$.value.get('contact') as FormGroup;
+  }
+
+  public get addressForm(): FormGroup {
+    return this.personForm$.value.get('address') as FormGroup;
+  }
+
 }

@@ -48,7 +48,7 @@ export const routes: Routes = [
         path: 'hotel',
         children: [
             { path: 'manage-rooms', component: ManageRoomsComponent },
-            { path: 'manage-rooms/room-details', component: RoomDetailsComponent },
+            { path: 'manage-rooms/room-details/:id', component: RoomDetailsComponent },
             { path: 'manage-rooms/add-room', component: AddRoomComponent },
             { path: 'my-bookings', component: MyBookingsComponent }
         ]

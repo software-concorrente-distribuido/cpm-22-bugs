@@ -3,12 +3,10 @@ import { EtherHeaderCellComponent } from './ether-header-cell/ether-header-cell.
 
 @Component({
   selector: 'ether-table-header',
-  standalone: true,
-  imports: [],
   template: `
-    <div class='ether-table-header'>
-      <ng-content select='ether-header-cell'></ng-content>
-    </div>
+    <thead class="ether-table-header">
+      <ng-content select="ether-header-cell"></ng-content>
+    </thead>
   `,
   styleUrl: './ether-table-header.component.scss',
   host: {

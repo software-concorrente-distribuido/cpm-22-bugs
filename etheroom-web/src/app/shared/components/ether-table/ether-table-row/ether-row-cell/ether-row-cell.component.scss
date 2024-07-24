@@ -1,0 +1,11 @@
+:host(.ether-row-cell) {
+    display: inline-flex;
+    flex: 1;
+}
+
+td.ether-row-cell {
+    flex: auto;
+    text-align: left;
+    font-size: 18px;
+    font-family: 'quasimoda-light';
+}

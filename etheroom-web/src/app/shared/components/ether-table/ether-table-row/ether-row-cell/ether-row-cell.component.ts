@@ -2,12 +2,10 @@ import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'ether-row-cell',
-  standalone: true,
-  imports: [],
   template: `
-    <div class='ether-row-cell'>
+    <td class="ether-row-cell">
       <ng-content></ng-content>
-    </div>
+    </td>
   `,
   styleUrl: './ether-row-cell.component.scss',
   host: {

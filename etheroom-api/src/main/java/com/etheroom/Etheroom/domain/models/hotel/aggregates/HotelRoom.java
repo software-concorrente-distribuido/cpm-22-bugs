@@ -40,7 +40,7 @@ public class HotelRoom extends BaseEntity {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "etheroom_hotel_room_convenience",
+            name = "etheroom_hotel_room_conveniences",
             joinColumns = @JoinColumn(name = "hotel_room_id"),
             inverseJoinColumns = @JoinColumn(name = "convenience_id")
     )
@@ -57,7 +57,7 @@ public class HotelRoom extends BaseEntity {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "etheroom_hotel_room_images",
-            joinColumns = @JoinColumn(name = "hotel_id"),
+            joinColumns = @JoinColumn(name = "hotel_room_id"),
             inverseJoinColumns = @JoinColumn(name = "media_id")
     )
     private List<Media> images = new ArrayList<>();
