@@ -95,6 +95,7 @@ h2 {
 
 .ether-form-field {
     input {
+        font-family: 'quasimoda-regular';
         outline: none;
         border: none;
         display:block;
@@ -108,6 +109,24 @@ h2 {
             font-size: 13px;
             background-color: transparent;
         }
+    }
+
+    textarea {
+        font-family: 'quasimoda-regular';
+        outline: none;
+        border: none;
+        display:block;
+        padding: 0;
+        width: 100%;
+        background-color: transparent;
+
+        &::placeholder {
+            font-family: 'quasimoda-semi-bold';
+            color: #979797;
+            font-size: 13px;
+            background-color: transparent;
+        }
+    
     }
 
 }

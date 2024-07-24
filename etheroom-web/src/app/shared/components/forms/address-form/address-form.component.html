@@ -1,7 +1,7 @@
 <span class="divider"></span>
 <h2>Address</h2>
 <form *ngIf="addressForm$ | async as addressForm" [formGroup]="addressForm">
-    <ether-form-field>
+    <ether-form-field class="address">
         <ether-form-field-label>Address</ether-form-field-label>
         <textarea formControlName="description"></textarea>
         <ether-form-field-error *ngIf="addressForm.get('description').touched && addressForm.get('description').hasError('required')">

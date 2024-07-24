@@ -10,7 +10,10 @@ import { Optional } from '../../../../core/utils/optional';
 @Component({
   selector: 'etheroom-hotel-form',
   templateUrl: './hotel-form.component.html',
-  styleUrl: './hotel-form.component.scss'
+  styleUrl: './hotel-form.component.scss',
+  host: {
+    class: 'etheroom-hotel-form'
+  }
 })
 export class HotelFormComponent implements OnInit {
 
