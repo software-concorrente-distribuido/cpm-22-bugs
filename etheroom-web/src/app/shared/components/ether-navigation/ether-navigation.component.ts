@@ -1,6 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 
 interface NavRoute {
   path: string;
@@ -16,5 +15,14 @@ export class EtherNavigationComponent {
 
   @Input()
   public routes: NavRoute[] = [];
+  
+  constructor(private authenticationService: AuthenticationService) { }
 
+  public get isHotel(): boolean {
+    return this.authenticationService.isCurrentUserHotel();
+  }
+
+  public get isUser(): boolean {
+    return this.authenticationService.isCurrentUserPerson();
+  }
 }

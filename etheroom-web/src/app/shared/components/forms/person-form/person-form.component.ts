@@ -5,7 +5,10 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'etheroom-person-form',
   templateUrl: './person-form.component.html',
-  styleUrl: './person-form.component.scss'
+  styleUrl: './person-form.component.scss',
+  host: {
+    class: 'etheroom-person-form'
+  }
 })
 export class PersonFormComponent {
 
