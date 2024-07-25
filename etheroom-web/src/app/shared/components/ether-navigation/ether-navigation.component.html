@@ -1,3 +1,7 @@
 <nav>
     <a *ngFor="let route of routes" [routerLink]="route.path">{{ route.label }}</a>
 </nav>
+
+<!-- <nav>
+    <a *ngIf="isHotel" [routerLink]="'/hotel/manage-rooms'">MANAGE ROOMS</a>
+</nav> -->

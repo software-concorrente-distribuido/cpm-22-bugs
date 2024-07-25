@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
 import { Web3Service } from '../../../core/services/web3.service';
 import { AuthenticationResponse, EthereumAccount } from '../../../core/types/types';
 import { AuthenticationService } from '../../../core/services/authentication.service';
+import { UtilComponent } from '../../../shared/components/util/util.component';
 
 @Component({
   selector: 'ether-login',
@@ -15,14 +16,18 @@ import { AuthenticationService } from '../../../core/services/authentication.ser
     class: 'ether-login'
   }
 })
-export class LoginComponent {
+export class LoginComponent extends UtilComponent {
+  protected override pageTitle: string;
+  protected override pageDescription: string;
   public ethereumAccount: EthereumAccount;
 
   constructor(
-    public router: Router,
+    injector: Injector,
     public web3Service: Web3Service,
     public authService: AuthenticationService
-  ) { }
+  ) {
+    super(injector);
+  }
 
   public async login(): Promise<void> {
     try {
@@ -31,6 +36,7 @@ export class LoginComponent {
       this.handleLogin(loginInfo);
     } catch (error) {
       console.error('Erro ao conectar a MetaMask ou autenticar:', error);
+      this.handleError(error);
       // Adicione um tratamento de erros adequado aqui, como exibir uma mensagem de erro ao usuário.
     }
   }  
@@ -56,6 +62,7 @@ export class LoginComponent {
 
     } catch (error) {
       console.error('Erro ao conectar a MetaMask:', error);
+      this.handleError(error);
       // Adicione um tratamento de erros adequado aqui, como exibir uma mensagem de erro ao usuário.
       return null;
     }
@@ -66,7 +73,7 @@ export class LoginComponent {
 
     this.authService.login(authRequest).subscribe({
       next: (response: AuthenticationResponse) => this.handleAuthResponse(response),
-      error: (error) => console.error('Erro ao autenticar:', error)
+      error: (error) => this.handleError(error)
     });
   }
 

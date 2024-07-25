@@ -5,7 +5,7 @@ import { Web3Service } from '../../../core/services/web3.service';
 import { BehaviorSubject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { createHotelForm, createPersonForm } from '../../../core/utils/forms';
-import { EthereumAccount } from '../../../core/types/types';
+import { AuthenticationResponse, EthereumAccount } from '../../../core/types/types';
 import { HotelService } from '../../../core/services/hotel.service';
 import { Person } from '../../../core/models/person/person.model';
 import { Hotel } from '../../../core/models/hotel/hotel.model';
@@ -66,7 +66,8 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     const form: FormGroup = this.userForm$.value;
     if(form.valid) {
       this.loading.start();
-      this.isPerson ? this.createPerson(form.value) : this.createHotel(form.value);
+      const formValues = this.getFormValues(form);
+      this.isPerson ? this.createPerson(formValues) : this.createHotel(formValues);
     }
     else {
       this.snackbar.info("Please fill all the required fields");
@@ -101,7 +102,8 @@ export class RegisterComponent extends UtilComponent implements OnInit {
         next: (hotel: Hotel) => {
           this.loading.stop();
           this.snackbar.success("Hotel created successfully");
-          this.router.navigate([`/profile`], { queryParams: { id: hotel.user.id } });
+          // this.router.navigate([`/profile`], { queryParams: { id: hotel.user.id } });
+          this.handleLogin();
         },
         error: this.handleError
       });
@@ -119,6 +121,28 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     const user: User = User.fromEthereumAccount(this.ethereumAccount$.value);
     user.role = UserRole.HOTEL;
     this.userForm$.next(createHotelForm(Hotel.fromUser(user)));
+  }
+
+  private getFormValues(form: FormGroup): any {
+    form.enable();
+    const values = form.getRawValue();
+    form.disable();
+    return values;
+  }
+
+  private handleLogin(): void {
+    this.authenticationService.login(this.authenticationService.buildAuthRequest(this.ethereumAccount$.value)).subscribe({
+      next: (response: AuthenticationResponse) => this.handleAuthResponse(response),
+      error: (error) => this.handleError(error)
+    });
+  }
+
+  private handleAuthResponse(response: AuthenticationResponse): void {
+    if (response && response.accessToken) {
+      this.router.navigate(['/home']); // Navega para a página inicial
+    } else {
+      this.router.navigate(['/register']); // Navega para a página de registro
+    }
   }
 
 }
