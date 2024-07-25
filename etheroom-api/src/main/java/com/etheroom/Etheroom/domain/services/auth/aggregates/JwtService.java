@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -30,7 +31,11 @@ public class JwtService implements IJwtService {
     @Override
     public Boolean isValid(String token, UserDetails userDetails) {
         String login = this.extractLogin(token);
-        return login.equals(userDetails.getUsername()) && !this.isExpired(token);
+        return login.equals(
+                Optional.ofNullable(userDetails)
+                        .map(UserDetails::getUsername)
+                        .orElse(null)
+        ) && !this.isExpired(token);
     }
 
     @Override
