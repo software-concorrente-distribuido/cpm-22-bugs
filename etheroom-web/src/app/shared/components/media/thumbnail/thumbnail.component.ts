@@ -22,9 +22,20 @@ export class ThumbnailComponent {
 
   public control$: BehaviorSubject<FormControl> = new BehaviorSubject<FormControl>(null);
 
+  public viewOnly: boolean = false;
+
   @Input()
-  public set thumbnailControl(value: FormControl) {
-    this.control$.next(value);
+  public set thumbnailControl(value: Media | FormControl) {
+    this.control$.next(
+      value instanceof Media
+        ? new FormControl(value)
+        : value
+    )
+  }
+
+  @Input()
+  public set isViewOnly(value: boolean) {
+    this.viewOnly = value;
   }
 
   constructor(
