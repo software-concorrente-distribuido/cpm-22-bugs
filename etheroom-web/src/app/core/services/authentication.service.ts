@@ -47,7 +47,7 @@ export class AuthenticationService {
   }
 
   public ngOnInit(): void {
-    //this.verifyAuthenticationContext();
+    this.verifyAuthenticationContext();
   }
 
   public login(loginForm: AuthenticationRequest): Observable<AuthenticationResponse> {
