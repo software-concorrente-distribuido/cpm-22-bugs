@@ -1,1 +1,3 @@
-<p>thumbnail works!</p>
+<input type="file" (change)="onFileChange($event)" #fileInput />
+<img [src]="fileUrl" [alt]="filename" />
+<button (click)="fileInput.click()">{{ temporaryMedia ? 'INSERT' : 'UPDATE' }} FILE</button>

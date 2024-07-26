@@ -20,7 +20,6 @@ export class ApplicationService {
     private http: HttpClient
   ) {
     this.appApiUrl = `${environment.apiUrl}/${this.APP_PATH}`;
-    console.log("dfjfdskljsdflk")
     this.createGlobalProviders();
   }
 
@@ -31,7 +30,6 @@ export class ApplicationService {
   }
 
   private createGlobalProviders(): void {
-    console.log('Creating global providers...');
     setProvider(FormBuilder, inject(FormBuilder));
   }
   
