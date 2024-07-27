@@ -11,19 +11,21 @@
         
                 <div class="room-information">
                     <div class="infos">
-                        <!-- <ether-icon-text [iconName]="'house'">Room information</ether-icon-text> -->
+                        <ether-icon-text [iconName]="'house'">Room information</ether-icon-text>
                         <ul>
-                            <li *ngFor="let convenience of roomConveniences">{{ convenience.type }}</li>
+                            <li *ngFor="let convenience of roomConveniences">
+                                {{ findConvenienceDescription(convenience.type) }}
+                            </li>
                         </ul>
                     </div>
         
-                    <!-- <ether-button>Change Info</ether-button> -->
+                    <ether-button>Change Info</ether-button>
                 </div>
             </div>
         </div>
     
         <div class="group-tab">
-            <!-- <mat-tab-group>
+            <mat-tab-group>
                 <mat-tab label="BOOKING">
                     <div class="booking">
                         <div class="room-price">
@@ -71,7 +73,7 @@
                 <mat-tab label="SERVICES & ACTIVITIES"></mat-tab>
                 <mat-tab label="REVIEWS"></mat-tab>
                 <mat-tab label="CONTACT"></mat-tab>
-            </mat-tab-group> -->
+            </mat-tab-group>
         </div>
     </form>
 </section>

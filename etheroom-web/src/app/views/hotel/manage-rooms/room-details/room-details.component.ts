@@ -12,6 +12,9 @@ import { ConfirmationDialogComponent } from '../../../../shared/components/dialo
 import { HotelService } from '../../../../core/services/hotel.service';
 import { Hotel } from '../../../../core/models/hotel/hotel.model';
 import { Convenience } from '../../../../core/models/hotel/aggregates/convenience.model';
+import { ApplicationService } from '../../../../core/services/application.service';
+import { EnumsNames } from '../../../../core/data/enums';
+import { Enum } from '../../../../core/types/types';
 
 @Component({
   selector: 'ether-room-details',
@@ -24,6 +27,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
 
   public hotelRoomForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
   public newHotelRoom$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public conveniences$: BehaviorSubject<Enum[]> = new BehaviorSubject(null);
 
   public hotelId: string;
   public hotel: Hotel;
@@ -31,6 +35,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
   constructor(
     injector: Injector,
     private hotelRoomService: HotelRoomService,
+    private appService: ApplicationService,
     private hotelService: HotelService,
     private route: ActivatedRoute
   ) {
@@ -39,6 +44,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
   
   ngOnInit(): void {
     this.getRouteData();
+    this.loadItems();
   }
 
   ngOnDestroy(): void {
@@ -48,6 +54,13 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
 
   public get roomConveniences(): Convenience[] {
     return this.hotelRoomForm.get('conveniences').value;
+  }
+
+  public findConvenienceDescription(type: string): string {
+    return Optional.ofNullable(this.conveniences$.value)
+      .map(conveniences => conveniences.find(convenience => convenience.name === type))
+      .map(convenience => convenience.description)
+      .orElse(null);
   }
 
   public onSave(): void {
@@ -176,5 +189,13 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
       }
     });
   }
+
+  private loadItems(): void {
+    this.appService.findEnumByName(EnumsNames.HOTEL_ROOM_CONVENIENCE).subscribe(
+      (conveniences: Enum[]) => this.conveniences$.next(conveniences)
+    );
+  }
+
+  // find no array pelo type
 
 }

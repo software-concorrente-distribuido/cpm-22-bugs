@@ -1,11 +1,10 @@
-section {
+form {
     display: flex;
     justify-content: center;
     gap: 25px;
 
     .container {
         display: flex;
-        width: 60%;
         justify-content: center;
         align-items: center;
         .room-details {
