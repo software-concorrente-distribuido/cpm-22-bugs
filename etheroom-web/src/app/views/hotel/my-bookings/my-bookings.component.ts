@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { EtherFilterComponent } from '../../../shared/components/filter/ether-filter.component';
 import { RouterOutlet } from '@angular/router';
-import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
 import { CommonModule } from '@angular/common';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { EtherDialogComponent } from '../../../shared/components/ether-dialog/ether-dialog.component';
+import { ButtonsModule } from '../../../shared/components/buttons/buttons.module';
 
 @Component({
   selector: 'ether-my-bookings',
   standalone: true,
   imports: [
-    EtherButtonTextIconComponent,
+    ButtonsModule,
     EtherFilterComponent,
     CommonModule,
     RouterOutlet

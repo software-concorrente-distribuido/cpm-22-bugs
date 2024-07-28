@@ -72,12 +72,12 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
   }
 
   public onClickDelete(): void {
-    this.dialog.open(ConfirmationDialogComponent, {
-      inputs: {
-        text: 'Deseja realmente deletar este quarto?'
-      },
-      onClose: (bool: any) => this.handleDeletionConfirmation(bool)
-    })
+    // this.dialog.open(ConfirmationDialogComponent, {
+    //   inputs: {
+    //     text: 'Deseja realmente deletar este quarto?'
+    //   },
+    //   onClose: (bool: any) => this.handleDeletionConfirmation(bool)
+    // })
   }
 
   private get hotelRoomForm(): FormGroup {

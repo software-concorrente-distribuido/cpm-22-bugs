@@ -8,6 +8,7 @@ import { InputsModule } from '../inputs/inputs.module';
 import { MediaModule } from "../media/media.module";
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddressFormComponent } from './address-form/address-form.component';
+import { RoomFormComponent } from './room-form/room-form.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { AddressFormComponent } from './address-form/address-form.component';
     HotelFormComponent,
     PersonFormComponent,
     ContactFormComponent,
-    AddressFormComponent
+    AddressFormComponent,
+    RoomFormComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { AddressFormComponent } from './address-form/address-form.component';
   exports: [
     UserFormComponent,
     HotelFormComponent,
-    PersonFormComponent
+    PersonFormComponent,
+    RoomFormComponent
   ]
 })
 export class FormsModule { }

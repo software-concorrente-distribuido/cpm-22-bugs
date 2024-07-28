@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-confirmation-dialog',
-  standalone: true,
-  imports: [],
+  selector: 'ether-confirmation-dialog',
   templateUrl: './confirmation-dialog.component.html',
   styleUrl: './confirmation-dialog.component.scss'
 })

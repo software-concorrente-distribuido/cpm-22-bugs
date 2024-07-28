@@ -1,0 +1,16 @@
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    padding: 15px 20px;
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+
+        ether-button {
+            width: 8rem;
+        }
+    }
+}
