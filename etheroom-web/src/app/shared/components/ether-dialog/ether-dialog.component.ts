@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { EtherButtonIconComponent } from '../ether-button-icon/ether-button-icon.component';
-import { EtherButtonTextIconComponent } from "../ether-button-text-icon/ether-button-text-icon.component";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 interface DialogData {
   room: string;
@@ -12,7 +11,7 @@ interface DialogData {
 @Component({
   selector: 'ether-dialog',
   standalone: true,
-  imports: [EtherButtonIconComponent, EtherButtonTextIconComponent],
+  imports: [ButtonsModule],
   templateUrl: './ether-dialog.component.html',
   styleUrl: './ether-dialog.component.scss'
 })
