@@ -15,7 +15,7 @@
 
                     <ether-table-row *ngFor="let hotelRoom of hotelRooms">
                         <ether-row-cell>{{ hotelRoom?.number }}</ether-row-cell>
-                        <ether-row-cell>{{ hotelRoom?.type }}</ether-row-cell>
+                        <ether-row-cell>{{ findRoomTypeDescription(hotelRoom?.type) }}</ether-row-cell>
                         <ether-row-cell>{{ hotelRoom?.capacity }}</ether-row-cell>
                         <ether-row-cell>{{ hotelRoom?.price + ' ETH' }}</ether-row-cell>
                         <ether-row-cell>

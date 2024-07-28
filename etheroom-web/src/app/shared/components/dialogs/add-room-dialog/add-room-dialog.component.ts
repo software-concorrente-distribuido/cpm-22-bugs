@@ -24,22 +24,15 @@ export class AddRoomDialogComponent {
 
   public hotelId$: BehaviorSubject<string> = new BehaviorSubject(null);
 
-  // @Input()
-  // public set hotelId(hotelId: string) {
-  //   this.hotelId$.next(hotelId);
-  // }
-
-  // @Input()
-  // public set hotelRoomForm(value: FormGroup) {
-  //   this.hotelRoomForm$.next(value);
-  // }
-
   constructor(
     public dialogRef: MatDialogRef<AddRoomDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {
+    this.hotelRoomForm$.next(data.hotelRoomForm);
+  }
 
   public onClickOption(bool: boolean): void {
-    this.dialogRef.close(bool);
+    this.dialogRef.close({ isConfirmed: bool, hotelRoomForm: this.hotelRoomForm$.value });
   }
 
 }

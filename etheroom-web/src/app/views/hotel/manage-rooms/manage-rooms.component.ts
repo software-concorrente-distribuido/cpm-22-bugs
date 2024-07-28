@@ -1,7 +1,7 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { HotelRoomService } from '../../../core/services/hotel-room.service';
 import { HotelRoom } from '../../../core/models/hotel/aggregates/hotel-room.model';
-import { Page } from '../../../core/types/types';
+import { Enum, Page } from '../../../core/types/types';
 import { MatTable } from '@angular/material/table';
 import { UtilComponent } from '../../../shared/components/util/util.component';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
@@ -11,6 +11,9 @@ import { AddRoomDialogComponent } from '../../../shared/components/dialogs/add-r
 import { FormGroup } from '@angular/forms';
 import { createHotelRoomForm } from '../../../core/utils/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ApplicationService } from '../../../core/services/application.service';
+import { EnumsNames } from '../../../core/data/enums';
+import { Optional } from '../../../core/utils/optional';
 
 @Component({
   selector: 'ether-manage-rooms',
@@ -23,6 +26,7 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
   
   public hotelRooms$: BehaviorSubject<HotelRoom[]> = new BehaviorSubject(null);
   public hotelRoomForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
+  public roomType$: BehaviorSubject<Enum[]> = new BehaviorSubject(null);
 
   @ViewChild(MatTable)
   public table: MatTable<HotelRoom>;
@@ -33,7 +37,8 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
     injector: Injector,
     public hotelRoomService: HotelRoomService,
     public dialog: MatDialog,
-    public autheticationService: AuthenticationService
+    public autheticationService: AuthenticationService,
+    private appService: ApplicationService
   ) {
     super(injector);
   }
@@ -42,7 +47,12 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
     return this.hotelRoomForm$.value;
   }
 
+  private get roomType(): Enum[] {
+    return this.roomType$.value;
+  }
+
   ngOnInit(): void {
+    this.loadEnums();
     this.loadCurrentHotel();
     this.loadRooms();
   }
@@ -69,23 +79,44 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
     });
   }
 
-  private handleRoomAddition = (bool: boolean): void => {
-    if (bool) {
-      this.hotelRoomService.create(this.hotelRoomForm.value)
-    }
+  public findRoomTypeDescription(type: string): string {
+    return Optional.ofNullable(this.roomType)
+      .map(roomType => roomType.find(roomType => roomType.name === type))
+      .map(roomType => roomType.description)
+      .orElse(null);
   }
 
   private openDialog(): void {
     this.dialog.open(AddRoomDialogComponent, {
       data: {
-        hotelRoomForm: this.hotelRoomForm$.value,
+        hotelRoomForm: this.hotelRoomForm,
       }
     }).afterClosed()
-      .subscribe((bool: any) => this.handleRoomAddition(bool));
+      .subscribe((result: { isConfirmed: boolean, hotelRoomForm: FormGroup }) => {
+        console.log(result);
+        this.handleRoomAddition(result)
+      });
+  }
+
+  private handleRoomAddition = (result: { isConfirmed: boolean, hotelRoomForm: FormGroup }): void => {
+    if (result.isConfirmed) {
+      this.loading.start();
+      this.hotelRoomForm$.next(result.hotelRoomForm);
+      this.hotelRoomService.create(result.hotelRoomForm.value)
+        .subscribe({
+          next: () => {
+            this.snackbar.success('Quarto adicionado com sucesso');
+            this.loadRooms();
+            this.loading.stop();
+          },
+          error: this.handleError
+        });
+    }
   }
 
   private async createRoomForm(): Promise<void> {
     const hotelRoom: HotelRoom = new HotelRoom();
+    hotelRoom.hotelId = this.hotelId;
     this.hotelRoomForm$.next(createHotelRoomForm(hotelRoom));
   }
 
@@ -104,6 +135,11 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
       },
 
       error: this.handleError
-    })
+    });
+  }
+
+  private loadEnums(): void {
+    this.appService.findEnumByName(EnumsNames.HOTEL_ROOM_TYPE)
+      .subscribe((enums: Enum[]) => this.roomType$.next(enums));
   }
 }
