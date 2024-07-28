@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { EtherIconTextComponent } from '../../ether-icon-text/ether-icon-text.component';
-import { EtherButtonIconComponent } from '../../ether-button-icon/ether-button-icon.component';
+import { ButtonsModule } from '../../buttons/buttons.module';
 
 @Component({
   selector: 'app-hotel-details',
   standalone: true,
   imports: [
     EtherIconTextComponent,
-    EtherButtonIconComponent
+    ButtonsModule
   ],
   templateUrl: './hotel-details.component.html',
   styleUrl: './hotel-details.component.scss'
