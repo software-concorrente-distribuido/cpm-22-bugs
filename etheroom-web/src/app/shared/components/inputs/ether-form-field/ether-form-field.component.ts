@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
       <ng-content select="ether-form-field-label"></ng-content>
       <ng-content select="input"></ng-content>
       <ng-content select="textarea"></ng-content>
-      <ng-content select="select"></ng-content>
+      <ng-content select="mat-select"></ng-content>
       <ng-content select="ether-form-field-error"></ng-content>
     </div>
   `,
