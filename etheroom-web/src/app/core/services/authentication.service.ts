@@ -42,7 +42,7 @@ export class AuthenticationService {
     private router: Router,
     private hotelService: HotelService,
     private personService: PersonService
-  ) { 
+  ) {
     this.authApiUrl = `${environment.apiUrl}/${this.AUTH_API_PATH}`;
   }
 
@@ -100,7 +100,7 @@ export class AuthenticationService {
 
   public isCurrentUserHotel = (): boolean => this.role === 'HOTEL';
 
-  public isCurrentUserPerson = (): boolean => this.role === 'PERSON';
+  public isCurrentUserPerson = (): boolean => this.role === 'PERSON' || this.role === 'USER';
 
   public buildAuthRequest(ethereumAccount: EthereumAccount): AuthenticationRequest {
     const authRequest: AuthenticationRequest = {
@@ -119,6 +119,7 @@ export class AuthenticationService {
   private handleAccessToken = (token: string): void => {
     localStorage.setItem(this.TOKEN_KEY, token);
     const claims: JwtTokenClaims = jwtDecode(token);
+    this.accessToken = token;
     this.accessToken = token;
     this.userId = claims?.id;
     this.role = claims?.role;
@@ -151,7 +152,14 @@ export class AuthenticationService {
 
   private onUserLoaded = (user: User): void => {
     this.user$.next(user);
-    this.router.navigate(['/']);
+    if (this.isCurrentUserHotel()) {
+      this.router.navigate(['/hotel/manage-rooms']);
+    } else if (this.isCurrentUserPerson()) {
+      this.router.navigate(['/guest/all-hotels']);
+    } else {
+      console.error('Unknown user role:', this.role);
+      this.logout();
+    }
   }
   
 }

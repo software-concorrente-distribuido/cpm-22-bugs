@@ -90,11 +90,11 @@
           <div class="room-info">
             <div class="room-details">
               <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b4d0263c87749065617cba54b52250d74ac0d570676b88a2b8c189e7e3b3766b?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="details-icon" alt="Room Type Icon" />
-              <div class="details-title">Room Types</div>
+              <div class="details-title">Room Capacity</div>
             </div>
             <div class="guests-info">
               <div class="guest-title">Number of Guests</div>
-              <div class="guest-range">1-4</div>
+              <div class="guest-range">1</div>
             </div>
           </div>
           <div class="payment-section">
@@ -114,19 +114,19 @@
             <div class="help-text">Need Help?</div>
           </div>
           <div>
-            <button id="openPopup" class="room-reservation">Abrir Popup</button>
+            <button id="openPopup" class="room-reservation">Details</button>
           </div>
 
           <!-- Popup Container -->
-<div id="popupContainer" class="popup-container" style="display: none;">
-  <div class="popup-content">
-    <span id="closePopup" class="close">&times;</span>
-    <h2>Insira o ID da Reserva</h2>
-    <input type="text" id="reservationIdInput" placeholder="ID da Reserva">
-    <button id="getReservationInfo">Obter Informações</button>
-    <div id="reservationInfoContainer"></div>
-  </div>
-</div>
+          <div id="popupContainer" class="popup-container" style="display: none;">
+            <div class="popup-content">
+              <span id="closePopup" class="close">&times;</span>
+              <h2>Insira o ID da Reserva</h2>
+              <input type="text" id="reservationIdInput" placeholder="ID da Reserva">
+              <button id="getReservationInfo">Obter Informações</button>
+              <div id="reservationInfoContainer"></div>
+            </div>
+          </div>
 
         </div>
       </div>
