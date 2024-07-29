@@ -11,6 +11,9 @@ import { AddressFormComponent } from './address-form/address-form.component';
 import { RoomFormComponent } from './room-form/room-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ConvenienceFormComponent } from './convenience-form/convenience-form.component';
+import {
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { ConvenienceFormComponent } from './convenience-form/convenience-form.co
     ReactiveFormsModule,
     AngularFormsModule,
     MatSelectModule,
+    MatSlideToggleModule,
     InputsModule,
     MediaModule
 ],

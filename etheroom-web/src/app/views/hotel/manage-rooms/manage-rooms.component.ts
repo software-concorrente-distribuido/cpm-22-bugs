@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ApplicationService } from '../../../core/services/application.service';
 import { EnumsNames } from '../../../core/data/enums';
 import { Optional } from '../../../core/utils/optional';
+import { Functions } from '../../../core/utils/functions';
 
 @Component({
   selector: 'ether-manage-rooms',
@@ -93,25 +94,31 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
       }
     }).afterClosed()
       .subscribe((result: { isConfirmed: boolean, hotelRoomForm: FormGroup }) => {
-        console.log(result);
-        this.handleRoomAddition(result)
+        Optional.ofNullable(result)
+          .ifPresent(() => this.handleRoomAddition(result))
       });
   }
 
   private handleRoomAddition = (result: { isConfirmed: boolean, hotelRoomForm: FormGroup }): void => {
-    if (result.isConfirmed) {
-      this.loading.start();
-      this.hotelRoomForm$.next(result.hotelRoomForm);
-      this.hotelRoomService.create(result.hotelRoomForm.value)
-        .subscribe({
-          next: () => {
-            this.snackbar.success('Quarto adicionado com sucesso');
-            this.loadRooms();
-            this.loading.stop();
-          },
-          error: this.handleError
-        });
-    }
+    Optional.ofNullable(result)
+      .ifPresent(() => {
+        Functions.acceptTrue(
+          result.isConfirmed,
+          () => {
+            this.loading.start();
+            this.hotelRoomForm$.next(result.hotelRoomForm);
+            this.hotelRoomService.create(result.hotelRoomForm.value)
+              .subscribe({
+                next: () => {
+                  this.snackbar.success('Quarto adicionado com sucesso');
+                  this.loadRooms();
+                  this.loading.stop();
+                },
+                error: this.handleError
+              });
+          }
+        );
+      });
   }
 
   private async createRoomForm(): Promise<void> {

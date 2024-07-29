@@ -1,1 +1,7 @@
-<p>confirmation-dialog works!</p>
+<section>
+    <h2 *ngIf="confirmationText$ | async as text" [innerHtml]="text"></h2>
+    <div class="actions">
+        <ether-button (click)="onClickOption(true)">Sim</ether-button>
+        <ether-button (click)="onClickOption(false)">Não</ether-button>
+    </div>
+</section>

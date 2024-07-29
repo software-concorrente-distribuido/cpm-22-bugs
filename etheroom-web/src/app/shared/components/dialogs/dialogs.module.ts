@@ -4,6 +4,7 @@ import { DialogComponent } from './dialog.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { AddRoomDialogComponent } from './add-room-dialog/add-room-dialog.component';
 import { FormsModule } from '../forms/forms.module';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 
 
@@ -15,6 +16,7 @@ import { FormsModule } from '../forms/forms.module';
   imports: [
     FormsModule,
     CommonModule,
+    ButtonsModule,
     NgComponentOutlet
   ],
   exports: [
