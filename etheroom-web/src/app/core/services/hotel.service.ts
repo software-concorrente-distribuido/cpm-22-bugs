@@ -34,7 +34,7 @@ export class HotelService {
     numberOfGuests: number = null
   ): Observable<Page<Hotel>> {
     return this.http.get<Page<Hotel>>(
-      this.hotelApiUrl, 
+      this.hotelApiUrl,
       {
         params: {
           page: page.toString(),
