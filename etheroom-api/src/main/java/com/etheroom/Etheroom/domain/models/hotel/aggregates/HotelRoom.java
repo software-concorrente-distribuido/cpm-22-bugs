@@ -46,7 +46,7 @@ public class HotelRoom extends BaseEntity {
     )
     private List<Convenience> conveniences = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "hotel_id", nullable = false, referencedColumnName = "id", updatable = false)
     private Hotel hotel;
 

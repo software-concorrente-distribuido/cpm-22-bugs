@@ -1,0 +1,32 @@
+:host(.ether-room-form) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 21px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 40rem;
+
+    .room-form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+
+        .convenience {
+            max-width: 308px;
+        }
+
+        .slide-toggle {
+            display: flex;
+            gap: 1rem;
+            p {
+                margin: 0;
+            }
+        }
+    }
+}

@@ -25,4 +25,8 @@ export class EtherNavigationComponent {
   public get isUser(): boolean {
     return this.authenticationService.isCurrentUserPerson();
   }
+
+  public get homeAccess(): boolean {
+    return this.isHotel || this.isUser || true;
+  }
 }

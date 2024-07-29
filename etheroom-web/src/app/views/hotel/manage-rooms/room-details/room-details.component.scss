@@ -1,66 +1,70 @@
 section {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-
-    .container {
+    padding: 20px;
+    
+    form {
         display: flex;
-        width: 60%;
-        justify-content: center;
-        align-items: center;
-        .room-details {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            .room-information {
-                display: flex;
-                align-items: center;
-                .infos {
-                    ul {
-                        display: grid;
-                        grid-template-columns: repeat(2, 1fr);
-                        column-gap: 40px;
-                    }
-                }
-            }
-        }
-    }
-
-
-    .group-tab {
-
-        .button {
+        justify-content: space-around;
+        gap: 25px;
+    
+        ether-button {
             width: 25%;
         }
     
-        .booking {
+        .container {
             display: flex;
-            flex-direction: column;
-            gap: 30px;
-    
-            .room-price,
-            .room-availability,
-            .room-type {
+            justify-content: center;
+            align-items: center;
+            .room-details {
                 display: flex;
-                gap: 20px;
-            }
-    
-            .room-price,
-            .room-availability {
-                align-items: center;
-            }
-    
-            .room-type {
-                align-items: end;
-            }
-    
-            .room-price {
-                &__currency-info {
-                    .question-mark {
-                        width: 10%;
+                flex-direction: column;
+                justify-content: center;
+                .room-information {
+                    display: flex;
+                    align-items: center;
+                    .infos {
+                        ul {
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            column-gap: 40px;
+                        }
                     }
                 }
             }
         }
-    }
+    
+    
+        .group-tab {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: end;
+            justify-content: space-between;
+    
+            .booking {            
+                display: flex;
+                flex-direction: column;
+                gap: 30px;
+        
+                .room-price,
+                .room-availability,
+                .room-type {
+                    display: flex;
+                    gap: 20px;
+                }
+        
+                .room-price,
+                .room-availability {
+                    align-items: center;
+                }
+        
+                .room-type {
+                    align-items: end;
+                }
+            }
+    
+            .delete-room {
+                width: 25%;
+            }
+        }
+    }    
 }

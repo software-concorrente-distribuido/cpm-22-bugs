@@ -1,15 +1,15 @@
 import { Component, Injector } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
-import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
+import { RouterModule } from '@angular/router';
 import { Web3Service } from '../../../core/services/web3.service';
 import { AuthenticationResponse, EthereumAccount } from '../../../core/types/types';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { UtilComponent } from '../../../shared/components/util/util.component';
+import { ButtonsModule } from '../../../shared/components/buttons/buttons.module';
 
 @Component({
   selector: 'ether-login',
   standalone: true,
-  imports: [EtherButtonTextIconComponent, RouterModule],
+  imports: [ButtonsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   host: {

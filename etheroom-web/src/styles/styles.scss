@@ -35,7 +35,7 @@ $etheroom-web-theme: mat.define-light-theme((
 @include mat.all-component-themes($etheroom-web-theme);
 
 /* You can add global styles to this file, and also import other style files */
-@import 'colors';
+@import '_colors';
 @import 'typography';
 
 html, body {
@@ -172,6 +172,7 @@ h2 {
     --color-darkslategray: #333;
     --color-silver: #b5b5b5;
     --splash-screen-bg: rgba(0, 0, 0, 0.7);
+    --ether-red: #FF9797;
   
     /* Gaps */
     --gap-5xl: 24px;

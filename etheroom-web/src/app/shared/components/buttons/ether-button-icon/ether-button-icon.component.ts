@@ -1,10 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'ether-button-icon',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './ether-button-icon.component.html',
   styleUrl: './ether-button-icon.component.scss'
 })

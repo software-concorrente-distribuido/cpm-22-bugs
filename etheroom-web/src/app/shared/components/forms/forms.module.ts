@@ -10,9 +10,15 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddressFormComponent } from './address-form/address-form.component';
 import { TouristSpotFormComponent } from './tourist-spot-form/tourist-spot-form.component';
 import { ConvenienceFormComponent } from './convenience-form/convenience-form.component';
+import { RoomFormComponent } from './room-form/room-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import {
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
+    RoomFormComponent,
     UserFormComponent,
     HotelFormComponent,
     PersonFormComponent,
@@ -25,13 +31,16 @@ import { ConvenienceFormComponent } from './convenience-form/convenience-form.co
     CommonModule,
     ReactiveFormsModule,
     AngularFormsModule,
+    MatSelectModule,
+    MatSlideToggleModule,
     InputsModule,
     MediaModule
   ],
   exports: [
     UserFormComponent,
     HotelFormComponent,
-    PersonFormComponent
+    PersonFormComponent,
+    RoomFormComponent
   ]
 })
 export class FormsModule { }

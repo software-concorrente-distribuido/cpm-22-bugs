@@ -35,15 +35,6 @@ public class HotelRoomDto extends BaseEntityDto<HotelRoom> {
         hotelRoom.setDescription(this.getDescription());
         hotelRoom.setType(this.getType());
         hotelRoom.setPrice(this.getPrice());
-        hotelRoom.setHotel(
-                Optional.ofNullable(this.getHotelId())
-                        .map(id -> {
-                            var hotel = new Hotel();
-                            hotel.setId(id);
-                            return hotel;
-                        })
-                        .orElse(null)
-        );
         hotelRoom.setNumber(this.getNumber());
         hotelRoom.setCapacity(this.getCapacity());
         hotelRoom.setAvailable(this.getAvailable());
