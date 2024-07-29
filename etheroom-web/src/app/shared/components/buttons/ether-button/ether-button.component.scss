@@ -18,3 +18,9 @@ button.inverted {
     background-color: black;
     color: #ffffff;
 }
+
+button.danger {
+    background-color: var(--ether-red);
+    color: var(--color-black);
+    border: 2px solid var(--color-black);
+}

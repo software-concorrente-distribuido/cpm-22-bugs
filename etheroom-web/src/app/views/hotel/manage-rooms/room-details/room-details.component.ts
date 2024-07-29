@@ -15,13 +15,14 @@ import { Convenience } from '../../../../core/models/hotel/aggregates/convenienc
 import { ApplicationService } from '../../../../core/services/application.service';
 import { EnumsNames } from '../../../../core/data/enums';
 import { Enum } from '../../../../core/types/types';
+import { DialogsService } from '../../../../shared/components/dialogs/dialogs.service';
 
 @Component({
   selector: 'ether-room-details',
   templateUrl: './room-details.component.html',
   styleUrl: './room-details.component.scss'
 })
-export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDestroy {
+export class RoomDetailsComponent extends UtilComponent implements OnInit {
   protected override pageTitle: string;
   protected override pageDescription: string;
 
@@ -35,6 +36,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
   constructor(
     injector: Injector,
     private hotelRoomService: HotelRoomService,
+    private dialog: DialogsService,
     private appService: ApplicationService,
     private hotelService: HotelService,
     private route: ActivatedRoute
@@ -43,13 +45,9 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
   }
   
   ngOnInit(): void {
+    console.log(this.hotelRoomForm);
     this.getRouteData();
     this.loadItems();
-  }
-
-  ngOnDestroy(): void {
-    this.hotelRoomForm$.unsubscribe();
-    this.newHotelRoom$.unsubscribe();
   }
 
   public get roomConveniences(): Convenience[] {
@@ -72,12 +70,12 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
   }
 
   public onClickDelete(): void {
-    // this.dialog.open(ConfirmationDialogComponent, {
-    //   inputs: {
-    //     text: 'Deseja realmente deletar este quarto?'
-    //   },
-    //   onClose: (bool: any) => this.handleDeletionConfirmation(bool)
-    // })
+    this.dialog.open(ConfirmationDialogComponent, {
+      inputs: {
+        text: 'Deseja realmente deletar este quarto?'
+      },
+      onClose: (bool: any) => this.handleDeletionConfirmation(bool)
+    })
   }
 
   private get hotelRoomForm(): FormGroup {
@@ -145,7 +143,8 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
     this.loading.start();
     this.hotelRoomService.findById(id).subscribe({
       next: (hotelRoom: HotelRoom) => {
-        this.createRoomForm(hotelRoom);
+        console.log(hotelRoom);
+        this.hotelRoomForm$.next(createHotelRoomForm(hotelRoom));
         this.findHotelById(hotelRoom.hotelId);
         this.loading.stop();
       },
@@ -158,6 +157,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
     this.hotelService.findById(hotelId).subscribe({
       next: (hotel) => {
         this.hotel = hotel;
+        this.loading.stop();
       },
       error: this.handleError
     });
