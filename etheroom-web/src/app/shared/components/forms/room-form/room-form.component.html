@@ -1,0 +1,67 @@
+<h2>Room</h2>
+<form *ngIf="hotelRoomForm$ | async as hotelRoomForm" [formGroup]="hotelRoomForm">
+    <div class="room-form">
+        <ether-form-field>
+            <ether-form-field-label>Room Number</ether-form-field-label>
+            <input formControlName="number" type="text" />
+            <ether-form-field-error *ngIf="hotelRoomForm.get('number').touched && hotelRoomForm.get('number').hasError('required')">
+                Field is required
+            </ether-form-field-error>
+            <ether-form-field-error *ngIf="hotelRoomForm.get('number').touched && hotelRoomForm.get('number').hasError('maxlength')">
+                Max length is 100
+            </ether-form-field-error>
+        </ether-form-field>
+        
+        <ether-form-field>
+            <ether-form-field-label>Room Description</ether-form-field-label>
+            <textarea formControlName="description"></textarea>
+            <ether-form-field-error *ngIf="hotelRoomForm.get('description').touched && hotelRoomForm.get('description').hasError('required')">
+                Field is required
+            </ether-form-field-error>
+            <ether-form-field-error *ngIf="hotelRoomForm.get('description').touched && hotelRoomForm.get('description').hasError('maxlength')">
+                Max length is 255
+            </ether-form-field-error>
+        </ether-form-field>
+        
+        <ether-form-field>
+            <ether-form-field-label>Price per night</ether-form-field-label>
+            <input formControlName="price" type="text" />
+            <ether-form-field-error *ngIf="hotelRoomForm.get('price').touched && hotelRoomForm.get('price').hasError('required')">
+                Field is required
+            </ether-form-field-error>
+            <ether-form-field-error *ngIf="hotelRoomForm.get('price').touched && hotelRoomForm.get('price').hasError('maxlength')">
+                Max length is 100
+            </ether-form-field-error>
+        </ether-form-field>
+        
+        <ether-form-field>
+            <ether-form-field-label>Capacity</ether-form-field-label>
+            <input formControlName="capacity" type="text" />
+            <ether-form-field-error *ngIf="hotelRoomForm.get('capacity').touched && hotelRoomForm.get('capacity').hasError('required')">
+                Field is required
+            </ether-form-field-error>
+            <ether-form-field-error *ngIf="hotelRoomForm.get('capacity').touched && hotelRoomForm.get('capacity').hasError('maxlength')">
+                Max length is 100
+            </ether-form-field-error>
+        </ether-form-field>
+        
+        <ether-form-field>
+            <ether-form-field-label>Room Type</ether-form-field-label>
+            <mat-select formControlName="type">
+                <mat-option *ngFor="let type of roomTypes" [value]="type.name">{{ findRoomTypeDescription(type.name) }}</mat-option>
+            </mat-select>
+            <ether-form-field-error *ngIf="hotelRoomForm.get('type').touched && hotelRoomForm.get('type').hasError('required')">
+                Field is required
+            </ether-form-field-error>
+        </ether-form-field>
+
+        <ether-form-field class="convenience">
+            <ether-form-field-label>Conveniences</ether-form-field-label>
+            <mat-select formArrayName="conveniences" multiple>
+                <mat-option *ngFor="let convenience of conveniences" [value]="convenience.name">
+                    {{ findConvenienceDescription(convenience.name) }}
+                </mat-option>
+            </mat-select>
+        </ether-form-field>
+    </div>
+</form>

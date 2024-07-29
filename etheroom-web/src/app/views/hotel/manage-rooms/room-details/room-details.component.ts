@@ -12,18 +12,23 @@ import { ConfirmationDialogComponent } from '../../../../shared/components/dialo
 import { HotelService } from '../../../../core/services/hotel.service';
 import { Hotel } from '../../../../core/models/hotel/hotel.model';
 import { Convenience } from '../../../../core/models/hotel/aggregates/convenience.model';
+import { ApplicationService } from '../../../../core/services/application.service';
+import { EnumsNames } from '../../../../core/data/enums';
+import { Enum } from '../../../../core/types/types';
+import { DialogsService } from '../../../../shared/components/dialogs/dialogs.service';
 
 @Component({
   selector: 'ether-room-details',
   templateUrl: './room-details.component.html',
   styleUrl: './room-details.component.scss'
 })
-export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDestroy {
+export class RoomDetailsComponent extends UtilComponent implements OnInit {
   protected override pageTitle: string;
   protected override pageDescription: string;
 
   public hotelRoomForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
   public newHotelRoom$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public conveniences$: BehaviorSubject<Enum[]> = new BehaviorSubject(null);
 
   public hotelId: string;
   public hotel: Hotel;
@@ -31,6 +36,8 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
   constructor(
     injector: Injector,
     private hotelRoomService: HotelRoomService,
+    private dialog: DialogsService,
+    private appService: ApplicationService,
     private hotelService: HotelService,
     private route: ActivatedRoute
   ) {
@@ -38,16 +45,20 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
   }
   
   ngOnInit(): void {
+    console.log(this.hotelRoomForm);
     this.getRouteData();
-  }
-
-  ngOnDestroy(): void {
-    this.hotelRoomForm$.unsubscribe();
-    this.newHotelRoom$.unsubscribe();
+    this.loadItems();
   }
 
   public get roomConveniences(): Convenience[] {
     return this.hotelRoomForm.get('conveniences').value;
+  }
+
+  public findConvenienceDescription(type: string): string {
+    return Optional.ofNullable(this.conveniences$.value)
+      .map(conveniences => conveniences.find(convenience => convenience.name === type))
+      .map(convenience => convenience.description)
+      .orElse(null);
   }
 
   public onSave(): void {
@@ -132,7 +143,8 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
     this.loading.start();
     this.hotelRoomService.findById(id).subscribe({
       next: (hotelRoom: HotelRoom) => {
-        this.createRoomForm(hotelRoom);
+        console.log(hotelRoom);
+        this.hotelRoomForm$.next(createHotelRoomForm(hotelRoom));
         this.findHotelById(hotelRoom.hotelId);
         this.loading.stop();
       },
@@ -145,6 +157,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
     this.hotelService.findById(hotelId).subscribe({
       next: (hotel) => {
         this.hotel = hotel;
+        this.loading.stop();
       },
       error: this.handleError
     });
@@ -176,5 +189,13 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit, OnDes
       }
     });
   }
+
+  private loadItems(): void {
+    this.appService.findEnumByName(EnumsNames.HOTEL_ROOM_CONVENIENCE).subscribe(
+      (conveniences: Enum[]) => this.conveniences$.next(conveniences)
+    );
+  }
+
+  // find no array pelo type
 
 }

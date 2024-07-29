@@ -1,3 +1,4 @@
+import { AuthGuard } from './core/guards/auth.guard';
 import { Routes } from '@angular/router';
 import { YourBookingsComponent } from './views/guest/your-bookings/your-bookings.component';
 import { BookedRoomComponent } from './views/guest/booked-room/booked-room.component';
@@ -10,9 +11,9 @@ import { AboutComponent } from './views/shared/about/about.component';
 import { FaqComponent } from './views/shared/faq/faq.component';
 import { ManageRoomsComponent } from './views/hotel/manage-rooms/manage-rooms.component';
 import { RoomDetailsComponent } from './views/hotel/manage-rooms/room-details/room-details.component';
-import { AddRoomComponent } from './views/hotel/manage-rooms/add-room/add-room.component';
 import { MyBookingsComponent } from './views/hotel/my-bookings/my-bookings.component';
 import { RoomPageComponent } from './views/shared/room-page/room-page.component';
+import { HotelGuard, PersonGuard } from './core/guards/user.guard';
 
 export const routes: Routes = [
     {
@@ -39,9 +40,11 @@ export const routes: Routes = [
     {
         path: 'guest',
         children: [
+            { path: 'all-hotels', component: AllHotelsComponent },
             { path: 'your-bookings', component: YourBookingsComponent },
             { path: 'booked-room', component: BookedRoomComponent }
-        ]
+        ],
+        canActivate: [AuthGuard, PersonGuard]
     },
 
     {
@@ -49,8 +52,8 @@ export const routes: Routes = [
         children: [
             { path: 'manage-rooms', component: ManageRoomsComponent },
             { path: 'manage-rooms/room-details/:id', component: RoomDetailsComponent },
-            { path: 'manage-rooms/add-room', component: AddRoomComponent },
             { path: 'my-bookings', component: MyBookingsComponent }
-        ]
+        ],
+        canActivate: [AuthGuard, HotelGuard]
     }
 ];

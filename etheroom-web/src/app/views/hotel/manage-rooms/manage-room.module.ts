@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RoomDetailsComponent } from './room-details/room-details.component';
-import { AddRoomComponent } from './add-room/add-room.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { EtherIconTextComponent } from '../../../shared/components/ether-icon-text/ether-icon-text.component';
 import { InputsModule } from '../../../shared/components/inputs/inputs.module';
@@ -10,19 +9,17 @@ import { EtherFilterComponent } from '../../../shared/components/filter/ether-fi
 import { EtherPageComponent } from '../../../shared/components/containers/ether-page/ether-page.component';
 import { RouterOutlet } from '@angular/router';
 import { ManageRoomsComponent } from './manage-rooms.component';
-import { EtherButtonIconComponent } from '../../../shared/components/ether-button-icon/ether-button-icon.component';
 import { EtherTableModule } from '../../../shared/components/ether-table/ether-table.module';
-import { EtherButtonTextIconComponent } from '../../../shared/components/ether-button-text-icon/ether-button-text-icon.component';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ButtonsModule } from '../../../shared/components/buttons/buttons.module';
 
 
 
 @NgModule({
   declarations: [
     RoomDetailsComponent,
-    ManageRoomsComponent,
-    AddRoomComponent
+    ManageRoomsComponent
   ],
   imports: [
     FormsModule,
@@ -37,13 +34,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EtherDialogComponent,
     EtherFilterComponent,
     EtherIconTextComponent,
-    EtherButtonIconComponent,
-    EtherButtonTextIconComponent,
+    ButtonsModule
 ],
   exports: [
     RoomDetailsComponent,
     ManageRoomsComponent,
-    AddRoomComponent,
     EtherFilterComponent,
   ]
 })

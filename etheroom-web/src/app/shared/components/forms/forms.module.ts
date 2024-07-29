@@ -8,26 +8,33 @@ import { InputsModule } from '../inputs/inputs.module';
 import { MediaModule } from "../media/media.module";
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddressFormComponent } from './address-form/address-form.component';
+import { RoomFormComponent } from './room-form/room-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ConvenienceFormComponent } from './convenience-form/convenience-form.component';
 
 @NgModule({
   declarations: [
+    RoomFormComponent,
     UserFormComponent,
     HotelFormComponent,
     PersonFormComponent,
     ContactFormComponent,
-    AddressFormComponent
+    AddressFormComponent,
+    ConvenienceFormComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     AngularFormsModule,
+    MatSelectModule,
     InputsModule,
     MediaModule
 ],
   exports: [
     UserFormComponent,
     HotelFormComponent,
-    PersonFormComponent
+    PersonFormComponent,
+    RoomFormComponent
   ]
 })
 export class FormsModule { }

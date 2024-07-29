@@ -9,9 +9,14 @@ import { SnackbarService } from '../../snackbar/snackbar.service';
 @Component({
   selector: 'ether-thumbnail',
   templateUrl: './thumbnail.component.html',
-  styleUrl: './thumbnail.component.scss'
+  styleUrl: './thumbnail.component.scss',
+  host: {
+    class: 'ether-thumbnail'
+  }
 })
 export class ThumbnailComponent {
+
+  private readonly DEFAULT_FILE_URL: string = '';
   
   private readonly base64Prefix: string = 'data:image/png;base64,';
 
@@ -39,18 +44,19 @@ export class ThumbnailComponent {
       .ifPresent(this.handleMediaUpload);
   }
 
-  public onFileDownload(): void {
-    const linkSource = this.fileUrl;
-    const downloadLink = document.createElement("a");
-    const fileName = this.filename;
-
-    downloadLink.href = linkSource;
-    downloadLink.download = fileName;
-    downloadLink.click();
+  public get fileUrl(): string {
+    return Optional.ofNullable(this.mediaControl.value)
+                    .map((media) => media as Media)
+                    .map((media) => media.data)
+                    .map((data: string) => this.base64Prefix + data)
+                    .orElse(this.DEFAULT_FILE_URL);
   }
 
   public get filename(): string {
-    return this.mediaControl.value?.filename;
+    return Optional.ofNullable(this.mediaControl.value)
+                    .map((media) => media as Media)
+                    .map((media) => media.filename)
+                    .orElse('thumbnail');
   }
 
   public get temporaryMedia(): boolean {
@@ -62,10 +68,6 @@ export class ThumbnailComponent {
 
   private get mediaControl(): FormControl {
     return this.control$.value;
-  }
-
-  private get fileUrl(): string {
-    return this.base64Prefix + (this.mediaControl.value as Media).data;
   }
 
   private handleMediaUpload = (file: File): void => {
