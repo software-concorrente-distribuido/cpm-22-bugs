@@ -1,10 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
-import { Enum } from '../../../../core/types/types';
-import { ApplicationService } from '../../../../core/services/application.service';
-import { EnumsNames } from '../../../../core/data/enums';
-import { createConvenienceForm, createTouristSpotForm } from '../../../../core/utils/forms';
 import { Optional } from '../../../../core/utils/optional';
 
 @Component({
@@ -15,11 +11,9 @@ import { Optional } from '../../../../core/utils/optional';
     class: 'etheroom-hotel-form'
   }
 })
-export class HotelFormComponent implements OnInit {
+export class HotelFormComponent {
 
   public hotelForm$: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(null);
-
-  public conveniences$: BehaviorSubject<Enum[]> = new BehaviorSubject<Enum[]>(null);
 
   public isRegistered: boolean = false;
 
@@ -27,15 +21,6 @@ export class HotelFormComponent implements OnInit {
   public set hotelForm(value: FormGroup) {
     this.isRegistered = Optional.ofNullable(value.get('id').value).isPresent();
     this.hotelForm$.next(value);
-  }
-
-  constructor(
-    private appService: ApplicationService
-  ) {
-  }
-
-  public ngOnInit(): void {
-    this.loadEnums();
   }
 
   public get userForm(): FormGroup {
@@ -64,27 +49,6 @@ export class HotelFormComponent implements OnInit {
 
   public get imagesControl(): FormControl {
     return this.hotelForm$.value.get('images') as FormControl;
-  }
-
-  public addConvenience(): void {
-    this.convenienceFormArray.push(createConvenienceForm());
-  }
-
-  public removeConvenience(index: number): void {
-    this.convenienceFormArray.removeAt(index);
-  }
-
-  public addTouristSpot(): void {
-    this.touristSpotFormArray.push(createTouristSpotForm());
-  }
-
-  public removeTouristSpot(index: number): void {
-    this.touristSpotFormArray.removeAt(index);
-  }
-
-  private loadEnums(): void {
-    this.appService.findEnumByName(EnumsNames.HOTEL_CONVENIENCE)
-      .subscribe((enums: Enum[]) => this.conveniences$.next(enums));
   }
 
 }

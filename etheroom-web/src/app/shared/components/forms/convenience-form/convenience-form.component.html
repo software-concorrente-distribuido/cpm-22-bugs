@@ -1,10 +1,17 @@
-<form *ngIf="convenienceForm$ | async as convenienceForm" [formGroup]="convenienceForm">
+<div>
+    <h2>Conveniences</h2>
+    <button (click)="addConvenience()">+</button>
+</div>
+<form *ngFor="let conveniencesForm of (conveniencesFormArray$ | async).controls; let i = index" [formGroup]="castAbstractToFormGroup(conveniencesForm)">
     <ether-form-field>
-        <ether-form-field-label>Conveniences</ether-form-field-label>
-        <mat-select formControlName="type" multiple>
-            <mat-option *ngFor="let convenience of conveniences" [value]="convenience.name">
-                {{ findConvenienceDescription(convenience.name) }}</mat-option>
-        </mat-select>
+        <ether-form-field-label>Convenience *</ether-form-field-label>
+        <select formControlName="type">
+            <option [value]="null">Select an option</option>
+            <option *ngFor="let convenience of conveniences$ | async" [value]="convenience?.name">{{ convenience?.description }}</option>
+        </select>
+        <ether-form-field-error *ngIf="castAbstractToFormGroup(conveniencesForm).get('type').touched && castAbstractToFormGroup(conveniencesForm).get('type').hasError('required')">
+            Field is required
+        </ether-form-field-error>
     </ether-form-field>
+    <button (click)="removeConvenience(i)">-</button>
 </form>
-  
