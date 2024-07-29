@@ -20,5 +20,13 @@ form {
         .convenience {
             max-width: 308px;
         }
+
+        .slide-toggle {
+            display: flex;
+            gap: 1rem;
+            p {
+                margin: 0;
+            }
+        }
     }
 }
