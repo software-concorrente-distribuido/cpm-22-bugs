@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.etheroom</groupId>
-	<artifactId>Etheroom</artifactId>
+	<artifactId>etheroom-api</artifactId>
 	<version>1.0.0</version>
-	<name>Etheroom</name>
-	<description>Demo Etheroomfor Spring Boot</description>
+	<name>etheroom-api</name>
+	<description>Etheroom API</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
