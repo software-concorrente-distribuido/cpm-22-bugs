@@ -95,6 +95,8 @@ export class AuthenticationService {
 
   public currentPerson = (): Observable<Person> => this.person$.asObservable();
 
+  public isAuthenticationContextValid = (): boolean => Optional.ofNullable(this.accessToken).isPresent();
+
   public isCurrentUserHotel = (): boolean => this.role === 'HOTEL';
 
   public isCurrentUserPerson = (): boolean => this.role === 'PERSON' || this.role === 'USER';
