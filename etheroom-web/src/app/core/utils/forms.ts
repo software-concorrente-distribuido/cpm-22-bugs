@@ -82,8 +82,8 @@ export const createPersonForm = (person: Person = null): FormGroup => {
 export const createUserForm = (user: User = null): FormGroup => {
     return getFormBuilder().group({
         id: [user?.id],
-        ethereumAddress: [{value: user?.ethereumAddress, disabled: true}, [Validators.required, Validators.maxLength(255)]],
-        ethereumPublicKey: [{value: user?.ethereumPublicKey, disabled: true}, [Validators.required, Validators.maxLength(255)]],
+        ethereumAddress: [user?.ethereumAddress, [Validators.required, Validators.maxLength(255)]],
+        ethereumPublicKey: [user?.ethereumPublicKey, [Validators.required, Validators.maxLength(255)]],
         email: [user?.email, [Validators.required, Validators.maxLength(50)]],
         role: [user?.role],
         profilePicture: [user?.profilePicture],

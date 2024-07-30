@@ -78,10 +78,8 @@ export class LoginComponent extends UtilComponent {
   }
 
   private handleAuthResponse(response: AuthenticationResponse): void {
-    if (response && response.accessToken) {
-      this.router.navigate(['/home']); // Navega para a página inicial
-    } else {
-      this.router.navigate(['/register']); // Navega para a página de registro
-    }
+    this.router.navigate([
+      (response && response.accessToken) ? '/home' : '/register'
+    ]);
   }
 }

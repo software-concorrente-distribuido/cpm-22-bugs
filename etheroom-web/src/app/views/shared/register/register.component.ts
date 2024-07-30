@@ -66,7 +66,7 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     const form: FormGroup = this.userForm$.value;
     if(form.valid) {
       this.loading.start();
-      const formValues = this.getFormValues(form);
+      const formValues = form.value;
       this.isPerson ? this.createPerson(formValues) : this.createHotel(formValues);
     }
     else {
@@ -87,11 +87,10 @@ export class RegisterComponent extends UtilComponent implements OnInit {
   private createPerson(person: Person): void {
     this.personService.create(person)
       .subscribe({
-        next: (person: Person) => {
+        next: () => {
           this.loading.stop();
           this.snackbar.success("Person created successfully");
           this.handleLogin();
-          // this.router.navigate([`/profile`], { queryParams: { id: person.user.id } });
         },
         error: this.handleError
       });
@@ -100,10 +99,9 @@ export class RegisterComponent extends UtilComponent implements OnInit {
   private createHotel(hotel: Hotel): void {
     this.hotelService.create(hotel)
       .subscribe({
-        next: (hotel: Hotel) => {
+        next: () => {
           this.loading.stop();
           this.snackbar.success("Hotel created successfully");
-          // this.router.navigate([`/profile`], { queryParams: { id: hotel.user.id } });
           this.handleLogin();
         },
         error: this.handleError
@@ -124,26 +122,16 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     this.userForm$.next(createHotelForm(Hotel.fromUser(user)));
   }
 
-  private getFormValues(form: FormGroup): any {
-    form.enable();
-    const values = form.getRawValue();
-    form.disable();
-    return values;
-  }
-
   private handleLogin(): void {
-    this.authenticationService.login(this.authenticationService.buildAuthRequest(this.ethereumAccount$.value)).subscribe({
-      next: () => this.snackbar.success("Login successful"),
-      error: (error) => this.handleError(error)
+    this.authenticationService.login(
+      this.authenticationService.buildAuthRequest(this.ethereumAccount$.value)
+    ).subscribe({
+      next: () =>{ 
+        this.snackbar.success("Login successful");
+        this.router.navigate([`/profile`]);
+      },
+      error: this.handleError
     });
-  }
-
-  private handleAuthResponse(response: AuthenticationResponse): void {
-    if (response && response.accessToken) {
-      this.router.navigate(['/home']); // Navega para a página inicial
-    } else {
-      this.router.navigate(['/register']); // Navega para a página de registro
-    }
   }
 
 }
