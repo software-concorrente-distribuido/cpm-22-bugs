@@ -94,41 +94,34 @@ h2 {
 }
 
 .ether-form-field {
-    input, select {
-        font-family: 'quasimoda-regular';
+    input, textarea {
+        width: 100%;
+        display: block;
+        padding: 1.75rem 1rem;
+        font-family: 'quasimoda-medium';
+        font-size: 1rem;
+        letter-spacing: 0.0875rem;
         outline: none;
         border: none;
-        display:block;
-        padding: 0;
-        width: 100%;
-        background-color: transparent;
+        resize: none;
+        background-color: #D9D9D9;
+        border-radius: 1rem;
+        transition: var(--linear-transition-settings);
 
         &::placeholder {
             font-family: 'quasimoda-semi-bold';
             color: #979797;
-            font-size: 13px;
-            background-color: transparent;
+            font-size: 1rem;
+        }
+        &:hover {
+            background-color: #E6E6E6;
+            transition: var(--linear-transition-settings);
+        }
+        &:focus {
+            background-color: #E4E4E4;
+            transition: var(--linear-transition-settings);
         }
     }
-
-    textarea {
-        font-family: 'quasimoda-regular';
-        outline: none;
-        border: none;
-        display:block;
-        padding: 0;
-        width: 100%;
-        background-color: transparent;
-
-        &::placeholder {
-            font-family: 'quasimoda-semi-bold';
-            color: #979797;
-            font-size: 13px;
-            background-color: transparent;
-        }
-    
-    }
-
 }
 
 :root {

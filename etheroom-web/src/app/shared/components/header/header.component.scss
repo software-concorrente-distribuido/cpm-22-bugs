@@ -70,8 +70,10 @@ div.actions {
         padding: 0.5rem 2.5rem;
         background-color: black;
         color: white;
+        font-size: 1rem;
+        font-weight: 700;
         letter-spacing: 0.075rem;
-        border: 2px solid black;
+        border: 0.15rem solid black;
         border-radius: 1rem;
         text-decoration: none;
         transition: var(--linear-transition-settings);
