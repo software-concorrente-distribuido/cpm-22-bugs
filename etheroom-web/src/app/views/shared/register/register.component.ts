@@ -90,7 +90,8 @@ export class RegisterComponent extends UtilComponent implements OnInit {
         next: (person: Person) => {
           this.loading.stop();
           this.snackbar.success("Person created successfully");
-          this.router.navigate([`/profile`], { queryParams: { id: person.user.id } });
+          this.handleLogin();
+          // this.router.navigate([`/profile`], { queryParams: { id: person.user.id } });
         },
         error: this.handleError
       });
@@ -132,7 +133,7 @@ export class RegisterComponent extends UtilComponent implements OnInit {
 
   private handleLogin(): void {
     this.authenticationService.login(this.authenticationService.buildAuthRequest(this.ethereumAccount$.value)).subscribe({
-      next: (response: AuthenticationResponse) => this.handleAuthResponse(response),
+      next: () => this.snackbar.success("Login successful"),
       error: (error) => this.handleError(error)
     });
   }
