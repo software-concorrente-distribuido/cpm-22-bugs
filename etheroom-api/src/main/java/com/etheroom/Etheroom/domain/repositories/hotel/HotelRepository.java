@@ -19,14 +19,14 @@ public interface HotelRepository extends JpaRepository<Hotel, UUID> {
             "SELECT h FROM Hotel h " +
                     "LEFT JOIN HotelRoom hr ON h.id = hr.hotel.id " +
                     "WHERE (:location IS NULL OR :location = '' OR LOWER(h.address.description) LIKE LOWER(CONCAT('%', :location, '%'))) " +
-                    "AND (:checkIn IS NULL OR :checkOut IS NULL OR NOT EXISTS (SELECT 1 FROM Booking b WHERE b.hotelRoom.id = hr.id AND b.checkIn < :checkOut AND b.checkOut > :checkIn)) " +
+//                    "AND (:checkIn IS NULL OR :checkOut IS NULL OR NOT EXISTS (SELECT 1 FROM Booking b WHERE b.hotelRoom.id = hr.id AND b.checkIn < :checkOut AND b.checkOut > :checkIn)) " +
                     "AND (:numberOfGuests IS NULL OR hr.capacity >= :numberOfGuests) "
     )
     Page<Hotel> findAll(
             Pageable pageable,
             @Param("location") String location,
-            @Param("checkIn") LocalDateTime checkIn,
-            @Param("checkOut") LocalDateTime checkOut,
+//            @Param("checkIn") LocalDateTime checkIn,
+//            @Param("checkOut") LocalDateTime checkOut,
             @Param("numberOfGuests") Integer numberOfGuests
     );
 

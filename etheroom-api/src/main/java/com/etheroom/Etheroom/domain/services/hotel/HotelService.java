@@ -50,8 +50,8 @@ public class HotelService implements IHotelService {
         return this.hotelRepository.findAll(
                 pageable,
                 filter.getLocation(),
-                filter.getCheckIn(),
-                filter.getCheckOut(),
+//                filter.getCheckIn(),
+//                filter.getCheckOut(),
                 filter.getNumberOfGuests()
         ).map(Hotel::mapEntityToDto);
     }
@@ -78,7 +78,7 @@ public class HotelService implements IHotelService {
 
     @Override
     public void update(HotelDto hotelDto) {
-        Functions.acceptTrueThrows(
+        Functions.acceptFalseThrows(
                 Optional.ofNullable(hotelDto.getId()).isPresent() && this.hotelRepository.existsById(hotelDto.getId()),
                 () -> new NotFoundException(HOTEL_NOT_FOUND)
         );
