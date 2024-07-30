@@ -10,9 +10,11 @@ import { DialogsService } from '../dialogs.service';
 })
 export class ConfirmationDialogComponent {
 
+  private readonly DEFAULT_TEXT: string = 'Are you sure?';
+
   @Input()
   public set text(confirmationText: string) {
-    this.confirmationText$.next(confirmationText);
+    this.confirmationText$.next(confirmationText ?? this.DEFAULT_TEXT);
   }
 
   public confirmationText$: BehaviorSubject<string> = new BehaviorSubject(null);

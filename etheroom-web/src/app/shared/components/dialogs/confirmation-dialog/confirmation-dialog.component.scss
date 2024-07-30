@@ -1,0 +1,16 @@
+section {
+    width: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    div.actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        ether-button {
+            width: 180px;
+        }
+    }
+}
