@@ -16,9 +16,9 @@ import { SnackbarService } from '../../snackbar/snackbar.service';
 })
 export class ThumbnailComponent {
 
-  private readonly DEFAULT_FILE_URL: string = '';
+  private readonly DEFAULT_FILE_URL: string = './../../../../../assets/images/example-hotel.svg';
   
-  private readonly base64Prefix: string = 'data:image/png;base64,';
+  private readonly BASE_64_PREFIX: string = 'data:image/png;base64,';
 
   public control$: BehaviorSubject<FormControl> = new BehaviorSubject<FormControl>(null);
 
@@ -59,7 +59,7 @@ export class ThumbnailComponent {
     return Optional.ofNullable(this.mediaControl.value)
                     .map((media) => media as Media)
                     .map((media) => media.data)
-                    .map((data: string) => this.base64Prefix + data)
+                    .map((data: string) => this.BASE_64_PREFIX + data)
                     .orElse(this.DEFAULT_FILE_URL);
   }
 
