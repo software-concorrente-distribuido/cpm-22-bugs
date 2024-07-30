@@ -13,12 +13,15 @@ export class HotelService {
 
   private hotelApiUrl: string;
 
+  private hotelPublicApiUrl: string;
+
   private readonly HOTEL_PATH = 'hotel';
 
   constructor(
     private http: HttpClient
   ) {
     this.hotelApiUrl = `${environment.apiUrl}/${this.HOTEL_PATH}`;
+    this.hotelPublicApiUrl = `${environment.apiUrl}/public/${this.HOTEL_PATH}`;
   }
 
   public create(hotel: Hotel): Observable<Hotel> {
@@ -53,7 +56,7 @@ export class HotelService {
     size: number
   ): Observable<Page<Hotel>> {
     return this.http.get<Page<Hotel>>(
-      `${this.hotelApiUrl}/most-booked`,
+      `${this.hotelPublicApiUrl}/most-booked`,
       {
         params: {
           page: page.toString(),
