@@ -45,7 +45,7 @@ export const routes: Routes = [
             { path: 'your-bookings', component: YourBookingsComponent },
             { path: 'room-details/:id', component: RoomDetailsComponent },
             { path: 'booked-room', component: BookedRoomComponent },
-            { path: '/profile', component: ProfileComponent }
+            { path: 'profile', component: ProfileComponent }
         ],
         canActivate: [AuthGuard, PersonGuard]
     },
@@ -56,7 +56,7 @@ export const routes: Routes = [
             { path: 'manage-rooms', component: ManageRoomsComponent },
             { path: 'manage-rooms/room-details/:id', component: RoomDetailsComponent },
             { path: 'my-bookings', component: MyBookingsComponent },
-            { path: '/profile', component: ProfileComponent }
+            { path: 'profile', component: ProfileComponent }
         ],
         canActivate: [AuthGuard, HotelGuard]
     }
