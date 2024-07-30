@@ -45,7 +45,7 @@ export class ProfileComponent extends UtilComponent implements OnInit {
             .filter(form => form.valid)
             .map(form => form.value)
             .ifPresentOrElse(
-              this.updateUser,
+              (user: Person | Hotel) => this.updateUser(user),
               () => this.snackbar.info('Please fill all required fields')
             );
   }

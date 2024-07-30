@@ -11,6 +11,7 @@ import { Booking } from "../models/booking/booking.model";
 import { Hotel } from "../models/hotel/hotel.model";
 import { HotelRoom } from "../models/hotel/aggregates/hotel-room.model";
 import { getProvider } from "../providers/global.providers";
+import { Optional } from "./optional";
 
 export const createBookingForm = (booking: Booking = null): FormGroup => {
     const formBuilder: FormBuilder = getFormBuilder();
@@ -24,7 +25,9 @@ export const createBookingForm = (booking: Booking = null): FormGroup => {
         ethereumTransactionAddress: [booking?.ethereumTransactionAddress, [Validators.maxLength(255)]],
         checkIn: [booking?.checkIn],
         checkOut: [booking?.checkOut],
-        guests: formBuilder.array(booking?.guests?.map(guest => createGuestForm(guest))),
+        guests: formBuilder.array(
+            Optional.ofNullable(booking?.guests).orElse([]).map(guest => createGuestForm(guest))
+        ),
         updatedAt: [booking?.updatedAt],
         createdAt: [booking?.createdAt]
     });
@@ -40,7 +43,9 @@ export const createHotelRoomForm = (hotelRoom: HotelRoom = null): FormGroup => {
         number: [hotelRoom?.number, [Validators.required]],
         capacity: [hotelRoom?.capacity, [Validators.required]],
         available: [hotelRoom?.available],
-        conveniences: formBuilder.array(hotelRoom?.conveniences?.map(convenience => createConvenienceForm(convenience))),
+        conveniences: formBuilder.array(
+            Optional.ofNullable(hotelRoom?.conveniences).orElse([]).map(convenience => createConvenienceForm(convenience))
+        ),
         hotelId: [hotelRoom?.hotelId, [Validators.required]],
         thumbnail: [hotelRoom?.thumbnail],
         images: [hotelRoom?.images],
@@ -51,7 +56,7 @@ export const createHotelRoomForm = (hotelRoom: HotelRoom = null): FormGroup => {
 
 export const createHotelForm = (hotel: Hotel = null): FormGroup => {
     const formBuilder: FormBuilder = getFormBuilder();
-    return getFormBuilder().group({
+    return formBuilder.group({
         id: [hotel?.id],
         name: [hotel?.name, [Validators.required, Validators.maxLength(100)]],
         description: [hotel?.description, [Validators.required, Validators.maxLength(255)]],
@@ -59,9 +64,13 @@ export const createHotelForm = (hotel: Hotel = null): FormGroup => {
         address: createAddressForm(hotel?.address),
         contact: createContactForm(hotel?.contact),
         thumbnail: [hotel?.thumbnail],
-        conveniences: formBuilder.array(hotel?.conveniences?.map(convenience => createConvenienceForm(convenience))),
+        conveniences: formBuilder.array(
+            Optional.ofNullable(hotel?.conveniences).orElse([]).map(convenience => createConvenienceForm(convenience))
+        ),
         images: [hotel?.images],
-        touristSpots: formBuilder.array(hotel?.touristSpots?.map(touristSpot => createTouristSpotForm(touristSpot))),
+        touristSpots: formBuilder.array(
+            Optional.ofNullable(hotel?.touristSpots).orElse([]).map(touristSpot => createTouristSpotForm(touristSpot))
+        ),
         updatedAt: [hotel?.updatedAt],
         createdAt: [hotel?.createdAt]
     });
