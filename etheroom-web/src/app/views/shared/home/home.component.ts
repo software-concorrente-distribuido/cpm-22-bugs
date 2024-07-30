@@ -1,19 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HotelInfoComponent } from '../../../shared/components/hotel-info/hotel-info.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { EtherPageComponent } from '../../../shared/components/containers/ether-page/ether-page.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { EtherHomeSectionTitleComponent } from '../../../shared/components/ether-home-section-title/ether-home-section-title.component';
-
-export enum HotelsTypes {
-  FULL_SERVICE = 'FULL-SERVICE',
-  BOUTIQUE = 'BOUTIQUE',
-  LUXURY = 'LUXURY',
-  RESORT = 'RESORT',
-  BUSINESS = 'BUSINESS',
-  ECO_FRIENDLY = 'ECO-FRIENDLY',
-}
+import { HotelService } from '../../../core/services/hotel.service';
+import { BehaviorSubject } from 'rxjs';
+import { Hotel } from '../../../core/models/hotel/hotel.model';
+import { Page } from '../../../core/types/types';
+import { Optional } from '../../../core/utils/optional';
 
 @Component({
   selector: 'ether-home',
@@ -29,7 +25,32 @@ export enum HotelsTypes {
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  public hotelsTypes = Object.values(HotelsTypes);
+  public mostBookedHotels$: BehaviorSubject<Hotel[]> = new BehaviorSubject<Hotel[]>([]);
+
+  public aboutUsHotel$: BehaviorSubject<Hotel> = new BehaviorSubject<Hotel>(null);
+
+  constructor(
+    private hotelService: HotelService
+  ) { }
+
+  public ngOnInit(): void {
+    this.findMostBookedHotels();
+  }
+
+  private findMostBookedHotels(): void {
+    this.hotelService.findMostBooked(0, 5).subscribe(this.handleMostBookedHotels);
+  }
+
+  private handleMostBookedHotels = (hotels: Page<Hotel>): void => {
+    Optional.ofNullable(hotels)
+            .map((page: Page<Hotel>) => page.content)
+            .filter((hotels: Hotel[]) => hotels.length > 0)
+            .tap((hotels: Hotel[]) => this.mostBookedHotels$.next(hotels.slice(0, 4)))
+            .map((hotels: Hotel[]) => hotels.reverse())
+            .map((hotels: Hotel[]) => hotels[0])
+            .ifPresent(hotel => this.aboutUsHotel$.next(hotel));
+  }
+  
 }
