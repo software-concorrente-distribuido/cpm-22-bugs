@@ -28,12 +28,6 @@ public class HotelController {
         return hotelService.findAll(pageable, filter);
     }
 
-    @GetMapping("/most-booked")
-    @ResponseStatus(HttpStatus.OK)
-    public Page<HotelDto> findMostBooked(Pageable pageable) {
-        return hotelService.findMostBooked(pageable);
-    }
-
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public HotelDto findById(@PathVariable String id) {

@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
       *ngIf="isLoading$ | async as isLoading" 
       [class]="'splash-screen ' + (isLoading ? 'show' : 'hide')"
     >
-      <img src="" alt="Processando informações"/>
+      <img src="./../../../../assets/images/etheroom-logo.svg" alt="Processando informações"/>
     </div>
   `,
   styleUrls: ['./splash-screen.component.scss'],

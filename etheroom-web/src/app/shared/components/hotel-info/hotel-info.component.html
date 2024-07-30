@@ -1,5 +1,8 @@
-<section>
-    <img [src]="srcImage" alt="Hotel Preview">
-    
-    <app-hotel-details></app-hotel-details>
-</section>
+<img [src]="hotelThumbnail" [alt]="hotelName" />
+<div>
+    <span>{{ hotelName ?? 'Not Informed' }}</span>
+    <span>{{ hotelAddress ?? 'Not Informed' }}</span>
+    <button >
+        <img src="./../../../../assets/icons/right-arrow-black.svg" />
+    </button>
+</div>

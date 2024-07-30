@@ -13,12 +13,15 @@ export class HotelService {
 
   private hotelApiUrl: string;
 
+  private hotelPublicApiUrl: string;
+
   private readonly HOTEL_PATH = 'hotel';
 
   constructor(
     private http: HttpClient
   ) {
     this.hotelApiUrl = `${environment.apiUrl}/${this.HOTEL_PATH}`;
+    this.hotelPublicApiUrl = `${environment.apiUrl}/public/${this.HOTEL_PATH}`;
   }
 
   public create(hotel: Hotel): Observable<Hotel> {
@@ -29,8 +32,8 @@ export class HotelService {
     page: number,
     size: number,
     location: string = null,
-    checkIn: Date = null,
-    checkOut: Date = null,
+    // checkIn: Date = null,
+    // checkOut: Date = null,
     numberOfGuests: number = null
   ): Observable<Page<Hotel>> {
     return this.http.get<Page<Hotel>>(
@@ -40,8 +43,8 @@ export class HotelService {
           page: page.toString(),
           size: size.toString(),
           location: Optional.ofNullable(location).orElse(''),
-          checkIn: Optional.ofNullable(checkIn).map(c => c.toISOString()).orElse(''),
-          checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse(''),
+          // checkIn: Optional.ofNullable(checkIn).map(c => c.toISOString()).orElse(''),
+          // checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse(''),
           numberOfGuests: Optional.ofNullable(numberOfGuests).map(n => n.toString()).orElse('')
         }
       }
@@ -53,7 +56,7 @@ export class HotelService {
     size: number
   ): Observable<Page<Hotel>> {
     return this.http.get<Page<Hotel>>(
-      `${this.hotelApiUrl}/most-booked`,
+      `${this.hotelPublicApiUrl}/most-booked`,
       {
         params: {
           page: page.toString(),

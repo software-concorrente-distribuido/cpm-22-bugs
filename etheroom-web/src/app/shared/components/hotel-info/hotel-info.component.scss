@@ -1,18 +1,51 @@
-section {
+:host {
+    width: 100%;
+    height: 100%;
     position: relative;
+    border-radius: 8rem;
+}
 
-    img {
-        width: 280px;
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+div {
+    width: 90%;
+    padding: 0.5rem;
+    position: absolute;
+    left: 50%;
+    bottom: 4%;
+    transform: translateX(-50%);
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    border-radius: 0.5rem;
+    span {
+        width: 100%;
+        color: white;
+        &:first-child {
+            font-size: 1.25rem;
+            letter-spacing: 0.05rem;
+        }
+        &:nth-child(2) {
+            font-size: 1rem;
+            letter-spacing: 0.05rem;
+        }
     }
-
-    app-hotel-details {
-        position: absolute;
-        bottom: 15px;
-        left: 0;
-        right: 0;
-        font-size: 20px;
-        font-weight: bold;
-        display: flex;
-        justify-content: center;
+    button {
+        width: 48px;
+        height: 48px;
+        border-radius: 1rem 0 1rem 0;
+        img {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+        cursor: pointer;
     }
 }
