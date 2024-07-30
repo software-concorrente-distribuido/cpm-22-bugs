@@ -1,8 +1,7 @@
-<span class="divider"></span>
-<h2>Address</h2>
+<h4>ADDRESS</h4>
 <form *ngIf="addressForm$ | async as addressForm" [formGroup]="addressForm">
-    <ether-form-field class="address">
-        <ether-form-field-label>Address</ether-form-field-label>
+    <ether-form-field>
+        <ether-form-field-label>ADDRESS</ether-form-field-label>
         <textarea formControlName="description"></textarea>
         <ether-form-field-error *ngIf="addressForm.get('description').touched && addressForm.get('description').hasError('required')">
             Field is required
@@ -12,7 +11,7 @@
         </ether-form-field-error>
     </ether-form-field>
     <ether-form-field>
-        <ether-form-field-label>Country</ether-form-field-label>
+        <ether-form-field-label>COUNTRY</ether-form-field-label>
         <input formControlName="country" type="text" />
         <ether-form-field-error *ngIf="addressForm.get('country').touched && addressForm.get('country').hasError('required')">
             Field is required
@@ -22,7 +21,7 @@
         </ether-form-field-error>
     </ether-form-field>
     <ether-form-field>
-        <ether-form-field-label>Zip Code</ether-form-field-label>
+        <ether-form-field-label>ZIP CODE</ether-form-field-label>
         <input formControlName="zipCode" type="text" />
         <ether-form-field-error  *ngIf="addressForm.get('zipCode').touched && addressForm.get('zipCode').hasError('maxlength')">
             Max length is 20

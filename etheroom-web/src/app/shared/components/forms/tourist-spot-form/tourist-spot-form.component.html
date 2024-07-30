@@ -1,5 +1,5 @@
 <div>
-    <h2>Tourist Spots</h2>
+    <h4>Tourist Spots</h4>
     <button (click)="addTouristSpot()">+</button>
 </div>
 <form *ngFor="let touristSpotForm of (touristSpotFormArray$ | async).controls; let i = index" [formGroup]="castAbstractToFormGroup(touristSpotForm)">

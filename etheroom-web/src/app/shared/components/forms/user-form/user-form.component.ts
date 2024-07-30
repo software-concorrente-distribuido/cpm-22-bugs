@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { Optional } from '../../../../core/utils/optional';
 
@@ -12,11 +12,15 @@ export class UserFormComponent {
 
   public userForm$: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(null);
 
-  public isRegistered: boolean = false;
+  public profilePictureControl$: BehaviorSubject<FormControl> = new BehaviorSubject<FormControl>(null);
 
   @Input() 
   public set userForm(value: FormGroup) {
-    this.isRegistered = Optional.ofNullable(value.get('id').value).isPresent();
+    this.profilePictureControl$.next(
+      Optional.of(value.get('profilePicture'))
+              .map(control => control as FormControl)
+              .orElse(null)
+    );
     this.userForm$.next(value);
   }
 

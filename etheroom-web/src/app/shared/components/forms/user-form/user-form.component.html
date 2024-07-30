@@ -1,12 +1,15 @@
-<span class="divider"></span>
-<h2>User</h2>
+<h4>USER</h4>
 <form *ngIf="userForm$ | async as userForm" [formGroup]="userForm">
     <ether-form-field>
-        <ether-form-field-label>E-mail *</ether-form-field-label>
+        <ether-form-field-label>E-MAIL *</ether-form-field-label>
         <input etherInput formControlName="email" type="text" />
         <ether-form-field-error *ngIf="userForm.get('email').touched && userForm.get('email').hasError('required')">
             Field is required
         </ether-form-field-error>
     </ether-form-field>
-    <ether-thumbnail *ngIf="isRegistered"></ether-thumbnail>
+    <h4>PROFILE PICTURE</h4>
+    <ether-thumbnail 
+        *ngIf="profilePictureControl$ | async as profilePictureControl" 
+        [thumbnailControl]="profilePictureControl"
+    ></ether-thumbnail>
 </form>

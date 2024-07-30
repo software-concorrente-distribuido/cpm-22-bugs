@@ -1,33 +1,29 @@
-<span class="divider"></span>
-<h2>Hotel</h2>
+<h4>HOTEL</h4>
 <form *ngIf="hotelForm$ | async as hotelForm" [formGroup]="hotelForm">
-    <div class="hotel-form">
-        <ether-form-field>
-            <ether-form-field-label>Name</ether-form-field-label>
-            <input formControlName="name" type="text" />
-            <ether-form-field-error *ngIf="hotelForm.get('name').touched && hotelForm.get('name').hasError('required')">
-                Field is required
-            </ether-form-field-error>
-            <ether-form-field-error *ngIf="hotelForm.get('name').touched && hotelForm.get('name').hasError('maxlength')">
-                Max length is 100
-            </ether-form-field-error>
-        </ether-form-field>
-        <ether-form-field>
-            <ether-form-field-label>Description</ether-form-field-label>
-            <textarea formControlName="description"></textarea>
-            <ether-form-field-error *ngIf="hotelForm.get('description').touched && hotelForm.get('description').hasError('required')">
-                Field is required
-            </ether-form-field-error>
-            <ether-form-field-error *ngIf="hotelForm.get('description').touched && hotelForm.get('description').hasError('maxlength')">
-                Max length is 255
-            </ether-form-field-error>
-        </ether-form-field>
-    </div>
+    <ether-form-field>
+        <ether-form-field-label>NAME</ether-form-field-label>
+        <input formControlName="name" type="text" />
+        <ether-form-field-error *ngIf="hotelForm.get('name').touched && hotelForm.get('name').hasError('required')">
+            Field is required
+        </ether-form-field-error>
+        <ether-form-field-error *ngIf="hotelForm.get('name').touched && hotelForm.get('name').hasError('maxlength')">
+            Max length is 100
+        </ether-form-field-error>
+    </ether-form-field>
+    <ether-form-field>
+        <ether-form-field-label>DESCRIPTION</ether-form-field-label>
+        <textarea formControlName="description"></textarea>
+        <ether-form-field-error *ngIf="hotelForm.get('description').touched && hotelForm.get('description').hasError('required')">
+            Field is required
+        </ether-form-field-error>
+        <ether-form-field-error *ngIf="hotelForm.get('description').touched && hotelForm.get('description').hasError('maxlength')">
+            Max length is 255
+        </ether-form-field-error>
+    </ether-form-field>
     <etheroom-user-form [userForm]="userForm"></etheroom-user-form>
     <etheroom-contact-form [contactForm]="contactForm"></etheroom-contact-form>
     <etheroom-address-form [addressForm]="addressForm"></etheroom-address-form>
-    <span class="divider"></span>
-    <h2>Media</h2>
+    <h4>MEDIA</h4>
     <ether-thumbnail [thumbnailControl]="thumbnailControl"></ether-thumbnail>
     <ether-images [imagesControl]="imagesControl"></ether-images>
 </form>
