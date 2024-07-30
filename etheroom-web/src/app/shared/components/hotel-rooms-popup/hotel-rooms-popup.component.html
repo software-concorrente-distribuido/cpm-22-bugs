@@ -2,12 +2,22 @@
 <div *ngFor="let room of data.rooms">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Room {{ room.id }}</mat-card-title>
+      <mat-card-title>Room {{ room.number }}</mat-card-title>
     </mat-card-header>
+
     <mat-card-content>
-      <p>{{ room.description }}</p>
-      <p>Preço: {{ room.price }}</p>
+      <p>Description: {{ room.description }}</p>
+      <p>Type: {{ room.type }}</p>
+      <p>Capacity: {{ room.capacity }}</p>
+      <p>Price per night: {{ room.price }} ETH</p>
     </mat-card-content>
+
+    <mat-card-actions>
+      <div class="page-button">
+       <ether-button-text-icon [iconName]="'right-arrow-white'" mat-button (click)="goToRoomPage(room.id)">Go to page</ether-button-text-icon>
+      </div>
+    </mat-card-actions>
+
   </mat-card>
 </div>
-<button mat-button (click)="dialogRef.close()">Fechar</button>
+<button class="button-fechar" mat-button (click)="dialogRef.close()">Fechar</button>
