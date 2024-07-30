@@ -10,6 +10,8 @@ import { BehaviorSubject } from 'rxjs';
 import { Hotel } from '../../../core/models/hotel/hotel.model';
 import { Page } from '../../../core/types/types';
 import { Optional } from '../../../core/utils/optional';
+import { AuthenticationService } from '../../../core/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ether-home',
@@ -34,7 +36,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private hotelService: HotelService,
     private authenticationService: AuthenticationService,
-    private router: Router,
+    private router: Router
+  ) { }
 
   public ngOnInit(): void {
     this.findMostBookedHotels();
