@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {
   MatSlideToggleModule,
 } from '@angular/material/slide-toggle';
+import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import {
     MatSelectModule,
     MatSlideToggleModule,
     InputsModule,
-    MediaModule
+    MediaModule,
+    NgxMaskDirective, 
+    NgxMaskPipe
   ],
   exports: [
     UserFormComponent,
