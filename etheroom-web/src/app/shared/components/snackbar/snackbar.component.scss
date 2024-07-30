@@ -7,6 +7,7 @@ div.snackbar {
   left: 50%;
   transform: translateX(-50%);
   background-color: white;
+  border: 2px solid #CCCCCC;
   border-radius: var(--br-3xs);
   text-align: center;
   text-overflow: ellipsis;
@@ -16,12 +17,13 @@ div.snackbar {
 }
 
 div.snackbar:hover {
-  background-color: var(--color-whitesmoke-100);
+  background-color: #E6E6E6;
   transition: var(--linear-transition-settings);
 }
 
 div.snackbar > p {
-  font-size: var(--font-size-xxs);
-  font-weight: var(--font-weight-light);
-  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  margin: 0;
 }
