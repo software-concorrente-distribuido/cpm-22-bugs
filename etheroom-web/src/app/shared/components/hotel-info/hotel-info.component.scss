@@ -40,6 +40,10 @@ div {
     button {
         width: 48px;
         height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
         border-radius: 1rem 0 1rem 0;
         img {
             width: 24px;
@@ -47,5 +51,10 @@ div {
             object-fit: contain;
         }
         cursor: pointer;
+        transition: var(--linear-transition-settings);
+        &:hover {
+            background-color: #EFEFEF;
+            transition: var(--linear-transition-settings);
+        }
     }
 }

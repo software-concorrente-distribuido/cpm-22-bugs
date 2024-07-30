@@ -22,7 +22,6 @@ export const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
     },
-
     {
         path: '',
         children: [
@@ -37,7 +36,6 @@ export const routes: Routes = [
             // { path: 'profile', component: ProfileComponent }
         ]
     },
-
     {
         path: 'guest',
         children: [
@@ -49,7 +47,6 @@ export const routes: Routes = [
         ],
         canActivate: [AuthGuard, PersonGuard]
     },
-
     {
         path: 'hotel',
         children: [
