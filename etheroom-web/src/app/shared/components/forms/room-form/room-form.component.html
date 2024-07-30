@@ -55,14 +55,7 @@
             </ether-form-field-error>
         </ether-form-field>
 
-        <ether-form-field class="convenience">
-            <ether-form-field-label>Conveniences</ether-form-field-label>
-            <mat-select formArrayName="conveniences" multiple>
-                <mat-option *ngFor="let convenience of conveniences" [value]="convenience.name">
-                    {{ findConvenienceDescription(convenience.name) }}
-                </mat-option>
-            </mat-select>
-        </ether-form-field>
+        <ether-convenience-form [conveniencesForm]="convenienceFormArray" [isHotel]="false"></ether-convenience-form>
 
         <div class="slide-toggle">
             <p>Available</p>
