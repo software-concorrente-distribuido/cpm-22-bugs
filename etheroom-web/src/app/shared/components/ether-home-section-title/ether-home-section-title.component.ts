@@ -5,10 +5,8 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <section>
-      <div class="main-title">{{ title }}</div>
-      <div class="sub-title">{{ title }}</div>
-    </section>
+    <h1>{{ title }}</h1>
+    <h2>{{ title }}</h2>
   `,
   styleUrl: './ether-home-section-title.component.scss'
 })

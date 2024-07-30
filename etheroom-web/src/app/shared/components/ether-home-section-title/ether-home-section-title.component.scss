@@ -1,14 +1,17 @@
-section {
+:host {
     position: relative;
+}
 
-    .main-title {
-        position: absolute;
-        font-size: 60px;
-    }
+h1 {
+    padding-left: 1rem;
+    font-size: 8rem;
+    color: white;
+    text-shadow: 0 0 1px #000000;
+    margin: 0;
+}
 
-    .sub-title {
-        font-size: 100px;
-        color: white;
-        text-shadow: 1px 1px 0 #7F7F7F;
-    }
+h2 {
+    position: absolute;
+    top: 0;
+    font-size: 5rem;
 }
