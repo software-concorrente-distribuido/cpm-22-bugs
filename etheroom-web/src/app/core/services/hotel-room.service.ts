@@ -17,7 +17,7 @@ export class HotelRoomService {
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
     this.hotelRoomApiUrl = `${environment.apiUrl}/${this.HOTEL_ROOM_PATH}`;
   }
 
@@ -26,7 +26,7 @@ export class HotelRoomService {
   }
 
   public findAll(
-    page: number, 
+    page: number,
     size: number,
     number: number,
     type: string,
@@ -34,7 +34,7 @@ export class HotelRoomService {
     hotelId: string
   ): Observable<Page<HotelRoom>> {
     return this.http.get<Page<HotelRoom>>(
-      this.hotelRoomApiUrl, 
+      this.hotelRoomApiUrl,
       {
         params: {
           page: page.toString(),
@@ -49,14 +49,14 @@ export class HotelRoomService {
   }
 
   public findAllAvailable(
-    page: number, 
+    page: number,
     size: number,
     number: number = null,
     type: string = null,
     hotelId: string = null
   ): Observable<Page<HotelRoom>> {
     return this.http.get<Page<HotelRoom>>(
-      `${this.hotelRoomApiUrl}/available`, 
+      `${this.hotelRoomApiUrl}/available`,
       {
         params: {
           page: page.toString(),

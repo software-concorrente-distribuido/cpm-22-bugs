@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
 import { Optional } from '../../../core/utils/optional';
 import { EtherIconTextComponent } from "../../../shared/components/ether-icon-text/ether-icon-text.component";
 import { ButtonsModule } from '../../../shared/components/buttons/buttons.module';
+import { MatDialog } from '@angular/material/dialog';
+import { HotelRoomsPopupComponent } from '../../../shared/components/hotel-rooms-popup/hotel-rooms-popup.component';
+import { HotelRoomService } from '../../../core/services/hotel-room.service';
 
 @Component({
   selector: 'ether-all-hotels',
@@ -28,6 +31,7 @@ import { ButtonsModule } from '../../../shared/components/buttons/buttons.module
   styleUrls: ['./all-hotels.component.scss']
 })
 export class AllHotelsComponent extends UtilComponent implements OnInit {
+
   protected override pageTitle: string = 'All Hotels';
   protected override pageDescription: string = 'Find the best hotels in the world';
 
@@ -37,7 +41,9 @@ export class AllHotelsComponent extends UtilComponent implements OnInit {
   constructor (
     injector: Injector,
     private hotelService: HotelService,
-    private appService: ApplicationService
+    private appService: ApplicationService,
+    public dialog: MatDialog,
+    public hotelRoomService: HotelRoomService
   ) {
     super(injector);
   }
@@ -47,8 +53,17 @@ export class AllHotelsComponent extends UtilComponent implements OnInit {
     this.loadEnums();
   }
 
+  openRoomsDialog(hotelId: string): void {
+    this.hotelRoomService.findAllAvailable(0, 10, null, null, hotelId).subscribe(response => {
+      this.dialog.open(HotelRoomsPopupComponent, {
+        width: '600px',
+        data: { rooms: response.content }
+      });
+    });
+  }
+
   public seeAvailabilityButton(): void {
-  this.router.navigate(['/room-page']);
+    this.router.navigate(['/room-page']);
   }
 
   public findConvenienceDescription(type: string): string {
@@ -57,8 +72,6 @@ export class AllHotelsComponent extends UtilComponent implements OnInit {
       .map(convenience => convenience.description)
       .orElse(null);
   }
-
-  public handleClickButton(): void {}
 
   private loadHotels(): void {
     this.loading.start();

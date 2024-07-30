@@ -42,6 +42,7 @@ export const routes: Routes = [
         children: [
             { path: 'all-hotels', component: AllHotelsComponent },
             { path: 'your-bookings', component: YourBookingsComponent },
+            { path: 'room-details/:id', component: RoomDetailsComponent },
             { path: 'booked-room', component: BookedRoomComponent }
         ],
         canActivate: [AuthGuard, PersonGuard]
