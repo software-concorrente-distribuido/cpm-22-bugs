@@ -52,7 +52,7 @@ public class MediaService implements IMediaService {
 
     @Override
     public void delete(String id) {
-        Functions.acceptTrueThrows(
+        Functions.acceptFalseThrows(
                 this.mediaRepository.existsById(UUID.fromString(id)),
                 () -> new NotFoundException(MEDIA_NOT_FOUND)
         );

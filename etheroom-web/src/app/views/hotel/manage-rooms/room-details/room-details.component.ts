@@ -6,7 +6,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HotelRoomService } from '../../../../core/services/hotel-room.service';
 import { Optional } from '../../../../core/utils/optional';
 import { HotelRoom } from '../../../../core/models/hotel/aggregates/hotel-room.model';
-import { createHotelRoomForm } from '../../../../core/utils/forms';
+import { createHotelForm, createHotelRoomForm } from '../../../../core/utils/forms';
 import { Functions } from '../../../../core/utils/functions';
 import { ConfirmationDialogComponent } from '../../../../shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { HotelService } from '../../../../core/services/hotel.service';
@@ -27,6 +27,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   protected override pageDescription: string;
 
   public hotelRoomForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
+  public hotelForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
   public newHotelRoom$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public conveniences$: BehaviorSubject<Enum[]> = new BehaviorSubject(null);
 
@@ -45,9 +46,16 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    console.log(this.hotelRoomForm);
     this.getRouteData();
     this.loadItems();
+  }
+
+  private get hotelForm(): FormGroup {
+    return this.hotelForm$.value;
+  }
+
+  private get hotelRoomForm(): FormGroup {
+    return this.hotelRoomForm$.value;
   }
 
   public get roomConveniences(): Convenience[] {
@@ -76,10 +84,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
       },
       onClose: (bool: any) => this.handleDeletionConfirmation(bool)
     })
-  }
-
-  private get hotelRoomForm(): FormGroup {
-    return this.hotelRoomForm$.value;
   }
 
   private saveHotelRoom(): void {
@@ -156,7 +160,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     this.loading.start();
     this.hotelService.findById(hotelId).subscribe({
       next: (hotel) => {
-        this.hotel = hotel;
+        this.hotelForm$.next(createHotelForm(hotel));
         this.loading.stop();
       },
       error: this.handleError

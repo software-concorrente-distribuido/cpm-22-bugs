@@ -10,7 +10,7 @@
                 </h3>
         
                 <div class="room-information">
-                    <div class="infos">
+                    <div class="infos" *ngIf="roomConveniences.length > 0">
                         <ether-icon-text [iconName]="'house'">Room information</ether-icon-text>
                         <ul>
                             <li *ngFor="let convenience of roomConveniences">
@@ -27,7 +27,7 @@
         <div class="group-tab">
             <div class="booking">
                 <div class="room-price">
-                        <ether-icon-text [iconName]="'ether-icon-black'">0,053 ETH/night</ether-icon-text>
+                        <ether-icon-text [iconName]="'ether-icon-black'"></ether-icon-text>
                         <ether-button>Change Price</ether-button>
                 </div>
                 

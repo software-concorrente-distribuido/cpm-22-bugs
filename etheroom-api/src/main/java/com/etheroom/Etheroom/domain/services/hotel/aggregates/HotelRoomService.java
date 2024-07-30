@@ -97,7 +97,7 @@ public class HotelRoomService implements IHotelRoomService {
     @Override
     public void delete(String id) {
         UUID uuid = UUID.fromString(id);
-        Functions.acceptTrueThrows(
+        Functions.acceptFalseThrows(
                 hotelRoomRepository.existsById(uuid),
                 () -> new NotFoundException(HOTEL_ROOM_NOT_FOUND)
         );
