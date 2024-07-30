@@ -5,10 +5,12 @@
 <form *ngFor="let conveniencesForm of (conveniencesFormArray$ | async).controls; let i = index" [formGroup]="castAbstractToFormGroup(conveniencesForm)">
     <ether-form-field>
         <ether-form-field-label>Convenience *</ether-form-field-label>
-        <select formControlName="type">
-            <option [value]="null">Select an option</option>
-            <option *ngFor="let convenience of conveniences$ | async" [value]="convenience?.name">{{ convenience?.description }}</option>
-        </select>
+        <mat-select formControlName="type">
+            <mat-option [value]="null">Select an option</mat-option>
+            <mat-option *ngFor="let convenience of conveniences$ | async" [value]="convenience?.name">
+                {{ convenience?.description }}
+            </mat-option>
+        </mat-select>
         <ether-form-field-error *ngIf="castAbstractToFormGroup(conveniencesForm).get('type').touched && castAbstractToFormGroup(conveniencesForm).get('type').hasError('required')">
             Field is required
         </ether-form-field-error>
