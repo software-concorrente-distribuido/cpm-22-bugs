@@ -29,8 +29,8 @@ export class HotelService {
     page: number,
     size: number,
     location: string = null,
-    checkIn: Date = null,
-    checkOut: Date = null,
+    // checkIn: Date = null,
+    // checkOut: Date = null,
     numberOfGuests: number = null
   ): Observable<Page<Hotel>> {
     return this.http.get<Page<Hotel>>(
@@ -40,8 +40,8 @@ export class HotelService {
           page: page.toString(),
           size: size.toString(),
           location: Optional.ofNullable(location).orElse(''),
-          checkIn: Optional.ofNullable(checkIn).map(c => c.toISOString()).orElse(''),
-          checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse(''),
+          // checkIn: Optional.ofNullable(checkIn).map(c => c.toISOString()).orElse(''),
+          // checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse(''),
           numberOfGuests: Optional.ofNullable(numberOfGuests).map(n => n.toString()).orElse('')
         }
       }
