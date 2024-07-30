@@ -8,9 +8,10 @@ import { InputsModule } from '../inputs/inputs.module';
 import { MediaModule } from "../media/media.module";
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AddressFormComponent } from './address-form/address-form.component';
+import { TouristSpotFormComponent } from './tourist-spot-form/tourist-spot-form.component';
+import { ConvenienceFormComponent } from './convenience-form/convenience-form.component';
 import { RoomFormComponent } from './room-form/room-form.component';
 import { MatSelectModule } from '@angular/material/select';
-import { ConvenienceFormComponent } from './convenience-form/convenience-form.component';
 import {
   MatSlideToggleModule,
 } from '@angular/material/slide-toggle';
@@ -23,6 +24,7 @@ import {
     PersonFormComponent,
     ContactFormComponent,
     AddressFormComponent,
+    TouristSpotFormComponent,
     ConvenienceFormComponent
   ],
   imports: [
@@ -33,7 +35,7 @@ import {
     MatSlideToggleModule,
     InputsModule,
     MediaModule
-],
+  ],
   exports: [
     UserFormComponent,
     HotelFormComponent,

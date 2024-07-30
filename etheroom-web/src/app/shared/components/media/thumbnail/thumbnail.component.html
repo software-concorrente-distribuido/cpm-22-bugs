@@ -1,3 +1,5 @@
-<input type="file" (change)="onFileChange($event)" #fileInput />
 <img [src]="fileUrl" [alt]="filename" />
-<button (click)="fileInput.click()">{{ temporaryMedia ? 'INSERT' : 'UPDATE' }} FILE</button>
+@if (!viewOnly) {
+    <input type="file" (change)="onFileChange($event)" #fileInput />
+    <button *ngIf="!viewOnly" (click)="fileInput.click()">{{ temporaryMedia ? 'INSERT' : 'UPDATE' }} FILE</button>
+}
