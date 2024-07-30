@@ -1,64 +1,66 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../core/services/authentication.service';
+import { User } from '../../../core/models/user/user.model';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { Optional } from '../../../core/utils/optional';
+import { Media } from '../../../core/models/media/media.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit {
-  public isInvertColors: boolean = true;
-  public access: string = 'hotel';
+export class HeaderComponent implements OnInit, OnDestroy {
 
-  public navRoutes!: {
-    path: string;
-    label: string;
-  }[];
+  private readonly DEFAULT_FILE_URL: string = './../../../../assets/images/example-hotel.svg';
 
-  constructor(public router: Router) { }
+  private readonly BASE_64_PREFIX: string = 'data:image/png;base64,';
 
-  ngOnInit(): void {
-    // this.accessRoutes();
+  public authenticated: boolean = false;
+  public isHotel: boolean = false;
+  public profilePicture$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private authenticationService: AuthenticationService
+  ) { }
+
+  public ngOnInit(): void {
+    this.authenticationService.currentUser()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(this.onUserChange);
   }
 
-  // public accessRoutes(): void {
-  //   switch (this.access) {
-  //     case 'public':
-  //       this.navRoutes = [
-  //         { path: '/home', label: 'HOME' },
-  //         { path: '/all-hotels', label: 'ALL HOTELS' },
-  //         { path: '/explore-cities', label: 'EXPLORE CITIES' },
-  //         { path: '/about-us', label: 'ABOUT US' },
-  //         { path: '/faq', label: 'FAQ' }
-  //       ];
-  //       break;
-
-  //     case 'guest':
-  //       this.navRoutes = [
-  //         { path: '/home', label: 'HOME' },
-  //         { path: '/all-hotels', label: 'ALL HOTELS' },
-  //         { path: '/guest/your-bookings', label: 'MY BOOKINGS' },
-  //         { path: '/guest/profile', label: 'PROFILE' },
-  //         { path: '/faq', label: 'FAQ' }
-  //       ];
-  //       break;
-
-  //     case 'hotel':
-  //       this.navRoutes = [
-  //         { path: '/home', label: 'HOME' },
-  //         { path: '/hotel/manage-rooms', label: 'MANAGE ROOMS' },
-  //         { path: '/hotel/my-bookings', label: 'MY BOOKINGS' },
-  //         { path: '/hotel/profile', label: 'PROFILE' }
-  //       ];
-  //   }
-  // }
-
-  public handleButtonSignIn(): void {
-    this.router.navigate(['/sign-in']);
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  public handleButtonSignUp(): void {
-    this.router.navigate(['/sign-up']);
+  public logout(): void {
+    this.authenticationService.logout();
+  }
+
+  private onUserChange = (user: User) => {
+    Optional.ofNullable(user)
+            .ifPresentOrElse(
+              (user) => {
+                this.isHotel = this.authenticationService.isCurrentUserHotel();
+                this.handleProfilePicture(user.profilePicture);
+                this.authenticated = true;
+              },
+              () => this.authenticated = false
+            );
+  }
+
+  private handleProfilePicture = (media: Media) => {
+    this.profilePicture$.next(
+      Optional.ofNullable(media)
+            .map((media) => media.data)
+            .map((data: string) => this.BASE_64_PREFIX + data)
+            .orElse(this.DEFAULT_FILE_URL)
+    );
   }
 
 }

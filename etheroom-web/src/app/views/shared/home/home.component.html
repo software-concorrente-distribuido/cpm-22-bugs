@@ -1,75 +1,95 @@
 <ether-page>
-    <section class="main-section">
-    <section class="etheroom-presentation">
-        <div class="etheroom-presentation__search">
-            <div class="hosting">
-                <div class="hosting__title">DISCOVER YOUR FUTURE HOSTING</div>
+    <main>
+        <h1>DISCOVER YOUR FUTURE HOSTING</h1>
+        <div>
+            <mat-tab-group>
+                <mat-tab label="HOTELS">
+                    <section class="hotels-search">
+                        <ether-form-field>
+                            <ether-form-field-label>LOCATION</ether-form-field-label>
+                            <input type="text" placeholder="AVENIDA T-4, GOIÂNIA">
+                        </ether-form-field>
 
-                <div class="hosting__options">
-                    <mat-tab-group>
-                        <mat-tab label="HOTELS">
-                            <section class="hotel-section">
-                                <section class="hotel-form-field">
-                                    <ether-form-field>
-                                        <ether-form-field-label>LOCATION</ether-form-field-label>
-                                        <input type="text" placeholder="AVENIDA T-4, GOIÂNIA">
-                                    </ether-form-field>
-        
-                                    <ether-form-field>
-                                        <ether-form-field-label>CHECK IN</ether-form-field-label>
-                                        <input type="text" placeholder="04 MAY, 2024">
-                                    </ether-form-field>
-        
-                                    <ether-form-field>
-                                        <ether-form-field-label>CHECK OUT</ether-form-field-label>
-                                        <input type="text" placeholder="22 MAY, 2024">
-                                    </ether-form-field>
-                                </section>
-                                <section class="search">
-                                    <ether-button [isInvertColors]="true">SEARCH</ether-button>
-                                </section>
-                            </section>
-                        </mat-tab>
-                        <mat-tab label="FLIGHTS">
-                            <div>Content 2</div>
-                        </mat-tab>
-                        <mat-tab label="FOOD POINTS">
-                            <div>Content 3</div>
-                        </mat-tab>
-                    </mat-tab-group>
-                </div>
-            </div>
+                        <ether-form-field>
+                            <ether-form-field-label>CHECK IN</ether-form-field-label>
+                            <input type="text" placeholder="04 MAY, 2024">
+                        </ether-form-field>
+
+                        <ether-form-field>
+                            <ether-form-field-label>CHECK OUT</ether-form-field-label>
+                            <input type="text" placeholder="22 MAY, 2024">
+                        </ether-form-field>
+                        <ether-button [isInvertColors]="true">SEARCH</ether-button>
+                    </section>
+                </mat-tab>
+                <mat-tab label="FLIGHTS">
+                    <h2>AVAILABLE SOON</h2>
+                </mat-tab>
+                <mat-tab label="FOOD POINTS">
+                    <h2>AVAILABLE SOON</h2>
+                </mat-tab>
+            </mat-tab-group>
         </div>
-    </section>
+    </main>
     
     <section class="hotels">
-        <div class="hotels__header">
-            <ether-home-section-title title="HOTELS"></ether-home-section-title>
-
-            <mat-tab-group>
-                <section *ngFor="let type of hotelsTypes">
-                    <mat-tab label="{{ type }}">
-                        Content 1
-                    </mat-tab>
-                </section>
-            </mat-tab-group>
-            <!-- <div class="hotels__header--types">
-                <div 
-                    class="type"
-                    *ngFor="let type of hotelsTypes">
-                    {{ type }}
-                </div>
-            </div> -->
-        </div>
+        <ether-home-section-title title="HOTELS"></ether-home-section-title>
     
-        <div class="hotels__examples">
-            <app-hotel-info [srcImage]="'./../../../assets/images/example-hotel.svg'"></app-hotel-info>
-            <app-hotel-info [srcImage]="'./../../../assets/images/example-hotel.svg'"></app-hotel-info>
-            <app-hotel-info [srcImage]="'./../../../assets/images/example-hotel.svg'"></app-hotel-info>
-            <app-hotel-info [srcImage]="'./../../../assets/images/example-hotel.svg'"></app-hotel-info>
-        </div>
+        <ether-hotel-info *ngFor="let hotel of mostBookedHotels$ | async" [hotel]="hotel"></ether-hotel-info>
     </section>
     
-    <section class="about-us"></section>
+    <section class="about-us">
+        <ether-home-section-title title="ABOUT US"></ether-home-section-title>
+        <ether-hotel-info *ngIf="aboutUsHotel$ | async as hotel; else noneBooked" [hotel]="hotel"></ether-hotel-info>
+        <ng-template #noneBooked>
+            <div class="none-booked">
+
+            </div>
+        </ng-template>
+        <div>
+            <h3>SECURE, SEAMLESS, SMART.</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Nullam ornare purus eget posuere tincidunt. 
+                Vivamus ut eros fringilla, aliquet arcu ut, sollicitudin est. 
+                Integer dictum orci sed erat venenatis porta. 
+                Integer ornare faucibus accumsan. Proin iaculis lobortis tincidunt. 
+                Nulla condimentum suscipit fringilla. Vivamus rutrum eget urna id maximus. 
+                Aliquam nec auctor arcu. 
+                Vestibulum imperdiet orci id lectus gravida eleifend. 
+                Pellentesque vel enim rutrum, condimentum metus vel, elementum
+            </p>
+            <img src="./../../../../assets/images/home-about-us-1.png" />
+        </div>
+        <div>
+            <img src="./../../../../assets/images/home-about-us-2.png" />
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Nullam ornare purus eget posuere tincidunt. 
+                Vivamus ut eros fringilla, aliquet arcu ut, sollicitudin est. 
+                Integer dictum orci sed erat venenatis porta. 
+                Integer ornare faucibus accumsan. Proin iaculis lobortis tincidunt. 
+                Nulla condimentum suscipit fringilla. Vivamus rutrum eget urna id maximus. 
+                Aliquam nec auctor arcu. 
+                Vestibulum imperdiet orci id lectus gravida eleifend. 
+                Pellentesque vel enim rutrum, condimentum metus vel, elementum mauris. 
+                Quisque lorem magna.
+            </p>
+        </div>
+        <div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Nullam ornare purus eget posuere tincidunt. 
+                Vivamus ut eros fringilla, aliquet arcu ut, sollicitudin est. 
+                Integer dictum orci sed erat venenatis porta. 
+                Integer ornare faucibus accumsan. Proin iaculis lobortis tincidunt. 
+                Nulla condimentum suscipit fringilla. Vivamus rutrum eget urna id maximus. 
+                Aliquam nec auctor arcu. 
+                Vestibulum imperdiet orci id lectus gravida eleifend. 
+                Pellentesque vel enim rutrum, condimentum metus vel, elementum mauris. 
+                Quisque lorem magna. Lorem ipsum dolor sit amet, consectetur adipiscing
+            </p>
+            <img src="./../../../../assets/images/home-about-us-3.png" />
+        </div>
     </section>
 </ether-page>

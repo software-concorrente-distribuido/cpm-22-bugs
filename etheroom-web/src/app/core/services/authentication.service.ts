@@ -44,9 +44,6 @@ export class AuthenticationService {
     private personService: PersonService
   ) {
     this.authApiUrl = `${environment.apiUrl}/${this.AUTH_API_PATH}`;
-  }
-
-  public ngOnInit(): void {
     this.verifyAuthenticationContext();
   }
 
@@ -64,7 +61,7 @@ export class AuthenticationService {
 
   public logout = (): void => {
     this.clearAuthenticationContext();
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/home']);
   }
 
   public verifyAuthenticationContext(): void {
@@ -120,7 +117,6 @@ export class AuthenticationService {
     localStorage.setItem(this.TOKEN_KEY, token);
     const claims: JwtTokenClaims = jwtDecode(token);
     this.accessToken = token;
-    this.accessToken = token;
     this.userId = claims?.id;
     this.role = claims?.role;
     this.handleUserLoading();
@@ -152,14 +148,6 @@ export class AuthenticationService {
 
   private onUserLoaded = (user: User): void => {
     this.user$.next(user);
-    if (this.isCurrentUserHotel()) {
-      this.router.navigate(['/hotel/manage-rooms']);
-    } else if (this.isCurrentUserPerson()) {
-      this.router.navigate(['/guest/all-hotels']);
-    } else {
-      console.error('Unknown user role:', this.role);
-      this.logout();
-    }
   }
   
 }

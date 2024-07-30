@@ -1,19 +1,33 @@
-<section>
-    <div class="header-content">
-        <div class="ether-logo">
-            <img src="./../../assets/images/etheroom-logo.svg" alt="Ether Logo" routerLink="/home">
-        </div>
-
-        <ether-navigation></ether-navigation>
-
-        <div class="access-buttons">
-            <ether-button
-                (onClick)="handleButtonSignIn()"
-                [buttonType]="'primary'">SIGN IN</ether-button>
-            <ether-button
-                (onClick)="handleButtonSignUp()"
-                [buttonType]="'primary'" 
-                [isInvertColors]="isInvertColors">SIGN UP</ether-button>
-        </div>
-    </div>
-</section>
+<img class="logo" src="./../../assets/images/etheroom-logo.svg" alt="Ether Logo" routerLink="/home">
+<nav>
+    <ul>
+        <li><a [routerLink]="'/home'" routerLinkActive="active">HOME</a></li>
+        <ng-container *ngIf="authenticated">
+            <ng-container *ngIf="isHotel; else personRoutes">
+                <li><a routerLink="/hotel/manage-rooms" routerLinkActive="active">MANAGE ROOMS</a></li>
+                <li><a routerLink="/hotel/my-bookings" routerLinkActive="active">MY BOOKINGS</a></li>
+            </ng-container>
+            <ng-template #personRoutes>
+                <li><a routerLink="/guest/all-hotels" routerLinkActive="active">ALL HOTELS</a></li>
+                <li><a routerLink="/guest/your-bookings" routerLinkActive="active">YOUR BOOKINGS</a></li>
+            </ng-template>
+        </ng-container>
+    </ul>
+</nav>
+<div class="avatar-container" *ngIf="authenticated && profilePicture$ | async as picture">
+    <img class="avatar" [src]="picture" alt="User Profile Picture" [matMenuTriggerFor]="menu" />
+</div>
+<mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/profile">
+        <mat-icon>account_circle</mat-icon>
+        <span>Profile</span>
+    </a>
+    <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+    </button>
+</mat-menu>
+<div class="actions" *ngIf="!authenticated">
+    <a routerLink="/sign-in" routerLinkActive="active">SIGN IN</a>
+    <a routerLink="/sign-up" routerLinkActive="active">SIGN UP</a>
+</div>
