@@ -20,6 +20,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc
@@ -73,6 +76,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                     .requestMatchers(HttpMethod.POST, "/hotel")
                     .permitAll()
                     .requestMatchers(HttpMethod.POST, "/person")
+                    .permitAll()
+                    .requestMatchers(HttpMethod.GET, "/media", "/medias/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
