@@ -4,6 +4,7 @@ import com.etheroom.Etheroom.domain.models.user.User;
 import com.etheroom.Etheroom.domain.services.auth.aggregates.JwtService;
 import com.etheroom.Etheroom.infrastructure.vo.chains.auth.AuthCredentialsValidationChain;
 import com.etheroom.Etheroom.infrastructure.vo.chains.user.UserAuthenticationValidationChain;
+import com.etheroom.Etheroom.infrastructure.vo.exception.exceptions.NotFoundException;
 import com.etheroom.Etheroom.presentation.dtos.auth.AuthenticationRequest;
 import com.etheroom.Etheroom.presentation.dtos.auth.AuthenticationResponse;
 import com.etheroom.Etheroom.presentation.services.auth.IAuthenticationService;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -31,7 +34,8 @@ public class AuthenticationService implements IAuthenticationService {
     public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
         String ethereumAddress = authenticationRequest.getEthereumAddress();
         String ethereumPublicKey = authenticationRequest.getEthereumPublicKey();
-        User user = this.userService.loadUserByUsername(ethereumAddress);
+        User user = Optional.ofNullable(this.userService.loadUserByUsername(ethereumAddress))
+                .orElseThrow(() -> new NotFoundException("User not found"));
         user.setAddressToMatch(ethereumAddress);
         user.setKeyToMatch(ethereumPublicKey);
         userAuthenticationValidationChain.performValidations(user);

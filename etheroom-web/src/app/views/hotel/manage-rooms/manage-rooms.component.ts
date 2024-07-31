@@ -11,6 +11,7 @@ import { ApplicationService } from '../../../core/services/application.service';
 import { EnumsNames } from '../../../core/data/enums';
 import { Optional } from '../../../core/utils/optional';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ConfirmationDialogComponent } from '../../../shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ether-manage-rooms',
@@ -63,6 +64,15 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
     this.openHotelRoomDialog(hotelRoom);
   }
 
+  public onClickDeleteRoom(hotelId: string): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      inputs: {
+        text: 'This action is irreversible. Are you sure you want to delete this room?'
+      },
+      onClose: (bool: any) => bool && this.deleteHotelRoom(hotelId)
+    })
+  }
+
   public applyFilter(): void {
     this.findAllRooms();
   }
@@ -100,12 +110,13 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
     });
   }
 
-  private handleRoomAddition = (hotelRoom: HotelRoom): void => {
-    Optional.ofNullable(hotelRoom)
+  private handleRoomAddition = (hotelRoomForm: FormGroup): void => {
+    Optional.ofNullable(hotelRoomForm)
+      .map((hotelRoomForm) => hotelRoomForm.value)
       .filter((hr) => hr.id === null)
       .ifPresentOrElse(
-        () => this.createHotelRoom(hotelRoom),
-        () => this.updateHotelRoom(hotelRoom)
+        (hotelRoom) => this.createHotelRoom(hotelRoom),
+        () => this.updateHotelRoom(hotelRoomForm.value)
       )
   }
 
@@ -123,10 +134,24 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
 
   private updateHotelRoom(hotelRoom: HotelRoom): void {
     this.loading.start();
+    console.log(hotelRoom)
     this.hotelRoomService.update(hotelRoom)
       .subscribe({
         next: () => {
           this.snackbar.success('Hotel Room updated successfully');
+          this.findAllRooms();
+        },
+        error: this.handleError
+      });
+  }
+
+  private deleteHotelRoom(hotelId: string): void {
+    this.loading.start();
+    this.hotelRoomService.delete(hotelId)
+      .subscribe({
+        next: () => {
+          this.snackbar.success('Room deleted successfully');
+          this.loading.stop();
           this.findAllRooms();
         },
         error: this.handleError

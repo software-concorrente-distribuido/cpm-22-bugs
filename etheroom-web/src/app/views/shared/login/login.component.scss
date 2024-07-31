@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000; // Ensure it is above other elements
+    z-index: 99; // Ensure it is above other elements
     background: #F5F5F5; // Or any other background you need
     display: flex;
     justify-content: center;

@@ -1,132 +1,85 @@
-<section>
-    <form *ngIf="hotelRoomForm$ | async as hotelRoomForm" [formGroup]="hotelRoomForm">
-        <div class="container">
-            <div class="room-details">
-                <h2>
-                    Bedroom in {{ addressForm.get('country').value }}
-                </h2>
-                <h3>
-                    {{ addressForm.get('description').value }}
-                </h3>
+:host {
+    width: 86%;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+}
 
-                <ether-images [imagesControl]="imagesControl"></ether-images>
-        
-                <div class="room-information">
-                    <div class="infos" *ngIf="roomConveniences.length > 0">
-                        <ether-icon-text [iconName]="'house'">Room information</ether-icon-text>
-                        <!-- <ether-convenience-form [conveniencesForm]="roomConveniences"></ether-convenience-form> -->
-                    </div>
-        
-                    <!-- <ether-button>Change Info</ether-button> -->
-                </div>
-            </div>
-        </div>
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    h2, h4, h5 {
+        margin: 0;
+    }
+    h2 {
+        font-size: 3rem;
+        img {
+            height: 64px;
+        }
+    }
+    h4 {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+    h5 {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    p {
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+        img {
+            height: 24px;
+        }
+    }
+
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+form, ether-images {
+    margin: 2rem 0;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    align-items: center;
+    ether-button {
+        grid-column: span 2;
+  }
+
+
+    .wallet-btn {
+        cursor: pointer;
+        border-radius: 20px;
+        border: 3px solid;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 11px 46px;
+    }
     
-        <div class="group-tab">
-            <div class="booking">
-                <div class="room-price">
-                        <ether-icon-text [iconName]="'ether-icon-black'">{{ hotelRoomForm.get('price').value }}</ether-icon-text>
-                        <!-- <ether-button>Change Price</ether-button> -->
-                </div>
-                
-                <!-- <div class="room-availability">
-                    <ether-form-field>
-                        <ether-form-field-label>CHECK IN</ether-form-field-label>
-                        <input type="text" placeholder="ARRIVE DATE">
-                    </ether-form-field>
+    .wallet-label {
+        font-size: 16px;
+        font-weight: 600;
+        margin: auto 0;
+    }
+    
+    .wallet-icon {
+        width: 44px;
 
-                    <ether-form-field>
-                        <ether-form-field-label>CHECK OUT</ether-form-field-label>
-                        <input type="text" placeholder="LEAVE DATE">
-                    </ether-form-field>
-
-                    <ether-button>Check Availability</ether-button>
-                </div> -->
-                
-                <div class="room-type">
-                    <div class="room-type__form-field">
-                        <ether-icon-text [iconName]="'house'">Room type</ether-icon-text>
-                        <!-- <ether-form-field>
-                            <ether-form-field-label>Room Type</ether-form-field-label>
-                            <mat-select formControlName="type">
-                                <mat-option *ngFor="let type of roomTypes" [value]="type.name">{{ findRoomTypeDescription(type.name) }}</mat-option>
-                            </mat-select>
-                            <ether-form-field-error *ngIf="hotelRoomForm.get('type').touched && hotelRoomForm.get('type').hasError('required')">
-                                Field is required
-                            </ether-form-field-error>
-                        </ether-form-field> -->
-                    </div>
-
-                    <div class="button">
-                        <ether-button>Change Room Type</ether-button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="actions">
-                <ether-button (onClick)="onClickUpdate()">UPDATE ROOM</ether-button>
-                <ether-button buttonType="danger" (onClick)="onClickDelete()">DELETE ROOM</ether-button>
-            </div>
-
-            <div id="conectar">
-                <div tabindex="0" role="button" class="wallet-btn" id="btnConectar" (click)="createBooking()" style="display: flex">
-                <div class="wallet-label">BOOK ROOM</div>
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1d8dd0382c16396155cf11001f63ba813906cc645d629d201d185980b41cda00?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="wallet-icon" alt="Wallet Icon" />
-                </div>
-            </div>
-            
-        </div>
-        
-    </form>
-
-</section>
-
-
-<!-- <mat-tab-group>
-    <mat-tab label="BOOKING">
-        <div class="booking">
-            <div class="room-price">
-                <div class="room-price__currency-info">
-                    <ether-icon-text [iconName]="'ether-icon-black'">0,053 ETH/night</ether-icon-text>
-                </div>
-                <div class="button">
-                    <ether-button>Change Price</ether-button>
-                </div>
-            </div>
-            
-            <div class="room-availability">
-                <ether-form-field>
-                    <ether-form-field-label>CHECK IN</ether-form-field-label>
-                    <input type="text" placeholder="ARRIVE DATE">
-                </ether-form-field>
-
-                <ether-form-field>
-                    <ether-form-field-label>CHECK OUT</ether-form-field-label>
-                    <input type="text" placeholder="LEAVE DATE">
-                </ether-form-field>
-
-                <div class="button">
-                    <ether-button>Check Availability</ether-button>
-                </div>
-            </div>
-            
-            <div class="room-type">
-                <div class="room-type__form-field">
-                    <ether-icon-text [iconName]="'house'">Room type</ether-icon-text>
-                    <ether-form-field>
-                        <ether-form-field-label>ROOM TYPE</ether-form-field-label>
-                        <input type="text" placeholder="SINGLE ROOM" va>
-                    </ether-form-field>
-                </div>
-
-                <div class="button">
-                    <ether-button>Change Room Type</ether-button>
-                </div>
-            </div>
-        </div>
-    </mat-tab>
-    <mat-tab label="AMENITIES"></mat-tab>
-    <mat-tab label="SERVICES & ACTIVITIES"></mat-tab>
-    <mat-tab label="REVIEWS"></mat-tab>
-    <mat-tab label="CONTACT"></mat-tab>
-</mat-tab-group> -->
+    }
+}

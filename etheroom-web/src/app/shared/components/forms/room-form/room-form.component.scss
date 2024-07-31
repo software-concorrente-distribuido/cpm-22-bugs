@@ -18,6 +18,7 @@ form {
         grid-column: span 2;
     }
     h4, ether-form-field.description, ether-thumbnail, ether-images, ether-convenience-form {
+        width: 100%;
         grid-column: span 4;
     }
 }

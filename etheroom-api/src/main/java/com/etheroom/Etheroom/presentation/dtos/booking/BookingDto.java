@@ -4,6 +4,8 @@ import com.etheroom.Etheroom.domain.models.booking.Booking;
 import com.etheroom.Etheroom.infrastructure.base.BaseEntityDto;
 import com.etheroom.Etheroom.infrastructure.vo.enums.BookingStatus;
 import com.etheroom.Etheroom.presentation.dtos.booking.aggregates.GuestDto;
+import com.etheroom.Etheroom.presentation.dtos.hotel.aggregates.HotelRoomDto;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +27,8 @@ public class BookingDto extends BaseEntityDto<Booking> {
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
     private List<GuestDto> guests = new ArrayList<>();
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private HotelRoomDto hotelRoom;
 
     @Override
     public Booking mapDtoToEntity() {
@@ -44,6 +48,11 @@ public class BookingDto extends BaseEntityDto<Booking> {
         booking.setPersonId(this.getPersonId());
         booking.setHotelRoomId(this.getHotelRoomId());
         return booking;
+    }
+
+    public BookingDto setHotelRoom(HotelRoomDto hotelRoom) {
+        this.hotelRoom = hotelRoom;
+        return this;
     }
 
 }
