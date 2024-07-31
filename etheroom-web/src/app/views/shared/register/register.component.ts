@@ -90,7 +90,7 @@ export class RegisterComponent extends UtilComponent implements OnInit {
         next: () => {
           this.loading.stop();
           this.snackbar.success("Person created successfully");
-          this.handleLogin();
+          this.handleLogin(true);
         },
         error: this.handleError
       });
@@ -122,13 +122,13 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     this.userForm$.next(createHotelForm(Hotel.fromUser(user)));
   }
 
-  private handleLogin(): void {
+  private handleLogin(isPerson = false): void {
     this.authenticationService.login(
       this.authenticationService.buildAuthRequest(this.ethereumAccount$.value)
     ).subscribe({
       next: () =>{ 
         this.snackbar.success("Login successful");
-        this.router.navigate([`/profile`]);
+        this.router.navigate([`${isPerson ? '/guest' : '/hotel'}/profile`]);
       },
       error: this.handleError
     });
