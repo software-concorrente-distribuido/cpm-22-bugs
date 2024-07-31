@@ -1,6 +1,7 @@
 package com.etheroom.Etheroom.domain.services.booking;
 
 import com.etheroom.Etheroom.domain.models.booking.Booking;
+import com.etheroom.Etheroom.domain.models.hotel.aggregates.HotelRoom;
 import com.etheroom.Etheroom.domain.repositories.booking.BookingRepository;
 import com.etheroom.Etheroom.infrastructure.utils.Functions;
 import com.etheroom.Etheroom.infrastructure.vo.enums.BookingStatus;
@@ -57,7 +58,7 @@ public class BookingService implements IBookingService {
         booking.setPerson(this.personService.findById(personId).mapDtoToEntity());
         booking.setHotelRoom(this.hotelRoomService.findById(hotelRoomId).mapDtoToEntity());
         booking.setStatus(BookingStatus.STARTED);
-        this.checkGuestsAmount(booking);
+        this.checkGuestsAmount(booking, hotelRoomId);
         return this.bookingRepository.save(booking).mapEntityToDto();
     }
 
@@ -112,13 +113,16 @@ public class BookingService implements IBookingService {
     public void update(BookingDto bookingDto) {
         Booking saved = this.bookingRepository.findById(bookingDto.getId())
                 .orElseThrow(() -> new NotFoundException(BOOKING_NOT_FOUND));
+        String hotelRoomId = Optional.ofNullable(bookingDto.getHotelRoomId())
+                .map(Objects::toString)
+                .orElseThrow(() -> new BadRequestException(HOTEL_ROOM_NOT_SENDED));
         Functions.acceptTrueThrows(
                 BookingStatus.STARTED.equals(saved.getStatus()),
                 () -> new BadRequestException(ONLY_STARTED_BOOKINGS)
         );
         Booking booking = bookingDto.mapDtoToEntity();
         booking.setStatus(BookingStatus.ACTIVE);
-        this.checkGuestsAmount(booking);
+        this.checkGuestsAmount(booking, hotelRoomId);
         Functions.acceptFalseOrElseThrow(
                 this.bookingRepository.isHotelRoomBooked(
                         booking.getHotelRoom().getId(),
@@ -165,9 +169,10 @@ public class BookingService implements IBookingService {
         );
     }
 
-    private void checkGuestsAmount(Booking booking) {
+    private void checkGuestsAmount(Booking booking, String id) {
+        Integer hotelRoomCapacity = this.hotelRoomService.findById(id).mapDtoToEntity().getCapacity();
         Functions.acceptTrueThrows(
-                booking.getGuests().size() > booking.getNumberOfGuests(),
+                booking.getGuests().size() > hotelRoomCapacity,
                 () -> new BadRequestException(HOTEL_ROOM_DONT_SUPPORT_GUESTS)
         );
     }
