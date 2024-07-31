@@ -37,7 +37,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   constructor(
     injector: Injector,
     private hotelRoomService: HotelRoomService,
-    private dialog: DialogsService,
     private appService: ApplicationService,
     private hotelService: HotelService,
     private route: ActivatedRoute

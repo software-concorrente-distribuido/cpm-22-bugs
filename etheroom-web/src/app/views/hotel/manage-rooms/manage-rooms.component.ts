@@ -37,7 +37,7 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
   constructor(
     injector: Injector,
     public hotelRoomService: HotelRoomService,
-    public dialog: MatDialog,
+    public matDialog: MatDialog,
     public autheticationService: AuthenticationService,
     private appService: ApplicationService
   ) {
@@ -88,7 +88,7 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
   }
 
   private openDialog(): void {
-    this.dialog.open(AddRoomDialogComponent, {
+    this.matDialog.open(AddRoomDialogComponent, {
       data: {
         hotelRoomForm: this.hotelRoomForm,
       }

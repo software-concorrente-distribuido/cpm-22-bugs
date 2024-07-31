@@ -42,7 +42,7 @@ export class AllHotelsComponent extends UtilComponent implements OnInit {
     injector: Injector,
     private hotelService: HotelService,
     private appService: ApplicationService,
-    public dialog: MatDialog,
+    public matDialog: MatDialog,
     public hotelRoomService: HotelRoomService
   ) {
     super(injector);
@@ -55,7 +55,7 @@ export class AllHotelsComponent extends UtilComponent implements OnInit {
 
   openRoomsDialog(hotelId: string): void {
     this.hotelRoomService.findAllAvailable(0, 10, null, null, hotelId).subscribe(response => {
-      this.dialog.open(HotelRoomsPopupComponent, {
+      this.matDialog.open(HotelRoomsPopupComponent, {
         width: '600px',
         data: { rooms: response.content }
       });
