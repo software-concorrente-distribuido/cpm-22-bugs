@@ -1,191 +1,36 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
-
-    <link rel="stylesheet" href="../../../../styles/global.scss" />
-    <link rel="stylesheet" href="./your-bookings.component.scss" />
-
-    <style>
-      @font-face {
-        font-family: "Quasimoda";
-        src: url("./assets/public/Quasimoda Light.otf");
-        font-weight: 300;
-      }
-      @font-face {
-        font-family: "Quasimoda";
-        src: url("./assets/public/Quasimoda Regular.otf");
-        font-weight: 400;
-      }
-      @font-face {
-        font-family: "Quasimoda";
-        src: url("./assets/public/Quasimoda Bold.otf");
-        font-weight: 500;
-      }
-      @font-face {
-        font-family: "Quasimoda";
-        src: url("./assets/public/Quasimoda SemiBold.otf");
-        font-weight: 600;
-      }
-      @font-face {
-        font-family: "FONTSPRING DEMO - All Round Gothic Book";
-        src: url("./assets/public/Quasimoda Light.otf");
-        font-weight: 400;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="root1">
-      <main class="user-booking-history-page">
-        <div class="home-page1"></div>
-        <div class="frame-parent4">
-          <div class="your-bookings-wrapper">
-            <div class="your-bookings1">YOUR BOOKINGS</div>
-          </div>
-          <div class="hotel-description-container">
-            <div class="hotel-description-1">
-              <img
-                class="hotel-description-1-child"
-                alt=""
-                src="./assets/public/rectangle-41@2x.png"
-              />
-
-              <div class="rectangle-parent1">
-                <div class="frame-child2"></div>
-                <div class="frame-wrapper2">
-                  <div class="hotel-card-parent-1">
-                    <div class="hotel-card-name-1">Nashville, Tennessee</div>
-                    <div class="hotel-card-date-1">April 03 - 08, 2025</div>
-                  </div>
-                </div>
-                <div class="frame-parent5">
-                  <div class="status-icon-container-wrapper">
-                    <div class="status-icon-container">
-                      <img
-                        class="checkmark-512-1-icon"
-                        loading="lazy"
-                        alt=""
-                        src="./assets/public/checkmark512-1@2x.png"
-                      />
-
-                      <div class="status-active-wrapper">
-                        <div class="status-active">Status: Active</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="cancelled-status-container">
-                    <div class="cancelled-status-container-child"></div>
-                    <img
-                      class="cancelled-status-container-item"
-                      loading="lazy"
-                      alt=""
-                      src="./assets/public/arrow-1.svg"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="hotel-description-2">
-              <img
-                class="hotel-description-2-child"
-                alt=""
-                src="./assets/public/rectangle-411@2x.png"
-              />
-
-              <div class="rectangle-parent2">
-                <div class="frame-child3"></div>
-                <div class="frame-wrapper3">
-                  <div class="hotel-card-parent-2">
-                    <div class="hotel-card-name-2">Uji, Kyoto</div>
-                    <div class="hotel-card-date-2">July 17 - 23, 2025</div>
-                  </div>
-                </div>
-                <div class="frame-parent6">
-                  <div class="x-mark-512-1-wrapper">
-                    <img
-                      class="x-mark-512-1-icon"
-                      loading="lazy"
-                      alt=""
-                      src="./assets/public/xmark512-1@2x.png"
-                    />
-                  </div>
-                  <div class="status-cancelled-wrapper">
-                    <div class="status-cancelled">Status: Cancelled</div>
-                  </div>
-                  <div class="empty-status-container">
-                    <div class="empty-status-container-child"></div>
-                    <img
-                      class="empty-status-container-item"
-                      alt=""
-                      src="./assets/public/arrow-1.svg"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-       
-        <section class="search-bar1">
-          <div class="search-bar-item"></div>
-          <div class="search-bookings">SEARCH BOOKINGS</div>
-          <div class="search-filters">
-            <div class="filter-icons-parent">
-              <div class="filter-icons">
-                <img
-                  class="location-icon"
-                  loading="lazy"
-                  alt=""
-                  src="./assets/public/vector-3.svg"
-                />
-
-                <img
-                  class="calendar-icon"
-                  loading="lazy"
-                  alt=""
-                  src="./assets/public/vector-4.svg"
-                />
-              </div>
-              <div class="input-fields">
-                <div class="input-fields-container">
-                  <div class="input-labels1">
-                    <div class="input-labels-item"></div>
-                    <div class="location2">LOCATION</div>
-                    <input
-                      class="search-placeholder"
-                      placeholder="AVENIDA T-4, GOIÂNIA"
-                      type="text"
-                    />
-                  </div>
-                  <div class="input-labels2">
-                    <div class="input-labels-checkin"></div>
-                    <div class="check-in1">CHECK IN</div>
-                    <input
-                      class="checkin-placeholder"
-                      placeholder="04 MAY, 2024"
-                      type="text"
-                    />
-                  </div>
-                  <div class="input-labels3">
-                    <div class="input-labels-checkout"></div>
-                    <div class="check-out1">CHECK OUT</div>
-                    <input
-                      class="checkout-placeholder"
-                      placeholder="22 MAY, 2024"
-                      type="text"
-                    />
-                  </div>
-                </div>
-                <button class="search-button1">
-                  <div class="search-button-child"></div>
-                  <div class="search2">SEARCH</div>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+<form *ngIf="filterForm$ | async as filterForm" [formGroup]="filterForm">
+  <h2>Search</h2>
+    <ether-form-field>
+        <ether-form-field-label>LOCATION</ether-form-field-label>
+        <input formControlName="location" type="text" />
+    </ether-form-field>
+    <ether-form-field>
+      <ether-form-field-label>CHECK-IN</ether-form-field-label>
+      <input type="datetime-local" placeholder="Choose a date">
+    </ether-form-field>
+    <ether-form-field>
+      <ether-form-field-label>CHECK-OUT</ether-form-field-label>
+      <input type="datetime-local" placeholder="Choose a date">
+    </ether-form-field>
+    <ether-form-field>
+        <ether-form-field-label>STATUS</ether-form-field-label>
+        <mat-select formControlName="type">
+            <mat-option *ngFor="let status of bookingStatus$ | async" [value]="status.name">{{ findBookingStatusDescriptionByName(status.name) }}</mat-option>
+        </mat-select>
+    </ether-form-field>
+    <ether-button [isInvertColors]="true" (onClick)="applyFilter()">SEARCH</ether-button>
+    <ether-button (onClick)="clearFilter()">CLEAR</ether-button>
+</form>
+<section>
+  <div class="booking-card" *ngFor="let booking of (bookings$ | async)">
+    <img [src]="findImgSrcByBase64(booking?.hotelRoom)" [alt]="booking?.hotelRoom?.description ?? 'Hotel Image'" />
+    <div>
+      <h4>{{ booking?.hotel?.address }}</h4>
+      <h5>{{ booking.checkIn }}, {{ booking.checkOut }}</h5>
+      <div>
+        <span>{{ findBookingStatusDescriptionByName(booking.status) }}</span>
+        <ether-button-icon iconName="right-arrow-white"></ether-button-icon>
+      </div>
     </div>
-  </body>
-</html>
+  </div>
+</section>
