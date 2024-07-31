@@ -42,7 +42,6 @@ import { MediaModule } from '../../../shared/components/media/media.module';
     EtherFilterComponent,
     EtherIconTextComponent,
     ButtonsModule
-    
 ],
   exports: [
     RoomDetailsComponent,
