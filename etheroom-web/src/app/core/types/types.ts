@@ -55,3 +55,9 @@ export type EthereumAccount = {
     account: string;
     secret: string;
 }
+
+export type Availability = {
+    checkIn: Date;
+    checkOut: Date;
+    hotelRoomId: string;
+}

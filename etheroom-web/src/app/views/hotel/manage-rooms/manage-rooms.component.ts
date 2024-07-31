@@ -110,12 +110,13 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
     });
   }
 
-  private handleRoomAddition = (hotelRoom: HotelRoom): void => {
-    Optional.ofNullable(hotelRoom)
+  private handleRoomAddition = (hotelRoomForm: FormGroup): void => {
+    Optional.ofNullable(hotelRoomForm)
+      .map((hotelRoomForm) => hotelRoomForm.value)
       .filter((hr) => hr.id === null)
       .ifPresentOrElse(
-        () => this.createHotelRoom(hotelRoom),
-        () => this.updateHotelRoom(hotelRoom)
+        (hotelRoom) => this.createHotelRoom(hotelRoom),
+        () => this.updateHotelRoom(hotelRoomForm.value)
       )
   }
 
@@ -133,6 +134,7 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
 
   private updateHotelRoom(hotelRoom: HotelRoom): void {
     this.loading.start();
+    console.log(hotelRoom)
     this.hotelRoomService.update(hotelRoom)
       .subscribe({
         next: () => {
