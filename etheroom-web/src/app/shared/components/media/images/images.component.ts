@@ -67,6 +67,8 @@ export class ImagesComponent {
   }
 
   public onImageSelected(image: Media): void {
+    console.log('fd')
+    console.log(image)
     this.otherImages$.next(
       this.initialImages.filter((img) => img.id !== image.id)
     );
@@ -157,10 +159,8 @@ export class ImagesComponent {
   }
 
   private handleValuesChange = (images: Media[] = null, changeCurrent: boolean = true): void => {
-    const medias: Media = images || this.control$.value?.value;
-    console.log(medias);
-    this.control$.value?.setValue(medias);
-    Optional.ofNullable(images)
+    const medias: Media[] = images || this.control$.value?.value;
+    Optional.ofNullable(medias)
             .tap((images) => this.initialImages = images)
             .filter((images) => images.length > 0)
             .tap((images) => {

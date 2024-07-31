@@ -1,8 +1,11 @@
 :host {
     width: 100%;
+    margin-bottom: 1rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 }
 
 div.container {
@@ -10,15 +13,15 @@ div.container {
     grid-template-columns: repeat(8, 1fr);
     gap: 1rem;
     > div {
+        height: 320px;
         grid-column: span 2;
         display: flex;
         flex-direction: column;
-        align-items: center;
         gap: 0.5rem;
         overflow-y: auto;
         > img {
             width: 72px;
-            height: 72px;
+            min-height: 72px;
             cursor: pointer;
         }
     }
@@ -36,6 +39,7 @@ div.container {
 }
 
 div.actions {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -67,14 +71,15 @@ div.actions {
                 background-color: #FF0000;
             }
             &.update {
-                background-color: #000000;
+                color: black;
+                background-color: white;
             }
         }
     }
 }
 
 div.container, div.actions {
-    max-width: 640px;
+    max-width: 440px;
 }
 
 input[type="file"] {

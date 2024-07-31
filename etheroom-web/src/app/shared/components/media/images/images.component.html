@@ -2,21 +2,25 @@
 <input type="file" (change)="onFileChange($event, true)" #fileUpdateInput />
 <div class="container">
     <div *ngIf="hasManyImages && otherImages$ | async as otherImages">
-        <img *ngFor="let image of otherImages" [src]="buildFileUrlFromMedia(image)" alt="Pictures" />
+        <img 
+            *ngFor="let image of otherImages" 
+            [src]="buildFileUrlFromMedia(image)" 
+            (click)="onImageSelected(image)"
+            alt="Pictures" 
+        />
     </div>
     <img 
         *ngIf="currentImage$ | async as currentImage" 
         [src]="buildFileUrlFromMedia(currentImage)" 
-        (click)="onImageSelected(currentImage)"
         alt="Pictures"
     />
 </div>
 @if (canEdit) {
     <div class="actions">
         @if(hasImage) {
-         <button class="update" (click)="fileUpdateInput.click()">UPDATE IMAGE</button>
-         <button class="delete" (click)="onClickDelete()">DELETE IMAGE</button>
+         <button class="update" (click)="fileUpdateInput.click()" type="button">UPDATE IMAGE</button>
+         <button class="delete" (click)="onClickDelete()" type="button">DELETE IMAGE</button>
         }
-         <button (click)="fileInput.click()">ADD IMAGE</button>
+         <button (click)="fileInput.click()" type="button">ADD IMAGE</button>
      </div>
 }
