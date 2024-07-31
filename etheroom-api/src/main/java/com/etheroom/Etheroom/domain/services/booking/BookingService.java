@@ -14,7 +14,10 @@ import com.etheroom.Etheroom.presentation.services.person.IPersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -87,17 +90,24 @@ public class BookingService implements IBookingService {
                 Optional.ofNullable(filter.getPersonId()).map(UUID::fromString).orElse(null),
                 Optional.ofNullable(filter.getHotelRoomId()).map(UUID::fromString).orElse(null),
                 Optional.ofNullable(filter.getHotelId()).map(UUID::fromString).orElse(null)
-        ).map(Booking::mapEntityToDto);
+        )
+                .map(booking -> {
+                    BookingDto bookingDto = booking.mapEntityToDto();
+                    bookingDto.setHotelRoom(booking.getHotelRoom().mapEntityToDto());
+                    return bookingDto;
+                });
     }
 
     @Override
     public BookingDto findById(String id) {
         return this.bookingRepository.findById(UUID.fromString(id))
                 .map(Booking::mapEntityToDto)
+                .map(bookingDto -> bookingDto.setHotelRoom(this.hotelRoomService.findById(bookingDto.getHotelRoomId().toString())))
                 .orElseThrow(() -> new RuntimeException(BOOKING_NOT_FOUND));
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void update(BookingDto bookingDto) {
         Booking saved = this.bookingRepository.findById(bookingDto.getId())
                 .orElseThrow(() -> new NotFoundException(BOOKING_NOT_FOUND));
@@ -108,7 +118,15 @@ public class BookingService implements IBookingService {
         Booking booking = bookingDto.mapDtoToEntity();
         booking.setStatus(BookingStatus.ACTIVE);
         this.checkGuestsAmount(booking);
-        this.bookingRepository.save(booking);
+        Functions.acceptFalseOrElseThrow(
+                this.bookingRepository.isHotelRoomBooked(
+                        booking.getHotelRoom().getId(),
+                        booking.getCheckIn(),
+                        booking.getCheckOut()
+                ),
+                () -> this.bookingRepository.save(booking),
+                () -> new BadRequestException("Hotel room is already booked")
+        );
     }
 
     @Override
@@ -134,6 +152,16 @@ public class BookingService implements IBookingService {
                 () -> new BadRequestException(ONLY_STARTED_BOOKINGS)
         );
         this.bookingRepository.deleteById(uuid);
+    }
+
+    @Scheduled(cron = "0 0 4 * * 6")
+    public void findActiveDoneBookings() {
+        this.bookingRepository.saveAll(
+                this.bookingRepository.findAllActiveDone()
+                        .stream()
+                        .map(Booking::setFinishedStatus)
+                        .toList()
+        );
     }
 
     private void checkGuestsAmount(Booking booking) {

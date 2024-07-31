@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../../../core/services/authentication.service';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -14,6 +15,8 @@ export class UserFormComponent {
 
   public profilePictureControl$: BehaviorSubject<FormControl> = new BehaviorSubject<FormControl>(null);
 
+  public isRegistered: boolean = false;
+
   @Input() 
   public set userForm(value: FormGroup) {
     this.profilePictureControl$.next(
@@ -22,6 +25,12 @@ export class UserFormComponent {
               .orElse(null)
     );
     this.userForm$.next(value);
+  }
+
+  constructor(
+    private authenticationService: AuthenticationService
+  ) { 
+    this.isRegistered = this.authenticationService.isAuthenticationContextValid();
   }
 
 }
