@@ -14,6 +14,7 @@ import com.etheroom.Etheroom.presentation.services.person.IPersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -142,6 +143,16 @@ public class BookingService implements IBookingService {
                 () -> new BadRequestException(ONLY_STARTED_BOOKINGS)
         );
         this.bookingRepository.deleteById(uuid);
+    }
+
+    @Scheduled(cron = "0 0 4 * * 6")
+    public void findActiveDoneBookings() {
+        this.bookingRepository.saveAll(
+                this.bookingRepository.findAllActiveDone()
+                        .stream()
+                        .map(Booking::setFinishedStatus)
+                        .toList()
+        );
     }
 
     private void checkGuestsAmount(Booking booking) {

@@ -87,4 +87,9 @@ public class Booking extends BaseEntity {
         return bookingDto;
     }
 
+    public Booking setFinishedStatus() {
+        this.status = BookingStatus.FINISHED;
+        return this;
+    }
+
 }
