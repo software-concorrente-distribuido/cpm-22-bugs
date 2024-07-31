@@ -1,52 +1,85 @@
-<ng-container *ngIf="hotelRoom$ | async as hotelRoom">
-    <section class="room-infos">
-        <h2>{{ hotelRoom.description }}</h2>
-        @if ((hotel$ | async); as hotel) {
-            <h4>{{ hotel.name }}</h4>
-            <h5>
-                {{ (hotel$ | async)?.address.description }} -
-                {{ (hotel$ | async)?.address.zipCode }},
-                {{ (hotel$ | async)?.address.country }}
-            </h5>
-            <h5>
-                {{ (hotel$ | async)?.contact.phone }} |
-                {{ (hotel$ | async)?.contact.cellphone }} |
-                {{ (hotel$ | async)?.user.email }}
-            </h5>
+:host {
+    width: 86%;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+}
+
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    h2, h4, h5 {
+        margin: 0;
+    }
+    h2 {
+        font-size: 3rem;
+        img {
+            height: 64px;
         }
-        <ether-images [imagesControl]="hotelRoom.images" [isViewOnly]="true"></ether-images>
-        <p *ngIf="hotelRoom.conveniences.length > 0">
-            <img src="./../../../../../assets/icons/house.svg" alt="House" />
-            Room Information
-        </p>
-        <ul>
-            <li *ngFor="let convenience of hotelRoom.conveniences">
-                {{ findConvenienceDescription(convenience.type) }}
-            </li>
-        </ul>
-    </section>
-    <section class="availability">
-        <h2>
-            <img src="./../../../../../assets/images/brand-ethereum-icon-158920-2@2x.png" alt="Ethereum Icon" />
-            {{ hotelRoom.price }} ETH/night
-        </h2>
-        <h4>{{ findRoomTypeDescription(hotelRoom.type) }}</h4>
-        <h5>Max of {{ hotelRoom.capacity }} guests</h5>
-        <form *ngIf="availabilityFormGroup$ | async as availabilityFormGroup" [formGroup]="availabilityFormGroup">
-            <ether-form-field>
-                <ether-form-field-label>CHECK-IN</ether-form-field-label>
-                <input type="datetime-local" placeholder="Choose a date">
-            </ether-form-field>
-            <ether-form-field>
-                <ether-form-field-label>CHECK-OUT</ether-form-field-label>
-                <input type="datetime-local" placeholder="Choose a date">
-            </ether-form-field>
-            <ether-button (onClick)="onCheckAvailability()">
-                CHECK AVAILABILITY
-            </ether-button>
-        </form>
-        <ether-button *ngIf="available && isPerson" (onClick)="startBooking()">
-            START BOOKING
-        </ether-button>
-    </section>
-</ng-container>
+    }
+    h4 {
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+    h5 {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    p {
+        display: flex;
+        gap: 0.25rem;
+        align-items: center;
+        img {
+            height: 24px;
+        }
+    }
+
+}
+
+ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+form, ether-images {
+    margin: 2rem 0;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    align-items: center;
+    ether-button {
+        grid-column: span 2;
+  }
+
+
+    .wallet-btn {
+        cursor: pointer;
+        border-radius: 20px;
+        border: 3px solid;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 11px 46px;
+    }
+    
+    .wallet-label {
+        font-size: 16px;
+        font-weight: 600;
+        margin: auto 0;
+    }
+    
+    .wallet-icon {
+        width: 44px;
+
+    }
+}
