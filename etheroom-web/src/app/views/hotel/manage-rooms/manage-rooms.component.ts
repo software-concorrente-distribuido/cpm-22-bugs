@@ -11,6 +11,7 @@ import { ApplicationService } from '../../../core/services/application.service';
 import { EnumsNames } from '../../../core/data/enums';
 import { Optional } from '../../../core/utils/optional';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ConfirmationDialogComponent } from '../../../shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ether-manage-rooms',
@@ -61,6 +62,15 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
 
   public onClickEditRoom(hotelRoom: HotelRoom): void {
     this.openHotelRoomDialog(hotelRoom);
+  }
+
+  public onClickDeleteRoom(hotelId: string): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      inputs: {
+        text: 'This action is irreversible. Are you sure you want to delete this room?'
+      },
+      onClose: (bool: any) => bool && this.deleteHotelRoom(hotelId)
+    })
   }
 
   public applyFilter(): void {
@@ -127,6 +137,19 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
       .subscribe({
         next: () => {
           this.snackbar.success('Hotel Room updated successfully');
+          this.findAllRooms();
+        },
+        error: this.handleError
+      });
+  }
+
+  private deleteHotelRoom(hotelId: string): void {
+    this.loading.start();
+    this.hotelRoomService.delete(hotelId)
+      .subscribe({
+        next: () => {
+          this.snackbar.success('Room deleted successfully');
+          this.loading.stop();
           this.findAllRooms();
         },
         error: this.handleError

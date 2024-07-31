@@ -29,6 +29,7 @@
                 <ether-header-cell>Capacity:</ether-header-cell>
                 <ether-header-cell>Price per night:</ether-header-cell>
                 <ether-header-cell>Edit Room:</ether-header-cell>
+                <ether-header-cell>Delete Room:</ether-header-cell>
                 <ether-header-cell>View Room:</ether-header-cell>
             </ether-table-header>
 
@@ -39,6 +40,9 @@
                 <ether-row-cell>{{ hotelRoom?.price + ' ETH' }}</ether-row-cell>
                 <ether-row-cell>
                     <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="onClickEditRoom(hotelRoom)">Edit</ether-button-text-icon>
+                </ether-row-cell>
+                <ether-row-cell>
+                    <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="onClickDeleteRoom(hotelRoom?.id)">Delete</ether-button-text-icon>
                 </ether-row-cell>
                 <ether-row-cell>
                     <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="onClickView(hotelRoom?.id)">Go to page</ether-button-text-icon>
