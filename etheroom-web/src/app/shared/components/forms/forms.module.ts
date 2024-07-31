@@ -43,7 +43,8 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     UserFormComponent,
     HotelFormComponent,
     PersonFormComponent,
-    RoomFormComponent
+    RoomFormComponent,
+    ConvenienceFormComponent
   ]
 })
 export class FormsModule { }
