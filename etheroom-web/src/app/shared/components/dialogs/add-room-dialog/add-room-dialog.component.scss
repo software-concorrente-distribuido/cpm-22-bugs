@@ -1,16 +1,22 @@
-section {
+:host {
+    width: 840px;
+    height: 640px;
     display: flex;
     flex-direction: column;
-    gap: 21px;
-    padding: 15px 20px;
+    gap: 2rem;
+}
 
-    .actions {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
+ether-room-form {
+    height: 780px;
+}
 
-        ether-button {
-            width: 8rem;
-        }
+div.actions {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    ether-button {
+        width: 180px;
     }
 }
