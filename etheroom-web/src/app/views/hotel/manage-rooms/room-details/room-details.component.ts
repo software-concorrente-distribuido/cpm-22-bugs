@@ -46,34 +46,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     this.loadItems();
   }
 
-  public get hotelForm(): FormGroup {
-    return this.hotelForm$.value;
-  }
-
-  public get addressForm(): FormGroup {
-    return this.hotelForm.get('address') as FormGroup;
-  }
-
-  private get hotelRoomForm(): FormGroup {
-    return this.hotelRoomForm$.value;
-  }
-
-  public get roomTypes(): Enum[] {
-    return this.roomType$.value;
-  }
-
-  public get roomConveniences(): FormArray {
-    return this.hotelRoomForm.get('conveniences') as FormArray;
-  }
-
-  public get imagesControl(): FormControl {
-    return this.hotelRoomForm.get('images') as FormControl;
-  }
-
-  // public get roomType() {
-  //   return this.hotelRoomForm.get('type');
-  // }
-
   public findConvenienceDescription(type: string): string {
     return Optional.ofNullable(this.conveniences$.value)
       .map(conveniences => conveniences.find(convenience => convenience.name === type))
@@ -88,15 +60,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
       .orElse(null);
   }
 
-  public onClickUpdate(): void {
-    this.dialog.open(ConfirmationDialogComponent, {
-      inputs: {
-        text: 'Deseja realmente salvar as alterações?'
-      },
-      onClose: (bool: any) => this.handleUpdateConfirmation(bool)
-    });
-  }
-
   public onClickDelete(): void {
     this.dialog.open(ConfirmationDialogComponent, {
       inputs: {
@@ -104,17 +67,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
       },
       onClose: (bool: any) => this.handleDeletionConfirmation(bool)
     })
-  }
-
-  private updateRoom(): void {
-    this.hotelRoomService.update(this.hotelRoomForm.value)
-      .subscribe({
-        next: () => {
-          this.snackbar.success('Quarto atualizado com sucesso');
-          this.loading.stop();
-        },
-        error: this.handleError
-      });
   }
 
   private deleteHotelRoom(): void {
@@ -127,17 +79,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
           this.router.navigate(['hotel/manage-rooms']);
         },
         error: this.handleError
-      });
-  }
-
-  private handleUpdateConfirmation(bool: any): void {
-    Optional.ofNullable(bool)
-      .ifPresent(() => {
-        Functions.acceptTrueOrElse(
-          this.hotelRoomForm.valid,
-          () => this.updateRoom(),
-          () => this.snackbar.error('Formulário inválido')
-        );
       });
   }
 
