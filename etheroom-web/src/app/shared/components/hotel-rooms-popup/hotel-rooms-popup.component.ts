@@ -28,6 +28,7 @@ throw new Error('Method not implemented.');
   ) {}
 
   goToRoomPage(id: any) {
-    this.router.navigate([`/room-page`, id]);
+    this.dialogRef.close();
+    this.router.navigate([`/guest/room-details`, id]);
   }
 }

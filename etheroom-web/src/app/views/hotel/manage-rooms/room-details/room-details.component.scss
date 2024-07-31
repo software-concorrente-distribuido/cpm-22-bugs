@@ -68,5 +68,28 @@ section {
                 justify-content: center;
             }
         }
-    }    
+    }
+
+    .wallet-btn {
+        cursor: pointer;
+        border-radius: 20px;
+        border: 3px solid;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 11px 46px;
+    }
+    
+    .wallet-label {
+        font-size: 16px;
+        font-weight: 600;
+        margin: auto 0;
+    }
+    
+    .wallet-icon {
+        width: 44px;
+    }
 }

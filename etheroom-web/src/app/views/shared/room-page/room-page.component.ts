@@ -61,6 +61,8 @@ export class RoomPageComponent implements OnInit {
 
     const checkinDate = (document.getElementById('checkin_date') as HTMLInputElement).value;
     const checkoutDate = (document.getElementById('checkout_date') as HTMLInputElement).value;
+    console.log(checkinDate);
+    console.log(checkoutDate);
     const dailyRate = 0.16; // Definindo o preço diário
 
     if (checkinDate && checkoutDate) {

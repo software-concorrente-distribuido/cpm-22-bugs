@@ -7,8 +7,7 @@ contract HotelBookingManager {
     address public owner;
     uint256 public bookingCount = 0;
     address[] public bookingContracts;
-    // lista de endereços de contratos de reserva
-
+    
     struct BookingInfo {
         address bookingContract;
         address guest;
@@ -18,13 +17,8 @@ contract HotelBookingManager {
         uint256 roomNumber;
     }
 
-    /*Notifica qualquer sistema externo que uma nova reserva foi feita, incluindo detalhes como o ID da reserva, o endereço do contrato
-    da reserva, o endereço do hóspede, o nome do hotel e o valor pago. Sistemas que monitoram a blockchain podem capturar esse evento e
-    atualizar a interface do usuário ou realizar outras ações com base nas informações fornecidas.*/
-    
-    //"Indexed" permite a busca e filtragem de eventos no log da blockchain pelo 'bookingId' e 'guest'
     mapping(uint256 => BookingInfo) public bookings;
-    mapping(string => mapping(uint256 => bool)) public roomAvailability; // hotel => roomNumber => isBooked
+    mapping(string => mapping(uint256 => bool)) public roomLocked; // hotel => roomNumber => isLocked
 
     event BookingCreated(
         uint256 indexed bookingId,
@@ -34,10 +28,20 @@ contract HotelBookingManager {
         uint256 amount,
         uint256 roomNumber
     );
-    
+
     event BookingCancelled(
         uint256 indexed bookingId,
         address indexed guest
+    );
+
+    event RoomLocked(
+        string indexed hotel,
+        uint256 indexed roomNumber
+    );
+
+    event RoomUnlocked(
+        string indexed hotel,
+        uint256 indexed roomNumber
     );
 
     modifier onlyOwner() {
@@ -49,18 +53,20 @@ contract HotelBookingManager {
         owner = msg.sender;
     }
 
-    function createBooking(string memory _hotel, uint256 _amount, string memory _checkInDate, string memory _checkOutDate, uint256 _roomNumber, address payable _hotelAddress) public payable {
+    function createBooking(
+        string memory _hotel,
+        uint256 _amount,
+        string memory _checkInDate,
+        string memory _checkOutDate,
+        uint256 _roomNumber,
+        address payable _hotelAddress
+    ) public payable {
         // Verifica se o valor enviado na transação é igual ao valor esperado da reserva
         require(msg.value == _amount, "Valor de pagamento incorreto");
 
-        // Verifica se o quarto está disponível
-        require(!roomAvailability[_hotel][_roomNumber], "Quarto ja reservado");
-
-        // Marca o quarto como reservado
-        roomAvailability[_hotel][_roomNumber] = true;
-
         // Cria uma instância de um novo contrato de reserva individual (HotelBooking)
-        HotelBooking newBooking = new HotelBooking{value: msg.value}(
+        HotelBooking newBooking;
+        try new HotelBooking{value: msg.value}(
             msg.sender, // endereço do hóspede
             _hotel, // nome do hotel
             _amount, // valor pago
@@ -68,12 +74,17 @@ contract HotelBookingManager {
             _checkOutDate,
             _roomNumber,
             _hotelAddress
-        );
+        ) returns (HotelBooking booking) {
+            newBooking = booking;
+        } catch {
+
+            revert("Falha ao criar contrato de reserva");
+        }
 
         // Incrementa o contador de reservas para gerar um novo ID de reserva
         bookingCount++;
 
-        // Registra as informações da nova reserva no mapeamento 'bookings' usando o novo ID de reserva como chave
+        // Registra as informações da nova reserva no mapeamento 'bookings'
         bookings[bookingCount] = BookingInfo({
             bookingContract: address(newBooking),
             guest: msg.sender,
@@ -86,7 +97,7 @@ contract HotelBookingManager {
         // Adiciona o endereço do novo contrato de reserva à lista de contratos de reserva
         bookingContracts.push(address(newBooking));
 
-        // Emite o evento 'BookingCreated' para notificar sobre a nova reserva
+        // Emite o evento 'BookingCreated'
         emit BookingCreated(
             bookingCount,
             address(newBooking),
@@ -108,13 +119,15 @@ contract HotelBookingManager {
         HotelBooking(booking.bookingContract).cancelBooking(msg.sender);
         booking.isActive = false;
 
-        // Marca o quarto como disponível
-        roomAvailability[booking.hotel][booking.roomNumber] = false;
-
+        // Emite o evento 'BookingCancelled'
         emit BookingCancelled(_bookingId, msg.sender);
     }
 
-    function getBooking(uint256 _bookingId) public view returns (BookingInfo memory) {
+    function getBooking(uint256 _bookingId)
+        public
+        view
+        returns (BookingInfo memory)
+    {
         return bookings[_bookingId];
     }
 
@@ -160,5 +173,23 @@ contract HotelBookingManager {
         }
 
         return userBookings;
+    }
+
+    function isRoomLocked(string memory _hotel, uint256 _roomNumber) public view returns (bool) {
+        return roomLocked[_hotel][_roomNumber];
+    }
+
+    // Método para bloquear um quarto manualmente
+    function lockRoom(string memory _hotel, uint256 _roomNumber) public {
+        require(!roomLocked[_hotel][_roomNumber], "Quarto ja esta bloqueado");
+        roomLocked[_hotel][_roomNumber] = true;
+        emit RoomLocked(_hotel, _roomNumber);
+    }
+
+    // Método para desbloquear um quarto manualmente
+    function unlockRoom(string memory _hotel, uint256 _roomNumber) public {
+        require(roomLocked[_hotel][_roomNumber], "Quarto nao esta bloqueado");
+        roomLocked[_hotel][_roomNumber] = false;
+        emit RoomUnlocked(_hotel, _roomNumber);
     }
 }
