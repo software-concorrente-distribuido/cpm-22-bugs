@@ -1,9 +1,13 @@
+import { HotelRoom } from "../hotel/aggregates/hotel-room.model";
+import { Hotel } from "../hotel/hotel.model";
 import { Guest } from "./aggregates/guest.model";
 
 export class Booking {
 
     public id: string;
     public hotelRoomId: string;
+    public hotelRoom?: HotelRoom;
+    public hotel?: Hotel;
     public personId: string;
     public status: string;
     public totalPrice: number;
