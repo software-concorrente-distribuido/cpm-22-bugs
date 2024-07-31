@@ -1,0 +1,16 @@
+:host {
+    display: block;
+    max-width: 86%;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.action {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    * {
+        width: 320px;
+    }
+}

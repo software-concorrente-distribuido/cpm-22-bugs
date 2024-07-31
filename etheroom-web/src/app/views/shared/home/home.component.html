@@ -7,19 +7,19 @@
                     <section class="hotels-search">
                         <ether-form-field>
                             <ether-form-field-label>LOCATION</ether-form-field-label>
-                            <input type="text" placeholder="AVENIDA T-4, GOIÂNIA">
+                            <input type="text" placeholder="AVENIDA T-4, GOIÂNIA" disabled>
                         </ether-form-field>
 
                         <ether-form-field>
                             <ether-form-field-label>CHECK IN</ether-form-field-label>
-                            <input type="text" placeholder="04 MAY, 2024">
+                            <input type="text" placeholder="04 MAY, 2024" disabled>
                         </ether-form-field>
 
                         <ether-form-field>
                             <ether-form-field-label>CHECK OUT</ether-form-field-label>
-                            <input type="text" placeholder="22 MAY, 2024">
+                            <input type="text" placeholder="22 MAY, 2024" disabled>
                         </ether-form-field>
-                        <ether-button [isInvertColors]="true">SEARCH</ether-button>
+                        <ether-button (onClick)="onSearch()" [isInvertColors]="true">SEARCH</ether-button>
                     </section>
                 </mat-tab>
                 <mat-tab label="FLIGHTS">
