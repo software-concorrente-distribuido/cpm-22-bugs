@@ -54,37 +54,10 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   }
 
   public findRoomTypeDescription(type: string): string {
-    return Optional.ofNullable(this.roomTypes)
+    return Optional.ofNullable(this.roomType$.value)
       .map(roomType => roomType.find(roomType => roomType.name === type))
       .map(roomType => roomType.description)
       .orElse(null);
-  }
-
-  public onClickDelete(): void {
-    this.dialog.open(ConfirmationDialogComponent, {
-      inputs: {
-        text: 'Deseja realmente deletar este quarto?'
-      },
-      onClose: (bool: any) => this.handleDeletionConfirmation(bool)
-    })
-  }
-
-  private deleteHotelRoom(): void {
-    this.loading.start();
-    this.hotelRoomService.delete(this.hotelRoomForm.get('id').value)
-      .subscribe({
-        next: () => {
-          this.snackbar.success('Quarto deletado com sucesso');
-          this.loading.stop();
-          this.router.navigate(['hotel/manage-rooms']);
-        },
-        error: this.handleError
-      });
-  }
-
-  private handleDeletionConfirmation = (bool: any): void => {
-    Optional.ofNullable(bool)
-      .ifPresent(() => this.deleteHotelRoom());
   }
 
   private getRouteData(): void {
