@@ -107,6 +107,7 @@ public class BookingService implements IBookingService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void update(BookingDto bookingDto) {
         Booking saved = this.bookingRepository.findById(bookingDto.getId())
                 .orElseThrow(() -> new NotFoundException(BOOKING_NOT_FOUND));
@@ -117,7 +118,15 @@ public class BookingService implements IBookingService {
         Booking booking = bookingDto.mapDtoToEntity();
         booking.setStatus(BookingStatus.ACTIVE);
         this.checkGuestsAmount(booking);
-        this.bookingRepository.save(booking);
+        Functions.acceptFalseOrElseThrow(
+                this.bookingRepository.isHotelRoomBooked(
+                        booking.getHotelRoom().getId(),
+                        booking.getCheckIn(),
+                        booking.getCheckOut()
+                ),
+                () -> this.bookingRepository.save(booking),
+                () -> new BadRequestException("Hotel room is already booked")
+        );
     }
 
     @Override
