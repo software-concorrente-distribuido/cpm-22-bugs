@@ -12,6 +12,7 @@ import { ButtonsModule } from '../buttons/buttons.module';
   declarations: [
     DialogComponent,
     ConfirmationDialogComponent,
+    AddRoomDialogComponent
   ],
   imports: [
     FormsModule,

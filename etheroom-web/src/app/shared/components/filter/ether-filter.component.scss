@@ -1,10 +1,11 @@
 section {
-    background-color: #F4F4F4;
+    max-width: 300px;
     padding: 20px 18px;
     display: flex;
     flex-direction: column;
     gap: 26px;
-    max-width: 300px;
+    background-color: #F4F4F4;
+    border-radius: 1rem;
 
     .fields {
         display: grid;
