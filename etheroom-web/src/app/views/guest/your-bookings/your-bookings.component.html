@@ -1,25 +1,25 @@
 <form *ngIf="filterForm$ | async as filterForm" [formGroup]="filterForm">
   <h2>Search</h2>
-    <ether-form-field>
-        <ether-form-field-label>LOCATION</ether-form-field-label>
-        <input formControlName="location" type="text" />
-    </ether-form-field>
-    <ether-form-field>
-      <ether-form-field-label>CHECK-IN</ether-form-field-label>
-      <input type="datetime-local" placeholder="Choose a date">
-    </ether-form-field>
-    <ether-form-field>
-      <ether-form-field-label>CHECK-OUT</ether-form-field-label>
-      <input type="datetime-local" placeholder="Choose a date">
-    </ether-form-field>
-    <ether-form-field>
-        <ether-form-field-label>STATUS</ether-form-field-label>
-        <mat-select formControlName="type">
-            <mat-option *ngFor="let status of bookingStatus$ | async" [value]="status.name">{{ findBookingStatusDescriptionByName(status.name) }}</mat-option>
-        </mat-select>
-    </ether-form-field>
-    <ether-button [isInvertColors]="true" (onClick)="applyFilter()">SEARCH</ether-button>
-    <ether-button (onClick)="clearFilter()">CLEAR</ether-button>
+  <ether-form-field>
+    <ether-form-field-label>LOCATION</ether-form-field-label>
+    <input formControlName="location" type="text" />
+  </ether-form-field>
+  <ether-form-field>
+    <ether-form-field-label>CHECK-IN</ether-form-field-label>
+    <input type="datetime-local" placeholder="Choose a date">
+  </ether-form-field>
+  <ether-form-field>
+    <ether-form-field-label>CHECK-OUT</ether-form-field-label>
+    <input type="datetime-local" placeholder="Choose a date">
+  </ether-form-field>
+  <ether-form-field>
+    <ether-form-field-label>STATUS</ether-form-field-label>
+    <mat-select formControlName="status">
+      <mat-option *ngFor="let status of bookingStatus$ | async" [value]="status.name">{{ findBookingStatusDescriptionByName(status.name) }}</mat-option>
+    </mat-select>
+  </ether-form-field>
+  <ether-button [isInvertColors]="true" (onClick)="applyFilter()">SEARCH</ether-button>
+  <ether-button (onClick)="clearFilter()">CLEAR</ether-button>
 </form>
 <section>
   <div class="booking-card" *ngFor="let booking of (bookings$ | async)">

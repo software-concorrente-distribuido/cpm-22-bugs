@@ -1,11 +1,22 @@
 :host {
   width: 86%;
-  margin: 0 auto;
+  margin: 2rem auto;
   display: block;
 }
 
 form {
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 0.5rem;
+  row-gap: 1rem;
+  align-items: center;
+  h2 {
+    grid-column: span 10;
+  }
+  ether-form-field {
+    grid-column: span 2;
+  }
 }
 
 section {
