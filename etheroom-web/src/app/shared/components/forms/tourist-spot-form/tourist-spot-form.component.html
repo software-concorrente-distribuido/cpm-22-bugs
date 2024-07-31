@@ -1,6 +1,6 @@
 <div>
     <h4>Tourist Spots</h4>
-    <button (click)="addTouristSpot()">+</button>
+    <button (click)="addTouristSpot()" type="button">+</button>
 </div>
 <form *ngFor="let touristSpotForm of (touristSpotFormArray$ | async).controls; let i = index" [formGroup]="castAbstractToFormGroup(touristSpotForm)">
     <ether-form-field>
@@ -13,5 +13,5 @@
             Max length is 100
         </ether-form-field-error>
     </ether-form-field>
-    <button (click)="removeTouristSpot(i)">-</button>
+    <button (click)="removeTouristSpot(i)" type="button">-</button>
 </form>

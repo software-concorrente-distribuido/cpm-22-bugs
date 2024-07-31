@@ -1,6 +1,6 @@
 <div>
     <h4>Conveniences</h4>
-    <button (click)="addConvenience()">+</button>
+    <button (click)="addConvenience()" type="button">+</button>
 </div>
 <form *ngFor="let conveniencesForm of (conveniencesFormArray$ | async).controls; let i = index" [formGroup]="castAbstractToFormGroup(conveniencesForm)">
     <ether-form-field>
@@ -15,5 +15,5 @@
             Field is required
         </ether-form-field-error>
     </ether-form-field>
-    <button (click)="removeConvenience(i)">-</button>
+    <button (click)="removeConvenience(i)" type="button">-</button>
 </form>
