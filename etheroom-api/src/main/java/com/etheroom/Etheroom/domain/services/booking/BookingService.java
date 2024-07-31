@@ -94,6 +94,7 @@ public class BookingService implements IBookingService {
                 .map(booking -> {
                     BookingDto bookingDto = booking.mapEntityToDto();
                     bookingDto.setHotelRoom(booking.getHotelRoom().mapEntityToDto());
+                    bookingDto.setHotel(booking.getHotelRoom().getHotel().mapEntityToDto());
                     return bookingDto;
                 });
     }

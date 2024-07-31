@@ -29,6 +29,8 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   public hotelRoom$: BehaviorSubject<HotelRoom> = new BehaviorSubject(null);
   public availabilityFormGroup$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
 
+  public readonly MIN_DATE: string = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+
   private conveniences$: BehaviorSubject<Enum[]> = new BehaviorSubject(null);
   private roomTypes$: BehaviorSubject<Enum[]> = new BehaviorSubject<Enum[]>(null);
 
@@ -76,7 +78,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
 
   public startBooking(): void {
     if(this.available && this.isPerson) {
-      this.router.navigate(['hotel/booking', this.hotelRoom$.value.id]);
+      this.router.navigate(['guest/booked-room', { hotelRoomId: this.hotelRoom$.value.id }]);
     } else {
       this.snackbar.info('Requirements for booking not met');
     }

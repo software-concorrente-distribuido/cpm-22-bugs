@@ -6,6 +6,7 @@ import com.etheroom.Etheroom.presentation.services.hotel.aggregates.IHotelRoomSe
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +45,11 @@ public class HotelRoomController {
 
     @GetMapping("/{id}/booked")
     @ResponseStatus(HttpStatus.OK)
-    public Boolean isHotelRoomBooked(@PathVariable String id, LocalDateTime checkIn, LocalDateTime checkOut) {
+    public Boolean isHotelRoomBooked(
+            @PathVariable String id,
+            @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime checkIn,
+            @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime checkOut
+    ) {
         return hotelRoomService.isHotelRoomBooked(id, checkIn, checkOut);
     }
 
