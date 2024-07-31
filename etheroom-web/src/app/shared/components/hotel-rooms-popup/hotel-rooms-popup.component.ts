@@ -28,6 +28,6 @@ throw new Error('Method not implemented.');
   ) {}
 
   goToRoomPage(id: any) {
-    this.router.navigate([`/room-page`, id]);
+    this.router.navigate([`/guest/room-details/${id}`]);
   }
 }
