@@ -20,14 +20,12 @@ public interface BookingRepository extends JpaRepository<Booking, UUID> {
 
     @Query(
             "SELECT b FROM Booking b " +
-                    "WHERE (:contractOwnerName IS NULL OR LOWER(b.person.name) LIKE LOWER(CONCAT('%', :contractOwnerName, '%'))) "
-                    + "AND (:location IS NULL OR LOWER(b.hotelRoom.hotel.address.description) LIKE LOWER(CONCAT('%', :location, '%'))) "
-                    + "AND (:checkIn IS NULL OR b.checkIn >= :checkIn) "
-                    + "AND (:checkOut IS NULL OR b.checkOut <= :checkOut) "
+                    "WHERE (:contractOwnerName IS NULL OR b.person.name LIKE :contractOwnerName) "
+                    + "AND (:location IS NULL OR b.hotelRoom.hotel.address.description LIKE :location) "
+                    + "AND (DATE(:checkIn) IS NULL OR b.checkIn >= :checkIn) "
+                    + "AND (DATE(:checkOut) IS NULL OR b.checkOut <= :checkOut) "
                     + "AND (:roomNumber IS NULL OR b.hotelRoom.number = :roomNumber) "
                     + "AND (:status IS NULL OR b.status = :status) "
-                    + "AND (:personId IS NULL OR b.person.id = :personId) "
-                    + "AND (:hotelRoomId IS NULL OR b.hotelRoom.id = :hotelRoomId) "
                     + "AND (:hotelId IS NULL OR b.hotelRoom.hotel.id = :hotelId)"
     )
     Page<Booking> findAll(
@@ -45,11 +43,10 @@ public interface BookingRepository extends JpaRepository<Booking, UUID> {
 
     @Query(
             "SELECT b FROM Booking b " +
-                    "WHERE b.status = 'REGISTERED' "
-                    + "AND (:contractOwnerName IS NULL OR LOWER(b.person.name) LIKE LOWER(CONCAT('%', :contractOwnerName, '%'))) "
-                    + "AND (:location IS NULL OR LOWER(b.hotelRoom.hotel.description) LIKE LOWER(CONCAT('%', :location, '%'))) "
-                    + "AND (:checkIn IS NULL OR b.checkIn >= :checkIn) "
-                    + "AND (:checkOut IS NULL OR b.checkOut <= :checkOut) "
+                    "WHERE (:contractOwnerName IS NULL OR b.person.name LIKE :contractOwnerName) "
+                    + "AND (:location IS NULL OR b.hotelRoom.hotel.description LIKE :location) "
+                    + "AND (DATE(:checkIn) IS NULL OR b.checkIn >= :checkIn) "
+                    + "AND (DATE(:checkOut) IS NULL OR b.checkOut <= :checkOut) "
                     + "AND (:roomNumber IS NULL OR b.hotelRoom.number = :roomNumber) "
                     + "AND (:status IS NULL OR b.status = :status) "
                     + "AND (:personId IS NULL OR b.person.id = :personId) "
