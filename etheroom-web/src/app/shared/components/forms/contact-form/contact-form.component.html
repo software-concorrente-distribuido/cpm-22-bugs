@@ -1,9 +1,8 @@
-<h2>Contact</h2>
-<span class="divider"></span>
+<h4>CONTACT</h4>
 <form *ngIf="contactForm$ | async as contactForm" [formGroup]="contactForm">
     <ether-form-field>
-        <ether-form-field-label>Phone</ether-form-field-label>
-        <input formControlName="phone" type="text" />
+        <ether-form-field-label>PHONE</ether-form-field-label>
+        <input formControlName="phone" type="text" mask="+00(00)0000-0000" />
         <ether-form-field-error *ngIf="contactForm.get('phone').touched && contactForm.get('phone').hasError('required')">
             Field is required
         </ether-form-field-error>
@@ -12,8 +11,8 @@
         </ether-form-field-error>
     </ether-form-field>
     <ether-form-field>
-        <ether-form-field-label>Cellphone</ether-form-field-label>
-        <input formControlName="cellphone" type="text" />
+        <ether-form-field-label>CELLPHONE</ether-form-field-label>
+        <input formControlName="cellphone" type="text" mask="+00(00)00000-0000" />
         <ether-form-field-error *ngIf="contactForm.get('phone').touched && contactForm.get('phone').hasError('maxlength')">
             Max length is 20
         </ether-form-field-error>

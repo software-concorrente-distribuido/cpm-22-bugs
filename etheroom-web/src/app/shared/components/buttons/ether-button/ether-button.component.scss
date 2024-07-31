@@ -1,8 +1,16 @@
 button {
     width: 100%;
-    height: 40px;
-    border-radius: 15px;
+    padding: 0.75rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.075rem;
+    border-radius: 1rem;
+    border: 0.15rem solid black;
     cursor: pointer;
+    transition: var(--linear-transition-settings);
+    &:hover {
+        transition: var(--linear-transition-settings);
+    }
 }
 
 // button.secondary {
@@ -11,12 +19,19 @@ button {
 
 button.default {
     background-color: #ffffff;
-    border: 2px solid #000000;
+    &:hover {
+        background-color: black;
+        color: white;
+    }
 }
 
 button.inverted {
     background-color: black;
     color: #ffffff;
+    &:hover {
+        background-color: #ffffff;
+        color: black;
+    }
 }
 
 button.danger {

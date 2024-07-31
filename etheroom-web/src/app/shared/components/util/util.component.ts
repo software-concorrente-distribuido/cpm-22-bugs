@@ -13,7 +13,7 @@ import { Optional } from '../../../core/utils/optional';
 export abstract class UtilComponent {
 
   protected loading: LoadingService;
-  // protected dialog: DialogsService;
+  protected dialog: DialogsService;
   protected router: Router;
   protected snackbar: SnackbarService;
   protected authenticationService: AuthenticationService;
@@ -21,7 +21,7 @@ export abstract class UtilComponent {
 
   constructor(injector: Injector) {
     this.loading = injector.get(LoadingService);
-    // this.dialog = injector.get(DialogsService);
+    this.dialog = injector.get(DialogsService);
     this.router = injector.get(Router);
     this.snackbar = injector.get(SnackbarService);
     this.authenticationService = injector.get(AuthenticationService);

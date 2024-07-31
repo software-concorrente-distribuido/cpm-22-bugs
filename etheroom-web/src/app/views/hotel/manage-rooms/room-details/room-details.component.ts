@@ -1,12 +1,12 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { UtilComponent } from '../../../../shared/components/util/util.component';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HotelRoomService } from '../../../../core/services/hotel-room.service';
 import { Optional } from '../../../../core/utils/optional';
 import { HotelRoom } from '../../../../core/models/hotel/aggregates/hotel-room.model';
-import { createHotelRoomForm } from '../../../../core/utils/forms';
+import { createHotelForm, createHotelRoomForm } from '../../../../core/utils/forms';
 import { Functions } from '../../../../core/utils/functions';
 import { ConfirmationDialogComponent } from '../../../../shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { HotelService } from '../../../../core/services/hotel.service';
@@ -27,16 +27,13 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   protected override pageDescription: string;
 
   public hotelRoomForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
-  public newHotelRoom$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public hotelForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
   public conveniences$: BehaviorSubject<Enum[]> = new BehaviorSubject(null);
-
-  public hotelId: string;
-  public hotel: Hotel;
+  public roomType$: BehaviorSubject<Enum[]> = new BehaviorSubject<Enum[]>(null);
 
   constructor(
     injector: Injector,
     private hotelRoomService: HotelRoomService,
-    private dialog: DialogsService,
     private appService: ApplicationService,
     private hotelService: HotelService,
     private route: ActivatedRoute
@@ -45,14 +42,37 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    console.log(this.hotelRoomForm);
     this.getRouteData();
     this.loadItems();
   }
 
-  public get roomConveniences(): Convenience[] {
-    return this.hotelRoomForm.get('conveniences').value;
+  public get hotelForm(): FormGroup {
+    return this.hotelForm$.value;
   }
+
+  public get addressForm(): FormGroup {
+    return this.hotelForm.get('address') as FormGroup;
+  }
+
+  private get hotelRoomForm(): FormGroup {
+    return this.hotelRoomForm$.value;
+  }
+
+  public get roomTypes(): Enum[] {
+    return this.roomType$.value;
+  }
+
+  public get roomConveniences(): FormArray {
+    return this.hotelRoomForm.get('conveniences') as FormArray;
+  }
+
+  public get imagesControl(): FormControl {
+    return this.hotelRoomForm.get('images') as FormControl;
+  }
+
+  // public get roomType() {
+  //   return this.hotelRoomForm.get('type');
+  // }
 
   public findConvenienceDescription(type: string): string {
     return Optional.ofNullable(this.conveniences$.value)
@@ -61,12 +81,20 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
       .orElse(null);
   }
 
-  public onSave(): void {
-    Functions.acceptTrueOrElse(
-      this.hotelRoomForm.valid,
-      () => this.saveHotelRoom(),
-      () => this.snackbar.error('Formulário inválido')
-    );
+  public findRoomTypeDescription(type: string): string {
+    return Optional.ofNullable(this.roomTypes)
+      .map(roomType => roomType.find(roomType => roomType.name === type))
+      .map(roomType => roomType.description)
+      .orElse(null);
+  }
+
+  public onClickUpdate(): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      inputs: {
+        text: 'Deseja realmente salvar as alterações?'
+      },
+      onClose: (bool: any) => this.handleUpdateConfirmation(bool)
+    });
   }
 
   public onClickDelete(): void {
@@ -78,38 +106,12 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     })
   }
 
-  private get hotelRoomForm(): FormGroup {
-    return this.hotelRoomForm$.value;
-  }
-
-  private saveHotelRoom(): void {
-    this.loading.start();
-    const id: string = this.hotelRoomForm.get('id').value;
-    Optional.ofNullable(id)
-      .ifPresentOrElse(
-        () => this.updateRoom(),
-        () => this.createRoom()
-      );
-  }
-
   private updateRoom(): void {
     this.hotelRoomService.update(this.hotelRoomForm.value)
       .subscribe({
         next: () => {
           this.snackbar.success('Quarto atualizado com sucesso');
           this.loading.stop();
-        },
-        error: this.handleError
-      });
-  }
-
-  private createRoom(): void {
-    this.hotelRoomService.create(this.hotelRoomForm.value)
-      .subscribe({
-        next: (hotelRoom: HotelRoom) => {
-          this.snackbar.success('Quarto criado com sucesso');
-          this.loading.stop();
-          this.router.navigate([`hotel/manage-rooms/room-details/${hotelRoom.id}`]);
         },
         error: this.handleError
       });
@@ -128,54 +130,20 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
       });
   }
 
+  private handleUpdateConfirmation(bool: any): void {
+    Optional.ofNullable(bool)
+      .ifPresent(() => {
+        Functions.acceptTrueOrElse(
+          this.hotelRoomForm.valid,
+          () => this.updateRoom(),
+          () => this.snackbar.error('Formulário inválido')
+        );
+      });
+  }
+
   private handleDeletionConfirmation = (bool: any): void => {
     Optional.ofNullable(bool)
       .ifPresent(() => this.deleteHotelRoom());
-  }
-
-  private createRoomForm(hotelRoom: HotelRoom = new HotelRoom()): void {
-    this.hotelRoomForm$.next(
-      createHotelRoomForm(hotelRoom)
-    );
-  }
-
-  private findHotelRoomById(id: string): void {
-    this.loading.start();
-    this.hotelRoomService.findById(id).subscribe({
-      next: (hotelRoom: HotelRoom) => {
-        console.log(hotelRoom);
-        this.hotelRoomForm$.next(createHotelRoomForm(hotelRoom));
-        this.findHotelById(hotelRoom.hotelId);
-        this.loading.stop();
-      },
-      error: this.handleError
-    });
-  }
-
-  private findHotelById(hotelId: string): void {
-    this.loading.start();
-    this.hotelService.findById(hotelId).subscribe({
-      next: (hotel) => {
-        this.hotel = hotel;
-        this.loading.stop();
-      },
-      error: this.handleError
-    });
-  }
-
-  private handleRetrievedHotelRoomId(id: string): void {
-    Optional.ofNullable(id)
-      .ifPresentOrElse(
-        () => {
-          this.newHotelRoom$.next(false);
-          this.findHotelRoomById(id);
-          this.loading.stop();
-        },
-        () => {
-          this.createRoomForm();
-          this.loading.stop();
-        }
-      );
   }
 
   private getRouteData(): void {
@@ -190,12 +158,49 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     });
   }
 
+  private handleRetrievedHotelRoomId(id: string): void {
+    Optional.ofNullable(id)
+      .ifPresentOrElse(
+        () => {
+          this.findHotelRoomById(id);
+          this.loading.stop();
+        },
+        () => {
+          this.router.navigate(['hotel/manage-rooms']);
+          this.loading.stop();
+        }
+      );
+  }
+
+  private findHotelById(hotelId: string): void {
+    this.loading.start();
+    this.hotelService.findById(hotelId).subscribe({
+      next: (hotel) => {
+        this.hotelForm$.next(createHotelForm(hotel));
+        this.loading.stop();
+      },
+      error: this.handleError
+    });
+  }
+
+  private findHotelRoomById(id: string): void {
+    this.loading.start();
+    this.hotelRoomService.findById(id).subscribe({
+      next: (hotelRoom: HotelRoom) => {
+        console.log(hotelRoom);
+        this.hotelRoomForm$.next(createHotelRoomForm(hotelRoom));
+        // this.hotelRoom$.next(hotelRoom);
+        this.findHotelById(hotelRoom.hotelId);
+        this.loading.stop();
+      },
+      error: this.handleError
+    });
+  }
+
   private loadItems(): void {
     this.appService.findEnumByName(EnumsNames.HOTEL_ROOM_CONVENIENCE).subscribe(
       (conveniences: Enum[]) => this.conveniences$.next(conveniences)
     );
   }
-
-  // find no array pelo type
 
 }

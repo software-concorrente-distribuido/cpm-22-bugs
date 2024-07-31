@@ -1,9 +1,6 @@
-<section>
-    <div class="add-room__form">
-        <ether-room-form [hotelRoomForm]="hotelRoomForm$ | async"></ether-room-form>
-    </div>
-    <div class="actions">
-        <ether-button (onClick)="onClickOption(false)">Close</ether-button>
-        <ether-button (onClick)="onClickOption(true)">Submit</ether-button>
-    </div>
-</section>
+
+<ether-room-form [hotelRoomForm]="hotelRoomForm$ | async"></ether-room-form>
+<div class="actions">
+    <ether-button (onClick)="onClose()">CLOSE</ether-button>
+    <ether-button (onClick)="onSubmit()">SUBMIT</ether-button>
+</div>

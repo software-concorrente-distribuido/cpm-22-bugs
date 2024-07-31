@@ -18,11 +18,11 @@
     <img class="avatar" [src]="picture" alt="User Profile Picture" [matMenuTriggerFor]="menu" />
 </div>
 <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/profile">
+    <a mat-menu-item [routerLink]="(isHotel ? '/hotel' : '/guest') + '/profile'">
         <mat-icon>account_circle</mat-icon>
         <span>Profile</span>
     </a>
-    <button mat-menu-item (click)="logout()">
+    <button mat-menu-item (click)="logout()" type="button">
         <mat-icon>logout</mat-icon>
         <span>Logout</span>
     </button>

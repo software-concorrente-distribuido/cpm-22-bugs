@@ -1,15 +1,16 @@
 <ng-container *ngIf="userForm$ | async as userForm; else roleNotSelected">
-    <div class="sign-up-header">
-        <img src="./../../assets/images/etheroom-logo.svg" alt="Ether Logo">
-        <h1>Sign Up</h1>
-    </div>
-    <etheroom-person-form *ngIf="isPerson; else hotelForm" [personForm]="userForm"></etheroom-person-form>
-    <ng-template #hotelForm>
-        <etheroom-hotel-form [hotelForm]="userForm"></etheroom-hotel-form>
-    </ng-template>
-    <div class="actions">
-        <ether-button (onClick)="reset()">Back</ether-button>
-        <ether-button (onClick)="onSubmit()">Submit</ether-button>
+    <div class="sign-up-welcome-container">
+        <img src="./../../../../assets/images/login-image.png" alt="Picture that shows a hotel with a pool at night" />
+        <div class="forms">
+            <etheroom-person-form *ngIf="isPerson; else hotelForm" [personForm]="userForm"></etheroom-person-form>
+            <ng-template #hotelForm>
+                <etheroom-hotel-form [hotelForm]="userForm"></etheroom-hotel-form>
+            </ng-template>
+            <div class="actions">
+                <ether-button (onClick)="reset()">BACK</ether-button>
+                <ether-button (onClick)="onSubmit()">SUBMIT</ether-button>
+            </div>
+        </div>
     </div>
 </ng-container>
 <ng-template #roleNotSelected>
@@ -23,8 +24,8 @@
                 Make sure you have installed the <a href="https://metamask.io/download/">Metamask plugin</a> in your browser.
             </p>
             <div class="actions" *ngIf="ethereumAccount$ | async; else loadingAccount">
-                <ether-button (onClick)="onClickPerson()">Create Guest</ether-button>
-                <ether-button (onClick)="onClickHotel()">Create Hotel</ether-button>
+                <ether-button (onClick)="onClickPerson()">CREATE GUEST</ether-button>
+                <ether-button (onClick)="onClickHotel()">CREATE HOTEL</ether-button>
             </div>
             <ng-template #loadingAccount>
                 <ng-container *ngIf="connectionAttempted; else unableToConnect">

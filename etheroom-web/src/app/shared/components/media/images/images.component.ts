@@ -5,6 +5,8 @@ import { MediaService } from '../../../../core/services/media.service';
 import { Media } from '../../../../core/models/media/media.model';
 import { Optional } from '../../../../core/utils/optional';
 import { SnackbarService } from '../../snackbar/snackbar.service';
+import { DialogsService } from '../../dialogs/dialogs.service';
+import { ConfirmationDialogComponent } from '../../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ether-images',
@@ -12,6 +14,10 @@ import { SnackbarService } from '../../snackbar/snackbar.service';
   styleUrl: './images.component.scss'
 })
 export class ImagesComponent {
+  
+  private readonly DEFAULT_FILE_URL: string = './../../../../../assets/images/example-hotel.svg';
+  
+  private readonly BASE_64_PREFIX: string = 'data:image/png;base64,';
 
   public control$: BehaviorSubject<FormControl> = new BehaviorSubject<FormControl>(null);
 
@@ -19,7 +25,11 @@ export class ImagesComponent {
 
   public otherImages$: BehaviorSubject<Media[]> = new BehaviorSubject<Media[]>(null);
 
-  public viewOnly: boolean = false;
+  public canEdit: boolean = true;
+
+  public hasImage: boolean = false;
+
+  public hasManyImages: boolean = false;
 
   private initialImages: Media[] = [];
 
@@ -30,14 +40,20 @@ export class ImagesComponent {
 
   @Input()
   public set isViewOnly(value: boolean) {
-    this.viewOnly = value;
+    this.canEdit = !value;
   }
 
   constructor(
     private mediaService: MediaService,
-    private snackbarService: SnackbarService
-  ) {
+    private snackbarService: SnackbarService,
+    private dialogService: DialogsService
+  ) {  }
 
+  public buildFileUrlFromMedia(media: Media): string {
+    return Optional.ofNullable(media)
+                    .map((media) => media.data)
+                    .map((data: string) => this.BASE_64_PREFIX + data)
+                    .orElse(this.DEFAULT_FILE_URL);
   }
 
   public onFileChange(event: Event, update: boolean = false): void {
@@ -55,6 +71,21 @@ export class ImagesComponent {
       this.initialImages.filter((img) => img.id !== image.id)
     );
     this.currentImage$.next(image);
+  }
+
+  public onClickDelete(): void {
+    Optional.ofNullable(this.currentImage$.value)
+            .map((media) => media.id)
+            .ifPresent((mediaId) => {
+              this.dialogService.open(ConfirmationDialogComponent,
+                {
+                  inputs: {
+                    text: 'Are you sure you want to delete this file?'
+                  },
+                  onClose: (result) => result && this.deleteMedia(mediaId)
+                }
+              )
+            });
   }
 
   private handleMediaUpload = (file: File, update: boolean = false): void => {
@@ -85,11 +116,17 @@ export class ImagesComponent {
       });
   }
 
+  private deleteMedia(mediaId: string): void {
+    this.mediaService.delete(mediaId)
+      .subscribe({
+        next: this.handleMediaDelete,
+        error: (error: any) => this.snackbarService.error(error?.error?.details)
+      });
+  }
+
   private handleMediaCreate = (media: Media): void => {
-    const otherImages: Media[] = this.otherImages$.value;
     this.initialImages.push(media);
-    otherImages.push(media);
-    this.otherImages$.next(otherImages);
+    this.handleValuesChange(this.initialImages);
     this.snackbarService.success('File saved successfully');
   }
 
@@ -97,8 +134,17 @@ export class ImagesComponent {
     Optional.ofNullable(media)
             .ifPresent((media) => {
               this.currentImage$.next(media);
+              const medias: Media[] = this.initialImages.map((img) => img.id === media.id ? media : img);
+              this.handleValuesChange(medias, false);
               this.snackbarService.success('File updated successfully');
             });
+  }
+
+  private handleMediaDelete = (): void => {
+    this.handleValuesChange(
+      this.initialImages.filter((img) => img.id !== this.currentImage$.value.id)
+    );
+    this.snackbarService.success('File deleted successfully');
   }
 
   private handleImagesInput(images: Media[] | FormControl): void {
@@ -107,18 +153,32 @@ export class ImagesComponent {
         ? new FormControl(images)
         : images
     );
-    Optional.ofNullable(images)
-            .map((images) => images instanceof Array ? images : images.value)
-            .tap((images) => this.initialImages = images)
-            .filter((images) => images.length > 0)
-            .tap((images) => this.currentImage$.next(images[0]))
-            .filter((images) => images.length > 1)
-            .map((images) => images.slice(1))
-            .ifPresent((images) => this.otherImages$.next(images));
+    this.handleValuesChange();
   }
 
-  private handleValuesChange = (images: Media[]): void => {
-    this.control$.value?.setValue(images);
+  private handleValuesChange = (images: Media[] = null, changeCurrent: boolean = true): void => {
+    const medias: Media[] = images || this.control$.value?.value;
+    Optional.ofNullable(medias)
+            .tap((images) => this.initialImages = images)
+            .filter((images) => images.length > 0)
+            .tap((images) => {
+              this.hasImage = true;
+              changeCurrent && this.currentImage$.next(images[0]);
+            })
+            .filter((images) => images.length > 1)
+            .map((images) => images.slice(1))
+            .ifPresentOrElse(
+              (images) => {
+                this.hasManyImages = true;
+                this.otherImages$.next(images);
+              },
+              () => {
+                this.hasImage = this.currentImage$.value && images.length > 0;
+                !this.hasImage && this.currentImage$.next(null);
+                this.hasManyImages = false;
+                this.otherImages$.next([]);
+              }
+            );
   }
 
 }

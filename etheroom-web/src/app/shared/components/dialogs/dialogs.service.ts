@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, Type } from '@angular/core';
+import { Injectable, OnDestroy, Renderer2, Type } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DialogComponentData, DialogOptions } from './dialog.types';
 
@@ -13,7 +13,8 @@ export class DialogsService implements OnDestroy {
 
   private onClose: <T> (arg: T) => void; 
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnDestroy(): void {
     this.open$.unsubscribe();
@@ -21,6 +22,7 @@ export class DialogsService implements OnDestroy {
   }
 
   public open(dialog: Type<any>, options?: DialogOptions): void {
+    this.preventBodyScroll();
     this.dialogComponentData$.next(
       {
         component: dialog,
@@ -34,8 +36,19 @@ export class DialogsService implements OnDestroy {
   public close<T>(val?: T): void {
     if(val && this.onClose)
       this.onClose(val);
+    this.allowBodyScroll();
     this.onClose = null;
     this.open$.next(false);
+  }
+
+  private preventBodyScroll(): void {
+    const body: HTMLElement = document.body;
+    body.style.overflow = 'hidden';
+  }
+
+  private allowBodyScroll(): void {
+    const body: HTMLElement = document.body;
+    body.style.overflow = 'auto';
   }
 
 }

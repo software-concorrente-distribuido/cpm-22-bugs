@@ -1,23 +1,29 @@
-<h1>Quartos disponíveis</h1>
-<div *ngFor="let room of data.rooms">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Room {{ room.number }}</mat-card-title>
-    </mat-card-header>
+<section *ngIf="data.rooms.length > 0; else emptyRooms">
+  <h1>Quartos disponíveis</h1>
+  <div *ngFor="let room of data.rooms">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Room {{ room.number }}</mat-card-title>
+      </mat-card-header>
 
-    <mat-card-content>
-      <p>Description: {{ room.description }}</p>
-      <p>Type: {{ room.type }}</p>
-      <p>Capacity: {{ room.capacity }}</p>
-      <p>Price per night: {{ room.price }} ETH</p>
-    </mat-card-content>
+      <mat-card-content>
+        <p>Description: {{ room.description }}</p>
+        <p>Type: {{ room.type }}</p>
+        <p>Capacity: {{ room.capacity }}</p>
+        <p>Price per night: {{ room.price }} ETH</p>
+      </mat-card-content>
 
-    <mat-card-actions>
-      <div class="page-button">
-       <ether-button-text-icon [iconName]="'right-arrow-white'" mat-button (click)="goToRoomPage(room.id)">Go to page</ether-button-text-icon>
-      </div>
-    </mat-card-actions>
+      <mat-card-actions>
+        <div class="page-button">
+        <ether-button-text-icon [iconName]="'right-arrow-white'" mat-button (click)="goToRoomPage(room.id)">Go to page</ether-button-text-icon>
+        </div>
+      </mat-card-actions>
 
-  </mat-card>
-</div>
+    </mat-card>
+  </div>
+</section>
 <button class="button-fechar" mat-button (click)="dialogRef.close()">Fechar</button>
+
+<ng-template #emptyRooms>
+  <p>No rooms available</p>
+</ng-template>

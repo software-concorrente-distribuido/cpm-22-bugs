@@ -1,10 +1,10 @@
 <div>
-    <h2>Tourist Spots</h2>
-    <button (click)="addTouristSpot()">+</button>
+    <h4>TOURIST SPOTS</h4>
+    <button (click)="addTouristSpot()" type="button">+</button>
 </div>
 <form *ngFor="let touristSpotForm of (touristSpotFormArray$ | async).controls; let i = index" [formGroup]="castAbstractToFormGroup(touristSpotForm)">
     <ether-form-field>
-        <ether-form-field-label>Spot *</ether-form-field-label>
+        <ether-form-field-label>SPOT *</ether-form-field-label>
         <input formControlName="touristSpot" type="text" />
         <ether-form-field-error *ngIf="castAbstractToFormGroup(touristSpotForm).get('touristSpot').touched && castAbstractToFormGroup(touristSpotForm).get('touristSpot').hasError('required')">
             Field is required
@@ -13,5 +13,5 @@
             Max length is 100
         </ether-form-field-error>
     </ether-form-field>
-    <button (click)="removeTouristSpot(i)">-</button>
+    <button (click)="removeTouristSpot(i)" type="button">-</button>
 </form>

@@ -1,15 +1,22 @@
 :host {
     width: 100vw;
     height: 100vh;
-    display: block;
-}
-
-div.sign-up-welcome-container {
-    width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000; // Ensure it is above other elements
+    background-color: #F5F5F5; // Or any other background you need
+}
+
+div.sign-up-welcome-container {
+    width: 72%;
+    height: 72%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #D9D9D9;
+    box-shadow: -1px 1px 4px rgba(0, 0, 0, 0.25);
     > * {
         flex: 1;
     }
@@ -19,15 +26,25 @@ div.sign-up-welcome-container {
         object-fit: cover;
     }
     > div {
+        height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
+        overflow-y: auto;
+        &:not(.forms) {
+            justify-content: center;
+        }
+        h2 {
+            text-align: left;
+            margin-bottom: 1rem;
+        }
     }
 }
 
 div.actions {
     width: 100%;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;

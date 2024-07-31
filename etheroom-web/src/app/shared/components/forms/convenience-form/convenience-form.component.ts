@@ -5,6 +5,7 @@ import { ApplicationService } from '../../../../core/services/application.servic
 import { EnumsNames } from '../../../../core/data/enums';
 import { Enum } from '../../../../core/types/types';
 import { createConvenienceForm } from '../../../../core/utils/forms';
+import { Functions } from '../../../../core/utils/functions';
 
 @Component({
   selector: 'ether-convenience-form',
@@ -20,9 +21,16 @@ export class ConvenienceFormComponent implements OnInit {
 
   public conveniences$: BehaviorSubject<Enum[]> = new BehaviorSubject<Enum[]>(null);
 
+  public isHotelRoom: boolean = false;
+
   @Input()
   public set conveniencesForm(value: FormArray) {
     this.conveniencesFormArray$.next(value);
+  }
+
+  @Input()
+  public set isHotel(value: boolean) {
+    this.isHotelRoom = !value;
   }
 
   constructor(
@@ -39,6 +47,7 @@ export class ConvenienceFormComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    console.log(this.convenienceFormArray);
     this.loadEnums();
   }
 
@@ -51,7 +60,20 @@ export class ConvenienceFormComponent implements OnInit {
   }
 
   private loadEnums(): void {
+    Functions.acceptTrueOrElse(
+      this.isHotelRoom,
+      () => this.loadRoomConveniences(),
+      () => this.loadHotelConveniences()
+    );
+  }
+
+  private loadHotelConveniences(): void {
     this.appService.findEnumByName(EnumsNames.HOTEL_CONVENIENCE)
+      .subscribe((enums: Enum[]) => this.conveniences$.next(enums));
+  }
+
+  private loadRoomConveniences(): void {
+    this.appService.findEnumByName(EnumsNames.HOTEL_ROOM_CONVENIENCE)
       .subscribe((enums: Enum[]) => this.conveniences$.next(enums));
   }
 

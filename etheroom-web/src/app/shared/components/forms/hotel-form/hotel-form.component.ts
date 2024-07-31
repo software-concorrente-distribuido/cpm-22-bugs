@@ -15,11 +15,8 @@ export class HotelFormComponent {
 
   public hotelForm$: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(null);
 
-  public isRegistered: boolean = false;
-
   @Input()
   public set hotelForm(value: FormGroup) {
-    this.isRegistered = Optional.ofNullable(value.get('id').value).isPresent();
     this.hotelForm$.next(value);
   }
 

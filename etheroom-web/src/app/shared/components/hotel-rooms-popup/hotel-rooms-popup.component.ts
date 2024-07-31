@@ -11,7 +11,10 @@ import { ButtonsModule } from "../buttons/buttons.module";
   standalone: true,
   imports: [CommonModule, MatDialogModule, MatCardModule, EtherIconTextComponent, ButtonsModule],
   templateUrl: './hotel-rooms-popup.component.html',
-  styleUrl: './hotel-rooms-popup.component.scss'
+  styleUrl: './hotel-rooms-popup.component.scss',
+  host: {
+    class: 'hotel-rooms-popup'
+  }
 })
 export class HotelRoomsPopupComponent {
 openRoomsDialog(arg0: any) {

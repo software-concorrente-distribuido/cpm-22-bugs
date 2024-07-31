@@ -11,8 +11,12 @@ import { RouterOutlet } from '@angular/router';
 import { ManageRoomsComponent } from './manage-rooms.component';
 import { EtherTableModule } from '../../../shared/components/ether-table/ether-table.module';
 import { MatTableModule } from '@angular/material/table';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonsModule } from '../../../shared/components/buttons/buttons.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '../../../shared/components/forms/forms.module';
+import { MediaModule } from '../../../shared/components/media/media.module';
 
 
 
@@ -28,6 +32,9 @@ import { ButtonsModule } from '../../../shared/components/buttons/buttons.module
     RouterOutlet,
     MatTabsModule,
     MatTableModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MediaModule,
     EtherTableModule,
     EtherPageComponent,
     ReactiveFormsModule,
@@ -35,6 +42,7 @@ import { ButtonsModule } from '../../../shared/components/buttons/buttons.module
     EtherFilterComponent,
     EtherIconTextComponent,
     ButtonsModule
+    
 ],
   exports: [
     RoomDetailsComponent,

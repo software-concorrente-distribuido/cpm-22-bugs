@@ -14,6 +14,7 @@ import { RoomDetailsComponent } from './views/hotel/manage-rooms/room-details/ro
 import { MyBookingsComponent } from './views/hotel/my-bookings/my-bookings.component';
 import { RoomPageComponent } from './views/shared/room-page/room-page.component';
 import { HotelGuard, PersonGuard } from './core/guards/user.guard';
+import { ProfileComponent } from './views/shared/profile/profile.component';
 
 export const routes: Routes = [
     {
@@ -21,7 +22,6 @@ export const routes: Routes = [
         redirectTo: 'home',
         pathMatch: 'full'
     },
-
     {
         path: '',
         children: [
@@ -36,24 +36,24 @@ export const routes: Routes = [
             // { path: 'profile', component: ProfileComponent }
         ]
     },
-
     {
         path: 'guest',
         children: [
             { path: 'all-hotels', component: AllHotelsComponent },
             { path: 'your-bookings', component: YourBookingsComponent },
             { path: 'room-details/:id', component: RoomDetailsComponent },
-            { path: 'booked-room', component: BookedRoomComponent }
+            { path: 'booked-room', component: BookedRoomComponent },
+            { path: 'profile', component: ProfileComponent }
         ],
         canActivate: [AuthGuard, PersonGuard]
     },
-
     {
         path: 'hotel',
         children: [
             { path: 'manage-rooms', component: ManageRoomsComponent },
             { path: 'manage-rooms/room-details/:id', component: RoomDetailsComponent },
-            { path: 'my-bookings', component: MyBookingsComponent }
+            { path: 'my-bookings', component: MyBookingsComponent },
+            { path: 'profile', component: ProfileComponent }
         ],
         canActivate: [AuthGuard, HotelGuard]
     }

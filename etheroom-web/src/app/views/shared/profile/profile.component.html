@@ -1,0 +1,9 @@
+<ng-container *ngIf="formGroup$ | async as formGroup">
+    <etheroom-person-form *ngIf="isPerson; else hotelForm" [personForm]="formGroup"></etheroom-person-form>
+    <ng-template #hotelForm>
+        <etheroom-hotel-form [hotelForm]="formGroup"></etheroom-hotel-form>
+    </ng-template>
+    <div class="action">
+        <ether-button (onClick)="onSubmit()">SAVE</ether-button>
+    </div>
+</ng-container>

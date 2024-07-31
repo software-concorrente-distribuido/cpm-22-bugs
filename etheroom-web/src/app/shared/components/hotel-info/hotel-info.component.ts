@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Hotel } from '../../../core/models/hotel/hotel.model';
 import { Optional } from '../../../core/utils/optional';
+import { AuthenticationService } from '../../../core/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ether-hotel-info',
@@ -19,6 +21,13 @@ export class HotelInfoComponent {
   public hotelAddress: string;
   public hotelThumbnail: string;
 
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) {
+
+  }
+
   @Input()
   public set hotel(hotel: Hotel) {
     this.hotelThumbnail = Optional.ofNullable(this.hotel)
@@ -33,6 +42,14 @@ export class HotelInfoComponent {
                                 .map(h => h.address)
                                 .map(a => a.description)
                                 .orElse(null);
+  }
+
+  public onSearch(): void {
+    let route: string = '/sign-in';
+    if (this.authenticationService.isAuthenticationContextValid()) {
+      route = this.authenticationService.isCurrentUserPerson() ? '/guest/all-hotels' : '/hotel/profile';
+    }
+    this.router.navigate([route]);
   }
 
 }
