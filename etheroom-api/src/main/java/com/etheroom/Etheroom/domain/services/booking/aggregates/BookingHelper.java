@@ -5,6 +5,8 @@ import com.etheroom.Etheroom.infrastructure.vo.enums.BookingStatus;
 import com.etheroom.Etheroom.presentation.services.booking.aggregates.IBookingHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -31,6 +33,7 @@ public class BookingHelper implements IBookingHelper {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Boolean isHotelRoomBooked(String roomId, LocalDateTime checkIn, LocalDateTime checkOut) {
         return this.bookingRepository.isHotelRoomBooked(UUID.fromString(roomId), checkIn, checkOut);
     }
