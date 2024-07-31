@@ -7,9 +7,11 @@
             Field is required
         </ether-form-field-error>
     </ether-form-field>
-    <h4>PROFILE PICTURE</h4>
-    <ether-thumbnail 
-        *ngIf="profilePictureControl$ | async as profilePictureControl" 
-        [thumbnailControl]="profilePictureControl"
-    ></ether-thumbnail>
+    @if (isRegistered) {
+        <h4>PROFILE PICTURE</h4>
+        <ether-thumbnail 
+            *ngIf="profilePictureControl$ | async as profilePictureControl" 
+            [thumbnailControl]="profilePictureControl"
+        ></ether-thumbnail>
+    }
 </form>

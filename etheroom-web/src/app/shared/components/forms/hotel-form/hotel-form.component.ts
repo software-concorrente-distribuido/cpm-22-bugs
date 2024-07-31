@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { Optional } from '../../../../core/utils/optional';
+import { AuthenticationService } from '../../../../core/services/authentication.service';
 
 @Component({
   selector: 'etheroom-hotel-form',
@@ -14,10 +15,18 @@ import { Optional } from '../../../../core/utils/optional';
 export class HotelFormComponent {
 
   public hotelForm$: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(null);
+  
+  public isRegistered: boolean = false;
 
   @Input()
   public set hotelForm(value: FormGroup) {
     this.hotelForm$.next(value);
+  }
+  
+  constructor(
+    private authenticationService: AuthenticationService
+  ) { 
+    this.isRegistered = this.authenticationService.isAuthenticationContextValid();
   }
 
   public get userForm(): FormGroup {

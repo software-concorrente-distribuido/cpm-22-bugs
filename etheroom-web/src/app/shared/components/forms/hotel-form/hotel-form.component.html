@@ -25,7 +25,9 @@
     <etheroom-address-form [addressForm]="addressForm"></etheroom-address-form>
     <ether-tourist-spot-form [touristSpotForm]="touristSpotFormArray"></ether-tourist-spot-form>
     <ether-convenience-form [conveniencesForm]="convenienceFormArray"></ether-convenience-form>
-    <h4>MEDIA</h4>
-    <ether-thumbnail [thumbnailControl]="thumbnailControl"></ether-thumbnail>
-    <ether-images [imagesControl]="imagesControl"></ether-images>
+    @if (isRegistered) {
+        <h4>MEDIA</h4>
+        <ether-thumbnail [thumbnailControl]="thumbnailControl"></ether-thumbnail>
+        <ether-images [imagesControl]="imagesControl"></ether-images>
+    }
 </form>
