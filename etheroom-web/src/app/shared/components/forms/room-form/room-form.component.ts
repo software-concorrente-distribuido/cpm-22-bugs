@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormControlName, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormControlName, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { Enum } from '../../../../core/types/types';
 import { Optional } from '../../../../core/utils/optional';
 import { ApplicationService } from '../../../../core/services/application.service';
 import { EnumsNames } from '../../../../core/data/enums';
 import { createConvenienceForm } from '../../../../core/utils/forms';
-import { Convenience } from '../../../../core/models/hotel/aggregates/convenience.model';
 
 @Component({
   selector: 'ether-room-form',
@@ -44,10 +43,6 @@ export class RoomFormComponent implements OnInit {
     return this.hotelRoomForm$.value;
   }
 
-  // public get addressForm(): FormGroup {
-  //   return this.hotelForm$.value.get('address') as FormGroup;
-  // }
-
   public get convenienceForm(): FormGroup {
     return this.convenienceForm$.value;
   }
@@ -62,6 +57,14 @@ export class RoomFormComponent implements OnInit {
 
   public get roomTypes(): Enum[] {
     return this.roomType$.value;
+  }
+
+  public get thumbnailControl(): FormControl {
+    return this.hotelRoomForm.get('thumbnail') as FormControl;
+  }
+
+  public get imagesControl(): FormControl {
+    return this.hotelRoomForm.get('images') as FormControl;
   }
 
   public addConvenience(): void {

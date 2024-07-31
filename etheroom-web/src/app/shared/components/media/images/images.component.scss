@@ -22,6 +22,7 @@ div.container {
         > img {
             width: 72px;
             min-height: 72px;
+            padding: 0.125rem;
             cursor: pointer;
         }
     }
@@ -33,7 +34,7 @@ div.container {
     img {
         object-fit: cover;
         background-color: #ffffff;
-        border: 2px solid #000000;
+        border: 1px solid #DDDDDD;
         border-radius: 1rem;
     }
 }
@@ -68,7 +69,7 @@ div.actions {
             color: #ffffff;
             transition: var(--linear-transition-settings);
             &.delete {
-                background-color: #FF0000;
+                background-color: #FF7777;
             }
             &.update {
                 color: black;

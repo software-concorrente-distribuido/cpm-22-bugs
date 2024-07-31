@@ -1,37 +1,60 @@
-<section>
-    <div class="manage-sections">
-        <ether-filter></ether-filter>
-        
-        <div class="manage-sections__rooms">
-            <div class="list-room">
-                <ether-table *ngIf="hotelRooms$ | async as hotelRooms; else emptyTable">
-                    <ether-table-header>
-                        <ether-header-cell>Room:</ether-header-cell>
-                        <ether-header-cell>Room Type:</ether-header-cell>
-                        <ether-header-cell>Capacity:</ether-header-cell>
-                        <ether-header-cell>Price per night:</ether-header-cell>
-                        <ether-header-cell>View Room:</ether-header-cell>
-                    </ether-table-header>
+<form *ngIf="filterForm$ | async as filterForm" [formGroup]="filterForm">
+    <h2>Search</h2>
+    <ether-form-field>
+        <ether-form-field-label>ROOM NUMBER</ether-form-field-label>
+        <input formControlName="number" type="text" />
+    </ether-form-field>
+    
+    <ether-form-field>
+        <ether-form-field-label>ROOM TYPE</ether-form-field-label>
+        <mat-select formControlName="type">
+            <mat-option *ngFor="let type of roomType$ | async" [value]="type.name">{{ findRoomTypeDescription(type.name) }}</mat-option>
+        </mat-select>
+    </ether-form-field>
 
-                    <ether-table-row *ngFor="let hotelRoom of hotelRooms">
-                        <ether-row-cell>{{ hotelRoom?.number }}</ether-row-cell>
-                        <ether-row-cell>{{ findRoomTypeDescription(hotelRoom?.type) }}</ether-row-cell>
-                        <ether-row-cell>{{ hotelRoom?.capacity }}</ether-row-cell>
-                        <ether-row-cell>{{ hotelRoom?.price + ' ETH' }}</ether-row-cell>
-                        <ether-row-cell>
-                            <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="onClickEdit(hotelRoom?.id)">Go to page</ether-button-text-icon>
-                        </ether-row-cell>
-                    </ether-table-row>
-                </ether-table>
-                <ng-template #emptyTable>
-                    <ether-empty-table></ether-empty-table>
-                </ng-template>
-            </div>
-            <div class="create-room">
-                <p>CREATE NEW ROOM</p>
-                <ether-button-icon iconName="add-icon" buttonType="secondary" (onClick)="onClickAddRoom()"></ether-button-icon>
-            </div>
-        </div>
+    <div class="slide-toggle">
+        <p>AVAILABLE</p>
+        <mat-slide-toggle formControlName="available"></mat-slide-toggle>
     </div>
-    <router-outlet></router-outlet>
-</section>
+    <ether-button [isInvertColors]="true" (onClick)="applyFilter()">SEARCH</ether-button>
+    <ether-button (onClick)="clearFilter()">CLEAR</ether-button>
+</form>
+
+<div class="rooms">
+    <div class="list-room">
+        <ether-table *ngIf="hotelRooms$ | async as hotelRooms; else emptyTable">
+            <ether-table-header>
+                <ether-header-cell>Room:</ether-header-cell>
+                <ether-header-cell>Room Type:</ether-header-cell>
+                <ether-header-cell>Capacity:</ether-header-cell>
+                <ether-header-cell>Price per night:</ether-header-cell>
+                <ether-header-cell>Edit Room:</ether-header-cell>
+                <ether-header-cell>Delete Room:</ether-header-cell>
+                <ether-header-cell>View Room:</ether-header-cell>
+            </ether-table-header>
+
+            <ether-table-row *ngFor="let hotelRoom of hotelRooms">
+                <ether-row-cell>{{ hotelRoom?.number }}</ether-row-cell>
+                <ether-row-cell>{{ findRoomTypeDescription(hotelRoom?.type) }}</ether-row-cell>
+                <ether-row-cell>{{ hotelRoom?.capacity }}</ether-row-cell>
+                <ether-row-cell>{{ hotelRoom?.price + ' ETH' }}</ether-row-cell>
+                <ether-row-cell>
+                    <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="onClickEditRoom(hotelRoom)">Edit</ether-button-text-icon>
+                </ether-row-cell>
+                <ether-row-cell>
+                    <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="onClickDeleteRoom(hotelRoom?.id)">Delete</ether-button-text-icon>
+                </ether-row-cell>
+                <ether-row-cell>
+                    <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="onClickView(hotelRoom?.id)">Go to page</ether-button-text-icon>
+                </ether-row-cell>
+            </ether-table-row>
+        </ether-table>
+        <ng-template #emptyTable>
+            <ether-empty-table></ether-empty-table>
+        </ng-template>
+    </div>
+    <div class="create-room">
+        <p>CREATE NEW ROOM</p>
+        <ether-button-icon iconName="add-icon" buttonType="secondary" (onClick)="onClickAddRoom()"></ether-button-icon>
+    </div>
+</div>

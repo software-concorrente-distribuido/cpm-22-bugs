@@ -47,4 +47,10 @@ export class HotelRoom {
         this.createdAt = createdAt;
     }
 
+    public static buildWithHotelId(hotelId: string): HotelRoom {
+        const hotelRoom: HotelRoom = new HotelRoom();
+        hotelRoom.hotelId = hotelId;
+        return hotelRoom;
+    }
+
 }

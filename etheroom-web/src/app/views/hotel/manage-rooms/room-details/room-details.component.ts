@@ -46,34 +46,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     this.loadItems();
   }
 
-  public get hotelForm(): FormGroup {
-    return this.hotelForm$.value;
-  }
-
-  public get addressForm(): FormGroup {
-    return this.hotelForm.get('address') as FormGroup;
-  }
-
-  private get hotelRoomForm(): FormGroup {
-    return this.hotelRoomForm$.value;
-  }
-
-  public get roomTypes(): Enum[] {
-    return this.roomType$.value;
-  }
-
-  public get roomConveniences(): FormArray {
-    return this.hotelRoomForm.get('conveniences') as FormArray;
-  }
-
-  public get imagesControl(): FormControl {
-    return this.hotelRoomForm.get('images') as FormControl;
-  }
-
-  // public get roomType() {
-  //   return this.hotelRoomForm.get('type');
-  // }
-
   public findConvenienceDescription(type: string): string {
     return Optional.ofNullable(this.conveniences$.value)
       .map(conveniences => conveniences.find(convenience => convenience.name === type))
@@ -82,68 +54,10 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   }
 
   public findRoomTypeDescription(type: string): string {
-    return Optional.ofNullable(this.roomTypes)
+    return Optional.ofNullable(this.roomType$.value)
       .map(roomType => roomType.find(roomType => roomType.name === type))
       .map(roomType => roomType.description)
       .orElse(null);
-  }
-
-  public onClickUpdate(): void {
-    this.dialog.open(ConfirmationDialogComponent, {
-      inputs: {
-        text: 'Deseja realmente salvar as alterações?'
-      },
-      onClose: (bool: any) => this.handleUpdateConfirmation(bool)
-    });
-  }
-
-  public onClickDelete(): void {
-    this.dialog.open(ConfirmationDialogComponent, {
-      inputs: {
-        text: 'Deseja realmente deletar este quarto?'
-      },
-      onClose: (bool: any) => this.handleDeletionConfirmation(bool)
-    })
-  }
-
-  private updateRoom(): void {
-    this.hotelRoomService.update(this.hotelRoomForm.value)
-      .subscribe({
-        next: () => {
-          this.snackbar.success('Quarto atualizado com sucesso');
-          this.loading.stop();
-        },
-        error: this.handleError
-      });
-  }
-
-  private deleteHotelRoom(): void {
-    this.loading.start();
-    this.hotelRoomService.delete(this.hotelRoomForm.get('id').value)
-      .subscribe({
-        next: () => {
-          this.snackbar.success('Quarto deletado com sucesso');
-          this.loading.stop();
-          this.router.navigate(['hotel/manage-rooms']);
-        },
-        error: this.handleError
-      });
-  }
-
-  private handleUpdateConfirmation(bool: any): void {
-    Optional.ofNullable(bool)
-      .ifPresent(() => {
-        Functions.acceptTrueOrElse(
-          this.hotelRoomForm.valid,
-          () => this.updateRoom(),
-          () => this.snackbar.error('Formulário inválido')
-        );
-      });
-  }
-
-  private handleDeletionConfirmation = (bool: any): void => {
-    Optional.ofNullable(bool)
-      .ifPresent(() => this.deleteHotelRoom());
   }
 
   private getRouteData(): void {

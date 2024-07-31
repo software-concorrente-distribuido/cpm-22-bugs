@@ -1,20 +1,17 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import { HotelRoomService } from '../../../core/services/hotel-room.service';
 import { HotelRoom } from '../../../core/models/hotel/aggregates/hotel-room.model';
 import { Enum, Page } from '../../../core/types/types';
-import { MatTable } from '@angular/material/table';
 import { UtilComponent } from '../../../shared/components/util/util.component';
-import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { Hotel } from '../../../core/models/hotel/hotel.model';
 import { AddRoomDialogComponent } from '../../../shared/components/dialogs/add-room-dialog/add-room-dialog.component';
-import { FormGroup } from '@angular/forms';
-import { createHotelRoomForm } from '../../../core/utils/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { ApplicationService } from '../../../core/services/application.service';
 import { EnumsNames } from '../../../core/data/enums';
 import { Optional } from '../../../core/utils/optional';
-import { Functions } from '../../../core/utils/functions';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ConfirmationDialogComponent } from '../../../shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'ether-manage-rooms',
@@ -22,62 +19,67 @@ import { Functions } from '../../../core/utils/functions';
   styleUrl: './manage-rooms.component.scss'
 })
 export class ManageRoomsComponent extends UtilComponent implements OnInit {
+
   protected override pageTitle: string;
   protected override pageDescription: string;
   
-  public hotelRooms$: BehaviorSubject<HotelRoom[]> = new BehaviorSubject(null);
-  public hotelRoomForm$: BehaviorSubject<FormGroup> = new BehaviorSubject(null);
-  public roomType$: BehaviorSubject<Enum[]> = new BehaviorSubject(null);
-
-  @ViewChild(MatTable)
-  public table: MatTable<HotelRoom>;
+  public hotelRooms$: BehaviorSubject<HotelRoom[]> = new BehaviorSubject<HotelRoom[]>(null);
+  public roomType$: BehaviorSubject<Enum[]> = new BehaviorSubject<Enum[]>(null);
+  public filterForm$: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(null);
 
   public hotelId: string = '';
 
   constructor(
+    private hotelRoomService: HotelRoomService,
+    private autheticationService: AuthenticationService,
+    private appService: ApplicationService,
+    private fb: FormBuilder,
     injector: Injector,
-    public hotelRoomService: HotelRoomService,
-    public matDialog: MatDialog,
-    public autheticationService: AuthenticationService,
-    private appService: ApplicationService
   ) {
     super(injector);
-  }
-
-  public get hotelRoomForm(): FormGroup {
-    return this.hotelRoomForm$.value;
   }
 
   private get roomType(): Enum[] {
     return this.roomType$.value;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.loadEnums();
     this.loadCurrentHotel();
-    this.loadRooms();
-  }
-
-  private loadCurrentHotel(): Observable<Hotel> {
-    return this.autheticationService.currentHotel().pipe(
-      tap((hotel: Hotel) => {
-        this.hotelId = hotel?.id;
-      })
-    );
   }
 
   public handleButtonClick(): void {
     this.router.navigate(['hotel/manage-rooms/add-room']);
   }
   
-  public onClickEdit(id: string): void {
+  public onClickView(id: string): void {
     this.router.navigate([`hotel/manage-rooms/room-details/${id}`]);
   }
 
   public onClickAddRoom(): void {
-    this.createRoomForm().then(() => {
-      this.openDialog();
-    });
+    this.openHotelRoomDialog();
+  }
+
+  public onClickEditRoom(hotelRoom: HotelRoom): void {
+    this.openHotelRoomDialog(hotelRoom);
+  }
+
+  public onClickDeleteRoom(hotelId: string): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      inputs: {
+        text: 'This action is irreversible. Are you sure you want to delete this room?'
+      },
+      onClose: (bool: any) => bool && this.deleteHotelRoom(hotelId)
+    })
+  }
+
+  public applyFilter(): void {
+    this.findAllRooms();
+  }
+
+  public clearFilter(): void {
+    this.filterForm$.value.reset();
+    this.findAllRooms();
   }
 
   public findRoomTypeDescription(type: string): string {
@@ -87,66 +89,115 @@ export class ManageRoomsComponent extends UtilComponent implements OnInit {
       .orElse(null);
   }
 
-  private openDialog(): void {
-    this.matDialog.open(AddRoomDialogComponent, {
-      data: {
-        hotelRoomForm: this.hotelRoomForm,
+  private loadCurrentHotel(): void {
+    this.autheticationService.currentHotel().subscribe(
+      (hotel: Hotel) => {
+        this.hotelId = hotel?.id;
+        this.createFilterForm(this.hotelId);
+        this.findAllRooms();
       }
-    }).afterClosed()
-      .subscribe((result: { isConfirmed: boolean, hotelRoomForm: FormGroup }) => {
-        Optional.ofNullable(result)
-          .ifPresent(() => this.handleRoomAddition(result))
-      });
+    );
   }
 
-  private handleRoomAddition = (result: { isConfirmed: boolean, hotelRoomForm: FormGroup }): void => {
-    Optional.ofNullable(result)
-      .ifPresent(() => {
-        Functions.acceptTrue(
-          result.isConfirmed,
-          () => {
-            this.loading.start();
-            this.hotelRoomForm$.next(result.hotelRoomForm);
-            this.hotelRoomService.create(result.hotelRoomForm.value)
-              .subscribe({
-                next: () => {
-                  this.snackbar.success('Quarto adicionado com sucesso');
-                  this.loadRooms();
-                  this.loading.stop();
-                },
-                error: this.handleError
-              });
-          }
-        );
-      });
-  }
-
-  private async createRoomForm(): Promise<void> {
-    const hotelRoom: HotelRoom = new HotelRoom();
-    hotelRoom.hotelId = this.hotelId;
-    this.hotelRoomForm$.next(createHotelRoomForm(hotelRoom));
-  }
-
-  private loadRooms(): void {
-    this.loading.start();
-    this.loadCurrentHotel().pipe(
-      switchMap(() => {
-        console.log(this.hotelId);
-        return this.hotelRoomService.findAll(0, 10, null, null, null, this.hotelId);
-      })
-    ).subscribe({
-      next: (paginator: Page<HotelRoom>) => {
-        const rooms: HotelRoom[] = paginator?.content;
-        this.hotelRooms$.next(rooms?.length > 0 ? rooms : null);
-        this.loading.stop();
+  private openHotelRoomDialog(hotelRoom: HotelRoom = null): void {
+    this.dialog.open(AddRoomDialogComponent, {
+      inputs: {
+        hotelRoom: hotelRoom ?? HotelRoom.buildWithHotelId(this.hotelId),
       },
-
-      error: this.handleError
+      onClose: (result: any) => 
+        Optional.ofNullable(result)
+          .ifPresent((hotelRoom) => this.handleRoomAddition(hotelRoom))
     });
+  }
+
+  private handleRoomAddition = (hotelRoom: HotelRoom): void => {
+    Optional.ofNullable(hotelRoom)
+      .filter((hr) => hr.id === null)
+      .ifPresentOrElse(
+        () => this.createHotelRoom(hotelRoom),
+        () => this.updateHotelRoom(hotelRoom)
+      )
+  }
+
+  private createHotelRoom(hotelRoom: HotelRoom): void {
+    this.loading.start();
+    this.hotelRoomService.create(hotelRoom)
+      .subscribe({
+        next: () => {
+          this.snackbar.success('Hotel Room added successfully');
+          this.findAllRooms();
+        },
+        error: this.handleError
+      });
+  }
+
+  private updateHotelRoom(hotelRoom: HotelRoom): void {
+    this.loading.start();
+    this.hotelRoomService.update(hotelRoom)
+      .subscribe({
+        next: () => {
+          this.snackbar.success('Hotel Room updated successfully');
+          this.findAllRooms();
+        },
+        error: this.handleError
+      });
+  }
+
+  private deleteHotelRoom(hotelId: string): void {
+    this.loading.start();
+    this.hotelRoomService.delete(hotelId)
+      .subscribe({
+        next: () => {
+          this.snackbar.success('Room deleted successfully');
+          this.loading.stop();
+          this.findAllRooms();
+        },
+        error: this.handleError
+      });
+  }
+
+  private findAllRooms(): void {
+    this.loading.start();
+    const filterForm: FormGroup = this.filterForm$.value;
+    if(filterForm.valid) {
+      this.hotelRoomService.findAll(
+        0,
+        1000,
+        filterForm.get('number').value,
+        filterForm.get('type').value,
+        filterForm.get('available').value,
+        filterForm.get('hotelId').value
+      )
+      .subscribe({
+        next: (page: Page<HotelRoom>) => {
+          this.hotelRooms$.next(
+            Optional.ofNullable(page.content)
+              .filter((rooms) => rooms.length > 0)
+              .orElse(null)
+          );
+          this.loading.stop();
+        },
+        error: this.handleError
+      });
+    } else {
+      this.snackbar.info('Please fill in the required fields');
+    }
   }
 
   private loadEnums(): void {
     this.appService.findEnumByName(EnumsNames.HOTEL_ROOM_TYPE)
       .subscribe((enums: Enum[]) => this.roomType$.next(enums));
   }
+
+  private createFilterForm(hotelId: string): void {
+    this.filterForm$.next(
+      this.fb.group({
+        type: [null],
+        available: [null],
+        number: [null],
+        hotelId: [hotelId]
+      })
+    );
+  }
+
 }

@@ -67,8 +67,6 @@ export class ImagesComponent {
   }
 
   public onImageSelected(image: Media): void {
-    console.log('fd')
-    console.log(image)
     this.otherImages$.next(
       this.initialImages.filter((img) => img.id !== image.id)
     );

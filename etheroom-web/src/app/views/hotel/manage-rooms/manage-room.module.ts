@@ -14,6 +14,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonsModule } from '../../../shared/components/buttons/buttons.module';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '../../../shared/components/forms/forms.module';
 import { MediaModule } from '../../../shared/components/media/media.module';
 
@@ -32,6 +33,7 @@ import { MediaModule } from '../../../shared/components/media/media.module';
     MatTabsModule,
     MatTableModule,
     MatSelectModule,
+    MatSlideToggleModule,
     MediaModule,
     EtherTableModule,
     EtherPageComponent,
@@ -40,6 +42,7 @@ import { MediaModule } from '../../../shared/components/media/media.module';
     EtherFilterComponent,
     EtherIconTextComponent,
     ButtonsModule
+    
 ],
   exports: [
     RoomDetailsComponent,
