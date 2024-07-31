@@ -15,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -87,13 +89,19 @@ public class BookingService implements IBookingService {
                 Optional.ofNullable(filter.getPersonId()).map(UUID::fromString).orElse(null),
                 Optional.ofNullable(filter.getHotelRoomId()).map(UUID::fromString).orElse(null),
                 Optional.ofNullable(filter.getHotelId()).map(UUID::fromString).orElse(null)
-        ).map(Booking::mapEntityToDto);
+        )
+                .map(booking -> {
+                    BookingDto bookingDto = booking.mapEntityToDto();
+                    bookingDto.setHotelRoom(booking.getHotelRoom().mapEntityToDto());
+                    return bookingDto;
+                });
     }
 
     @Override
     public BookingDto findById(String id) {
         return this.bookingRepository.findById(UUID.fromString(id))
                 .map(Booking::mapEntityToDto)
+                .map(bookingDto -> bookingDto.setHotelRoom(this.hotelRoomService.findById(bookingDto.getHotelRoomId().toString())))
                 .orElseThrow(() -> new RuntimeException(BOOKING_NOT_FOUND));
     }
 
