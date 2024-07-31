@@ -73,8 +73,8 @@ public class BookingService implements IBookingService {
                 filter.getRoomNumber(),
                 filter.getStatus(),
                 Optional.ofNullable(filter.getPersonId()).map(UUID::fromString).orElse(null),
-                Optional.ofNullable(filter.getHotelRoomId()).map(UUID::fromString).orElse(null),
-                Optional.ofNullable(filter.getHotelId()).map(UUID::fromString).orElse(null)
+                Optional.ofNullable(filter.getHotelRoomId()).filter(str -> !str.isBlank()).map(UUID::fromString).orElse(null),
+                Optional.ofNullable(filter.getHotelId()).filter(str -> !str.isBlank()).map(UUID::fromString).orElse(null)
         ).map(Booking::mapEntityToDto);
     }
 
