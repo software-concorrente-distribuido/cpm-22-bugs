@@ -220,12 +220,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
   }
 
   public async createBooking() {
-    if (this.isBookingInProgress) {
-      alert("Uma reserva já está em andamento. Por favor, aguarde.");
-      return;
-    }
 
-    this.isBookingInProgress = true;
     
     this.web3.isConnected();
 
@@ -238,21 +233,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     const hotelName = hotel.name;
     const roomNumber = hotelRoom.number;
     const hotelAddress = hotel.user.ethereumAddress;
-    console.log(checkinDate);
-    console.log(checkoutDate);
-    console.log(hotel);
-    console.log(hotelRoom);
-    console.log(dailyRate);
-    console.log(hotelName);
-    console.log(roomNumber);
-    console.log(hotelAddress);
-
-    //SUBSTITUIR PELOS VALORES DINÂMICOS
-    //const checkinDate = '2024-07-31';
-    //const checkoutDate = '2024-08-10';
-    //const dailyRate = 0.16;
-    //const hotelName = 'NOME DO HOTEL';
-    //const roomNumber = 603;
 
     if (checkinDate && checkoutDate) {
       try {
@@ -260,19 +240,19 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
 
         const id = await this.web3.createBooking(hotelName, finalPrice, checkinDate, checkoutDate, roomNumber, hotelAddress);
         const booking = await this.web3.getBooking(id);
-        await this.web3.startBooking(id, this.todayDate);
+        await this.web3.startBooking(id, checkinDate);
         console.log(booking);
+        console.log(this.web3.getCheckInDate(booking.bookingContract));
+        console.log(this.web3.getHotelAddress(booking.bookingContract));
 
         alert("Reserva criada! ID: " + id);
       } catch (error) {
         console.error("Erro ao criar reserva:", error);
         alert("Falha ao criar reserva.");
       } finally {
-        this.isBookingInProgress = false;
       }
     } else {
       alert("Por favor, selecione as datas de check-in e check-out.");
-      this.isBookingInProgress = false;
     }
   }
 

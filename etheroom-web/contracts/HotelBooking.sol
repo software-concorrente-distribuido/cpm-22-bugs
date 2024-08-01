@@ -92,6 +92,10 @@ contract HotelBooking {
     function getHotel() public view returns (string memory) {
         return hotel;
     }
+    
+    function getHotelAddress() public view returns (address payable) {
+        return hotelAddress;
+    }
 
     function getRoomNumber() public view returns (uint256) {
         return roomNumber;
