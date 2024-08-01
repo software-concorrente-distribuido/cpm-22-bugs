@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 @Setter
 public class BookingFilter {
 
-    private String contractOwnerName;
-    private String location;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
     private Integer roomNumber;

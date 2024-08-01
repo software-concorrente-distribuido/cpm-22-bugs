@@ -66,13 +66,11 @@ public class BookingService implements IBookingService {
     public Page<BookingDto> findAll(Pageable pageable, BookingFilter filter) {
         return this.bookingRepository.findAll(
                 pageable,
-                filter.getContractOwnerName(),
-                filter.getLocation(),
                 filter.getCheckIn(),
                 filter.getCheckOut(),
                 filter.getRoomNumber(),
                 filter.getStatus(),
-                Optional.ofNullable(filter.getPersonId()).map(UUID::fromString).orElse(null),
+                Optional.ofNullable(filter.getPersonId()).filter(str -> !str.isBlank()).map(UUID::fromString).orElse(null),
                 Optional.ofNullable(filter.getHotelRoomId()).filter(str -> !str.isBlank()).map(UUID::fromString).orElse(null),
                 Optional.ofNullable(filter.getHotelId()).filter(str -> !str.isBlank()).map(UUID::fromString).orElse(null)
         ).map(Booking::mapEntityToDto);
@@ -82,8 +80,6 @@ public class BookingService implements IBookingService {
     public Page<BookingDto> findAllRegistered(Pageable pageable, BookingFilter filter) {
         return this.bookingRepository.findAllRegistered(
                 pageable,
-                filter.getContractOwnerName(),
-                filter.getLocation(),
                 filter.getCheckIn(),
                 filter.getCheckOut(),
                 filter.getRoomNumber(),
