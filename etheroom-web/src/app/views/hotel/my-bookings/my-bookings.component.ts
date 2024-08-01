@@ -62,8 +62,6 @@ export class MyBookingsComponent extends UtilComponent implements OnInit {
     private fb: FormBuilder,
     private appService: ApplicationService,
     private bookingService: BookingService,
-    private personService: PersonService,
-    private hotelRoomService: HotelRoomService,
     private autheticationService: AuthenticationService,
   ) {
     super(injector);
@@ -152,9 +150,8 @@ export class MyBookingsComponent extends UtilComponent implements OnInit {
                 .filter((bookings) => bookings.length > 0)
                 .orElse(null)
             );
-            this.loadRoomDetails();
-            
-            this.loadPersonName();
+            // this.loadRoomDetails();            
+            // this.loadPersonName();
             this.loading.stop();
           },
           error: (error) => this.handleError(error)
@@ -164,38 +161,38 @@ export class MyBookingsComponent extends UtilComponent implements OnInit {
     }
   }
 
-  private loadRoomDetails(): void {
-    this.bookings$.value.forEach((booking: Booking) => {
-      this.hotelRoomService.findById(booking?.hotelRoomId).subscribe({
-        next: (hotelRoom) => {
-          this.hotelRoom$.next(hotelRoom);
-        },
-        error: this.handleError
-      });
-    });
-  }
+  // private loadRoomDetails(): void {
+  //   this.bookings$.value.forEach((booking: Booking) => {
+  //     this.hotelRoomService.findById(booking?.hotelRoomId).subscribe({
+  //       next: (hotelRoom) => {
+  //         this.hotelRoom$.next(hotelRoom);
+  //       },
+  //       error: this.handleError
+  //     });
+  //   });
+  // }
 
-  public findRoomNumber(hotelRoomId: string): number {
-    this.hotelRoomService.findById(hotelRoomId).subscribe({
-      next: (hotelRoom) => {
-        this.hotelRoom$.next(hotelRoom);
-      },
-      error: this.handleError
-    });
+  // public findRoomNumber(hotelRoomId: string): number {
+  //   this.hotelRoomService.findById(hotelRoomId).subscribe({
+  //     next: (hotelRoom) => {
+  //       this.hotelRoom$.next(hotelRoom);
+  //     },
+  //     error: this.handleError
+  //   });
 
-    return this.hotelRoom.number;
-  }
+  //   return this.hotelRoom.number;
+  // }
 
-  private loadPersonName(): void {
-    this.bookings$.value.forEach((booking: Booking) => {
-      this.personService.findById(booking?.personId).subscribe({
-        next: (person) => {
-          this.personName = person.name
-        },
-        error: this.handleError
-      });
-    });
-  }
+  // private loadPersonName(): void {
+  //   this.bookings$.value.forEach((booking: Booking) => {
+  //     this.personService.findById(booking?.personId).subscribe({
+  //       next: (person) => {
+  //         this.personName = person.name
+  //       },
+  //       error: this.handleError
+  //     });
+  //   });
+  // }
 
   private loadCurrentHotel(): void {
     this.autheticationService.currentHotel().subscribe(

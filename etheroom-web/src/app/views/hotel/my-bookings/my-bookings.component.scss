@@ -16,6 +16,14 @@ form {
     border-radius: 1rem;
 }
 
+div {
+    grid-column: 4 / 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
 .bookings {
     grid-column: span 6;
     display: flex;
