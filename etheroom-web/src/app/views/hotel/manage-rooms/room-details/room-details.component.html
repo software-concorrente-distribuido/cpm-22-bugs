@@ -35,11 +35,11 @@
         <form *ngIf="availabilityFormGroup$ | async as availabilityFormGroup" [formGroup]="availabilityFormGroup">
             <ether-form-field>
                 <ether-form-field-label>CHECK-IN</ether-form-field-label>
-                <input type="date" formControlName="checkIn" [min]="MIN_DATE" placeholder="Choose a date">
+                <input type="datetime-local" formControlName="checkIn" [min]="MIN_DATE" placeholder="Choose a date">
             </ether-form-field>
             <ether-form-field>
                 <ether-form-field-label>CHECK-OUT</ether-form-field-label>
-                <input type="date" formControlName="checkOut" [min]="MIN_DATE" placeholder="Choose a date">
+                <input type="datetime-local" formControlName="checkOut" [min]="MIN_DATE" placeholder="Choose a date">
             </ether-form-field>
             <ether-button (onClick)="onCheckAvailability()">
                 CHECK AVAILABILITY
