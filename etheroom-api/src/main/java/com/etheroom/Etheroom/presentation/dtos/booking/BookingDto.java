@@ -4,6 +4,7 @@ import com.etheroom.Etheroom.domain.models.booking.Booking;
 import com.etheroom.Etheroom.infrastructure.base.BaseEntityDto;
 import com.etheroom.Etheroom.infrastructure.vo.enums.BookingStatus;
 import com.etheroom.Etheroom.presentation.dtos.booking.aggregates.GuestDto;
+import com.etheroom.Etheroom.presentation.dtos.hotel.HotelDto;
 import com.etheroom.Etheroom.presentation.dtos.hotel.aggregates.HotelRoomDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
@@ -29,6 +30,8 @@ public class BookingDto extends BaseEntityDto<Booking> {
     private List<GuestDto> guests = new ArrayList<>();
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private HotelRoomDto hotelRoom;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private HotelDto hotel;
 
     @Override
     public Booking mapDtoToEntity() {
@@ -52,6 +55,11 @@ public class BookingDto extends BaseEntityDto<Booking> {
 
     public BookingDto setHotelRoom(HotelRoomDto hotelRoom) {
         this.hotelRoom = hotelRoom;
+        return this;
+    }
+
+    public BookingDto setHotel(HotelDto hotel) {
+        this.hotel = hotel;
         return this;
     }
 

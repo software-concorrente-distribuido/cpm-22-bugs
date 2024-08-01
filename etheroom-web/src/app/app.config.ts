@@ -1,5 +1,5 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -13,7 +13,7 @@ const maskConfig: Partial<IConfig> = {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([etheroomInterceptor])),
     provideEnvironmentNgxMask(maskConfig)

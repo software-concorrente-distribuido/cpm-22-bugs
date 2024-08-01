@@ -1,7 +1,6 @@
 import { AuthGuard } from './core/guards/auth.guard';
 import { Routes } from '@angular/router';
 import { YourBookingsComponent } from './views/guest/your-bookings/your-bookings.component';
-import { BookedRoomComponent } from './views/guest/booked-room/booked-room.component';
 import { RegisterComponent } from './views/shared/register/register.component';
 import { LoginComponent } from './views/shared/login/login.component';
 import { HomeComponent } from './views/shared/home/home.component';
@@ -44,7 +43,6 @@ export const routes: Routes = [
             { path: 'your-bookings', component: YourBookingsComponent },
             { path: 'room-details/:id', component: RoomDetailsComponent },
             { path: 'booking', component: Booking },
-            { path: 'booked-room', component: BookedRoomComponent },
             { path: 'profile', component: ProfileComponent }
         ],
         canActivate: [AuthGuard, PersonGuard]

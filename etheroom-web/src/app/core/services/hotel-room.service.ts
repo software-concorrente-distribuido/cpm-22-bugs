@@ -78,8 +78,8 @@ export class HotelRoomService {
       `${this.hotelRoomApiUrl}/${id}/booked`, 
       {
         params: {
-          checkIn: Optional.ofNullable(checkIn).map(c => c.toISOString()).orElse(''),
-          checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse('')
+          checkIn: Optional.ofNullable(checkIn).map(c => `${c}`).orElse(''),
+          checkOut: Optional.ofNullable(checkOut).map(c => `${c}`).orElse('')
         }
       }
     );

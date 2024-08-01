@@ -1,1 +1,56 @@
-<p>booking works!</p>
+<ng-container *ngIf="hotelRoom$ | async as hotelRoom">
+    <section class="room-infos">
+        <h2>{{ hotelRoom.description }}</h2>
+        @if ((hotel$ | async); as hotel) {
+            <h4>{{ hotel.name }}</h4>
+            <h5>
+                {{ (hotel$ | async)?.address.description }} -
+                {{ (hotel$ | async)?.address.zipCode }},
+                {{ (hotel$ | async)?.address.country }}
+            </h5>
+            <h5>
+                {{ (hotel$ | async)?.contact.phone }} |
+                {{ (hotel$ | async)?.contact.cellphone }} |
+                {{ (hotel$ | async)?.user.email }}
+            </h5>
+        }
+        <ether-images [imagesControl]="hotelRoom.images" [isViewOnly]="true"></ether-images>
+        <p *ngIf="hotelRoom.conveniences.length > 0">
+            <img src="./../../../../../assets/icons/house.svg" alt="House" />
+            Room Information
+        </p>
+        <ul>
+            <li *ngFor="let convenience of hotelRoom.conveniences">
+                {{ findConvenienceDescription(convenience.type) }}
+            </li>
+        </ul>
+    </section>
+    <section class="availability">
+        <h2>
+            <img src="./../../../../../assets/images/brand-ethereum-icon-158920-2@2x.png" alt="Ethereum Icon" />
+            {{ hotelRoom.price }} ETH/night
+        </h2>
+        <h4>{{ findRoomTypeDescription(hotelRoom.type) }}</h4>
+        <h5>Max of {{ hotelRoom.capacity }} guests</h5>
+        <form *ngIf="bookingForm$ | async as bookingForm" [formGroup]="bookingForm">
+            <ether-form-field>
+                <ether-form-field-label>CHECK-IN</ether-form-field-label>
+                <input type="datetime-local" formControlName="checkIn" [min]="MIN_DATE" placeholder="Choose a date">
+            </ether-form-field>
+            <ether-form-field>
+                <ether-form-field-label>CHECK-OUT</ether-form-field-label>
+                <input type="datetime-local" formControlName="checkOut" [min]="MIN_DATE" placeholder="Choose a date">
+            </ether-form-field>
+            <ether-guest-form [guestForm]="guestsFormArray"></ether-guest-form>
+        </form>
+        <ether-button *ngIf="!created" (onClick)="onClickCreate()">
+            START BOOKING
+        </ether-button>
+        <ether-button *ngIf="updatable" (onClick)="onClickUpdate()">
+            CONFIRM BOOKING
+        </ether-button>
+        <ether-button *ngIf="canBeCanceled" (onClick)="onClickCancel()">
+            CANCEL BOOKING
+        </ether-button>
+    </section>
+</ng-container>
