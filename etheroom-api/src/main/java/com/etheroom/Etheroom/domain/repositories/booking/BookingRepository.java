@@ -26,6 +26,8 @@ public interface BookingRepository extends JpaRepository<Booking, UUID> {
                     + "AND (DATE(:checkOut) IS NULL OR b.checkOut <= :checkOut) "
                     + "AND (:roomNumber IS NULL OR b.hotelRoom.number = :roomNumber) "
                     + "AND (:status IS NULL OR b.status = :status) "
+                    + "AND (:personId IS NULL OR b.person.id = :personId) "
+                    + "AND (:hotelRoomId IS NULL OR b.hotelRoom.id = :hotelRoomId) "
                     + "AND (:hotelId IS NULL OR b.hotelRoom.hotel.id = :hotelId)"
     )
     Page<Booking> findAll(

@@ -104,7 +104,6 @@ public class BookingService implements IBookingService {
     public BookingDto findById(String id) {
         return this.bookingRepository.findById(UUID.fromString(id))
                 .map(Booking::mapEntityToDto)
-                .map(bookingDto -> bookingDto.setHotelRoom(this.hotelRoomService.findById(bookingDto.getHotelRoomId().toString())))
                 .orElseThrow(() -> new RuntimeException(BOOKING_NOT_FOUND));
     }
 

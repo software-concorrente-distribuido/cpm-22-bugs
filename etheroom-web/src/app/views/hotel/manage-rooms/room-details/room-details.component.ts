@@ -78,7 +78,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
 
   public startBooking(): void {
     if(this.available && this.isPerson) {
-      this.router.navigate(['guest/booked-room', { hotelRoomId: this.hotelRoom$.value.id }]);
+      this.router.navigate(['guest/booking', { hotelRoomId: this.hotelRoom$.value.id }]);
     } else {
       this.snackbar.info('Requirements for booking not met');
     }
