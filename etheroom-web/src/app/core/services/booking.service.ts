@@ -28,8 +28,6 @@ export class BookingService {
   public findAll(
     page: number,
     size: number,
-    contractOwnerName: string = null,
-    location: string = null,
     checkIn: Date = null,
     checkOut: Date = null,
     roomNumber: number = null,
@@ -44,8 +42,6 @@ export class BookingService {
         params: {
           page: page.toString(),
           size: size.toString(),
-          contractOwnerName: Optional.ofNullable(contractOwnerName).orElse(''),
-          location: Optional.ofNullable(location).orElse(''),
           checkIn: Optional.ofNullable(checkIn).map(c => c.toISOString()).orElse(''),
           checkOut: Optional.ofNullable(checkOut).map(c => c.toISOString()).orElse(''),
           roomNumber: Optional.ofNullable(roomNumber).map(r => r.toString()).orElse(''),
