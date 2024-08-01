@@ -15,6 +15,7 @@ import { RoomPageComponent } from './views/shared/room-page/room-page.component'
 import { HotelGuard, PersonGuard } from './core/guards/user.guard';
 import { ProfileComponent } from './views/shared/profile/profile.component';
 import { Booking } from './core/models/booking/booking.model';
+import { BookingComponent } from './views/guest/booking/booking.component';
 
 export const routes: Routes = [
     {
@@ -42,7 +43,7 @@ export const routes: Routes = [
             { path: 'all-hotels', component: AllHotelsComponent },
             { path: 'your-bookings', component: YourBookingsComponent },
             { path: 'room-details/:id', component: RoomDetailsComponent },
-            { path: 'booking', component: Booking },
+            { path: 'booking/:hotelRoomId', component: BookingComponent },
             { path: 'profile', component: ProfileComponent }
         ],
         canActivate: [AuthGuard, PersonGuard]
