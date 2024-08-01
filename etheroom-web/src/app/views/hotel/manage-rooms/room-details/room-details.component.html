@@ -1,19 +1,5 @@
-<ng-container *ngIf="hotelRoom$ | async as hotelRoom">
-    <section class="room-infos">
-        <h2>{{ hotelRoom.description }}</h2>
-        @if ((hotel$ | async); as hotel) {
-            <h4>{{ hotel.name }}</h4>
-            <h5>
-                {{ (hotel$ | async)?.address.description }} -
-                {{ (hotel$ | async)?.address.zipCode }},
-                {{ (hotel$ | async)?.address.country }}
-            </h5>
-            <h5>
-                {{ (hotel$ | async)?.contact.phone }} |
-                {{ (hotel$ | async)?.contact.cellphone }} |
-                {{ (hotel$ | async)?.user.email }}
-            </h5>
-        }
+
+
         <ether-images [imagesControl]="hotelRoom.images" [isViewOnly]="true"></ether-images>
         <p *ngIf="hotelRoom.conveniences.length > 0">
             <img src="./../../../../../assets/icons/house.svg" alt="House" />
@@ -50,3 +36,4 @@
         </ether-button>
     </section>
 </ng-container>
+

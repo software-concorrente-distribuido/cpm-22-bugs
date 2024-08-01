@@ -126,7 +126,7 @@ export class RegisterComponent extends UtilComponent implements OnInit {
     this.authenticationService.login(
       this.authenticationService.buildAuthRequest(this.ethereumAccount$.value)
     ).subscribe({
-      next: () =>{ 
+      next: () =>{
         this.snackbar.success("Login successful");
         this.router.navigate([`${isPerson ? '/guest' : '/hotel'}/profile`]);
       },
