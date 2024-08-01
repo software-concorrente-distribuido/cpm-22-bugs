@@ -16,6 +16,7 @@ import {
   MatSlideToggleModule,
 } from '@angular/material/slide-toggle';
 import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
+import { GuestFormComponent } from './guest-form/guest-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     ContactFormComponent,
     AddressFormComponent,
     TouristSpotFormComponent,
-    ConvenienceFormComponent
+    ConvenienceFormComponent,
+    GuestFormComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { NgxMaskDirective, NgxMaskPipe } from 'ngx-mask';
     HotelFormComponent,
     PersonFormComponent,
     RoomFormComponent,
-    ConvenienceFormComponent
+    ConvenienceFormComponent,
+    GuestFormComponent
   ]
 })
 export class FormsModule { }
