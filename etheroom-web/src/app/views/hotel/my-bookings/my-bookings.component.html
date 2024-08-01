@@ -1,10 +1,59 @@
-<section>
-    <div class="bookings-section">
-        <ether-filter></ether-filter>
-        
-        <div class="bookings-section__bookings">
-            <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="openDialog()">Go to page</ether-button-text-icon>
-        </div>
+<form *ngIf="filterForm$ | async as filterForm" [formGroup]="filterForm">
+    <h2>Search</h2>
+    
+    <ether-form-field>
+        <ether-form-field-label>CHECK IN</ether-form-field-label>
+        <input formControlName="checkIn" type="text" />
+    </ether-form-field>
+
+    <ether-form-field>
+        <ether-form-field-label>CHECK OUT</ether-form-field-label>
+        <input formControlName="checkOut" type="text" />
+    </ether-form-field>
+
+    <ether-form-field>
+        <ether-form-field-label>ROOM NUMBER</ether-form-field-label>
+        <input formControlName="roomNumber" type="text" />
+    </ether-form-field>
+
+    <ether-form-field>
+        <ether-form-field-label>BOOKING STATUS</ether-form-field-label>
+        <mat-select formControlName="status">
+            <mat-option *ngFor="let status of bookingStatus$ | async" [value]="status.name">{{ findBookingStatusDescription(status.name) }}</mat-option>
+        </mat-select>
+    </ether-form-field>
+
+    <ether-button [isInvertColors]="true" (onClick)="applyFilter()">SEARCH</ether-button>
+    <ether-button (onClick)="clearFilter()">CLEAR</ether-button>
+</form>
+
+<div class="bookings">
+    <div class="list-booking">
+        <ether-table *ngIf="bookings$ | async as bookings; else emptyTable">
+            <ether-table-header>
+                <ether-header-cell>Room:</ether-header-cell>
+                <ether-header-cell>Check In:</ether-header-cell>
+                <ether-header-cell>Check Out:</ether-header-cell>
+                <ether-header-cell>Contract Owner Name:</ether-header-cell>
+                <ether-header-cell>Room Type:</ether-header-cell>
+                <ether-header-cell>Status:</ether-header-cell>
+                <ether-header-cell>View Details:</ether-header-cell>
+            </ether-table-header>
+
+            <ether-table-row *ngFor="let booking of bookings">
+                <ether-row-cell>{{ 205 }}</ether-row-cell> roomNumber
+                <ether-row-cell>{{ booking?.checkIn }}</ether-row-cell>
+                <ether-row-cell>{{ booking?.checkOut }}</ether-row-cell>
+                <ether-row-cell>{{ personName }}</ether-row-cell>
+                <ether-row-cell>{{ 'King' }}</ether-row-cell>
+                <ether-row-cell>{{ findBookingStatusDescription(booking?.status) }}</ether-row-cell>
+                <ether-row-cell>
+                    <ether-button-text-icon [iconName]="'right-arrow-white'" (onClick)="onClickView()">Go to page</ether-button-text-icon>
+                </ether-row-cell>
+            </ether-table-row>
+        </ether-table>
+        <ng-template #emptyTable>
+            <ether-empty-table></ether-empty-table>
+        </ng-template>
     </div>
-    <router-outlet></router-outlet>
-</section>
+</div>

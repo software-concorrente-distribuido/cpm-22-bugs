@@ -1,15 +1,24 @@
-section {
-    padding: 70px;
+:host {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1rem;
+    width: 86%;
+    margin: 2rem auto;
 }
 
-.bookings-section {
+form {
+    grid-column: span 2;
+    padding: 1rem;
     display: flex;
-    gap: 30px;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #F4F4F4;
+    border-radius: 1rem;
+}
 
-    &__bookings {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        width: 75%;
-    }
+.bookings {
+    grid-column: span 6;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
