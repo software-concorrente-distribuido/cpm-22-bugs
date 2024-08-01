@@ -179,14 +179,14 @@ contract HotelBookingManager {
         return roomLocked[_hotel][_roomNumber];
     }
 
-    // Método para bloquear um quarto manualmente
+    // Método para bloquear um quarto
     function lockRoom(string memory _hotel, uint256 _roomNumber) public {
         require(!roomLocked[_hotel][_roomNumber], "Quarto ja esta bloqueado");
         roomLocked[_hotel][_roomNumber] = true;
         emit RoomLocked(_hotel, _roomNumber);
     }
 
-    // Método para desbloquear um quarto manualmente
+    // Método para desbloquear um quarto
     function unlockRoom(string memory _hotel, uint256 _roomNumber) public {
         require(roomLocked[_hotel][_roomNumber], "Quarto nao esta bloqueado");
         roomLocked[_hotel][_roomNumber] = false;

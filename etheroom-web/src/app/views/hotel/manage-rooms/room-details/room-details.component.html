@@ -1,5 +1,19 @@
-
-
+<ng-container *ngIf="hotelRoom$ | async as hotelRoom">
+    <section class="room-infos">
+        <h2>{{ hotelRoom.description }}</h2>
+        <ng-container *ngIf="hotel$ | async as hotel">
+            <h4>{{ hotel.name }}</h4>
+            <h5>
+                {{ hotel.address.description }} -
+                {{ hotel.address.zipCode }},
+                {{ hotel.address.country }}
+            </h5>
+            <h5>
+                {{ hotel.contact.phone }} |
+                {{ hotel.contact.cellphone }} |
+                {{ hotel.user.email }}
+            </h5>
+        </ng-container>
         <ether-images [imagesControl]="hotelRoom.images" [isViewOnly]="true"></ether-images>
         <p *ngIf="hotelRoom.conveniences.length > 0">
             <img src="./../../../../../assets/icons/house.svg" alt="House" />
@@ -21,11 +35,11 @@
         <form *ngIf="availabilityFormGroup$ | async as availabilityFormGroup" [formGroup]="availabilityFormGroup">
             <ether-form-field>
                 <ether-form-field-label>CHECK-IN</ether-form-field-label>
-                <input type="datetime-local" formControlName="checkIn" [min]="MIN_DATE" placeholder="Choose a date">
+                <input type="date" formControlName="checkIn" [min]="MIN_DATE" placeholder="Choose a date">
             </ether-form-field>
             <ether-form-field>
                 <ether-form-field-label>CHECK-OUT</ether-form-field-label>
-                <input type="datetime-local" formControlName="checkOut" [min]="MIN_DATE" placeholder="Choose a date">
+                <input type="date" formControlName="checkOut" [min]="MIN_DATE" placeholder="Choose a date">
             </ether-form-field>
             <ether-button (onClick)="onCheckAvailability()">
                 CHECK AVAILABILITY
@@ -34,6 +48,11 @@
         <ether-button *ngIf="available && isPerson" (onClick)="startBooking()">
             START BOOKING
         </ether-button>
+        <div id="conectar">
+            <div tabindex="0" role="button" class="wallet-btn" id="btnConectar" (click)="createBooking()" style="display: flex">
+            <div class="wallet-label">BOOK ROOM</div>
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1d8dd0382c16396155cf11001f63ba813906cc645d629d201d185980b41cda00?apiKey=c5bd63d219db4e64b9764c41103b2d6b&" class="wallet-icon" alt="Wallet Icon" />
+            </div>
+        </div>
     </section>
 </ng-container>
-

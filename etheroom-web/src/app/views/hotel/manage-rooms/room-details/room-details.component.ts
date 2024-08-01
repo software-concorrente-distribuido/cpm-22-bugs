@@ -11,10 +11,11 @@ import { EnumsNames } from '../../../../core/data/enums';
 
 import { Availability, Enum } from '../../../../core/types/types';
 import { Hotel } from '../../../../core/models/hotel/hotel.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DialogsService } from '../../../../shared/components/dialogs/dialogs.service';
 import { Web3Service } from '../../../../core/services/web3.service';
+import { AuthenticationService } from '../../../../core/services/authentication.service';
 
 
 @Component({
@@ -54,11 +55,10 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     private appService: ApplicationService,
     private hotelService: HotelService,
     private route: ActivatedRoute,
-
     private fb: FormBuilder,
     injector: Injector,
-
-    public web3: Web3Service
+    public web3: Web3Service,
+    public override authenticationService: AuthenticationService
 
   ) {
     super(injector);
@@ -75,7 +75,6 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     const month = (today.getMonth() + 1).toString().padStart(2, '0');
     const day = today.getDate().toString().padStart(2, '0');
     this.todayDate = `${year}-${month}-${day}`;
-    console.log(this.todayDate);
 
     this.getRouteData();
 
@@ -199,21 +198,7 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
         } else {
           this.available = true;
           this.snackbar.info('Room is available for the selected period');
-        }}}}}
-
-  private findHotelRoomById(id: string): void {
-    this.loading.start();
-    this.hotelRoomService.findById(id).subscribe({
-      next: (hotelRoom: HotelRoom) => {
-        console.log(hotelRoom);
-        this.hotelRoomForm$.next(createHotelRoomForm(hotelRoom));
-        this.findHotelById(hotelRoom.hotelId);
-        this.loading.stop();
-
-      },
-      error: this.handleError
-    });
-  }
+        }}},)}
 
   private loadItems(): void {
     this.appService.findEnumByName(EnumsNames.HOTEL_ROOM_CONVENIENCE).subscribe(
@@ -244,18 +229,36 @@ export class RoomDetailsComponent extends UtilComponent implements OnInit {
     
     this.web3.isConnected();
 
+    const availabilityForm = this.availabilityFormGroup$.value;
+    const checkinDate = availabilityForm.get('checkIn').value;
+    const checkoutDate = availabilityForm.get('checkOut').value;
+    const hotel = this.hotel$.value;
+    const hotelRoom = this.hotelRoom$.value;
+    const dailyRate = hotelRoom.price;
+    const hotelName = hotel.name;
+    const roomNumber = hotelRoom.number;
+    const hotelAddress = hotel.user.ethereumAddress;
+    console.log(checkinDate);
+    console.log(checkoutDate);
+    console.log(hotel);
+    console.log(hotelRoom);
+    console.log(dailyRate);
+    console.log(hotelName);
+    console.log(roomNumber);
+    console.log(hotelAddress);
+
     //SUBSTITUIR PELOS VALORES DINÂMICOS
-    const checkinDate = '2024-07-31';
-    const checkoutDate = '2024-08-10';
-    const dailyRate = 0.16;
-    const hotelName = 'NOME DO HOTEL';
-    const roomNumber = 603;
+    //const checkinDate = '2024-07-31';
+    //const checkoutDate = '2024-08-10';
+    //const dailyRate = 0.16;
+    //const hotelName = 'NOME DO HOTEL';
+    //const roomNumber = 603;
 
     if (checkinDate && checkoutDate) {
       try {
         const finalPrice = this.calculatePrice(checkinDate, checkoutDate, dailyRate);
 
-        const id = await this.web3.createBooking(hotelName, finalPrice, checkinDate, checkoutDate, roomNumber, '0x80524E6e4644eFc240BCd03adE126bBe6E7CbB79');
+        const id = await this.web3.createBooking(hotelName, finalPrice, checkinDate, checkoutDate, roomNumber, hotelAddress);
         const booking = await this.web3.getBooking(id);
         await this.web3.startBooking(id, this.todayDate);
         console.log(booking);
